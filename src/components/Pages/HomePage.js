@@ -23,7 +23,8 @@ const HomePage = () => (
 
         <div className="video-right">
           <div className="bouncing-icon">
-            <Cpu className="bouncing-cpu-icon" />
+            <img src="/assets/logo_white_full.png" alt="Chips & Bytes Logo" 
+              style={{width: '120px',height: '95px'}}/>
           </div>
         </div>
       </div>
