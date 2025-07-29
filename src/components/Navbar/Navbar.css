@@ -4,7 +4,7 @@
   position: fixed;
   top: 0;
   z-index: 100;
-  background: linear-gradient(to right, rgba(30, 64, 175, 0.8), rgba(76, 29, 149, 0.8));
+  background: linear-gradient(to right, rgba(3, 7, 19, 0.8), rgba(11, 4, 22, 0.8));
   backdrop-filter: blur(12px);
   transition: all 0.3s ease;
 }
@@ -45,7 +45,11 @@
 .logo-subtitle {
   font-size: 0.9rem;
   margin: 0;
-  color: #555;
+  color: #fff; /* Change color to white */
+}
+
+.navbar .logo-text .logo-subtitle {
+  color: #fff !important; /* Force white color */
 }
 
 .navbar-links {
