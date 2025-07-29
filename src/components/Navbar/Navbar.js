@@ -2,18 +2,28 @@ import React from 'react';
 import { Cpu } from 'lucide-react';
 import './Navbar.css';
 
+const sectionMap = {
+  home: null,
+  about: 'about-us',
+  events: 'events-section',
+  projects: 'projects-section',
+  blogs: 'blogs-section',
+  mentors: 'mentors-section',
+  contact: 'contact-section'
+};
+
 const Navbar = ({ activeTab, setActiveTab }) => {
   const handleNavClick = (id) => {
-    if (id === 'about') {
-      setActiveTab('home'); // Always show HomePage
+    setActiveTab('home'); // Always show HomePage
+    if (sectionMap[id]) {
       setTimeout(() => {
-        const section = document.getElementById('about-us');
+        const section = document.getElementById(sectionMap[id]);
         if (section) {
           section.scrollIntoView({ behavior: 'smooth' });
         }
-      }, 100); // Wait for HomePage to render if needed
-    } else {
-      setActiveTab(id);
+      }, 100);
+    } else if (id === 'home') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
@@ -21,7 +31,7 @@ const Navbar = ({ activeTab, setActiveTab }) => {
     <nav className="navbar">
       <div className="nav-container">
         {/* Logo */}
-        <div className="navbar-logo" onClick={() => setActiveTab('home')}>
+        <div className="navbar-logo" onClick={() => handleNavClick('home')}>
           <img src="/assets/logo_white.png" alt="Chips & Bytes Logo" className="logo-icon" />
           <div className="logo-text">
             <h1 className="logo-title">Chips & Bytes</h1>

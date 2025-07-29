@@ -1,11 +1,11 @@
 import React from 'react';
 import './MentorsPage.css';
-
+import '../../style.css'
 const MentorsPage = () => (
-  <div className="page mentors-page">
-    <h1>Mentors</h1>
-    <p>Meet our mentors who guide and inspire us in our journey.</p>
-  </div>
+  <>
+    <h1  className="tab-heading" >Mentors</h1>
+    <p className="tab-desc">Meet our mentors who guide and inspire us in our journey.</p>
+  </>
 );
 
 export default MentorsPage;

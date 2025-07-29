@@ -1,11 +1,11 @@
 import React from 'react';
 import './BlogsPage.css';
-
+import '../../style.css'
 const BlogsPage = () => (
-  <div className="page blogs-page">
-    <h1>Blogs</h1>
-    <p>Read articles and tutorials written by our community members.</p>
-  </div>
+  <>
+    <h1  className="tab-heading">Blogs</h1>
+    <p className="tab-desc">Read articles and tutorials written by our community members.</p>
+  </>
 );
 
 export default BlogsPage;
