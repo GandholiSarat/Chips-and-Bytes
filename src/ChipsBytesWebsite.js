@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import Navbar from './components/Navbar/Navbar';
 import HomePage from './components/Pages/HomePage';
-import AboutPage from './components/Pages/AboutPage';
 import EventsPage from './components/Pages/EventsPage';
 import ProjectsPage from './components/Pages/ProjectsPage';
 import BlogsPage from './components/Pages/BlogsPage';
@@ -18,7 +17,6 @@ const ChipsBytesWebsite = () => {
     <div className="app">
       <Navbar activeTab={activeTab} setActiveTab={setActiveTab} />
       {activeTab === 'home' && <HomePage />}
-      {activeTab === 'about' && <AboutPage />}
       {activeTab === 'events' && <EventsPage />}
       {activeTab === 'projects' && <ProjectsPage />}
       {activeTab === 'blogs' && <BlogsPage />}
