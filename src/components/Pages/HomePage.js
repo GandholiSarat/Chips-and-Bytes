@@ -2,6 +2,11 @@ import React from 'react';
 import { Cpu } from 'lucide-react';
 import './HomePage.css';
 import AboutPage from './AboutPage';
+import EventsPage from './EventsPage';
+import ProjectsPage from './ProjectsPage';
+import BlogsPage from './BlogsPage';
+import MentorsPage from './MentorsPage';
+import ContactPage from './ContactPage';
 
 const HomePage = () => (
   <div className="page home-page">
@@ -30,9 +35,23 @@ const HomePage = () => (
         </div>
       </div>
     </div>
-    {/* About Section from AboutPage.js */}
-    <div id="about-us">
+    <div id="about-us" className="tab-section-container">
       <AboutPage />
+    </div>
+    <div id="events-section" className="tab-section-container">
+      <EventsPage />
+    </div>
+    <div id="projects-section" className="tab-section-container">
+      <ProjectsPage />
+    </div>
+    <div id="blogs-section" className="tab-section-container">
+      <BlogsPage />
+    </div>
+    <div id="mentors-section" className="tab-section-container">
+      <MentorsPage />
+    </div>
+    <div id="contact-section" className="tab-section-container">
+      <ContactPage />
     </div>
   </div>
 );

@@ -506,3 +506,43 @@
     text-align: center;
   }
 }
+.tab-heading {
+  font-size: 2.2rem;
+  color: #22d3ee;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+
+.global-page {
+    max-width: 700px;
+    margin: 80px auto 0 auto;
+    padding: 2rem;
+    background: rgba(17, 24, 39, 0.85);
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+    color: #fff;
+    text-align: center;
+}
+.global-page h1 {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+    color: #22d3ee;
+
+    
+}
+.tab-section-container {
+  max-width: 1100px;      /* Increased from 800px */
+  width: 95%;             /* Increased from 90% */
+  min-height: 400px;      /* Ensures enough vertical space */
+  margin: 48px auto 0 auto;
+  padding: 3rem 2rem;     /* Increased padding */
+  background: rgba(17, 24, 39, 0.85);
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  scroll-margin-top: 82px;
+}

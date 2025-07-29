@@ -1,12 +1,13 @@
 import React from 'react';
-import './AboutPage.css';
+import '../../style.css';
 
 const AboutPage = () => (
-  
-  <div className="page about-page">
-    <h1>About Us</h1>
-    <p>We are a community passionate about computer architecture and systems design.</p>
-  </div>
+  <>
+    <h1 className="tab-heading">About Us</h1>
+    <p className="tab-desc">
+      We are a community passionate about computer architecture and systems design.
+    </p>
+  </>
 );
 
 export default AboutPage;

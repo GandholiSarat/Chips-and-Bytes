@@ -1,11 +1,11 @@
 import React from 'react';
 import './ContactPage.css';
-
+import '../../style.css'
 const ContactPage = () => (
-  <div className="page contact-page">
-    <h1>Contact Us</h1>
-    <p>Get in touch with us for any queries or collaborations.</p>
-  </div>
+  <>
+    <h1  className="tab-heading">Contact Us</h1>
+    <p className="tab-desc">Get in touch with us for any queries or collaborations.</p>
+  </>
 );
 
 export default ContactPage;
