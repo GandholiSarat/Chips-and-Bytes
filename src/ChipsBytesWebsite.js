@@ -1,12 +1,11 @@
 // Updated ChipsBytesWebsite.jsx with new tabs and no icons
 
 import React, { useState, useEffect } from 'react';
-
+import { Cpu } from 'lucide-react'; // Importing the CPU icon from lucide-react
 import './style.css';
 
 const ChipsBytesWebsite = () => {
   const [activeTab, setActiveTab] = useState('home');
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
@@ -20,7 +19,7 @@ const ChipsBytesWebsite = () => {
       <div className="nav-container">
         {/* Logo aligned left */}
         <div className="navbar-logo" onClick={() => setActiveTab('home')}>
-          <img src="/logo.svg" alt="Logo" className="logo-image" />
+          <Cpu className="logo-icon" /> {/* Using the CPU icon as the logo */}
           <div className="logo-text">
             <h1 className="logo-title">Chips & Bytes</h1>
             <p className="logo-subtitle">Computer Architecture Club</p>
@@ -34,46 +33,13 @@ const ChipsBytesWebsite = () => {
             { id: 'about', label: 'About Us' },
             { id: 'events', label: 'Events' },
             { id: 'projects', label: 'Projects' },
-            { id: 'blogs', label: 'Blogs' },
+            { id: 'blogs', label: 'Articles' },
             { id: 'mentors', label: 'Mentors' },
             { id: 'contact', label: 'Contact Us' }
           ].map(({ id, label }) => (
             <button
               key={id}
               onClick={() => setActiveTab(id)}
-              className={`nav-button ${activeTab === id ? 'active' : ''}`}
-            >
-              {label}
-            </button>
-          ))}
-        </div>
-
-        {/* Mobile menu toggle */}
-        <div className="mobile-menu-button">
-          <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="menu-toggle">
-            {isMenuOpen ? 'Close' : 'Menu'}
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile Dropdown */}
-      <div className={`mobile-menu ${isMenuOpen ? 'open' : ''}`}>
-        <div className="mobile-menu-links">
-          {[
-            { id: 'home', label: 'Home' },
-            { id: 'about', label: 'About Us' },
-            { id: 'events', label: 'Events' },
-            { id: 'projects', label: 'Projects' },
-            { id: 'blogs', label: 'Blogs' },
-            { id: 'mentors', label: 'Mentors' },
-            { id: 'contact', label: 'Contact Us' }
-          ].map(({ id, label }) => (
-            <button
-              key={id}
-              onClick={() => {
-                setActiveTab(id);
-                setIsMenuOpen(false);
-              }}
               className={`nav-button ${activeTab === id ? 'active' : ''}`}
             >
               {label}
@@ -119,7 +85,7 @@ const ChipsBytesWebsite = () => {
           {/* Right: Animated Icon */}
           <div className="video-right">
             <div className="bouncing-icon">
-              <div className="icon-placeholder" />
+              <Cpu className="bouncing-cpu-icon" /> {/* Using the CPU icon as the bouncing logo */}
             </div>
           </div>
         </div>

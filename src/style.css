@@ -45,52 +45,67 @@
   .navbar-logo {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
     cursor: pointer;
   }
   
+  .logo-icon {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    color: #007bff; /* Logo color */
+  }
+  
+  .logo-text {
+    display: flex;
+    flex-direction: column;
+  }
+  
   .logo-title {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     font-weight: bold;
-    background: linear-gradient(to right, #22d3ee, #a78bfa);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    margin: 0;
   }
   
   .logo-subtitle {
-    font-size: 0.75rem;
-    color: #cbd5e1;
+    font-size: 0.9rem;
+    margin: 0;
+    color: #555;
   }
   
   /* Navigation buttons */
   .navbar-links {
     display: flex;
-    align-items: center;
-    gap: 1.5rem;
+    gap: 20px;
   }
   
   .nav-button {
     background: none;
     border: none;
-    color: #d1d5db;
-    font-size: 0.95rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    font-size: 1rem;
     cursor: pointer;
-    transition: all 0.3s ease;
-    padding: 0.5rem 0.75rem;
-    border-radius: 0.5rem;
+    padding: 5px 10px;
+    position: relative;
+    color: hsl(0, 16%, 91%); /* Default color for tabs */
+    text-decoration: none;
+    transition: color 0.3s ease;
   }
   
   .nav-button:hover {
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
+    color: #007bff; /* Hover color */
   }
   
   .nav-button.active {
-    background: linear-gradient(to right, #06b6d4, #9333ea);
-    color: white;
+    color: #007bff; /* Active tab color */
+  }
+  
+  .nav-button.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: #007bff; /* Underline for active tab */
   }
   
   /* Icon size */
