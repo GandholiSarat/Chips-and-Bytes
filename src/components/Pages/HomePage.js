@@ -20,7 +20,8 @@ const HomePage = () => (
 
       <div className="video-grid">
         <div className="video-left">
-          <h1 className="main-heading">Welcome to Chips & Bytes</h1>
+          <h1 className="main-heading">Welcome to</h1>
+          <h2 className="typing-heading">Chips & Bytes</h2>
           <p className="subheading">Explore the world of Computer Architecture</p>
           <div className="hero-buttons">
             <button className="btn primary button-glow">Join Our Community</button>

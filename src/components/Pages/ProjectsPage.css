@@ -13,3 +13,10 @@
     margin-bottom: 1rem;
     color: #9333ea;
 }
+.read-more-link {
+  display: inline-block;
+  margin-top: 1rem;
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 500;
+}

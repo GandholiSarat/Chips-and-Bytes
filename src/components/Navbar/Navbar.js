@@ -14,18 +14,21 @@ const sectionMap = {
 
 const Navbar = ({ activeTab, setActiveTab }) => {
   const handleNavClick = (id) => {
-    setActiveTab(id);// Always show HomePage
-    if (sectionMap[id]) {
-      setTimeout(() => {
-        const section = document.getElementById(sectionMap[id]);
-        if (section) {
-          section.scrollIntoView({ behavior: 'smooth' });
-        }
-      }, 100);
-    } else if (id === 'home') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  };
+
+  setActiveTab(id); 
+  if (sectionMap[id]) {
+    setTimeout(() => {
+      const section = document.getElementById(sectionMap[id]);
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
+  } else if (id === 'home') {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+};
+
+
 
   return (
     <nav className="navbar">
