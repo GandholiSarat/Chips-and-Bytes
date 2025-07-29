@@ -19,7 +19,6 @@ const HomePage = () => (
           <p className="subheading">Explore the world of Computer Architecture</p>
           <div className="hero-buttons">
             <button className="btn primary button-glow">Join Our Community</button>
-            <button className="btn secondary button-glow">Start Building</button>
           </div>
         </div>
 
