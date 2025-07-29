@@ -4,12 +4,16 @@ import './Navbar.css';
 
 const Navbar = ({ activeTab, setActiveTab }) => {
   const handleNavClick = (id) => {
-    setActiveTab(id);
     if (id === 'about') {
-      const section = document.getElementById('about-us');
-      if (section) {
-        section.scrollIntoView({ behavior: 'smooth' });
-      }
+      setActiveTab('home'); // Always show HomePage
+      setTimeout(() => {
+        const section = document.getElementById('about-us');
+        if (section) {
+          section.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100); // Wait for HomePage to render if needed
+    } else {
+      setActiveTab(id);
     }
   };
 

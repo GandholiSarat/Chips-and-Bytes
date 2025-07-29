@@ -1,6 +1,7 @@
 import React from 'react';
 import { Cpu } from 'lucide-react';
 import './HomePage.css';
+import AboutPage from './AboutPage';
 
 const HomePage = () => (
   <div className="page home-page">
@@ -30,10 +31,9 @@ const HomePage = () => (
         </div>
       </div>
     </div>
-        {/* About Section */}
-    <div id="about-us" className="about-page">
-      <h1>About Us</h1>
-      <p>We are a community passionate about computer architecture and systems design.</p>
+    {/* About Section from AboutPage.js */}
+    <div id="about-us">
+      <AboutPage />
     </div>
   </div>
 );
