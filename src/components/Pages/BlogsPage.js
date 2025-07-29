@@ -1,4 +1,5 @@
 import React from 'react';
+import './BlogsPage.css';
 
 const BlogsPage = () => (
   <div className="page blogs-page">

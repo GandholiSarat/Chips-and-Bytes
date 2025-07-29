@@ -1,4 +1,5 @@
 import React from 'react';
+import './MentorsPage.css';
 
 const MentorsPage = () => (
   <div className="page mentors-page">

@@ -1,4 +1,5 @@
 import React from 'react';
+import './EventsPage.css';
 
 const EventsPage = () => (
   <div className="page events-page">

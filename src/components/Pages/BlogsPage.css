@@ -1,0 +1,15 @@
+.blogs-page {
+    max-width: 900px;
+    margin: 80px auto 0 auto;
+    padding: 2rem;
+    background: rgba(34, 197, 94, 0.1);
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(34,197,94,0.08);
+    color: #fff;
+}
+
+.blogs-page h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #22d3ee;
+}
