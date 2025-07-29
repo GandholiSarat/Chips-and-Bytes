@@ -39,6 +39,7 @@
   font-size: 1.5rem;
   font-weight: bold;
   margin: 0;
+  color: #fff;
 }
 
 .navbar .logo-subtitle {
@@ -47,8 +48,8 @@
   color: #dbdbdb;
 }
 
-
-.navbar .navbar-links {
+/* Desktop Navigation Links */
+.navbar .navbar-links.desktop-only {
   display: flex;
   gap: 20px;
 }
@@ -81,38 +82,174 @@
   right: 0;
   height: 2px;
   background-color: #007bff;
+  animation: fade-in 0.3s ease forwards;
 }
-.nav-button {
+
+/* Mobile Menu Toggle - IMPORTANT: Force display */
+.mobile-menu-toggle {
+  display: none !important;
+  padding: 0.5rem; /* Add some padding to the container too */
+}
+
+.mobile-menu-toggle:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 0.5rem;
+}
+
+.menu-toggle-btn {
   background: none;
   border: none;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
   color: #cbd5e1;
   cursor: pointer;
+  padding: 1rem;  /* Increased from 0.5rem */
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 48px;  /* Minimum touch target size */
+  min-height: 48px; /* Minimum touch target size */
   position: relative;
-  transition: color 0.3s ease;
 }
 
-.nav-button:hover {
-  color: white;
+.menu-toggle-btn:hover {
+  color: #007bff;
+  background: rgba(255, 255, 255, 0.1);
 }
 
-.nav-button.active {
-  color: #fff;
-  font-weight: bold;
+/* Add a larger invisible click area for better mobile UX */
+.menu-toggle-btn::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  right: -8px;
+  bottom: -8px;
+  background: transparent;
+  border-radius: 0.75rem;
 }
 
-.nav-button.active::after {
+/* Mobile Navigation Menu */
+.mobile-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to right, rgba(3, 7, 19, 0.95), rgba(11, 4, 22, 0.95));
+  backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transform: translateY(-10px);
+  opacity: 0;
+  transition: all 0.3s ease;
+  z-index: 99;
+}
+
+.mobile-menu.open {
+  display: block !important;
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.mobile-menu-links {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0;
+}
+
+.mobile-nav-button {
+  background: none;
+  border: none;
+  color: hsl(0, 16%, 91%);
+  font-size: 1rem;
+  padding: 0.75rem 1.5rem;
+  text-align: left;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.mobile-nav-button:hover {
+  color: #007bff;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.mobile-nav-button.active {
+  color: #007bff;
+  background: rgba(0, 123, 255, 0.1);
+}
+
+.mobile-nav-button.active::before {
   content: '';
   position: absolute;
   left: 0;
-  bottom: -4px;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(to right, #06b6d4, #9333ea);
-  border-radius: 1px;
-  animation: fade-in 0.3s ease forwards;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(to bottom, #06b6d4, #9333ea);
 }
+
+/* Responsive Classes */
+.desktop-only {
+  display: flex !important;
+}
+
+.mobile-only {
+  display: none !important;
+}
+
+/* Media Queries - CRITICAL: These override everything */
+@media screen and (max-width: 768px) {
+  .navbar .navbar-links.desktop-only {
+    display: none !important;
+  }
+  
+  .mobile-menu-toggle.mobile-only {
+    display: block !important;
+  }
+  
+  .navbar .logo-icon {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .navbar .logo-title {
+    font-size: 1.3rem;
+  }
+  
+  .navbar .logo-subtitle {
+    font-size: 0.8rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .navbar .nav-container {
+    padding: 0.5rem 1rem;
+  }
+  
+  .navbar .logo-icon {
+    width: 45px;
+    height: 45px;
+    margin-right: 8px;
+  }
+  
+  .navbar .logo-title {
+    font-size: 1.2rem;
+  }
+  
+  .navbar .logo-subtitle {
+    font-size: 0.75rem;
+  }
+  
+  .mobile-nav-button {
+    padding: 0.875rem 1.5rem;
+    font-size: 1.1rem;
+  }
+}
+
+/* Animation for smooth transitions */
 @keyframes fade-in {
   from {
     opacity: 0;
@@ -123,3 +260,4 @@
     width: 100%;
   }
 }
+
