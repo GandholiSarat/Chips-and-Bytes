@@ -73,3 +73,47 @@
         justify-content: center;
     }
 }
+
+.typing-heading {
+  font-size: 3rem;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 2px solid #fff;
+  width: 0ch;
+  margin: 0.1rem;
+  display: inline-block;
+  position: relative;
+
+  animation: typing-and-deleting 6s steps(14) infinite, blink 0.75s step-end infinite;
+  animation-delay: 0.5s;
+}
+
+@keyframes typing-and-deleting {
+  0% {
+    width: 0ch;
+  }
+  30% {
+    width: 14ch; /* Typing done */
+  }
+  60% {
+    width: 14ch; /* Shorter pause after typing */
+  }
+  90% {
+    width: 0ch; /* Faster delete from 14ch to 0ch */
+  }
+  100% {
+    width: 0ch; /* Pause after deleting before next loop */
+  }
+}
+
+@keyframes blink {
+  0%, 100% {
+    border-color: transparent;
+  }
+  50% {
+    border-color: rgb(23, 40, 197);
+  }
+}
+
+
