@@ -1,0 +1,44 @@
+import React from 'react';
+import { Cpu } from 'lucide-react';
+import './Navbar.css';
+
+const Navbar = ({ activeTab, setActiveTab }) => {
+  return (
+    <nav className="navbar">
+      <div className="nav-container">
+        {/* Logo */}
+        <div className="navbar-logo" onClick={() => setActiveTab('home')}>
+          <Cpu className="logo-icon" />
+          <div className="logo-text">
+            <h1 className="logo-title">Chips & Bytes</h1>
+            <p className="logo-subtitle">Computer Architecture Club</p>
+          </div>
+        </div>
+
+        {/* Navigation Links */}
+        <div className="navbar-links">
+          {[
+            { id: 'home', label: 'Home' },
+            { id: 'about', label: 'About Us' },
+            { id: 'events', label: 'Events' },
+            { id: 'projects', label: 'Projects' },
+            { id: 'blogs', label: 'Blogs' },
+            { id: 'mentors', label: 'Mentors' },
+            { id: 'contact', label: 'Contact Us' }
+          ].map(({ id, label }) => (
+            <button
+              key={id}
+              onClick={() => setActiveTab(id)}
+              className={`nav-button ${activeTab === id ? 'active' : ''}`}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+      </div>
+    </nav>
+  );
+};
+
+export default Navbar;
+
