@@ -8,7 +8,7 @@ const Navbar = ({ activeTab, setActiveTab }) => {
       <div className="nav-container">
         {/* Logo */}
         <div className="navbar-logo" onClick={() => setActiveTab('home')}>
-          <Cpu className="logo-icon" />
+          <img src="/assets/logo_white.png" alt="Chips & Bytes Logo" className="logo-icon" />
           <div className="logo-text">
             <h1 className="logo-title">Chips & Bytes</h1>
             <p className="logo-subtitle">Computer Architecture Club</p>
