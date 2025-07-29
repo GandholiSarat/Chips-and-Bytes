@@ -14,7 +14,7 @@ const sectionMap = {
 
 const Navbar = ({ activeTab, setActiveTab }) => {
   const handleNavClick = (id) => {
-    setActiveTab('home'); // Always show HomePage
+    setActiveTab(id);// Always show HomePage
     if (sectionMap[id]) {
       setTimeout(() => {
         const section = document.getElementById(sectionMap[id]);
