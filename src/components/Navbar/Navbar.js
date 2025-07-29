@@ -3,6 +3,16 @@ import { Cpu } from 'lucide-react';
 import './Navbar.css';
 
 const Navbar = ({ activeTab, setActiveTab }) => {
+  const handleNavClick = (id) => {
+    setActiveTab(id);
+    if (id === 'about') {
+      const section = document.getElementById('about-us');
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
   return (
     <nav className="navbar">
       <div className="nav-container">
@@ -28,7 +38,7 @@ const Navbar = ({ activeTab, setActiveTab }) => {
           ].map(({ id, label }) => (
             <button
               key={id}
-              onClick={() => setActiveTab(id)}
+              onClick={() => handleNavClick(id)}
               className={`nav-button ${activeTab === id ? 'active' : ''}`}
             >
               {label}
