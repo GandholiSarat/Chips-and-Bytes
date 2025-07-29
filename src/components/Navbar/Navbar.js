@@ -14,6 +14,7 @@ const sectionMap = {
 
 const Navbar = ({ activeTab, setActiveTab }) => {
   const handleNavClick = (id) => {
+
   setActiveTab(id); 
   if (sectionMap[id]) {
     setTimeout(() => {
@@ -26,6 +27,7 @@ const Navbar = ({ activeTab, setActiveTab }) => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 };
+
 
 
   return (
