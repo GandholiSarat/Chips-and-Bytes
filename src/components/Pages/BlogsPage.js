@@ -70,7 +70,7 @@ const BlogsPage = () => {
   }, [blogs]);
 
   return (
-    <div className="blogs-tab-section-container ">
+    <div className="blogs-page">
       <h1 className="tab-heading">Blogs</h1>
       <p className="tab-desc">
         Read articles and tutorials written by our community members.
