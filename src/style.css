@@ -538,9 +538,9 @@
   min-height: 400px;      /* Ensures enough vertical space */
   margin: 48px auto 0 auto;
   padding: 3rem 2rem;     /* Increased padding */
-  background: rgba(17, 24, 39, 0.85);
+  background: transparent;
   border-radius: 16px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+  box-shadow: transparent;
   display: flex;
   flex-direction: column;
   align-items: center;
