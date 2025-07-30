@@ -10,7 +10,21 @@ const BlogsPage = () => {
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
+  const [touchStart, setTouchStart] = useState(null);
   const sliderRef = useRef(null);
+
+  // Detect mobile/tablet devices
+  useEffect(() => {
+    const checkMobile = () => {
+      const mobile = window.innerWidth <= 768;
+      setIsMobile(mobile);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     const fetchBlogPreviews = async () => {
@@ -46,13 +60,38 @@ const BlogsPage = () => {
   };
 
   const scroll = (direction) => {
-    const scrollAmount = 320;
+    const scrollAmount = isMobile ? (window.innerWidth <= 375 ? 200 : 250) : 320;
     if (sliderRef.current) {
       sliderRef.current.scrollBy({
         left: direction === 'left' ? -scrollAmount : scrollAmount,
         behavior: 'smooth',
       });
     }
+  };
+
+  // Touch handlers for mobile swipe
+  const handleTouchStart = (e) => {
+    setTouchStart(e.touches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    if (!touchStart) return;
+    
+    const currentTouch = e.touches[0].clientX;
+    const diff = touchStart - currentTouch;
+    
+    if (Math.abs(diff) > 50) { // Minimum swipe distance
+      if (diff > 0 && canScrollRight) {
+        scroll('right');
+      } else if (diff < 0 && canScrollLeft) {
+        scroll('left');
+      }
+      setTouchStart(null);
+    }
+  };
+
+  const handleTouchEnd = () => {
+    setTouchStart(null);
   };
 
   useEffect(() => {
@@ -63,11 +102,23 @@ const BlogsPage = () => {
     slider.addEventListener('scroll', checkScrollPosition);
     window.addEventListener('resize', checkScrollPosition);
 
+    // Add touch event listeners for mobile
+    if (isMobile) {
+      slider.addEventListener('touchstart', handleTouchStart, { passive: true });
+      slider.addEventListener('touchmove', handleTouchMove, { passive: true });
+      slider.addEventListener('touchend', handleTouchEnd, { passive: true });
+    }
+
     return () => {
       slider.removeEventListener('scroll', checkScrollPosition);
       window.removeEventListener('resize', checkScrollPosition);
+      if (isMobile) {
+        slider.removeEventListener('touchstart', handleTouchStart);
+        slider.removeEventListener('touchmove', handleTouchMove);
+        slider.removeEventListener('touchend', handleTouchEnd);
+      }
     };
-  }, [blogs]);
+  }, [blogs, isMobile, touchStart, canScrollLeft, canScrollRight]);
 
   return (
     <div className="blogs-page">
@@ -96,9 +147,12 @@ const BlogsPage = () => {
               </button>
             )}
 
-            <div className="blog-slider" ref={sliderRef}>
+            <div 
+              className={`blog-slider ${isMobile ? 'mobile-slider' : ''}`} 
+              ref={sliderRef}
+            >
               {blogs.map((blog, idx) => (
-                <div className="blog-card" key={idx}>
+                <div className={`blog-card ${isMobile ? 'mobile-card' : ''}`} key={idx}>
                   <div className="card-content">
                     {blog.image && (
                       <div className="image-container">
@@ -109,7 +163,7 @@ const BlogsPage = () => {
                     <div className="text-content">
                       <h3 className="blog-title">{blog.title}</h3>
                       <p className="blog-description">
-                        {blog.description?.slice(0, 100)}...
+                        {blog.description?.slice(0, isMobile ? 80 : 100)}...
                       </p>
                       <a 
                         href={blog.url} 
@@ -129,12 +183,12 @@ const BlogsPage = () => {
               ))}
               
               {/* More... card */}
-              <div className="blog-card ">
+              <div className={`blog-card more-card ${isMobile ? 'mobile-card' : ''}`}>
                 <Link to="/blogs/details" className="more-card-link">
                   <div className="card-content more-card-content">
                     <div className="more-card-inner">
                       <div className="more-icon">
-                        <svg width="70" height="70" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <svg width={isMobile ? "50" : "70"} height={isMobile ? "50" : "70"} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                           <circle cx="12" cy="12" r="3"></circle>
                           <circle cx="12" cy="5" r="3"></circle>
                           <circle cx="12" cy="19" r="3"></circle>
@@ -142,7 +196,7 @@ const BlogsPage = () => {
                       </div>
                       <h3 className="more-title">More...</h3>
                       <p className="more-description">
-                        Explore all our blogs and discover more amazing content
+                        {isMobile ? "Explore more content" : "Explore all our blogs and discover more amazing content"}
                       </p>
                       <div className="more-arrow">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -168,6 +222,13 @@ const BlogsPage = () => {
               </button>
             )}
           </div>
+
+          {/* Mobile swipe hint */}
+          {isMobile && (
+            <div className="mobile-swipe-hint">
+              <p className="swipe-hint">← Swipe to explore →</p>
+            </div>
+          )}
 
           <div className="read-more-container">
             <Link to="/blogs/details" className="read-more-link">
