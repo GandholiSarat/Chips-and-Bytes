@@ -155,17 +155,17 @@ const ProjectsPage = () => {
               ref={sliderRef}
             >
               {projectData.map((Projects, idx) => (
-                <div className={`blog-card ${isMobile ? 'mobile-card' : ''}`} key={idx}>
-                  <div className="card-content">
+                <div className={`Projects-card  ${isMobile ? 'mobile-card' : ''}`} key={idx}>
+                  <div className="cards-content">
                     {Projects.image && (
                       <div className="image-container">
-                        <img src={Projects.image} alt={Projects.title} className="blog-image" />
+                        <img src={Projects.image} alt={Projects.title} className="Projects-image" />
                         <div className="image-overlay"></div>
                       </div>
                     )}
                     <div className="text-content">
-                      <h3 className="blog-title">{Projects.title}</h3>
-                      <p className="blog-description">
+                      <h3 className="Projects-title">{Projects.title}</h3>
+                      <p className="Projects-description">
                         {Projects.description?.slice(0, isMobile ? 80 : 100)}...
                       </p>
                       <a
@@ -184,7 +184,7 @@ const ProjectsPage = () => {
               ))}
               
               {/* More... card */}
-              <div className={`blog-card more-card ${isMobile ? 'mobile-card' : ''}`}>
+              <div className={`Projects-card more-card ${isMobile ? 'mobile-card' : ''}`}>
                 <Link to="/Projects/details" className="more-card-link">
                   <div className="card-content more-card-content">
                     <div className="more-card-inner">
