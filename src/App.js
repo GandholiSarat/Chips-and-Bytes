@@ -41,9 +41,11 @@ function AppContent() {
 
 function App() {
   return (
-    <Router>
-      <AppContent />
-    </Router>
+    <div className="app-container">
+      <Router>
+        <AppContent />
+      </Router>
+    </div>
   );
 }
 
