@@ -1,263 +1,284 @@
-/* Navbar styles */
+/* Base styles for the Navbar */
 .navbar {
   width: 100%;
-  position: fixed;
+  position: fixed; /* Stays at the top of the viewport */
   top: 0;
-  z-index: 100;
-  background: linear-gradient(to right, rgba(3, 7, 19, 0.8), rgba(11, 4, 22, 0.8));
-  backdrop-filter: blur(12px);
-  transition: all 0.3s ease;
+  z-index: 1000; /* Ensures the navbar is above other content */
+  background: linear-gradient(to right, rgba(3, 7, 19, 0.9), rgba(11, 4, 22, 0.9)); /* Gradient background */
+  backdrop-filter: blur(12px); /* Blurred background effect */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
 }
 
-.navbar .nav-container {
-  max-width: 1280px;
-  margin: 0 auto;
+/* Container for the logo and navigation links */
+.nav-container {
+  max-width: 1280px; /* Maximum width for the content inside the navbar */
+  margin: 0 auto; /* Centers the container horizontally */
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.75rem 1rem;
+  justify-content: space-between; /* Pushes logo to left, links/toggle to right */
+  align-items: center; /* Vertically aligns items in the center */
+  padding: 0.75rem 1rem; /* Padding around the content */
+  width: 100%; /* Ensures container takes full width up to max-width */
+  box-sizing: border-box; /* Includes padding and border in the element's total width and height */
+  position: relative; /* Needed for positioning the mobile menu absolutely */
 }
 
-.navbar .navbar-logo {
+/* Logo styling */
+.navbar-logo {
   display: flex;
   align-items: center;
   cursor: pointer;
+  flex-shrink: 0; /* Prevents the logo from shrinking when space is limited */
 }
 
-.navbar .logo-icon {
+.logo-icon {
   width: 60px;
   height: 60px;
   margin-right: 10px;
+  flex-shrink: 0; /* Ensures the icon doesn't shrink */
 }
 
-.navbar .logo-text {
+.logo-text {
   display: flex;
   flex-direction: column;
 }
 
-.navbar .logo-title {
+.logo-title {
   font-size: 1.5rem;
   font-weight: bold;
   margin: 0;
   color: #fff;
+  white-space: nowrap; /* Prevents the title from wrapping */
 }
 
-.navbar .logo-subtitle {
+.logo-subtitle {
   font-size: 0.9rem;
   margin: 0;
   color: #dbdbdb;
+  white-space: nowrap; /* Prevents the subtitle from wrapping */
 }
 
-/* Desktop Navigation Links */
-.navbar .navbar-links.desktop-only {
-  display: flex;
-  gap: 20px;
+/* Desktop Navigation Links (default visible) */
+.navbar-links.desktop-links {
+  display: flex; /* Displayed as a flex container by default */
+  gap: 20px; /* Space between navigation buttons */
 }
 
-.navbar .nav-button {
+.nav-button {
   background: none;
   border: none;
   font-size: 1rem;
   cursor: pointer;
-  padding: 5px 10px;
-  position: relative;
-  color: hsl(0, 16%, 91%);
-  text-decoration: none;
-  transition: color 0.3s ease;
+  padding: 8px 12px;
+  color: #e2e8f0;
+  transition: color 0.3s ease, background 0.3s ease; /* Smooth transition for hover effects */
+  border-radius: 4px;
 }
 
-.navbar .nav-button:hover {
+.nav-button:hover {
+  color: #007bff; /* Highlight color on hover */
+  background: rgba(255, 255, 255, 0.1); /* Subtle background on hover */
+}
+
+.nav-button.active {
   color: #007bff;
+  background: rgba(0, 123, 255, 0.15); /* Active state background */
 }
 
-.navbar .nav-button.active {
-  color: #007bff;
-}
-
-.navbar .nav-button.active::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background-color: #007bff;
-  animation: fade-in 0.3s ease forwards;
-}
-
-/* Mobile Menu Toggle - IMPORTANT: Force display */
+/* Mobile Menu Toggle (hidden by default on desktop) */
 .mobile-menu-toggle {
-  display: none !important;
-  padding: 0.5rem; /* Add some padding to the container too */
-}
-
-.mobile-menu-toggle:hover {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 0.5rem;
+  display: none; /* Hidden on larger screens by default */
+  position: relative;
+  z-index: 1001; /* Ensures toggle button is on top */
+  flex-shrink: 0; /* Prevents the toggle from shrinking */
 }
 
 .menu-toggle-btn {
-  background: none;
-  border: none;
-  color: #cbd5e1;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  padding: 12px;
+  border-radius: 8px;
   cursor: pointer;
-  padding: 1rem;  /* Increased from 0.5rem */
-  border-radius: 0.5rem;
-  transition: all 0.3s ease;
-  display: flex;
+  display: flex; /* For centering the icon */
   align-items: center;
   justify-content: center;
-  min-width: 48px;  /* Minimum touch target size */
+  min-width: 48px; /* Minimum touch target size */
   min-height: 48px; /* Minimum touch target size */
-  position: relative;
+  transition: all 0.3s ease;
 }
 
 .menu-toggle-btn:hover {
-  color: #007bff;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05); /* Slight scale effect on hover */
 }
 
-/* Add a larger invisible click area for better mobile UX */
-.menu-toggle-btn::before {
-  content: '';
-  position: absolute;
-  top: -8px;
-  left: -8px;
-  right: -8px;
-  bottom: -8px;
-  background: transparent;
-  border-radius: 0.75rem;
-}
-
-/* Mobile Navigation Menu */
+/* Mobile Navigation Menu (hidden by default) */
 .mobile-menu {
-  display: none;
   position: absolute;
-  top: 100%;
+  top: 100%; /* Positions the menu right below the navbar */
   left: 0;
   right: 0;
-  background: linear-gradient(to right, rgba(3, 7, 19, 0.95), rgba(11, 4, 22, 0.95));
-  backdrop-filter: blur(12px);
+  background: rgba(3, 7, 19, 0.98);
+  backdrop-filter: blur(16px);
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  transform: translateY(-10px);
-  opacity: 0;
-  transition: all 0.3s ease;
-  z-index: 99;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  transform: translateY(-20px); /* Starts slightly above for slide-down effect */
+  opacity: 0; /* Starts invisible */
+  max-height: 0; /* Hidden state for transition */
+  overflow: hidden; /* Hides content outside max-height */
+  transition: all 0.4s ease; /* Smooth transition for opening/closing */
+  z-index: 99; /* Below the toggle button but above main content */
 }
 
 .mobile-menu.open {
-  display: block !important;
-  transform: translateY(0);
-  opacity: 1;
+  transform: translateY(0); /* Slides down to its position */
+  opacity: 1; /* Becomes visible */
+  max-height: 800px; /* Sufficiently large height to contain all menu items */
+  /* Using a large fixed value for max-height is common for smooth slide transitions */
 }
 
 .mobile-menu-links {
-  display: flex;
-  flex-direction: column;
   padding: 1rem 0;
+  display: flex;
+  flex-direction: column; /* Stacks menu items vertically */
 }
 
 .mobile-nav-button {
   background: none;
   border: none;
-  color: hsl(0, 16%, 91%);
-  font-size: 1rem;
-  padding: 0.75rem 1.5rem;
+  color: #e2e8f0;
+  font-size: 1.1rem;
+  padding: 1rem 1.5rem;
   text-align: left;
   cursor: pointer;
-  position: relative;
   transition: all 0.3s ease;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Separator between items */
 }
 
 .mobile-nav-button:hover {
   color: #007bff;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.1);
+  padding-left: 2rem; /* Indent effect on hover */
 }
 
 .mobile-nav-button.active {
   color: #007bff;
-  background: rgba(0, 123, 255, 0.1);
+  background: rgba(0, 123, 255, 0.2);
+  border-left: 4px solid #007bff; /* Highlight active item */
 }
 
-.mobile-nav-button.active::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 3px;
-  background: linear-gradient(to bottom, #06b6d4, #9333ea);
+/* --------------------------------------------------------------------- */
+/* RESPONSIVE RULES (Media Queries) */
+/* --------------------------------------------------------------------- */
+
+/* Desktop screens (min-width: 769px) */
+@media screen and (min-width: 769px) {
+  /* Show desktop links, hide mobile toggle */
+  .navbar-links.desktop-links {
+    display: flex; /* Ensure desktop links are visible */
+  }
+
+  .mobile-menu-toggle {
+    display: none; /* Hide mobile toggle button */
+  }
 }
 
-/* Responsive Classes */
-.desktop-only {
-  display: flex !important;
-}
-
-.mobile-only {
-  display: none !important;
-}
-
-/* Media Queries - CRITICAL: These override everything */
+/* Mobile and Tablet screens (max-width: 768px) */
 @media screen and (max-width: 768px) {
-  .navbar .navbar-links.desktop-only {
-    display: none !important;
+  /* Hide desktop links, show mobile toggle */
+  .navbar-links.desktop-links {
+    display: none; /* Hide desktop links */
   }
-  
-  .mobile-menu-toggle.mobile-only {
-    display: block !important;
+
+  .mobile-menu-toggle {
+    display: block; /* Show mobile toggle button */
   }
-  
-  .navbar .logo-icon {
+
+  /* Adjust nav container for mobile */
+  .nav-container {
+    padding: 0.5rem 1rem; /* Reduced padding for smaller screens */
+    gap: 1rem; /* Space between logo and toggle */
+  }
+
+  /* Make logo more compact on mobile */
+  .navbar-logo {
+    min-width: 0; /* Allow logo to shrink if necessary */
+    /* Calculate max-width to leave space for the toggle button */
+    max-width: calc(100% - 80px); /* 80px for toggle + some margin */
+  }
+
+  .logo-icon {
     width: 50px;
     height: 50px;
   }
-  
-  .navbar .logo-title {
+
+  .logo-title {
     font-size: 1.3rem;
   }
-  
-  .navbar .logo-subtitle {
+
+  .logo-subtitle {
     font-size: 0.8rem;
+  }
+
+  /* Ensure toggle button styles are consistent */
+  .menu-toggle-btn {
+    background: rgba(255, 255, 255, 0.1); /* Re-apply base styles without !important */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    min-width: 48px;
+    min-height: 48px;
   }
 }
 
+/* Smaller mobile screens (max-width: 480px) */
 @media screen and (max-width: 480px) {
-  .navbar .nav-container {
-    padding: 0.5rem 1rem;
+  .nav-container {
+    padding: 0.5rem 0.75rem; /* Further reduced padding */
+    gap: 0.5rem; /* Reduced gap */
   }
-  
-  .navbar .logo-icon {
+
+  /* Make logo even more compact on very small screens */
+  .navbar-logo {
+    max-width: calc(100% - 70px); /* Adjust max-width for smaller toggle space */
+  }
+
+  .logo-icon {
     width: 45px;
     height: 45px;
     margin-right: 8px;
   }
-  
-  .navbar .logo-title {
+
+  .logo-title {
     font-size: 1.2rem;
   }
-  
-  .navbar .logo-subtitle {
+
+  .logo-subtitle {
     font-size: 0.75rem;
   }
-  
-  .mobile-nav-button {
-    padding: 0.875rem 1.5rem;
+
+  .menu-toggle-btn {
+    min-width: 44px; /* Slightly smaller touch target */
+    min-height: 44px;
+    padding: 10px;
+  }
+}
+
+/* Extra small screens (max-width: 360px) */
+@media screen and (max-width: 360px) {
+  .logo-subtitle {
+    display: block !important; /* Hide subtitle to save space */
+  }
+
+  .logo-title {
     font-size: 1.1rem;
   }
-}
 
-/* Animation for smooth transitions */
-@keyframes fade-in {
-  from {
-    opacity: 0;
-    width: 0%;
+  .logo-icon {
+    width: 40px;
+    height: 40px;
+    margin-right: 6px;
   }
-  to {
-    opacity: 1;
-    width: 100%;
+
+  .navbar-logo {
+    max-width: calc(100% - 60px); /* Adjust max-width for even smaller space */
   }
 }
-
