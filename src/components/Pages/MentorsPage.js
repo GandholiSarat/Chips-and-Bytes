@@ -1,13 +1,25 @@
 import React, { useRef, useEffect, useState } from 'react';
 import './MentorsPage.css';
 import '../../style.css';
-import { mentors as originalMentors } from '../../data/constants';
-import { FaLinkedin, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { mentors } from '../../data/constants';
+import { FaLinkedin } from 'react-icons/fa';
 
 const Mentors = () => {
   const scrollRef = useRef();
+  const scrollCount = useRef(0);
   const intervalRef = useRef(null);
-  const [mentorList, setMentorList] = useState([...originalMentors, ...originalMentors, ...originalMentors]);
+
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
+
+  const maxLoops = 20;
+
+  const checkScrollPosition = () => {
+    const container = scrollRef.current;
+    if (!container) return;
+    setCanScrollLeft(container.scrollLeft > 0);
+    setCanScrollRight(container.scrollLeft + container.clientWidth < container.scrollWidth - 5);
+  };
 
   const scroll = (direction) => {
     const container = scrollRef.current;
@@ -18,53 +30,47 @@ const Mentors = () => {
       left: direction === 'left' ? -cardWidth : cardWidth,
       behavior: 'smooth',
     });
+
+    // Wait a moment for scroll to complete before checking
+    setTimeout(checkScrollPosition, 500);
   };
 
-  // Autoplay
+  // Auto-scroll setup
   useEffect(() => {
+    const container = scrollRef.current;
+    if (!container || container.children.length === 0) return;
+
+    const cardWidth = container.children[0].offsetWidth + 24;
+
     intervalRef.current = setInterval(() => {
-      scroll('right');
-    }, 4000);
+      const atEnd = container.scrollLeft + container.clientWidth >= container.scrollWidth - 5;
+
+      if (atEnd) {
+        scrollCount.current += 1;
+
+        setTimeout(() => {
+          container.scrollTo({ left: 0, behavior: 'auto' });
+          checkScrollPosition(); // Reset arrows
+        }, 300);
+
+        if (scrollCount.current >= maxLoops) {
+          clearInterval(intervalRef.current);
+        }
+      } else {
+        container.scrollBy({ left: cardWidth, behavior: 'smooth' });
+        setTimeout(checkScrollPosition, 500);
+      }
+    }, 3000);
 
     return () => clearInterval(intervalRef.current);
   }, []);
 
-  // Initialize scroll to center (so we can scroll both directions)
+  // Check scroll position on mount and on window resize
   useEffect(() => {
-    const container = scrollRef.current;
-    if (!container || container.children.length === 0) return;
-
-    const cardWidth = container.children[0].offsetWidth + 24;
-    const middleIndex = Math.floor(mentorList.length / 2);
-    container.scrollLeft = middleIndex * cardWidth;
-  }, [mentorList]);
-
-  const handleScroll = () => {
-    const container = scrollRef.current;
-    if (!container || container.children.length === 0) return;
-
-    const cardWidth = container.children[0].offsetWidth + 24;
-    const totalCards = mentorList.length;
-    const scrollLeft = container.scrollLeft;
-    const currentIndex = Math.floor(scrollLeft / cardWidth);
-
-    const buffer = 5; // how early to trigger append
-
-    // Append if near end
-    if (totalCards - currentIndex <= buffer) {
-      setMentorList((prev) => [...prev, ...originalMentors]);
-    }
-
-    // Prepend if near start (optional, for reverse scrolling)
-    else if (currentIndex <= buffer) {
-      setMentorList((prev) => [...originalMentors, ...prev]);
-
-      // Reset scroll position to maintain visual position
-      setTimeout(() => {
-        container.scrollLeft += originalMentors.length * cardWidth;
-      }, 0);
-    }
-  };
+    checkScrollPosition();
+    window.addEventListener('resize', checkScrollPosition);
+    return () => window.removeEventListener('resize', checkScrollPosition);
+  }, []);
 
   return (
     <div className="mentors-page">
@@ -72,20 +78,20 @@ const Mentors = () => {
       <p className="tab-desc">Meet our mentors who guide and inspire us in our journey.</p>
 
       <div className="mentors-carousel-wrapper">
+        {canScrollLeft && (
+          <button
+            className="scroll-arrow left-arrow"
+            onClick={() => scroll('left')}
+            aria-label="Scroll Left"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <polyline points="15,18 9,12 15,6"></polyline>
+            </svg>
+          </button>
+        )}
 
-        <button 
-                className="scroll-arrow left-arrow" 
-                onClick={() => scroll('left')} 
-                aria-label="Scroll Left"
-              >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <polyline points="15,18 9,12 15,6"></polyline>
-                </svg>
-              </button>
-
-
-        <div className="mentors-list" ref={scrollRef} onScroll={handleScroll}>
-          {mentorList.map((mentor, index) => (
+        <div className="mentors-list" ref={scrollRef} onScroll={checkScrollPosition}>
+          {mentors.map((mentor, index) => (
             <div className="mentor-card" key={`${mentor.name}-${index}`}>
               <img src={mentor.image} alt={mentor.name} className="mentor-image" />
               <div className="mentor-info">
@@ -105,17 +111,17 @@ const Mentors = () => {
           ))}
         </div>
 
-
-        <button 
-                className="scroll-arrow right-arrow" 
-                onClick={() => scroll('right')} 
-                aria-label="Scroll Right"
-              >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <polyline points="9,18 15,12 9,6"></polyline>
-                </svg>
-              </button>
-
+        {canScrollRight && (
+          <button
+            className="scroll-arrow right-arrow"
+            onClick={() => scroll('right')}
+            aria-label="Scroll Right"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <polyline points="9,18 15,12 9,6"></polyline>
+            </svg>
+          </button>
+        )}
       </div>
     </div>
   );
