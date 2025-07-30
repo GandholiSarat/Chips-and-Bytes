@@ -224,11 +224,11 @@ const BlogsPage = () => {
           </div>
 
           {/* Mobile swipe hint */}
-          {isMobile && (
+          {/* {isMobile && (
             <div className="mobile-swipe-hint">
               <p className="swipe-hint">← Swipe to explore →</p>
             </div>
-          )}
+          )} */}
 
           <div className="read-more-container">
             <Link to="/blogs/details" className="read-more-link">
