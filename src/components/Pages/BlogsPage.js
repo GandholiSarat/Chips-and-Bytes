@@ -70,7 +70,7 @@ const BlogsPage = () => {
   }, [blogs]);
 
   return (
-    <div className="blogs-page">
+    <div className="blogs-tab-section-container ">
       <h1 className="tab-heading">Blogs</h1>
       <p className="tab-desc">
         Read articles and tutorials written by our community members.
@@ -127,6 +127,33 @@ const BlogsPage = () => {
                   </div>
                 </div>
               ))}
+              
+              {/* More... card */}
+              <div className="blog-card ">
+                <Link to="/blogs/details" className="more-card-link">
+                  <div className="card-content more-card-content">
+                    <div className="more-card-inner">
+                      <div className="more-icon">
+                        <svg width="70" height="70" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <circle cx="12" cy="12" r="3"></circle>
+                          <circle cx="12" cy="5" r="3"></circle>
+                          <circle cx="12" cy="19" r="3"></circle>
+                        </svg>
+                      </div>
+                      <h3 className="more-title">More...</h3>
+                      <p className="more-description">
+                        Explore all our blogs and discover more amazing content
+                      </p>
+                      <div className="more-arrow">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <line x1="7" y1="17" x2="17" y2="7"></line>
+                          <polyline points="7,7 17,7 17,17"></polyline>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              </div>
             </div>
 
             {canScrollRight && (
