@@ -72,6 +72,7 @@ const Mentors = () => {
       <p className="tab-desc">Meet our mentors who guide and inspire us in our journey.</p>
 
       <div className="mentors-carousel-wrapper">
+
         <button 
                 className="scroll-arrow left-arrow" 
                 onClick={() => scroll('left')} 
@@ -81,6 +82,7 @@ const Mentors = () => {
                   <polyline points="15,18 9,12 15,6"></polyline>
                 </svg>
               </button>
+
 
         <div className="mentors-list" ref={scrollRef} onScroll={handleScroll}>
           {mentorList.map((mentor, index) => (
@@ -103,6 +105,7 @@ const Mentors = () => {
           ))}
         </div>
 
+
         <button 
                 className="scroll-arrow right-arrow" 
                 onClick={() => scroll('right')} 
@@ -112,6 +115,7 @@ const Mentors = () => {
                   <polyline points="9,18 15,12 9,6"></polyline>
                 </svg>
               </button>
+
       </div>
     </div>
   );
