@@ -1,15 +1,189 @@
+/* Mentors Page Container */
 .mentors-page {
-    max-width: 900px;
-    margin: 80px auto 0 auto;
-    padding: 2rem;
-    background: rgba(251, 191, 36, 0.1);
-    border-radius: 16px;
-    box-shadow: 0 4px 24px rgba(251,191,36,0.08);
-    color: #fff;
+  position: relative;
+  width: 100%;
+  padding: 2rem 1rem;
+  color: #fff;
+  overflow: visible;
 }
 
-.mentors-page h1 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    color: #fbbf24;
+/* Section Title and Description */
+.tab-heading {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: #22d3ee;
+  text-align: center;
+}
+
+.tab-desc {
+  text-align: center;
+  color: #e5e7eb;
+  margin-bottom: 2rem;
+}
+
+/* Horizontal Scroll List */
+.mentors-carousel-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.mentors-list {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 50%;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: 1rem 0;
+  scroll-behavior: smooth;
+}
+
+.mentors-list::-webkit-scrollbar {
+  display: none;
+}
+
+.mentor-card {
+  flex: 0 0 auto;
+  width: 90%;
+  max-width: 360px;
+  scroll-snap-align: center;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 2px 12px rgba(251, 191, 36, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeInUp 0.6s ease-out forwards;
+  cursor: pointer;
+  margin: 0 auto;
+}
+
+/* Hover Animation */
+.mentor-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 20px rgba(0, 123, 255, 0.4);
+}
+
+/* Mentor Image */
+.mentor-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 2px solid #22d3ee;
+  box-shadow: 0 0 12px rgba(0, 123, 255, 0.4);
+}
+
+/* Text Content */
+.mentor-info h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #22d3ee;
+}
+
+.mentor-designation {
+  font-weight: 500;
+  color: #e0e7ff;
+  margin: 0.25rem 0;
+}
+
+.mentor-experience {
+  font-size: 0.9rem;
+  color: #cbd5e1;
+  margin-bottom: 0.4rem;
+}
+
+.mentor-summary {
+  font-size: 0.95rem;
+  color: #f1f5f9;
+  line-height: 1.4;
+}
+
+.linkedin-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+  color: #0a66c2;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: color 0.2s ease;
+}
+
+.linkedin-link:hover {
+  color: #1a8cd8;
+}
+
+/* Scroll Buttons */
+.scroll-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(34, 211, 238, 0.1);
+  border: 1px solid #22d3ee;
+  color: #22d3ee;
+  font-size: 1.5rem;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: background 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Position them relative to the container, just outside the scroll list */
+.scroll-left {
+  left: 0; /* start at edge of wrapper */
+  transform: translate(-120%, -50%); /* move it left outside the scroll area */
+}
+
+.scroll-right {
+  right: 0;
+  transform: translate(120%, -50%); /* move it right outside the scroll area */
+}
+
+.scroll-btn {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Entry Animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 640px) {
+  .scroll-btn {
+    width: 30px;
+    height: 30px;
+    font-size: 1.2rem;
+  }
+
+  .scroll-left {
+    transform: translate(-100%, -50%);
+  }
+
+  .scroll-right {
+    transform: translate(100%, -50%);
+  }
 }
