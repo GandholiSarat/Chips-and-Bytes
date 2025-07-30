@@ -533,7 +533,7 @@
     
 }
 .tab-section-container {
-  max-width: 1100px;      /* Increased from 800px */
+  max-width: 1600px;      /* Increased from 800px */
   width: 95%;             /* Increased from 90% */
   min-height: 400px;      /* Ensures enough vertical space */
   margin: 48px auto 0 auto;
