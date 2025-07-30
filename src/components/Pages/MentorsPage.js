@@ -72,9 +72,17 @@ const Mentors = () => {
       <p className="tab-desc">Meet our mentors who guide and inspire us in our journey.</p>
 
       <div className="mentors-carousel-wrapper">
-        <button className="scroll-btn scroll-left" onClick={() => scroll('left')}>
-          <FaChevronLeft />
-        </button>
+
+        <button 
+                className="scroll-arrow left-arrow" 
+                onClick={() => scroll('left')} 
+                aria-label="Scroll Left"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <polyline points="15,18 9,12 15,6"></polyline>
+                </svg>
+              </button>
+
 
         <div className="mentors-list" ref={scrollRef} onScroll={handleScroll}>
           {mentorList.map((mentor, index) => (
@@ -97,9 +105,17 @@ const Mentors = () => {
           ))}
         </div>
 
-        <button className="scroll-btn scroll-right" onClick={() => scroll('right')}>
-          <FaChevronRight />
-        </button>
+
+        <button 
+                className="scroll-arrow right-arrow" 
+                onClick={() => scroll('right')} 
+                aria-label="Scroll Right"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <polyline points="9,18 15,12 9,6"></polyline>
+                </svg>
+              </button>
+
       </div>
     </div>
   );
