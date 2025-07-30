@@ -1,27 +1,48 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 
+import Navbar from './components/Navbar/Navbar';
 import ChipsBytesWebsite from './ChipsBytesWebsite';
 import BlogsPage from './components/Pages/BlogsPage';
 import BlogsDetailsPage from './components/Page-Contents/BlogsDetailsPage';
 import ProjectsPage from './components/Pages/ProjectsPage';
 import ProjectsDetailsPage from './components/Page-Contents/ProjectsDetailsPage';
-function App() {
+
+function AppContent() {
+  const [activeTab, setActiveTab] = useState('home');
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Update activeTab based on current route
+  useEffect(() => {
+    const path = location.pathname;
+    if (path === '/') {
+      setActiveTab('home');
+    } else if (path.startsWith('/blogs')) {
+      setActiveTab('blogs');
+    } else if (path.startsWith('/projects')) {
+      setActiveTab('projects');
+    }
+  }, [location.pathname]);
+
   return (
-    <Router>
+    <>
+      <Navbar activeTab={activeTab} setActiveTab={setActiveTab} navigate={navigate} />
       <Routes>
-        {/* Homepage or main layout */}
         <Route path="/" element={<ChipsBytesWebsite />} />
-
-        {/* Blog listing */}
         <Route path="/blogs" element={<BlogsPage />} />
-
-        {/* Blog details */}
         <Route path="/blogs/details" element={<BlogsDetailsPage />} />
-
         <Route path="/projects" element={<ProjectsPage />} />
         <Route path="/projects/details" element={<ProjectsDetailsPage />} />
       </Routes>
+    </>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <AppContent />
     </Router>
   );
 }
