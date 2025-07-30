@@ -172,7 +172,7 @@ const ProjectsPage = () => {
                                     href={Projects.url}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="github-link"
+                                    className="continue-link"
                                     aria-label={`GitHub link for ${Projects.title}`}
                                   >
                                     <FaGithub size={20} style={{ marginRight: '8px' }} />
