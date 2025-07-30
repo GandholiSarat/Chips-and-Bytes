@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './ProjectsDetailsPage.css';
+import axios from 'axios';
 import { gitLinks } from '../../data/constants';
 import { FaGithub } from 'react-icons/fa';
 import '../../style.css';
