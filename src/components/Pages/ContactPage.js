@@ -12,6 +12,7 @@ const ContactPage = () => {
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({});
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   // Basic email regex
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -34,17 +35,43 @@ const ContactPage = () => {
     setTouched((prev) => ({ ...prev, [name]: true }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = validate();
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
-      alert('Message sent!');
-      // Clear form
-      setFormData({ name: '', email: '', message: '' });
-      setTouched({});
-      setSubmitted(true);
+      setLoading(true);
+
+      try {
+        const response = await fetch('/api/send-email', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            name: formData.name,
+            email: formData.email,
+            message: formData.message,
+          }),
+        });
+
+        if (response.ok) {
+          alert('Message sent successfully!');
+          // Clear form
+          setFormData({ name: '', email: '', message: '' });
+          setTouched({});
+          setSubmitted(true);
+        } else {
+          const errorData = await response.json();
+          alert(errorData.error || 'Failed to send message. Please try again.');
+        }
+      } catch (error) {
+        console.error('Error sending message:', error);
+        alert('Something went wrong. Please try again later.');
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
@@ -58,7 +85,7 @@ const ContactPage = () => {
   return (
     <section className="contact-page" aria-labelledby="contact-heading">
       <h1 id="contact-heading">Contact Us</h1>
-      <p>We’d love to hear from you! Reach out with questions, feedback, or collaboration ideas.</p>
+      <p>We'd love to hear from you! Reach out with questions, feedback, or collaboration ideas.</p>
 
       <form className="contact-form" onSubmit={handleSubmit} noValidate>
         <div className="form-group">
@@ -71,6 +98,7 @@ const ContactPage = () => {
             onChange={handleChange}
             placeholder="Your name"
             required
+            disabled={loading}
             aria-invalid={!!errors.name}
             aria-describedby="name-error"
           />
@@ -87,6 +115,7 @@ const ContactPage = () => {
             onChange={handleChange}
             placeholder="you@example.com"
             required
+            disabled={loading}
             aria-invalid={!!errors.email}
             aria-describedby="email-error"
           />
@@ -103,13 +132,20 @@ const ContactPage = () => {
             placeholder="Type your message..." 
             rows="5"
             required
+            disabled={loading}
             aria-invalid={!!errors.message}
             aria-describedby="message-error"
           />
           {renderError('message')}
         </div>
 
-        <button type="submit" className="submit-button">Send Message</button>
+        <button 
+          type="submit" 
+          className="submit-button" 
+          disabled={loading}
+        >
+          {loading ? 'Sending...' : 'Send Message'}
+        </button>
 
         {submitted && <p className="success-message">Thanks for your message. We'll get back to you soon!</p>}
       </form>
