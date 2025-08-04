@@ -7,6 +7,8 @@ import ProjectsPage from './ProjectsPage';
 import BlogsPage from './BlogsPage';
 import MentorsPage from './MentorsPage';
 import ContactPage from './ContactPage';
+import Members from './MembersPage';
+import MembersPage from './MembersPage';
 
 const HomePage = () => (
   <div className="page home-page">
@@ -52,6 +54,9 @@ const HomePage = () => (
     </div>
     <div id="about-us" className="tab-section-container">
       <AboutPage />
+    </div>
+    <div id="members-section" className="tab-section-container">
+      <MembersPage />
     </div>
     <div id="events-section" className="tab-section-container">
       <EventsPage />
