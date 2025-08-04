@@ -5,9 +5,9 @@ import { mentors } from '../../data/constants';
 import { FaLinkedin } from 'react-icons/fa';
 
 const Mentors = () => {
-  const scrollRef = useRef<HTMLDivElement | null>(null);
+  const scrollRef = useRef(null);
   const scrollCount = useRef(0);
-  const intervalRef = useRef<number | null>(null);
+  const intervalRef = useRef(null);
 
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
@@ -21,11 +21,11 @@ const Mentors = () => {
     setCanScrollRight(container.scrollLeft + container.clientWidth < container.scrollWidth - 5);
   }, []);
 
-  const scroll = (direction: 'left' | 'right') => {
+  const scroll = (direction) => {
     const container = scrollRef.current;
     if (!container || container.children.length === 0) return;
 
-    const card = container.children[0] as HTMLElement;
+    const card = container.children[0];
     const cardWidth = card.offsetWidth + 24; // spacing assumption
 
     container.scrollBy({
@@ -44,7 +44,7 @@ const Mentors = () => {
 
     const getCardWidth = () => {
       if (!container.children[0]) return 0;
-      const card = container.children[0] as HTMLElement;
+      const card = container.children[0];
       return card.offsetWidth + 24;
     };
 
@@ -87,7 +87,7 @@ const Mentors = () => {
 
   // Debounced resize listener
   useEffect(() => {
-    let timeout: number | null = null;
+    let timeout = null;
     const onResize = () => {
       if (timeout) window.clearTimeout(timeout);
       timeout = window.setTimeout(() => {
