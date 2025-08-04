@@ -24,8 +24,16 @@ const HomePage = () => (
           <h2 className="typing-heading">Chips & Bytes</h2>
           <p className="subheading">Explore the world of Computer Architecture</p>
           <div className="hero-buttons">
-            <button className="btn primary button-glow">Join Our Community</button>
-          </div>
+  <button
+    className="btn primary button-glow"
+    onClick={() => {
+      document.getElementById("contact-section")?.scrollIntoView({ behavior: "smooth" });
+    }}
+  >
+    Join Our Community
+  </button>
+</div>
+
         </div>
 
         <div className="video-right">
