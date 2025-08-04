@@ -90,59 +90,17 @@ export const mentors = [
 export const events = [
     {
       id: 1,
-      date: "2024-03-15",
-      title: "Annual Tech Conference 2024",
-      reportLink: "https://drive.google.com/file/d/1234567890",
-      resourcesLink: "https://drive.google.com/drive/folders/abcdef123"
+      date: "2025-07-26",
+      title: "“The PC Builder Challenge” – System Fundamentals and PC Building Workshop",
+      reportLink: "https://drive.google.com/file/d/14rrIuCom7amLkbolOILVtzG1hFJlhPW1/view?usp=drive_link",
+      resourcesLink: "https://drive.google.com/drive/folders/1WQaSN3Oi6kHMR5ogUtprUuxLQ7t8Nl9g?usp=drive_link"
     },
     {
       id: 2,
-      date: "2024-02-28",
-      title: "Workshop on AI and Machine Learning",
+      date: "2025-08-02",
+      title: "Visit to SAI HiPC",
       reportLink: "https://drive.google.com/file/d/2345678901",
       resourcesLink: "https://drive.google.com/drive/folders/bcdef1234"
-    },
-    {
-      id: 3,
-      date: "2024-02-10",
-      title: "Digital Innovation Summit",
-      reportLink: "https://drive.google.com/file/d/3456789012",
-      resourcesLink: "https://drive.google.com/drive/folders/cdef12345"
-    },
-    {
-      id: 4,
-      date: "2024-01-20",
-      title: "Startup Pitch Competition",
-      reportLink: "https://drive.google.com/file/d/4567890123",
-      resourcesLink: "https://drive.google.com/drive/folders/def123456"
-    },
-    {
-      id: 5,
-      date: "2024-01-05",
-      title: "New Year Technology Roadmap",
-      reportLink: "https://drive.google.com/file/d/5678901234",
-      resourcesLink: "https://drive.google.com/drive/folders/ef1234567"
-    },
-    {
-      id: 6,
-      date: "2023-12-20",
-      title: "Year-End Review and Planning Session",
-      reportLink: "https://drive.google.com/file/d/6789012345",
-      resourcesLink: "https://drive.google.com/drive/folders/f12345678"
-    },
-    {
-      id: 7,
-      date: "2023-11-15",
-      title: "Cybersecurity Awareness Workshop",
-      reportLink: "https://drive.google.com/file/d/7890123456",
-      resourcesLink: "https://drive.google.com/drive/folders/g123456789"
-    },
-    {
-      id: 8,
-      date: "2023-10-30",
-      title: "Halloween Hackathon 2023",
-      reportLink: "https://drive.google.com/file/d/8901234567",
-      resourcesLink: "https://drive.google.com/drive/folders/h1234567890"
     }
   ];
   export const members = [

@@ -74,6 +74,7 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
   overflow-x: auto;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 110%;
 }
 
 .events-table {
@@ -187,8 +188,9 @@
 /* Enhanced hover effects for table rows */
 @media (hover: hover) and (pointer: fine) {
   .table-row:hover {
-    background: linear-gradient(135deg, rgba(34, 211, 238, 0.12) 0%, rgba(59, 130, 246, 0.08) 100%);
-    transform: translateX(8px);
+    background: linear-gradient(135deg, rgba(34, 211, 238, 0.12) 0%, rgba(59, 72, 246, 0.08) 100%);
+    transform: translateX(40px);
+    transform: translateY(-1px);
     box-shadow: 
       0 8px 24px rgba(34, 211, 238, 0.2),
       0 4px 12px rgba(34, 211, 238, 0.15),
@@ -212,7 +214,7 @@
   }
   
   .table-row:hover .date-cell {
-    color: #60a5fa;
+    color: #ffffff;
     font-weight: 600;
   }
   
@@ -248,7 +250,7 @@
 
 .title-cell {
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.95);
+  color: rgba(255, 255, 255, 0.90);
   line-height: 1.4;
   word-wrap: break-word;
   text-align: left;
