@@ -1,8 +1,14 @@
 .about-page {
-  max-width: 800px;
+  width: 90%;
+  max-width: 1200px;
+  min-width: 320px;
   margin: 80px auto 0 auto;
   padding: 2.5rem;
-  background: linear-gradient(135deg, rgba(17, 24, 39, 0.85), rgba(30, 41, 59, 0.85));
+  background: linear-gradient(
+    135deg, 
+    rgba(17, 24, 39, 0.85), 
+    rgba(30, 41, 59, 0.85)
+  );
   border-radius: 20px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   color: #f1f5f9;
@@ -10,7 +16,7 @@
   transition: all 0.3s ease-in-out;
 }
 
-/*about section hover glow*/
+/* About section hover glow */
 .about-page:hover {
   transform: scale(1.01);
   box-shadow: 0 12px 36px rgba(34, 211, 238, 0.3);
@@ -20,9 +26,10 @@
   opacity: 0;
   transform: translateY(30px) scale(0.95);
   transition: opacity 1s ease, transform 1s ease, text-shadow 1.2s ease;
-  /* text-shadow: 0 0 0px #22d3ee; */
   font-size: 2.5rem;
   color: #22d3ee;
+  margin-bottom: 1.5rem;
+  /* text-shadow: 0 0 0px #22d3ee; */
 }
 
 .about-us-heading.visible {
@@ -31,19 +38,72 @@
   /* text-shadow: 0 0 16px #22d3ee, 0 0 4px #fff; */
 }
 
+.subheading {
+  font-size: 1.8rem;
+  color: #22d3ee;
+  margin-bottom: 1rem;
+  margin-top: 2rem;
+}
+
 .tab-desc {
   font-size: 1.15rem;
   margin-bottom: 1.5rem;
   line-height: 1.7;
   color: #cbd5e1;
+  /* Make text use full width */
+  width: 100%;
+  max-width: 100%;
+  text-align: justify;
+  text-justify: inter-word;
+  padding: 0 1rem;
+  box-sizing: border-box;
+}
+
+/* Specific styling for the main about us paragraph */
+.about-page > .tab-desc:first-of-type {
+  text-align: justify;
+  text-justify: inter-word;
+  width: 100%;
+  max-width: 100%;
+  padding: 0 1rem;
+}
+
+/* Also target the last paragraph */
+.about-page > .tab-desc:last-of-type {
+  text-align: justify;
+  text-justify: inter-word;
+  width: 100%;
+  max-width: 100%;
+  padding: 0 1rem;
+}
+
+.club-mission,
+.club-objectives {
+  margin-bottom: 2rem;
+  /* Ensure full width utilization */
+  width: 100%;
+}
+
+.club-mission .tab-desc,
+.club-objectives .tab-desc {
+  /* Override center alignment for mission/objectives descriptions */
+  text-align: justify;
+  text-justify: inter-word;
+  padding: 0 1rem;
+  width: 100%;
+  max-width: 100%;
 }
 
 .about-list {
   list-style: none;
   padding: 0;
   margin: 2rem auto;
-  max-width: 600px;
+  max-width: 100%; /* Changed from 80% to 100% */
+  width: 100%;
   text-align: left;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  box-sizing: border-box;
 }
 
 .about-list li {
@@ -51,15 +111,29 @@
   padding-left: 1rem;
   font-size: 1.05rem;
   color: #f8fafc;
-  /* border-left: 4px solid #22d3ee; */
-  padding-left: 1rem;
   transition: all 0.3s ease;
+  position: relative;
+  /* Use full width */
+  width: 100%;
+  text-align: justify;
+  text-justify: inter-word;
+  /* border-left: 4px solid #22d3ee; */
+}
+
+.about-list li::before {
+  content: "▶";
+  color: #22d3ee;
+  font-size: 0.8rem;
+  position: absolute;
+  left: -0.5rem;
+  top: 0.1rem;
 }
 
 .about-list li:hover {
+  transform: translateX(5px);
+  color: #ffffff;
   /* background: rgba(34, 211, 238, 0.1); */
   /* border-left-color: #0ea5e9; */
-  transform: translateX(5px);
 }
 
 .fade-in {
@@ -69,9 +143,74 @@
   animation-delay: 0.4s;
 }
 
+.fade-in:nth-child(2) {
+  animation-delay: 0.6s;
+}
+
+.fade-in:nth-child(3) {
+  animation-delay: 0.8s;
+}
+
+.fade-in:nth-child(4) {
+  animation-delay: 1s;
+}
+
 @keyframes fadeInUp {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .about-page {
+    width: 95%;
+    margin: 60px auto 0 auto;
+    padding: 1.5rem;
+  }
+  
+  .about-us-heading {
+    font-size: 2rem;
+  }
+  
+  .subheading {
+    font-size: 1.5rem;
+  }
+  
+  .tab-desc {
+    font-size: 1rem;
+    padding: 0 0.5rem;
+  }
+  
+  .about-list {
+    max-width: 100%;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-page {
+    width: 98%;
+    padding: 1rem;
+    margin: 40px auto 0 auto;
+  }
+  
+  .about-us-heading {
+    font-size: 1.8rem;
+  }
+  
+  .subheading {
+    font-size: 1.3rem;
+  }
+  
+  .tab-desc {
+    padding: 0 0.25rem;
+  }
+  
+  .about-list {
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
   }
 }
