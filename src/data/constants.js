@@ -148,49 +148,51 @@ export const events = [
   export const members = [
   {
     name: 'Gandholi Sarat',
-    designation: 'I MTech CS at SSSIHL',
+    designation: 'I M.Tech CS at SSSIHL',
     summary: 'President of the Club',
     image: '/images/Sarat.jpeg',
     linkedin: 'https://www.linkedin.com/in/gandholi-sarat/',
   },
     {
     name: 'Panuganti Chirag Sai',
-    designation: 'I MTech CS at SSSIHL',
+    designation: 'I M.Tech CS at SSSIHL',
     summary: 'Vice-President of the Club',
     image: '/images/Chirag.jpeg',
     linkedin: 'https://www.linkedin.com/in/panuganti-chirag-sai-atjxhn8g/'
   },
   {
     name: 'K Sharat',
-    designation: 'Distinguished Engineer at IBM',
-    summary: 'Multicore System Design Expert',
-    image: '/images/Manoj.jpeg',
-    linkedin: 'https://www.linkedin.com/in/manojdusanapudi/'
+    designation: 'I M.Tech CS at SSSIHL',
+    summary: 'Secretary of the Club',
+    image: '/images/Sharat.jpeg',
+    linkedin: 'https://www.linkedin.com/in/k-sharat/'
   },
   {
-    name: 'Mr. Saketh Ram Chakilam',
-    designation: 'Senior Staff Verification Engineer at SiFive',
-    summary: 'Cache design and Analysis Expert',
-    image: '/images/Saketh.jpeg',
-    linkedin: 'https://www.linkedin.com/in/csakethram/'
+    name: 'Vishwanath Saikiran Shetiya',
+    designation: 'Research Scholar at SSSIHL',
+    summary: 'Public Realations Coordinator of the Club',
+    image: '/images/Vishwa.jpeg',
+    linkedin: 'https://www.linkedin.com/in/vishwanath-shetiya-376a571a5/'
   },
   {
-    name: 'Mr. K. V. K. Vamshi Krishna',
-    designation: 'System Software Engineer at NVIDIA',
-    summary: 'Specializes in GPU architecture, Development and Analysis.',
-    image: '/images/Vamshi.jpeg',
-    linkedin: 'https://www.linkedin.com/in/vamshi-krishna-a1109516/'
+    name: 'Cherukuri Sai Saketh',
+    designation: 'II M.Sc Mathematics at SSSIHL',
+    summary: 'Member of the Club',
+    image: '/images/Sasa.jpeg',
+    linkedin: 'https://www.linkedin.com/in/sai-saketh-cherukuri-825456250/'
   },
   {
-    name: 'Mr. Aravind. S. V',
-    designation: 'Graduate CPU Architect at ARM',
-    summary: 'CPU Design and Performance Analysis Expert',
-    image: '/images/Aravind.jpeg',
+    name: 'Prabin Kumar Sabat',
+    designation: 'II M.Sc Mathematics at SSSIHL',
+    summary: 'Member of the Club',
+    image: '/images/Prabin.jpeg',
+    linkedin: "https://www.linkedin.com/in/prabin-kumar-sabat/"
   },
   {
-    name: 'Mr. Mangala Prasad Sahu',
-    designation: 'Hardware Developer at IBM',
-    summary: 'Specializes in Hardware Design and Performance Analysis',
-    image: '/images/Mangala.jpeg',
+    name: 'Lokesh R',
+    designation: 'II M.Sc Mathematics at SSSIHL',
+    summary: 'Member of the Club',
+    image: '/images/Lokesh.jpeg',
+    linkedin: 'https://www.linkedin.com/in/lokesh-r-4b8a1b1b/'
   },
 ];
