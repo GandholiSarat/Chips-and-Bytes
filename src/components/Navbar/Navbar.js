@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
 import './Navbar.css';
+import { members } from '../../data/constants';
 
 const sectionMap = {
   home: null,
@@ -9,6 +10,7 @@ const sectionMap = {
   events: 'events-section',
   projects: 'projects-section',
   blogs: 'blogs-section',
+  members: 'members-section',
   mentors: 'mentors-section',
   contact: 'contact-section'
 };
@@ -139,6 +141,7 @@ const Navbar = ({ activeTab, setActiveTab, navigate }) => {
 
       const sections = [
         { id: 'about', element: document.getElementById('about-us') },
+        { id: 'members', element: document.getElementById('members-section') },
         { id: 'events', element: document.getElementById('events-section') },
         { id: 'projects', element: document.getElementById('projects-section') },
         { id: 'blogs', element: document.getElementById('blogs-section') },
@@ -217,6 +220,7 @@ const Navbar = ({ activeTab, setActiveTab, navigate }) => {
           {[
             { id: 'home', label: 'Home' },
             { id: 'about', label: 'About Us' },
+            { id: 'members', label: 'Members'},
             { id: 'events', label: 'Events' },
             { id: 'projects', label: 'Projects' },
             { id: 'blogs', label: 'Blogs' },
