@@ -83,7 +83,11 @@ export const mentors = [
   {
     name: 'Mr. Mangala Prasad Sahu',
     designation: 'Hardware Developer at IBM',
+<<<<<<< HEAD
+    summary: 'Specializes in Hardware Design and Performance Analysis',
+=======
     summary: 'Specializes in Hardware Design and Perormance Analysis',
+>>>>>>> bc4731c (Updated Mentors Data)
     image: '/images/Mangala.jpeg',
   },
 ];

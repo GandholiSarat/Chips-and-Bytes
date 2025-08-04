@@ -35,6 +35,12 @@ const HomePage = () => (
           </div>
         </div>
       </div>
+
+      <div className="announcements-bar">
+        <div className="scroll-text">
+          <span className="announcement-highlight">Latest Updates:</span> Welcome to Chips & Bytes! Join our community to explore Computer Architecture together.
+        </div>
+      </div>
     </div>
     <div id="about-us" className="tab-section-container">
       <AboutPage />
