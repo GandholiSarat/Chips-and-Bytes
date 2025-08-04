@@ -7,6 +7,8 @@ import BlogsPage from './components/Pages/BlogsPage';
 import BlogsDetailsPage from './components/Page-Contents/BlogsDetailsPage';
 import ProjectsPage from './components/Pages/ProjectsPage';
 import ProjectsDetailsPage from './components/Page-Contents/ProjectsDetailsPage';
+import EventsPage from './components/Pages/EventsPage';
+import EventDetailsPage from './components/Page-Contents/EventsDetailsPage';
 
 function AppContent() {
   const [activeTab, setActiveTab] = useState('home');
@@ -34,6 +36,9 @@ function AppContent() {
         <Route path="/blogs/details" element={<BlogsDetailsPage />} />
         <Route path="/projects" element={<ProjectsPage />} />
         <Route path="/projects/details" element={<ProjectsDetailsPage />} />
+        <Route path="/events" element={<EventsPage />} />
+        <Route path="/events/details" element={<EventDetailsPage />} />
+        {/* Add other routes as needed */}
       </Routes>
     </>
   );
