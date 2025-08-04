@@ -13,9 +13,9 @@ export default async function handler(req, res) {
   try {
 await resend.emails.send({
   from: 'contact@yourdomain.com',
-  to: ['gandholisarat@gmail.com', 'panugantichiragsai12@gmail.com'], // array of recipients
-//   cc: ['manager@example.com'],                  // optional CC
-//   bcc: ['audit@example.com'],                  // optional BCC
+  to: ['alice@example.com', 'bob@example.com'], // array of recipients
+  cc: ['manager@example.com'],                  // optional CC
+  bcc: ['audit@example.com'],                  // optional BCC
   subject: `New contact form message from ${name}`,
   html: `
     <h2>New Contact Form Submission</h2>
@@ -25,7 +25,7 @@ await resend.emails.send({
     <p>${message}</p>
   `,
 });
-);
+
 
     res.status(200).json({ success: true });
   } catch (error) {
