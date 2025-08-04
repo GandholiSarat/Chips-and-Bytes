@@ -38,10 +38,11 @@
   font-size: clamp(2rem, 6vw, 3.5rem);
   font-weight: 800;
   color: #22d3ee;
-  margin-bottom: clamp(0.5rem, 2vw, 1rem);
+  margin-top: 6rem; /* increased space before heading */
+  margin-bottom: 0.25rem;
   letter-spacing: -0.02em;
   text-shadow: 0 4px 20px rgba(34, 211, 238, 0.3);
-  line-height: 1.2;
+  line-height: 1.1;
 }
 
 .event-subtitle {
@@ -79,8 +80,8 @@
   width: 100%;
   border-collapse: collapse;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  min-width: 650px; /* Ensures table doesn't get too cramped on mobile */
-  table-layout: fixed; /* Fixed layout for consistent column widths */
+  min-width: 650px; 
+  table-layout: fixed;
 }
 
 .table-header {
@@ -95,52 +96,71 @@
   font-weight: 700;
   font-size: clamp(0.9rem, 2.2vw, 1.1rem);
   color: #22d3ee !important;
-  text-align: left;
   letter-spacing: 0.5px;
   text-transform: uppercase;
   text-shadow: 0 2px 10px rgba(34, 211, 238, 0.3);
   padding: clamp(1rem, 2.5vw, 1.5rem) clamp(0.75rem, 2vw, 1.25rem);
   border-right: 1px solid rgba(255, 255, 255, 0.1);
   box-sizing: border-box;
+  vertical-align: middle;
 }
 
 .header-cell:last-child {
   border-right: none;
 }
 
-/* Specific column widths for proper alignment */
-.header-cell:nth-child(1), /* S.No */
-.table-cell:nth-child(1) {
-  width: 80px;
-  min-width: 80px;
-  text-align: center;
+/* Make sure text wraps instead of overflowing */
+.events-table th,
+.events-table td {
+  overflow-wrap: break-word;
+  word-break: break-word; /* legacy safe fallback */
+  hyphens: auto;
+  white-space: normal; /* allow wrapping; override any stray nowrap */
 }
-
-.header-cell:nth-child(2), /* Date */
-.table-cell:nth-child(2) {
-  width: 180px;
-  min-width: 180px;
+.events-table th:nth-child(1),
+.events-table td:nth-child(1) { /* S.No */
+  width: 70px;
+  text-align: left;
+  white-space: nowrap; /* keep serial numbers inline */
 }
-
-.header-cell:nth-child(3), /* Event Title */
-.table-cell:nth-child(3) {
+.events-table th:nth-child(2),
+.events-table td:nth-child(2) { /* Date */
   width: auto;
-  min-width: 250px;
+  min-width: 120px;
+  text-align: left;
+  white-space: nowrap; /* keep date inline */
 }
 
-.header-cell:nth-child(4), /* Report */
-.table-cell:nth-child(4) {
-  width: 140px;
-  min-width: 140px;
-  text-align: center;
+/* If you want tighter control on the title column: */
+.events-table th:nth-child(3),
+.events-table td:nth-child(3) { /* Event Title */
+  width: auto;
+  min-width: 450px;
+  max-width: 400px; /* optional cap to force wrap sooner */
+  text-align: left;
+  white-space: normal;
 }
 
-.header-cell:nth-child(5), /* Resources */
-.table-cell:nth-child(5) {
-  width: 140px;
-  min-width: 140px;
+/* Prevent the link cells from causing too-wide rows while keeping their content inline */
+.events-table th:nth-child(4),
+.events-table td:nth-child(4),
+.events-table th:nth-child(5),
+.events-table td:nth-child(5) {
   text-align: center;
+  white-space: nowrap; /* keep "icon + Click here" together */
 }
+
+/* Optional: if a cell still overflows, show ellipsis for extremely tight cases */
+.table-cell {
+  position: relative;
+}
+
+.table-cell.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 
 .table-cell {
   padding: clamp(0.75rem, 2.5vw, 1.25rem);
@@ -162,18 +182,7 @@
   position: relative;
 }
 
-.table-row::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 4px;
-  background: linear-gradient(135deg, #22d3ee 0%, #3b82f6 100%);
-  transform: scaleY(0);
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  transform-origin: bottom;
-}
+
 
 /* Enhanced hover effects for table rows */
 @media (hover: hover) and (pointer: fine) {
@@ -224,7 +233,7 @@
 
 .serial-cell {
   font-weight: 600;
-  text-align: center;
+  text-align: left;
   color: #22d3ee;
   font-size: clamp(0.9rem, 2vw, 1.1rem);
 }
@@ -234,6 +243,7 @@
   color: rgba(255, 255, 255, 0.85);
   white-space: nowrap;
   font-family: 'Monaco', 'Menlo', monospace;
+  text-align: left;
 }
 
 .title-cell {
@@ -241,6 +251,7 @@
   color: rgba(255, 255, 255, 0.95);
   line-height: 1.4;
   word-wrap: break-word;
+  text-align: left;
 }
 
 .link-cell {
@@ -698,3 +709,4 @@
 .table-container::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(135deg, #0891b2 0%, #1d4ed8 100%);
 }
+
