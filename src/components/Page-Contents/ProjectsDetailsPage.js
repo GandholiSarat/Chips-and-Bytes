@@ -3,6 +3,7 @@ import axios from 'axios';
 import { gitLinks } from '../../data/constants';
 import './ProjectsDetailsPage.css';
 import '../../style.css';
+import Footer from '../Footer/Footer';
 import { FaGithub } from 'react-icons/fa';
 
 const ProjectsDetailsPage = () => {

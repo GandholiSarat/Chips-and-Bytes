@@ -9,6 +9,7 @@ import ProjectsPage from './components/Pages/ProjectsPage';
 import ProjectsDetailsPage from './components/Page-Contents/ProjectsDetailsPage';
 import EventsPage from './components/Pages/EventsPage';
 import EventDetailsPage from './components/Page-Contents/EventsDetailsPage';
+import Footer from './components/Footer/Footer';
 
 function AppContent() {
   const [activeTab, setActiveTab] = useState('home');
@@ -50,6 +51,7 @@ function App() {
       <Router>
         <AppContent />
       </Router>
+      <Footer />
     </div>
   );
 }
