@@ -10,6 +10,7 @@ import ContactPage from './ContactPage';
 import Members from './MembersPage';
 import MembersPage from './MembersPage';
 
+
 const HomePage = () => (
   <div className="page home-page">
     <div className="video-background-section">
@@ -73,6 +74,7 @@ const HomePage = () => (
     <div id="contact-section" className="tab-section-container">
       <ContactPage />
     </div>
+   
   </div>
 );
 

@@ -5,6 +5,7 @@ import { blogLinks } from '../../data/constants';
 import './BlogsPage.css';
 import '../../style.css';
 
+
 const BlogsPage = () => {
   const [blogs, setBlogs] = useState([]);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
@@ -237,6 +238,7 @@ const BlogsPage = () => {
           </div>
         </>
       )}
+      
     </div>
   );
 };

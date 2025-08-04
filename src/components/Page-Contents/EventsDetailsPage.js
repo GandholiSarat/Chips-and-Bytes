@@ -3,6 +3,7 @@ import './EventsDetailsPage.css';
 import '../../style.css';
 import { FaExternalLinkAlt } from 'react-icons/fa';
 import { events } from '../../data/constants';
+import Footer from '../Footer/Footer';
 const EventDetailsPage = () => {
   const [eventsList] = useState(events);
 
