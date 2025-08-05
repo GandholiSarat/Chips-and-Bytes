@@ -49,7 +49,7 @@ const HomePage = () => (
 
       <div className="announcements-bar">
         <div className="scroll-text">
-          <span className="announcement-highlight">Latest Updates:</span> Welcome to Chips & Bytes! Join our community to explore Computer Architecture together.
+          <span className="announcement-highlight">Latest Updates:</span> Session on Branch Predictors by Lokesh R on 9th August 2025 in I Mtech CS Lab from 3:00pm. <span className="announcement-highlight">Join us!</span>
         </div>
       </div>
     </div>
