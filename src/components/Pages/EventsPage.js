@@ -22,7 +22,7 @@ const EventsPage = () => (
 
     <div className="read-more-container">
       <Link to="/events/details" className="read-more-link">
-        View All Events →
+        View Past Events →
       </Link>
     </div>
   </>
