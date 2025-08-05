@@ -1,109 +1,77 @@
-// api/send-email.js
-import { Resend } from 'resend';
+// /api/send-email.js
 
-const RATE_LIMIT_WINDOW_MS = 60 * 1000;
-const MAX_PER_WINDOW = 5;
-const rateLimitStore = new Map();
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-const parseList = (s) =>
-  typeof s === 'string' ? s.split(',').map((x) => x.trim()).filter(Boolean) : [];
-
-function sanitize(str = '') {
-  return String(str)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/\n/g, '<br>');
-}
-
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
-    res.setHeader('Allow', 'POST');
-    return res.status(405).json({ error: 'Method Not Allowed' });
+    return res.status(405).json({ error: 'Method not allowed. Use POST.' });
   }
 
-  // Rate limiting per IP (ephemeral in serverless)
-  const ip =
-    req.headers['x-forwarded-for']?.split(',')[0]?.trim() ||
-    req.socket?.remoteAddress ||
-    'unknown';
-  const now = Date.now();
-  const entry = rateLimitStore.get(ip) || { count: 0, firstRequestAt: now };
-  if (now - entry.firstRequestAt < RATE_LIMIT_WINDOW_MS) {
-    if (entry.count >= MAX_PER_WINDOW) {
-      return res
-        .status(429)
-        .json({ error: 'Too many requests. Please wait and try again.' });
-    }
-    entry.count += 1;
-  } else {
-    entry.count = 1;
-    entry.firstRequestAt = now;
-  }
-  rateLimitStore.set(ip, entry);
+  const { name, email, message } = req.body;
 
-  let body;
-  try {
-    body = typeof req.body === 'object' ? req.body : JSON.parse(req.body);
-  } catch {
-    return res.status(400).json({ error: 'Invalid JSON payload.' });
+  if (!name || !email || !message) {
+    return res.status(400).json({ error: 'Missing required fields.' });
   }
 
-  const { name, email, message } = body || {};
-
-  if (!name || !name.toString().trim()) return res.status(400).json({ error: 'Name is required.' });
-  if (!email || !email.toString().trim()) return res.status(400).json({ error: 'Email is required.' });
-  if (!emailRegex.test(email.toString().trim())) return res.status(400).json({ error: 'Email is not valid.' });
-  if (!message || !message.toString().trim()) return res.status(400).json({ error: 'Message cannot be empty.' });
-
-  const cleanName = sanitize(name);
+  const cleanName = String(name).trim();
   const cleanEmail = String(email).trim();
-  const cleanMessage = sanitize(message);
+  const cleanMessage = String(message).trim();
 
-  const receivers = parseList(process.env.CONTACT_RECEIVER_EMAILS || '');
-  if (receivers.length === 0) {
-    return res.status(500).json({ error: 'No receiver email configured.' });
+  if (!cleanEmail.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+    return res.status(400).json({ error: 'Invalid email format.' });
   }
 
   const fromAddress = process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev';
+  const receiverEmails = (process.env.CONTACT_RECEIVER_EMAILS || '').split(',').map(e => e.trim()).filter(Boolean);
+
+  if (!process.env.RESEND_API_KEY || receiverEmails.length === 0) {
+    return res.status(500).json({ error: 'Missing Resend config in environment variables.' });
+  }
 
   try {
-    await resend.emails.send({
+    // Send to site owners
+    const toReceivers = await resend.emails.send({
       from: fromAddress,
-      to: receivers,
+      to: receiverEmails,
       subject: `New contact form message from ${cleanName}`,
-      html: `
-        <h2>New Contact Message</h2>
-        <p><strong>Name:</strong> ${cleanName}</p>
-        <p><strong>Email:</strong> <a href="mailto:${cleanEmail}">${cleanEmail}</a></p>
-        <p><strong>Message:</strong><br/>${cleanMessage}</p>
-        <hr/>
-        <p style="font-size:0.8em;"><em>IP: ${ip}</em></p>
-      `,
       reply_to: cleanEmail,
+      html: `
+        <p><strong>Name:</strong> ${cleanName}</p>
+        <p><strong>Email:</strong> ${cleanEmail}</p>
+        <p><strong>Message:</strong><br/>${cleanMessage.replace(/\n/g, '<br/>')}</p>
+      `,
     });
 
-    if (process.env.SEND_CONFIRMATION_EMAIL === 'true') {
-      await resend.emails.send({
-        from: fromAddress,
-        to: [cleanEmail],
-        subject: `Thanks for contacting us, ${cleanName}!`,
-        html: `
-          <p>Hi ${cleanName},</p>
-          <p>Thanks for your message. We received it and will get back to you soon.</p>
-          <p><strong>Your message:</strong></p>
-          <blockquote style="background:#f0f4f8;padding:10px;border-radius:6px;">${cleanMessage}</blockquote>
-          <p>— The Team</p>
-        `,
-      });
+    console.log('Email sent to team:', toReceivers);
+
+    // Optionally send confirmation to user
+    if (process.env.SEND_CONFIRMATION_EMAIL !== 'false') {
+      try {
+        const toUser = await resend.emails.send({
+          from: fromAddress,
+          to: cleanEmail,
+          subject: 'Thanks for reaching out!',
+          html: `
+            <p>Hi ${cleanName},</p>
+            <p>Thanks for contacting us. We received your message:</p>
+            <blockquote>${cleanMessage.replace(/\n/g, '<br/>')}</blockquote>
+            <p>We'll get back to you shortly.</p>
+            <p>— The Chips & Bytes Team</p>
+          `,
+        });
+
+        console.log('Confirmation email sent to user:', toUser);
+      } catch (userErr) {
+        console.warn('Failed to send confirmation email:', userErr);
+        // Don't fail the request just because confirmation email failed
+      }
     }
 
-    return res.status(200).json({ success: true });
+    return res.status(200).json({ message: 'Message sent successfully!' });
   } catch (err) {
-    console.error('Email send error:', err);
-    return res.status(500).json({ error: 'Failed to send email. Try again later.' });
+    console.error('Failed to send email:', err);
+    return res.status(500).json({ error: 'Failed to send message. Please try again later.' });
   }
 }
