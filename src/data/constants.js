@@ -5,17 +5,12 @@ export const blogLinks = [
   "https://medium.com/@saratgandholi/unlocking-the-binary-a-dive-into-dynamic-binary-instrumentation-with-dynamorio-8a003b95e836",
   "https://medium.com/@panugantichiragsai12/memory-around-us-why-your-laptop-phone-and-playstation-dont-speak-the-same-927b4cb86850",
   "https://medium.com/@panugantichiragsai12/memory-around-us-ddr-part-1-019408f92098",
-  "https://medium.com/long-sweet-valuable/ill-instantly-know-you-used-chat-gpt-if-i-see-this-d0a635bc0a00",
-  "https://medium.com/ai-mind-labs/5-industries-ai-will-completely-takeover-by-2026-d16d36b70cce",
-  "https://medium.com/code-like-a-girl/the-ais-you-chat-with-are-all-llms-9bb77f22cda3"
+  "https://medium.com/@saratgandholi/cache-memory-explained-l1-l2-l3-and-why-they-matter-for-performance-49403bb50b1b",
+  "https://medium.com/@saratgandholi/the-easy-way-to-understand-gpu-vs-cpu-364de2d608ad",
 ];
 
 export const gitLinks = [
-  { url: "https://github.com/GandholiSarat/JAVA-Server-Client" },
-  { url: "https://github.com/Chirag-Sai-Panuganti/Age-and-Gender-Detection-Cross-Entropy-vs-Ordinal-vs-CORAL" },
-  { url: "https://github.com/ksharat45/cacheSim"},
-  { url: "https://github.com/Satya7816/JAVA_JDBC_CODES" },
-  { url: "https://github.com/Satya7816/Hackstad"}
+  { url: "https://github.com/GandholiSarat/DynamoRIO-Custom-Client" },
 ];
 
 export const mentors = [
