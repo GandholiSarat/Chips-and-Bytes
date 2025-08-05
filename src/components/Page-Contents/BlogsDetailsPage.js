@@ -3,7 +3,6 @@ import axios from 'axios';
 import { blogLinks } from '../../data/constants';
 import './BlogsDetailsPage.css';
 import '../../style.css';
-import Footer from '../Footer/Footer';
 
 const BlogsDetailsPage = () => {
   const [blogs, setBlogs] = useState([]);
