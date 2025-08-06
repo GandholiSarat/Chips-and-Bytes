@@ -18,8 +18,8 @@ const BlogsDetailsPage = () => {
     try {
       for (const link of blogLinks) {
         try {
-          const res = await axios.get(`/api/preview?url=${encodeURIComponent(link)}`);
-          const { title, description, image, url } = res.data; // <-- FIXED from res.data.data
+          const res = await axios.get(`https://api.microlink.io/?url=${encodeURIComponent(link)}`);
+          const { title, description, image, url } = res.data.data; // <-- FIXED from res.data.data
           previews.push({
             title,
             description,
@@ -70,15 +70,15 @@ const BlogsDetailsPage = () => {
     };
   }, [blogs]);
 
-  return (
-  <>
+return (
+  <div className="blog-details-container">
     {loading ? (
       <div className="loading-spinner">
         <div className="spinner" />
         <p>Loading blog previews...</p>
       </div>
     ) : (
-      <div className="blog-details-container">
+      <>
         <div className="header-section">
           <h1 className="blog-heading">Featured Blogs</h1>
           <p className="blog-subtitle">Discover our latest insights and stories</p>
@@ -142,10 +142,11 @@ const BlogsDetailsPage = () => {
             </button>
           )}
         </div>
-      </div>
+      </>
     )}
-  </>
+  </div>
 );
+
 
 };
 
