@@ -95,8 +95,8 @@ export const events = [
       id: 2,
       date: "2025-08-02",
       title: "Visit to SAI HiPC",
-      reportLink: "https://drive.google.com/file/d/2345678901",
-      resourcesLink: "https://drive.google.com/drive/folders/bcdef1234"
+      reportLink: "https://drive.google.com/file/d/1K4NeZU8Cbdr_WuKwkZFmZntq9E61Bco_/view?usp=drive_link",
+      resourcesLink: "https://drive.google.com/drive/folders/10T8PJSt8KK2FokBF2OmTI2jjjrPXRCVA?usp=drive_link"
     }
   ];
   export const members = [
