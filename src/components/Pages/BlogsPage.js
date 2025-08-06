@@ -5,7 +5,6 @@ import { blogLinks } from '../../data/constants';
 import './BlogsPage.css';
 import '../../style.css';
 
-const LINK_PREVIEW_API_KEY = 'be0aaf24a2520e7effea56a68cac9d98';
 
 const BlogsPage = () => {
   const [blogs, setBlogs] = useState([]);
@@ -16,12 +15,13 @@ const BlogsPage = () => {
   const [touchStart, setTouchStart] = useState(null);
   const sliderRef = useRef(null);
 
+  // Detect mobile/tablet devices
   useEffect(() => {
     const checkMobile = () => {
       const mobile = window.innerWidth <= 768;
       setIsMobile(mobile);
     };
-
+    
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
@@ -30,27 +30,26 @@ const BlogsPage = () => {
   useEffect(() => {
     const fetchBlogPreviews = async () => {
       const previews = [];
+      // Get only first 5 blogs
       const firstFiveLinks = blogLinks.slice(0, 5);
-
+      
       for (const link of firstFiveLinks) {
         try {
-          const res = await axios.get(`https://api.linkpreview.net/?key=${LINK_PREVIEW_API_KEY}&q=${encodeURIComponent(link)}`);
-          const { title, description, image, url } = res.data;
+          const res = await axios.get(`https://api.microlink.io/?url=${encodeURIComponent(link)}`);
+          const { title, description, image, url } = res.data.data;
           previews.push({
             title,
             description,
-            image: image || '',
+            image: image?.url || '',
             url,
           });
         } catch (error) {
           console.error("Error fetching preview for", link, error);
         }
       }
-
       setBlogs(previews);
       setLoading(false);
     };
-
     fetchBlogPreviews();
   }, []);
 
@@ -71,17 +70,18 @@ const BlogsPage = () => {
     }
   };
 
+  // Touch handlers for mobile swipe
   const handleTouchStart = (e) => {
     setTouchStart(e.touches[0].clientX);
   };
 
   const handleTouchMove = (e) => {
     if (!touchStart) return;
-
+    
     const currentTouch = e.touches[0].clientX;
     const diff = touchStart - currentTouch;
-
-    if (Math.abs(diff) > 50) {
+    
+    if (Math.abs(diff) > 50) { // Minimum swipe distance
       if (diff > 0 && canScrollRight) {
         scroll('right');
       } else if (diff < 0 && canScrollLeft) {
@@ -103,6 +103,7 @@ const BlogsPage = () => {
     slider.addEventListener('scroll', checkScrollPosition);
     window.addEventListener('resize', checkScrollPosition);
 
+    // Add touch event listeners for mobile
     if (isMobile) {
       slider.addEventListener('touchstart', handleTouchStart, { passive: true });
       slider.addEventListener('touchmove', handleTouchMove, { passive: true });
@@ -181,7 +182,8 @@ const BlogsPage = () => {
                   </div>
                 </div>
               ))}
-
+              
+              {/* More... card */}
               <div className={`blog-card more-card ${isMobile ? 'mobile-card' : ''}`}>
                 <Link to="/blogs/details" className="more-card-link">
                   <div className="card-content more-card-content">
@@ -222,6 +224,13 @@ const BlogsPage = () => {
             )}
           </div>
 
+          {/* Mobile swipe hint */}
+          {/* {isMobile && (
+            <div className="mobile-swipe-hint">
+              <p className="swipe-hint">← Swipe to explore →</p>
+            </div>
+          )} */}
+
           <div className="read-more-container">
             <Link to="/blogs/details" className="read-more-link">
               View All Blogs →
@@ -229,6 +238,7 @@ const BlogsPage = () => {
           </div>
         </>
       )}
+      
     </div>
   );
 };
