@@ -6,6 +6,8 @@ import '../../style.css';
 import Footer from '../Footer/Footer';
 import { FaGithub } from 'react-icons/fa';
 
+const LINK_PREVIEW_API_KEY = '7ce13aab4c03f886a7ca55b0720b9780'; // 🔑 Replace with your real API key
+
 const ProjectsDetailsPage = () => {
   const [projects, setProjects] = useState([]);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
@@ -15,19 +17,20 @@ const ProjectsDetailsPage = () => {
   useEffect(() => {
     const fetchProjectPreviews = async () => {
       const previews = [];
+
       for (const linkObj of gitLinks) {
         try {
-          const res = await axios.get(`https://api.microlink.io/?url=${encodeURIComponent(linkObj.url)}`);
-          const { title, description, image, url } = res.data.data;
+          const res = await axios.get(`https://api.linkpreview.net/?key=${LINK_PREVIEW_API_KEY}&q=${encodeURIComponent(linkObj.url)}`);
+          const { title, description, image, url } = res.data;
+
           previews.push({
             title: title || linkObj.title,
             description: description || linkObj.description,
-            image: image?.url || '',
+            image: image || '',
             url: url || linkObj.url,
           });
         } catch (error) {
           console.error("Error fetching preview for", linkObj.url, error);
-          // Fallback to original data if API fails
           previews.push({
             title: linkObj.title,
             description: linkObj.description,
@@ -36,8 +39,10 @@ const ProjectsDetailsPage = () => {
           });
         }
       }
+
       setProjects(previews);
     };
+
     fetchProjectPreviews();
   }, []);
 
@@ -107,16 +112,16 @@ const ProjectsDetailsPage = () => {
                   <p className="project-description">
                     {project.description?.slice(0, 120)}...
                   </p>
-<a
-                                    href={project.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="continue-link"
-                                    aria-label={`GitHub link for ${project.title}`}
-                                  >
-                                    <FaGithub size={20} style={{ marginRight: '8px' }} />
-                                    View Repo
-                                  </a>
+                  <a
+                    href={project.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="continue-link"
+                    aria-label={`GitHub link for ${project.title}`}
+                  >
+                    <FaGithub size={20} style={{ marginRight: '8px' }} />
+                    View Repo
+                  </a>
                 </div>
               </div>
             </div>
