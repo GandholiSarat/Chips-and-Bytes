@@ -6,12 +6,14 @@ import '../../style.css';
 
 const BlogsDetailsPage = () => {
   const [blogs, setBlogs] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
   const sliderRef = useRef(null);
 
   useEffect(() => {
     const fetchBlogPreviews = async () => {
+      setLoading(true);
       const previews = [];
       for (const link of blogLinks) {
         try {
@@ -28,6 +30,7 @@ const BlogsDetailsPage = () => {
         }
       }
       setBlogs(previews);
+      setLoading(false);
     };
     fetchBlogPreviews();
   }, []);
@@ -63,6 +66,18 @@ const BlogsDetailsPage = () => {
     };
   }, [blogs]);
 
+  // Loading Spinner Component
+  const LoadingSpinner = () => (
+    <div className="loading-container">
+      <div className="spinner">
+        <div className="spinner-ring"></div>
+        <div className="spinner-ring"></div>
+        <div className="spinner-ring"></div>
+      </div>
+      <p className="loading-text">Loading amazing content...</p>
+    </div>
+  );
+
   return (
     <div className="blog-details-container">
       <div className="header-section">
@@ -70,64 +85,68 @@ const BlogsDetailsPage = () => {
         <p className="blog-subtitle">Discover our latest insights and stories</p>
       </div>
 
-      <div className="carousel-wrapper">
-        {canScrollLeft && (
-          <button 
-            className="scroll-arrow left-arrow" 
-            onClick={() => scroll('left')} 
-            aria-label="Scroll Left"
-          >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <polyline points="15,18 9,12 15,6"></polyline>
-            </svg>
-          </button>
-        )}
+      {loading ? (
+        <LoadingSpinner />
+      ) : (
+        <div className="carousel-wrapper">
+          {canScrollLeft && (
+            <button 
+              className="scroll-arrow left-arrow" 
+              onClick={() => scroll('left')} 
+              aria-label="Scroll Left"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <polyline points="15,18 9,12 15,6"></polyline>
+              </svg>
+            </button>
+          )}
 
-        <div className="blog-slider" ref={sliderRef}>
-          {blogs.map((blog, idx) => (
-            <div className="blog-card" key={idx}>
-              <div className="card-content">
-                {blog.image && (
-                  <div className="image-container">
-                    <img src={blog.image} alt={blog.title} className="blog-image" />
-                    <div className="image-overlay"></div>
+          <div className="blog-slider" ref={sliderRef}>
+            {blogs.map((blog, idx) => (
+              <div className="blog-card" key={idx}>
+                <div className="card-content">
+                  {blog.image && (
+                    <div className="image-container">
+                      <img src={blog.image} alt={blog.title} className="blog-image" />
+                      <div className="image-overlay"></div>
+                    </div>
+                  )}
+                  <div className="text-content">
+                    <h3 className="blog-title">{blog.title}</h3>
+                    <p className="blog-description">
+                      {blog.description?.slice(0, 120)}...
+                    </p>
+                    <a 
+                      href={blog.url} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="continue-link"
+                    >
+                      Read More
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <line x1="7" y1="17" x2="17" y2="7"></line>
+                        <polyline points="7,7 17,7 17,17"></polyline>
+                      </svg>
+                    </a>
                   </div>
-                )}
-                <div className="text-content">
-                  <h3 className="blog-title">{blog.title}</h3>
-                  <p className="blog-description">
-                    {blog.description?.slice(0, 120)}...
-                  </p>
-                  <a 
-                    href={blog.url} 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="continue-link"
-                  >
-                    Read More
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <line x1="7" y1="17" x2="17" y2="7"></line>
-                      <polyline points="7,7 17,7 17,17"></polyline>
-                    </svg>
-                  </a>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
 
-        {canScrollRight && (
-          <button 
-            className="scroll-arrow right-arrow" 
-            onClick={() => scroll('right')} 
-            aria-label="Scroll Right"
-          >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <polyline points="9,18 15,12 9,6"></polyline>
-            </svg>
-          </button>
-        )}
-      </div>
+          {canScrollRight && (
+            <button 
+              className="scroll-arrow right-arrow" 
+              onClick={() => scroll('right')} 
+              aria-label="Scroll Right"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <polyline points="9,18 15,12 9,6"></polyline>
+              </svg>
+            </button>
+          )}
+        </div>
+      )}
     </div>
   );
 };
