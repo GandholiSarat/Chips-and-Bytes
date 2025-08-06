@@ -6,40 +6,40 @@ import { FaGithub } from 'react-icons/fa';
 import './ProjectsPage.css';
 import '../../style.css';
 
+const LINK_PREVIEW_API_KEY = 'c81f9ce57875786f15d97e98aad729b5';
+
 const ProjectsPage = () => {
   const [projectData, setProjectData] = useState([]);
-    const [canScrollLeft, setCanScrollLeft] = useState(false);
-    const [canScrollRight, setCanScrollRight] = useState(false);
-    const [loading, setLoading] = useState(true);
-    const [isMobile, setIsMobile] = useState(false);
-    const [touchStart, setTouchStart] = useState(null);
-    const sliderRef = useRef(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
+  const [touchStart, setTouchStart] = useState(null);
+  const sliderRef = useRef(null);
 
-  // Detect mobile/tablet devices
   useEffect(() => {
     const checkMobile = () => {
       const mobile = window.innerWidth <= 768;
       setIsMobile(mobile);
     };
-    
+
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
- useEffect(() => {
+  useEffect(() => {
     const fetchMetadata = async () => {
       const results = await Promise.all(
         gitLinks.map(async (linkObj) => {
           try {
-            const response = await fetch(`https://api.microlink.io/?url=${encodeURIComponent(linkObj.url)}`);
-            const json = await response.json();
-            const { title, description, image, url } = json.data;
+            const response = await axios.get(`https://api.linkpreview.net/?key=${LINK_PREVIEW_API_KEY}&q=${encodeURIComponent(linkObj.url)}`);
+            const { title, description, image, url } = response.data;
 
             return {
               title: title || linkObj.title,
               description: description || linkObj.description,
-              image: image?.url || null,
+              image: image || null,
               url: url || linkObj.url,
             };
           } catch (err) {
@@ -49,7 +49,7 @@ const ProjectsPage = () => {
         })
       );
       setProjectData(results);
-      setLoading(false); 
+      setLoading(false);
     };
 
     fetchMetadata();
@@ -72,18 +72,17 @@ const ProjectsPage = () => {
     }
   };
 
-  // Touch handlers for mobile swipe
   const handleTouchStart = (e) => {
     setTouchStart(e.touches[0].clientX);
   };
 
   const handleTouchMove = (e) => {
     if (!touchStart) return;
-    
+
     const currentTouch = e.touches[0].clientX;
     const diff = touchStart - currentTouch;
-    
-    if (Math.abs(diff) > 50) { // Minimum swipe distance
+
+    if (Math.abs(diff) > 50) {
       if (diff > 0 && canScrollRight) {
         scroll('right');
       } else if (diff < 0 && canScrollLeft) {
@@ -105,7 +104,6 @@ const ProjectsPage = () => {
     slider.addEventListener('scroll', checkScrollPosition);
     window.addEventListener('resize', checkScrollPosition);
 
-    // Add touch event listeners for mobile
     if (isMobile) {
       slider.addEventListener('touchstart', handleTouchStart, { passive: true });
       slider.addEventListener('touchmove', handleTouchMove, { passive: true });
@@ -154,36 +152,35 @@ const ProjectsPage = () => {
               className={`blog-slider ${isMobile ? 'mobile-slider' : ''}`} 
               ref={sliderRef}
             >
-              {projectData.map((Projects, idx) => (
-                <div className={`Projects-card  ${isMobile ? 'mobile-card' : ''}`} key={idx}>
+              {projectData.map((project, idx) => (
+                <div className={`Projects-card ${isMobile ? 'mobile-card' : ''}`} key={idx}>
                   <div className="cards-content">
-                    {Projects.image && (
+                    {project.image && (
                       <div className="image-container">
-                        <img src={Projects.image} alt={Projects.title} className="Projects-image" />
+                        <img src={project.image} alt={project.title} className="Projects-image" />
                         <div className="image-overlay"></div>
                       </div>
                     )}
                     <div className="text-content">
-                      <h3 className="Projects-title">{Projects.title}</h3>
+                      <h3 className="Projects-title">{project.title}</h3>
                       <p className="Projects-description">
-                        {Projects.description?.slice(0, isMobile ? 80 : 100)}...
+                        {project.description?.slice(0, isMobile ? 80 : 100)}...
                       </p>
                       <a
-                                    href={Projects.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="continue-link"
-                                    aria-label={`GitHub link for ${Projects.title}`}
-                                  >
-                                    <FaGithub size={20} style={{ marginRight: '8px' }} />
-                                    View Repo
-                                  </a>
+                        href={project.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="continue-link"
+                        aria-label={`GitHub link for ${project.title}`}
+                      >
+                        <FaGithub size={20} style={{ marginRight: '8px' }} />
+                        View Repo
+                      </a>
                     </div>
                   </div>
                 </div>
               ))}
-              
-              {/* More... card */}
+
               <div className={`Projects-card more-card ${isMobile ? 'mobile-card' : ''}`}>
                 <Link to="/Projects/details" className="more-card-link">
                   <div className="card-content more-card-content">
@@ -223,13 +220,6 @@ const ProjectsPage = () => {
               </button>
             )}
           </div>
-
-          {/* Mobile swipe hint */}
-          {/* {isMobile && (
-            <div className="mobile-swipe-hint">
-              <p className="swipe-hint">← Swipe to explore →</p>
-            </div>
-          )} */}
 
           <div className="read-more-container">
             <Link to="/Projects/details" className="read-more-link">

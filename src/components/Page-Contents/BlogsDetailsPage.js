@@ -4,6 +4,8 @@ import { blogLinks } from '../../data/constants';
 import './BlogsDetailsPage.css';
 import '../../style.css';
 
+const LINK_PREVIEW_API_KEY = '24345a06fc29ca8d67e535ffc77a5655';
+
 const BlogsDetailsPage = () => {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -15,23 +17,26 @@ const BlogsDetailsPage = () => {
     const fetchBlogPreviews = async () => {
       setLoading(true);
       const previews = [];
+
       for (const link of blogLinks) {
         try {
-          const res = await axios.get(`https://api.microlink.io/?url=${encodeURIComponent(link)}`);
-          const { title, description, image, url } = res.data.data;
+          const res = await axios.get(`https://api.linkpreview.net/?key=${LINK_PREVIEW_API_KEY}&q=${encodeURIComponent(link)}`);
+          const { title, description, image, url } = res.data;
           previews.push({
             title,
             description,
-            image: image?.url || '',
+            image: image || '',
             url,
           });
         } catch (error) {
           console.error("Error fetching preview for", link, error);
         }
       }
+
       setBlogs(previews);
       setLoading(false);
     };
+
     fetchBlogPreviews();
   }, []);
 
@@ -66,7 +71,6 @@ const BlogsDetailsPage = () => {
     };
   }, [blogs]);
 
-  // Loading Spinner Component
   const LoadingSpinner = () => (
     <div className="loading-container">
       <div className="spinner">
