@@ -3,27 +3,26 @@ import axios from 'axios';
 import { blogLinks } from '../../data/constants';
 import './BlogsDetailsPage.css';
 import '../../style.css';
-import Footer from '../Footer/Footer';
 
 const BlogsDetailsPage = () => {
   const [blogs, setBlogs] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
   const sliderRef = useRef(null);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-  const fetchBlogPreviews = async () => {
-    const previews = [];
-    try {
+    const fetchBlogPreviews = async () => {
+      setLoading(true);
+      const previews = [];
       for (const link of blogLinks) {
         try {
           const res = await axios.get(`https://api.microlink.io/?url=${encodeURIComponent(link)}`);
-          const { title, description, image, url } = res.data.data; // <-- FIXED from res.data.data
+          const { title, description, image, url } = res.data.data;
           previews.push({
             title,
             description,
-            image,
+            image: image?.url || '',
             url,
           });
         } catch (error) {
@@ -31,13 +30,10 @@ const BlogsDetailsPage = () => {
         }
       }
       setBlogs(previews);
-    } finally {
       setLoading(false);
-    }
-  };
-  fetchBlogPreviews();
-}, []);
-
+    };
+    fetchBlogPreviews();
+  }, []);
 
   const checkScrollPosition = () => {
     const slider = sliderRef.current;
@@ -70,25 +66,33 @@ const BlogsDetailsPage = () => {
     };
   }, [blogs]);
 
-return (
-  <div className="blog-details-container">
-    {loading ? (
-      <div className="loading-spinner">
-        <div className="spinner" />
-        <p>Loading blog previews...</p>
+  // Loading Spinner Component
+  const LoadingSpinner = () => (
+    <div className="loading-container">
+      <div className="spinner">
+        <div className="spinner-ring"></div>
+        <div className="spinner-ring"></div>
+        <div className="spinner-ring"></div>
       </div>
-    ) : (
-      <>
-        <div className="header-section">
-          <h1 className="blog-heading">Featured Blogs</h1>
-          <p className="blog-subtitle">Discover our latest insights and stories</p>
-        </div>
+      <p className="loading-text">Loading amazing content...</p>
+    </div>
+  );
 
+  return (
+    <div className="blog-details-container">
+      <div className="header-section">
+        <h1 className="blog-heading">Featured Blogs</h1>
+        <p className="blog-subtitle">Discover our latest insights and stories</p>
+      </div>
+
+      {loading ? (
+        <LoadingSpinner />
+      ) : (
         <div className="carousel-wrapper">
           {canScrollLeft && (
-            <button
-              className="scroll-arrow left-arrow"
-              onClick={() => scroll('left')}
+            <button 
+              className="scroll-arrow left-arrow" 
+              onClick={() => scroll('left')} 
               aria-label="Scroll Left"
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -112,10 +116,10 @@ return (
                     <p className="blog-description">
                       {blog.description?.slice(0, 120)}...
                     </p>
-                    <a
-                      href={blog.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                    <a 
+                      href={blog.url} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
                       className="continue-link"
                     >
                       Read More
@@ -131,9 +135,9 @@ return (
           </div>
 
           {canScrollRight && (
-            <button
-              className="scroll-arrow right-arrow"
-              onClick={() => scroll('right')}
+            <button 
+              className="scroll-arrow right-arrow" 
+              onClick={() => scroll('right')} 
               aria-label="Scroll Right"
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -142,12 +146,9 @@ return (
             </button>
           )}
         </div>
-      </>
-    )}
-  </div>
-);
-
-
+      )}
+    </div>
+  );
 };
 
 export default BlogsDetailsPage;
