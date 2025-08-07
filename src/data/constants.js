@@ -108,49 +108,49 @@ export const events = [
     name: 'Gandholi Sarat',
     designation: 'I M.Tech CS at SSSIHL',
     summary: 'President of the Club',
-    image: '/images/Sarat.jpeg',
+    image: '/images/Sarat.png',
     linkedin: 'https://www.linkedin.com/in/gandholi-sarat/',
   },
     {
     name: 'Panuganti Chirag Sai',
     designation: 'I M.Tech CS at SSSIHL',
     summary: 'Vice-President of the Club',
-    image: '',
+    image: '/images/Chirag.png',
     linkedin: 'https://www.linkedin.com/in/panuganti-chirag-sai-atjxhn8g/'
   },
   {
     name: 'K Sharat',
     designation: 'I M.Tech CS at SSSIHL',
     summary: 'Secretary of the Club',
-    image: '/images/Sharat.jpeg',
+    image: '/images/Sharat.png',
     linkedin: 'https://www.linkedin.com/in/k-sharat/'
   },
   {
     name: 'Vishwanath Saikiran Shetiya',
     designation: 'Research Scholar at SSSIHL',
     summary: 'Public Realations Coordinator of the Club',
-    image: '/images/Vishwa.jpeg',
+    image: '/images/Vishwa.png',
     linkedin: 'https://www.linkedin.com/in/vishwanath-shetiya-376a571a5/'
   },
   {
     name: 'Satya Balaji Animireddy',
     designation: 'I M.Tech CS at SSSIHL',
     summary: 'Website Coordinator of the Club',
-    image: '',
+    image: '/images/Balaji.png',
     linkedin: 'https://www.linkedin.com/in/satya-balaji-animireddy/'
   },
   {
     name: 'Cherukuri Sai Saketh',
     designation: 'II M.Sc Mathematics at SSSIHL',
     summary: 'Member of the Club',
-    image: '/images/Sasa.jpeg',
+    image: '/images/Sasa.png',
     linkedin: 'https://www.linkedin.com/in/sai-saketh-cherukuri-825456250/'
   },
   {
     name: 'Prabin Kumar Sabat',
     designation: 'II M.Sc Mathematics at SSSIHL',
     summary: 'Member of the Club',
-    image: '',
+    image: '/images/Prabin.png',
     linkedin: "https://www.linkedin.com/in/prabin-kumar-sabat/"
   },
   {
@@ -164,28 +164,36 @@ export const events = [
     name: 'Sai Aswin',
     designation: 'I M.Sc Mathematics at SSSIHL',
     summary: 'Member of the Club',
-    image: '/images/Aswin.jpeg',
+    image: '/images/Aswin.png',
     linkedin: 'https://www.linkedin.com/in/sai-aswin-5bb211251/'
   },
   {
     name: 'Prashant Poudyal',
     designation: 'I M.Sc Mathematics at SSSIHL',
     summary: 'Member of the Club',
-    image: '/images/Prashant.png',
+    image: '/images/Prashanth.png',
     // linkedin: 'https://www.linkedin.com/in/prashant-poudyal-a02230325/'
   },
   {
     name: 'Narasimha Murthy',
     designation: 'I M.Sc Mathematics at SSSIHL',
     summary: 'Member of the Club',
-    image: '/images/Narasimha.jpeg',
+    image: '/images/Murthy.png',
     // linkedin: 'https://www.linkedin.com/in/narasimha-murthy-123456789/'
   },
-    {
+  {
     name: 'Sai Krishna',
     designation: 'I M.Sc Mathematics at SSSIHL',
     summary: 'Member of the Club',
-    image: '/images/Sai.jpeg',
+    image: '/images/Krishna.png',
     // linkedin: 'https://www.linkedin.com/in/narasimha-murthy-123456789/'
   },
+  {
+    name: 'Subhasish Charan Behera',
+    designation: 'I M.Sc Mathematics at SSSIHL',
+    summary: 'Member of the Club',
+    image: '/images/Subhashish.png',
+    // linkedin: 'https://www.linkedin.com/in/narasimha-murthy-123456789/'
+  },
+  
 ];
