@@ -182,7 +182,7 @@ export const events = [
     name: 'Sai Krishna',
     designation: 'I M.Sc Mathematics at SSSIHL',
     summary: 'Member of the Club',
-    image: '/images/Sai.png',
+    image: '/images/Sai.jpeg',
     // linkedin: 'https://www.linkedin.com/in/narasimha-murthy-123456789/'
   },
 ];
