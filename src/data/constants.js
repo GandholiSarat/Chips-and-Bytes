@@ -2,15 +2,15 @@
 
 export const blogLinks = [
   "https://medium.com/@saratgandholi/tracing-code-execution-unlocking-software-insight-without-exposing-code-c2d2f2b84ab6",
-  "https://medium.com/@saratgandholi/unlocking-the-binary-a-dive-into-dynamic-binary-instrumentation-with-dynamorio-8a003b95e836",
   "https://medium.com/@panugantichiragsai12/memory-around-us-why-your-laptop-phone-and-playstation-dont-speak-the-same-927b4cb86850",
+  "https://medium.com/@ssaketh.2002/cuda-chronicles-motivation-de3b68368598",
   "https://medium.com/@panugantichiragsai12/memory-around-us-ddr-part-1-019408f92098",
+  "https://medium.com/@saratgandholi/unlocking-the-binary-a-dive-into-dynamic-binary-instrumentation-with-dynamorio-8a003b95e836",
   "https://medium.com/@saratgandholi/cache-memory-explained-l1-l2-l3-and-why-they-matter-for-performance-49403bb50b1b",
   "https://medium.com/@saratgandholi/the-easy-way-to-understand-gpu-vs-cpu-364de2d608ad",
   "https://medium.com/@saratgandholi/how-a-cpu-really-works-from-fetch-to-execute-6640808e06eb",
-  "https://medium.com/@ssaketh.2002/cuda-chronicles-motivation-de3b68368598"
   "https://medium.com/@ssaketh.2002/cuda-chronicles-programming-model-2-3025daa389bc",
-  "https://medium.com/@ssaketh.2002/cuda-chronicles-programming-interface-3-part-1-021dec1d231c"
+  "https://medium.com/@ssaketh.2002/cuda-chronicles-programming-interface-3-part-1-021dec1d231c",
 ];
 
 export const gitLinks = [
