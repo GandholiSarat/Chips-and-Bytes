@@ -115,7 +115,7 @@ export const events = [
     name: 'Panuganti Chirag Sai',
     designation: 'I M.Tech CS at SSSIHL',
     summary: 'Vice-President of the Club',
-    image: '/images/Chirag.jpeg',
+    image: '',
     linkedin: 'https://www.linkedin.com/in/panuganti-chirag-sai-atjxhn8g/'
   },
   {
@@ -136,7 +136,7 @@ export const events = [
     name: 'Satya Balaji Animireddy',
     designation: 'I M.Tech CS at SSSIHL',
     summary: 'Website Coordinator of the Club',
-    image: '/images/Satya.jpeg',
+    image: '',
     linkedin: 'https://www.linkedin.com/in/satya-balaji-animireddy/'
   },
   {
@@ -150,7 +150,7 @@ export const events = [
     name: 'Prabin Kumar Sabat',
     designation: 'II M.Sc Mathematics at SSSIHL',
     summary: 'Member of the Club',
-    image: '/images/Prabin.jpeg',
+    image: '',
     linkedin: "https://www.linkedin.com/in/prabin-kumar-sabat/"
   },
   {
