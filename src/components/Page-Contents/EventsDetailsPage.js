@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+// import React, { useState } from 'react';
 import './EventsDetailsPage.css';
 import '../../style.css';
 import { FaExternalLinkAlt } from 'react-icons/fa';
 import { events } from '../../data/constants';
-import Footer from '../Footer/Footer';
+
 const EventDetailsPage = () => {
-  const [eventsList] = useState(events);
+  // const [eventsList] = useState(events);
 
   const formatDate = (dateString) => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
