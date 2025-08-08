@@ -1,0 +1,33 @@
+.admin-dashboard {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+}
+
+.event-form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+}
+
+.event-form input,
+.event-form textarea,
+.event-form button {
+  margin: 8px 0;
+  padding: 8px;
+}
+
+.event-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.event-item {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+
+.event-item button {
+  margin-right: 10px;
+}

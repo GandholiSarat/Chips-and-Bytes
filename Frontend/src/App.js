@@ -10,6 +10,9 @@ import ProjectsDetailsPage from './components/Page-Contents/ProjectsDetailsPage'
 import EventsPage from './components/Pages/EventsPage';
 import EventDetailsPage from './components/Page-Contents/EventsDetailsPage';
 import Footer from './components/Footer/Footer';
+import AdminLogin from './components/Pages/AdminLogin';
+import AdminDashboard from './components/Pages/AdminDashboard';
+
 
 function AppContent() {
   const [activeTab, setActiveTab] = useState('home');
@@ -40,6 +43,10 @@ function AppContent() {
         <Route path="/events" element={<EventsPage />} />
         <Route path="/events/details" element={<EventDetailsPage />} />
         {/* Add other routes as needed */}
+        <Route path="/admin" element={<AdminLogin />} />
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
+
+
       </Routes>
     </>
   );
