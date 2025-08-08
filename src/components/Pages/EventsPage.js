@@ -14,7 +14,7 @@ const EventsPage = () => (
       <p className="event-details">
         📌 <strong>Session on Branch Predictors</strong> by <strong>Lokesh R</strong><br />
         🗓️ <strong>9th August 2025</strong><br />
-        🕒 <strong>3:00 PM</strong><br />
+        🕒 <strong>3:15 PM</strong><br />
         📍 <strong>I M.Tech CS Lab</strong><br />
         Don't miss it – Join us!
       </p>
