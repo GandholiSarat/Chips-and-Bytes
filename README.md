@@ -1,159 +1,145 @@
-# Getting Started with Create React App
+# 💻 Chips and Bytes – Computer Architecture Club
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is the official repository for the **Chips and Bytes** Computer Architecture Club website.  
+It is built with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+This README is divided into two parts:  
+- **For Website Admins (Core Team)** – people with direct push access  
+- **For Contributors (Public Members)** – people contributing via fork & pull requests  
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## 🚀 Getting Started
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Prerequisites
+- [Node.js](https://nodejs.org/) (latest LTS recommended)
+- npm (comes with Node.js) or yarn
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## 🧑‍💻 For Website Admins (Core Team)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+You **have** direct push access to this repository.
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-
-
-## 🧑‍💻 Team Collaboration Guide
-
-### 1. 🚀 Clone the Repository
-
+### 1️⃣ Clone the Repository
 ```bash
 git clone https://github.com/GandholiSarat/Chips-and-Bytes.git
 cd Chips-and-Bytes
 ```
 
----
-
-### 2. 🌿 Create Your Own Feature Branch
-
-Use a descriptive name:
-
+### 2️⃣ Create Your Own Feature Branch
 ```bash
 git checkout -b feature-yourname-section
 ```
-
 Example:
-
 ```bash
 git checkout -b feature-ali-login
 ```
 
----
-
-### 3. 💻 Work on Your Section
-
-Make your changes locally. Then stage and commit:
-
+### 3️⃣ Work on Your Section
 ```bash
 git add .
 git commit -m "Add my section"
-```
-
-Push your branch:
-
-```bash
 git push -u origin feature-yourname-section
 ```
 
----
-
-### 4. 🔁 Create a Pull Request (PR)
-
-1. Go to the GitHub repo: https://github.com/GandholiSarat/Chips-and-Bytes
+### 4️⃣ Create a Pull Request (PR)
+1. Go to the [GitHub repo](https://github.com/GandholiSarat/Chips-and-Bytes)
 2. Click **"Compare & pull request"** next to your branch
 3. Set the base branch to `main`
 4. Submit the PR for review and merging
 
 ---
 
+## 🤝 For Contributors (Public Members)
+
+You **do not** have direct push access. Please fork and submit changes via Pull Requests.
+
+### 1️⃣ Fork the Repository
+Click **Fork** at the top-right of this page to create your copy.
+
+### 2️⃣ Clone Your Fork
+```bash
+git clone https://github.com/<your-username>/Chips-and-Bytes.git
+cd Chips-and-Bytes
+```
+
+### 3️⃣ Create Your Own Feature Branch
+```bash
+git checkout -b feature-yourname-section
+```
+
+### 4️⃣ Make Changes, Commit, and Push
+```bash
+git add .
+git commit -m "Describe your change"
+git push -u origin feature-yourname-section
+```
+
+### 5️⃣ Create a Pull Request to the Main Repo
+1. Go to your fork on GitHub
+2. Click **"Compare & pull request"**
+3. Set **base repo** to `GandholiSarat/Chips-and-Bytes` and **base branch** to `main`
+4. Submit for review
+
+---
+
 ## ✅ Git Tips
 
-- Keep your local main up to date:
-
+- Keep your local main branch up to date:
 ```bash
 git checkout main
 git pull origin main
 ```
 
-- Sync your feature branch:
-
+- Sync your feature branch with main:
 ```bash
 git checkout feature-yourname-section
 git merge main
 ```
 
-- If there are merge conflicts, resolve them, then push:
-
+- Resolve merge conflicts if any, then push:
 ```bash
 git push
 ```
 
+- Use clear, consistent branch names:  
+  `feature-yourname-task`  
+  Example: `feature-ali-login`
+
+- Keep commits **small** and **meaningful**
+
 ---
 
-## 📌 Notes
+## 🛠 Available Scripts (Create React App)
 
-- Use clear, consistent branch names: `feature-name-task`
-- Always pull before pushing
-- Keep commits meaningful and small
+In the project directory, you can run:
+
+### `npm start`
+Runs the app in development mode.  
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.  
+The page reloads automatically when changes are saved.
+
+### `npm test`
+Launches the test runner in watch mode.  
+See [running tests](https://facebook.github.io/create-react-app/docs/running-tests).
+
+### `npm run build`
+Builds the app for production to the `build` folder.  
+Optimized for best performance and minified with hashed filenames.  
+See [deployment guide](https://facebook.github.io/create-react-app/docs/deployment).
+
+### `npm run eject`
+**Warning:** This is irreversible!  
+Copies all configuration files and dependencies locally for full control.
+
+---
+
+## 📚 Learn More
+
+- [Create React App Documentation](https://facebook.github.io/create-react-app/docs/getting-started)  
+- [React Documentation](https://reactjs.org/)  
 
 ---
 
 Happy coding, team! 🚀
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
