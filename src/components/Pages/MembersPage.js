@@ -73,7 +73,7 @@ const MembersPage = () => {
       }
     };
 
-    intervalRef.current = window.setInterval(tick, 3000);
+    intervalRef.current = window.setInterval(tick, 6000);
 
     // initial check
     checkScrollPosition();
