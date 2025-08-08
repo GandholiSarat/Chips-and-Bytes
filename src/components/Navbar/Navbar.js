@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
 import './Navbar.css';
-import { members } from '../../data/constants';
+
 
 const sectionMap = {
   home: null,
