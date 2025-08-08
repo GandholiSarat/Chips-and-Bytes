@@ -9,7 +9,7 @@ const EventsPage = () => {
 
   // Fetch events from backend
   useEffect(() => {
-    fetch('http://localhost:5001/api/events')
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/events`)
       .then((res) => res.json())
       .then((data) => {
         const mappedData = data.map(e => ({ ...e, id: e._id }));
