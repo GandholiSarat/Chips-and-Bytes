@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './AdminDashboard.css';
 
-const API_URL = 'http://localhost:5001/api/events'; // ✅ fixed to http
+const API_URL = `${process.env.REACT_APP_BACKEND_URL}/api/events`;
+
 
 const AdminDashboard = () => {
   const [events, setEvents] = useState([]);
