@@ -9,7 +9,7 @@ const EventsPage = () => {
 
   // Fetch events from backend
   useEffect(() => {
-    fetch('http://localhost:5001/api/events')
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/events`)
       .then((res) => res.json())
       .then((data) => {
         const mappedData = data.map(e => ({ ...e, id: e._id }));
@@ -33,19 +33,27 @@ const EventsPage = () => {
       ) : events.length === 0 ? (
         <p>No events found.</p>
       ) : (
-        <div className="events-grid">
-          {events.map((event) => (
-            <div className="event-announcement" key={event._id}>
-              <h2 className="event-title">Upcoming Session</h2>
-              <p className="event-details">
-                📌 <strong>{event.title}</strong> by <strong>{event.speaker}</strong><br />
-                🗓️ <strong>{event.date}</strong><br />
-                🕒 <strong>{event.time}</strong><br />
-                📍 <strong>{event.location}</strong><br />
-                {event.description}
-              </p>
-            </div>
-          ))}
+        <div className="events-wrapper">
+          <div className="events-grid">
+            {events.map((event) => (
+              <div className="event-card neon-glow" key={event._id}>
+                <div className="event-card-header">
+                  <h2 className="event-title">{event.title}</h2>
+                  <span className="event-speaker">by {event.speaker}</span>
+                </div>
+                <div className="event-card-body">
+                  <div className="event-meta">
+                    <span className="event-date">
+                      🗓️ {new Date(event.date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}
+                    </span>
+                    <span className="event-time">🕒 {event.time}</span>
+                    <span className="event-location">📍 {event.location}</span>
+                  </div>
+                  <p className="event-description">{event.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       )}
 

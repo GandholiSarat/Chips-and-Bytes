@@ -1,0 +1,155 @@
+.event-edit-page {
+  max-width: 700px;
+  margin: 40px auto 0 auto;
+  padding: 2rem 1rem;
+  background: rgba(19, 31, 56, 0.95);
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 32px rgba(34, 211, 238, 0.08);
+  color: #fff;
+}
+
+.event-edit-page h1 {
+  color: #22d3ee;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.event-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  background: rgba(30, 41, 59, 0.7);
+  padding: 1.5rem;
+  border-radius: 1rem;
+  margin-bottom: 2rem;
+  justify-content: center;
+}
+
+.event-form input {
+  flex: 1 1 220px;
+  min-width: 220px;
+  background: #0f172a;
+  color: #fff;
+  border: 1px solid #22d3ee;
+  border-radius: 8px;
+  padding: 0.7em 1em;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.event-form input:focus {
+  border-color: #38bdf8;
+}
+
+.event-form button {
+  background: #22d3ee;
+  color: #0f172a;
+  border: none;
+  padding: 0.7em 2em;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  margin-left: 1rem;
+}
+
+.event-form button:hover {
+  background: #0ea5e9;
+  color: #fff;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+ul li {
+  background: #19223a;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #fff;
+}
+
+ul li button {
+  background: #22d3ee;
+  color: #0f172a;
+  border: none;
+  padding: 0.5em 1.2em;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  margin-left: 1rem;
+}
+
+ul li button:hover {
+  background: #0ea5e9;
+  color: #fff;
+}
+
+.back-to-admin-btn {
+  background: #22d3ee;
+  color: #0f172a;
+  border: none;
+  padding: 0.7em 2em;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  margin: 2rem auto 0 auto;
+  display: block;
+}
+
+.back-to-admin-btn:hover {
+  background: #0ea5e9;
+  color: #fff;
+}
+
+
+
+.edit-btn {
+  background: #22d3ee;
+  color: #0f172a;
+  border: none;
+  padding: 0.4em 1.1em;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.98rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  margin-right: 0.5em;
+  margin-bottom: 0.2em;
+  box-shadow: 0 2px 8px rgba(34, 211, 238, 0.08);
+}
+
+.edit-btn:hover {
+  background: #0ea5e9;
+  color: #fff;
+}
+
+.delete-btn {
+  background: #f87171;
+  color: #fff;
+  border: none;
+  padding: 0.4em 1.1em;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.98rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  margin-bottom: 0.2em;
+  box-shadow: 0 2px 8px rgba(248, 113, 113, 0.08);
+}
+
+.delete-btn:hover {
+  background: #dc2626;
+  color: #fff;
+}

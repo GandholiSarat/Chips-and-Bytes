@@ -32,6 +32,7 @@
   z-index: 2;
   position: relative;
   max-width: 800px;
+  margin-top: clamp(3.5rem, 8vw, 5rem);
 }
 
 .blog-heading {
@@ -627,5 +628,31 @@
   .loading-text {
     animation: none;
     opacity: 0.8;
+  }
+}
+
+/* Desktop grid layout for blog cards */
+@media (min-width: 1024px) {
+  .blog-slider {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+    overflow-x: unset;
+    padding: clamp(2rem, 4vw, 3rem) 0;
+    scroll-snap-type: none;
+  }
+  .blog-card {
+    width: 100%;
+    height: clamp(400px, 32vw, 480px);
+    scroll-snap-align: unset;
+  }
+  .carousel-wrapper {
+    overflow: visible;
+    justify-content: stretch;
+    align-items: stretch;
+  }
+  .scroll-arrow,
+  .mobile-swipe-hint {
+    display: none !important;
   }
 }
