@@ -9,6 +9,7 @@ const AdminDashboard = () => {
   const [events, setEvents] = useState([]);
   const [formData, setFormData] = useState({
     title: '',
+    speaker: '', // <-- add this line
     date: '',
     time: '',
     location: '',
@@ -66,6 +67,7 @@ const AdminDashboard = () => {
 
       setFormData({
         title: '',
+        speaker: '', // <-- add this line
         date: '',
         time: '',
         location: '',
@@ -94,8 +96,15 @@ const AdminDashboard = () => {
   };
 
   const handleEdit = (event) => {
-    setFormData(event);
-    setEditingId(event._id); // ✅ use _id instead of id
+    setFormData({
+      title: event.title || '',
+      speaker: event.speaker || '',
+      date: event.date ? new Date(event.date).toISOString().slice(0, 10) : '',
+      time: event.time || '',
+      location: event.location || '',
+      description: event.description || ''
+    });
+    setEditingId(event._id);
   };
 
   return (
@@ -109,6 +118,7 @@ const AdminDashboard = () => {
         <>
           <form className="event-form" onSubmit={handleSubmit}>
             <input name="title" placeholder="Title" value={formData.title} onChange={handleChange} required />
+            <input name="speaker" placeholder="Speaker" value={formData.speaker} onChange={handleChange} required /> {/* <-- add this line */}
             <input name="date" type="date" value={formData.date} onChange={handleChange} required />
             <input name="time" type="time" value={formData.time} onChange={handleChange} required />
             <input name="location" placeholder="Location" value={formData.location} onChange={handleChange} required />
@@ -119,16 +129,30 @@ const AdminDashboard = () => {
           {events.length === 0 ? (
             <p>No events found.</p>
           ) : (
-            <ul className="event-list">
-              {events.map(event => (
-                <li key={event._id} className="event-item">
-                  <strong>{event.title}</strong> - {event.date} at {event.time} | {event.location}
-                  <p>{event.description}</p>
-                  <button onClick={() => handleEdit(event)}>Edit</button>
-                  <button onClick={() => handleDelete(event._id)}>Delete</button>
-                </li>
-              ))}
-            </ul>
+            <div className="events-wrapper">
+              <div className="events-grid">
+                {events.map(event => (
+                  <div className="event-card neon-glow" key={event._id}>
+                    <div className="event-card-header">
+                      <h2 className="event-title">{event.title}</h2>
+                      <span className="event-speaker">by {event.speaker}</span>
+                    </div>
+                    <div className="event-card-body">
+                      <div className="event-meta">
+                        <span className="event-date">🗓️ {new Date(event.date).toISOString().slice(0, 10)}</span>
+                        <span className="event-time">🕒 {event.time}</span>
+                        <span className="event-location">📍 {event.location}</span>
+                      </div>
+                      <p className="event-description">{event.description}</p>
+                      <div className="admin-actions">
+                        <button onClick={() => handleEdit(event)}>Edit</button>
+                        <button onClick={() => handleDelete(event._id)}>Delete</button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           )}
         </>
       )}

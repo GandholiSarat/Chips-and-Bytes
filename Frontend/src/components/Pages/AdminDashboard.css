@@ -31,3 +31,25 @@
 .event-item button {
   margin-right: 10px;
 }
+
+.admin-actions {
+  margin-top: 1rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.admin-actions button {
+  background: #22d3ee;
+  color: #0f172a;
+  border: none;
+  padding: 0.5em 1.2em;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.admin-actions button:hover {
+  background: #0ea5e9;
+  color: #fff;
+}

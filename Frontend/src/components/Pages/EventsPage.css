@@ -1,5 +1,5 @@
 .events-page {
-  max-width: 900px;
+  max-width: 1200px; /* was 900px */
   margin: 80px auto 0 auto;
   padding: 2rem;
   background: rgba(30, 64, 175, 0.1); /* light blue tint */
@@ -50,21 +50,132 @@
 }
 
 .events-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 24px;
-  justify-content: center;
-  margin-bottom: 32px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  margin: 2rem 0;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 600px) {
   .events-grid {
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
-  .event-announcement {
-    width: 98vw;
-    padding: 16px 8px;
+}
+
+.event-card {
+  background: rgba(19, 31, 56, 0.95);
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 32px rgba(34, 211, 238, 0.08), 0 1.5px 8px rgba(139, 92, 246, 0.12);
+  padding: 2rem 1.5rem;
+  transition: transform 0.25s cubic-bezier(0.4,0,0.2,1), box-shadow 0.25s cubic-bezier(0.4,0,0.2,1);
+  border: 2px solid transparent;
+  position: relative;
+  overflow: hidden;
+  padding-left: 1.5rem; /* add space for the line */
+  max-width: 420px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.event-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 1.25rem;
+  bottom: 1.25rem;
+  width: 6px;
+  border-radius: 8px;
+  background: linear-gradient(180deg, #3b82f6 0%, #22d3ee 100%);
+  box-shadow: 0 0 8px 2px #22d3ee55;
+  transition: box-shadow 0.2s;
+}
+
+.event-card.neon-glow:hover::before,
+.event-card.neon-glow:focus-within::before {
+  box-shadow: 0 0 16px 4px #22d3eecc;
+}
+
+.event-card-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.event-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #22d3ee;
+  margin: 0 0 0.25rem 0;
+  letter-spacing: -0.01em;
+}
+
+.event-speaker {
+  font-size: 1rem;
+  color: #2b94da;
+  font-weight: 700;
+}
+
+.event-card-body {
+  margin-top: 0.5rem;
+}
+
+.event-meta {
+  display: block;
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+  color: #cbd5e1;
+}
+
+.event-date, .event-time, .event-location {
+  margin-right: 0;
+  display: block;
+  background: none;
+  border-radius: 0;
+  padding: 0;
+  font-weight: 700;
+  color: #fff;
+  font-size: 0.98rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.15em;
+}
+
+.event-description {
+  color: #e0e7ff;
+  font-size: 1.05rem;
+  margin-top: 0.5rem;
+  line-height: 1.6;
+}
+
+/* Neon Glow Hover Effect */
+.event-card.neon-glow:hover, .event-card.neon-glow:focus-within {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow:
+    0 0 24px 4px #22d3ee,
+    0 8px 32px rgba(139, 92, 246, 0.18),
+    0 2px 8px rgba(34, 211, 238, 0.18);
+  border-color: #22d3ee;
+  z-index: 2;
+}
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+  .event-card {
+    padding: 1.25rem 0.75rem;
   }
+  .event-title {
+    font-size: 1.15rem;
+  }
+  .event-meta {
+    font-size: 0.95rem;
+  }
+}
+
+.events-wrapper {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
