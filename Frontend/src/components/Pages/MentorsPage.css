@@ -1,5 +1,5 @@
 /* Mentors Page Container */
-.mentors-page {
+.mentors-mentor-page {
   position: relative;
   width: 100%;
   padding: 2rem 1rem;
@@ -8,27 +8,27 @@
 }
 
 /* Section Title and Description */
-.tab-heading {
+.tab-mentor-heading {
   font-size: 2rem;
   margin-bottom: 0.5rem;
   color: #22d3ee;
   text-align: center;
 }
 
-.tab-desc {
+.tab-mentor-desc {
   text-align: center;
   color: #e5e7eb;
   margin-bottom: 2rem;
 }
 
 /* Horizontal Scroll List */
-.mentors-carousel-wrapper {
+.mentors-mentor-carousel-wrapper {
   position: relative;
   display: flex;
   align-items: center;
 }
 
-.mentors-list {
+.mentors-mentor-list {
   display: flex;
   gap: 1.5rem;
   overflow-x: auto;
@@ -40,11 +40,11 @@
   scroll-behavior: smooth;
 }
 
-.mentors-list::-webkit-scrollbar {
+.mentors-mentor-list::-webkit-scrollbar {
   display: none;
 }
 
-.mentor-card {
+.mentor-mentor-card {
   flex: 0 0 auto;
   width: 90%;
   max-width: 360px;
@@ -66,13 +66,13 @@
 }
 
 /* Hover Animation */
-.mentor-card:hover {
+.mentor-mentor-card:hover {
   transform: translateY(-8px);
   box-shadow: 0 10px 20px rgba(0, 123, 255, 0.4);
 }
 
 /* Mentor Image */
-.mentor-image {
+.mentor-mentor-image {
   width: 100px;
   height: 100px;
   border-radius: 50%;
@@ -83,31 +83,31 @@
 }
 
 /* Text Content */
-.mentor-info h2 {
+.mentor-mentor-info h2 {
   margin: 0;
   font-size: 1.2rem;
   color: #22d3ee;
 }
 
-.mentor-designation {
+.mentor-mentor-designation {
   font-weight: 500;
   color: #e0e7ff;
   margin: 0.25rem 0;
 }
 
-.mentor-experience {
+.mentor-mentor-experience {
   font-size: 0.9rem;
   color: #cbd5e1;
   margin-bottom: 0.4rem;
 }
 
-.mentor-summary {
+.mentor-mentor-summary {
   font-size: 0.95rem;
   color: #f1f5f9;
   line-height: 1.4;
 }
 
-.linkedin-link {
+.mentor-mentor-linkedin-link {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
@@ -119,12 +119,12 @@
   transition: color 0.2s ease;
 }
 
-.linkedin-link:hover {
+.mentor-mentor-linkedin-link:hover {
   color: #1a8cd8;
 }
 
 /* Scroll Buttons */
-.scroll-btn {
+.mentor-scroll-btn {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -145,17 +145,17 @@
 }
 
 /* Position them relative to the container, just outside the scroll list */
-.scroll-left {
+.mentor-scroll-left {
   left: 0; /* start at edge of wrapper */
   transform: translate(-120%, -50%); /* move it left outside the scroll area */
 }
 
-.scroll-right {
+.mentor-scroll-right {
   right: 0;
   transform: translate(120%, -50%); /* move it right outside the scroll area */
 }
 
-.scroll-btn {
+.mentor-scroll-btn {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -173,17 +173,17 @@
 
 /* Responsive Adjustments */
 @media (max-width: 640px) {
-  .scroll-btn {
+  .mentor-scroll-btn {
     width: 30px;
     height: 30px;
     font-size: 1.2rem;
   }
 
-  .scroll-left {
+  .mentor-scroll-left {
     transform: translate(-100%, -50%);
   }
 
-  .scroll-right {
+  .mentor-scroll-right {
     transform: translate(100%, -50%);
   }
 }
