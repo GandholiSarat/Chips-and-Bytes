@@ -186,7 +186,7 @@ export const events = [
     designation: 'I M.Sc Mathematics at SSSIHL',
     summary: 'Member of the Club',
     image: '/images/Krishna.png',
-    // linkedin: 'https://www.linkedin.com/in/narasimha-murthy-123456789/'
+    linkedin: 'https://www.linkedin.com/in/saikrishna-kusumanchi-540442379/'
   },
   {
     name: 'Subhasish Charan Behera',
