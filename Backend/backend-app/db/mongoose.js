@@ -1,3 +1,4 @@
+// filepath: /backend-app/backend-app/db/mongoose.js
 const mongoose = require('mongoose');
 
 const connectDB = async () => {
