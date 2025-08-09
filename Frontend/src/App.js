@@ -15,6 +15,7 @@ import AdminDashboard from './components/Pages/AdminDashboard';
 import EventEdit from './components/AdminPages/EventEdit';
 import PastEventsEdit from './components/AdminPages/PastEventsEdit';
 import AnnouncementEdit from './components/AdminPages/AnnouncementEdit';
+import ProtectedRoute from './components/Auth/ProtectedRoute';
 
 
 function AppContent() {
@@ -48,10 +49,38 @@ function AppContent() {
           <Route path="/events/details" element={<EventDetailsPage />} />
           {/* Admin routes */}
           <Route path="/admin" element={<AdminLogin />} />
-          <Route path="/admin/dashboard" element={<AdminDashboard />} />
-          <Route path="/admin/event-edit" element={<EventEdit />} />
-          <Route path="/admin/past-events-edit" element={<PastEventsEdit />} />
-          <Route path="/admin/announcement-edit" element={<AnnouncementEdit />} />
+          <Route
+            path="/admin/dashboard"
+            element={
+              <ProtectedRoute>
+                <AdminDashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/event-edit"
+            element={
+              <ProtectedRoute>
+                <EventEdit />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/past-events-edit"
+            element={
+              <ProtectedRoute>
+                <PastEventsEdit />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/announcement-edit"
+            element={
+              <ProtectedRoute>
+                <AnnouncementEdit />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </div>
       <Footer />

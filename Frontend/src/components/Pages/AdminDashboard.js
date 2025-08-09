@@ -1,8 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './AdminDashboard.css';
 
 const AdminDashboard = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    navigate('/admin');
+  };
+
   return (
     <div className="admin-dashboard">
       <h1>Admin Dashboard</h1>
@@ -19,6 +26,13 @@ const AdminDashboard = () => {
           </li>
         </ul>
       </nav>
+      <button
+        className="logout-btn"
+        style={{ marginTop: '2rem' }}
+        onClick={handleLogout}
+      >
+        Logout
+      </button>
     </div>
   );
 };
