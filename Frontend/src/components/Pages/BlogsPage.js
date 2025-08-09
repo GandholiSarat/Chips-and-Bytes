@@ -30,10 +30,10 @@ const BlogsPage = () => {
   useEffect(() => {
     const fetchBlogPreviews = async () => {
       const previews = [];
-      // Get only first 5 blogs
-      const firstFiveLinks = blogLinks.slice(0, 5);
-      
-      for (const link of firstFiveLinks) {
+      // Get only first 7 blogs
+      const firstSevenLinks = blogLinks.slice(0, 7);
+
+      for (const link of firstSevenLinks) {
         try {
           const res = await axios.get(`https://api.microlink.io/?url=${encodeURIComponent(link)}`);
           const { title, description, image, url } = res.data.data;

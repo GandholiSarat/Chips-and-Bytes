@@ -3,6 +3,7 @@ import axios from 'axios';
 import { blogLinks } from '../../data/constants';
 import './BlogsDetailsPage.css';
 import '../../style.css';
+import { useLocation } from "react-router-dom";
 
 const BlogsDetailsPage = () => {
   const [blogs, setBlogs] = useState([]);
@@ -10,6 +11,7 @@ const BlogsDetailsPage = () => {
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
   const sliderRef = useRef(null);
+  const location = useLocation();
 
   useEffect(() => {
     const fetchBlogPreviews = async () => {
@@ -65,6 +67,10 @@ const BlogsDetailsPage = () => {
       window.removeEventListener('resize', checkScrollPosition);
     };
   }, [blogs]);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [location.pathname]);
 
   // Loading Spinner Component
   const LoadingSpinner = () => (
