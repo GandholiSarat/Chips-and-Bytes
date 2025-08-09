@@ -22,7 +22,7 @@ const AdminDashboard = () => {
             <Link to="/admin/event-edit">Edit Events</Link>
           </li>
           <li>
-            {/* <Link to="/admin/past-events-edit">Edit Past Events</Link> */}
+            <Link to="/admin/past-events-edit">Edit Past Events</Link>
           </li>
         </ul>
       </nav>

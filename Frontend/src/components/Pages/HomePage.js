@@ -9,6 +9,7 @@ import MentorsPage from './MentorsPage';
 import ContactPage from './ContactPage';
 import Members from './MembersPage';
 import MembersPage from './MembersPage';
+import { Link } from 'react-router-dom';
 
 const API_URL = `${process.env.REACT_APP_BACKEND_URL}/api/announcements`;
 
@@ -89,7 +90,13 @@ const HomePage = () => {
       <div id="contact-section" className="tab-section-container">
         <ContactPage />
       </div>
-     
+
+      <div style={{ textAlign: 'right', margin: '2rem 2.5rem 1rem 0' }}>
+        <Link to="/admin" aria-label="Admin Login">
+          <Cpu size={22} color="#38bff82f" />
+        </Link>
+      </div>
+
     </div>
   );
 };

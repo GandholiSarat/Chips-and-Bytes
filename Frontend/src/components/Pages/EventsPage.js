@@ -43,7 +43,9 @@ const EventsPage = () => {
                 </div>
                 <div className="event-card-body">
                   <div className="event-meta">
-                    <span className="event-date">🗓️ {new Date(event.date).toISOString().slice(0, 10)}</span>
+                    <span className="event-date">
+                      🗓️ {new Date(event.date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}
+                    </span>
                     <span className="event-time">🕒 {event.time}</span>
                     <span className="event-location">📍 {event.location}</span>
                   </div>
