@@ -12,6 +12,9 @@ import EventDetailsPage from './components/Page-Contents/EventsDetailsPage';
 import Footer from './components/Footer/Footer';
 import AdminLogin from './components/Pages/AdminLogin';
 import AdminDashboard from './components/Pages/AdminDashboard';
+import EventEdit from './components/AdminPages/EventEdit';
+import PastEventsEdit from './components/AdminPages/PastEventsEdit';
+import AnnouncementEdit from './components/AdminPages/AnnouncementEdit';
 
 
 function AppContent() {
@@ -32,23 +35,27 @@ function AppContent() {
   }, [location.pathname]);
 
   return (
-    <>
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       <Navbar activeTab={activeTab} setActiveTab={setActiveTab} navigate={navigate} />
-      <Routes>
-        <Route path="/" element={<ChipsBytesWebsite />} />
-        <Route path="/blogs" element={<BlogsPage />} />
-        <Route path="/blogs/details" element={<BlogsDetailsPage />} />
-        <Route path="/projects" element={<ProjectsPage />} />
-        <Route path="/projects/details" element={<ProjectsDetailsPage />} />
-        <Route path="/events" element={<EventsPage />} />
-        <Route path="/events/details" element={<EventDetailsPage />} />
-        {/* Add other routes as needed */}
-        <Route path="/admin" element={<AdminLogin />} />
-        <Route path="/admin/dashboard" element={<AdminDashboard />} />
-
-
-      </Routes>
-    </>
+      <div style={{ flex: 1 }}>
+        <Routes>
+          <Route path="/" element={<ChipsBytesWebsite />} />
+          <Route path="/blogs" element={<BlogsPage />} />
+          <Route path="/blogs/details" element={<BlogsDetailsPage />} />
+          <Route path="/projects" element={<ProjectsPage />} />
+          <Route path="/projects/details" element={<ProjectsDetailsPage />} />
+          <Route path="/events" element={<EventsPage />} />
+          <Route path="/events/details" element={<EventDetailsPage />} />
+          {/* Admin routes */}
+          <Route path="/admin" element={<AdminLogin />} />
+          <Route path="/admin/dashboard" element={<AdminDashboard />} />
+          <Route path="/admin/event-edit" element={<EventEdit />} />
+          <Route path="/admin/past-events-edit" element={<PastEventsEdit />} />
+          <Route path="/admin/announcement-edit" element={<AnnouncementEdit />} />
+        </Routes>
+      </div>
+      <Footer />
+    </div>
   );
 }
 
@@ -58,7 +65,6 @@ function App() {
       <Router>
         <AppContent />
       </Router>
-      <Footer />
     </div>
   );
 }

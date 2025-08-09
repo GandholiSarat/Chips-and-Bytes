@@ -7,6 +7,7 @@ const connectDB = require('./db/mongoose');
 
 const eventRoutes = require('./routes/events');
 const authRoutes = require('./routes/auth');
+const announcementRoutes = require('./routes/announcements');
 
 const app = express();
 
@@ -21,5 +22,6 @@ app.get('/', (req, res) => {
 
 app.use('/api/events', eventRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/announcements', announcementRoutes);
 
 module.exports = app;

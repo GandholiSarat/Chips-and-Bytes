@@ -1,55 +1,45 @@
 .admin-dashboard {
-  max-width: 800px;
-  margin: auto;
-  padding: 20px;
+  max-width: 500px;
+  margin: 60px auto 0 auto;
+  padding: 32px 16px;
+  background: rgba(19, 31, 56, 0.95);
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 32px rgba(34, 211, 238, 0.08);
+  color: #fff;
+  text-align: center;
 }
 
-.event-form {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 30px;
+.admin-dashboard h1 {
+  color: #22d3ee;
+  margin-bottom: 2rem;
+  font-size: 2rem;
 }
 
-.event-form input,
-.event-form textarea,
-.event-form button {
-  margin: 8px 0;
-  padding: 8px;
-}
-
-.event-list {
-  list-style-type: none;
+.admin-nav ul {
+  list-style: none;
   padding: 0;
+  margin: 0;
 }
 
-.event-item {
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin-bottom: 15px;
+.admin-nav li {
+  margin: 1.2rem 0;
 }
 
-.event-item button {
-  margin-right: 10px;
-}
-
-.admin-actions {
-  margin-top: 1rem;
-  display: flex;
-  gap: 1rem;
-}
-
-.admin-actions button {
+.admin-nav a {
+  display: inline-block;
+  padding: 0.75em 2em;
   background: #22d3ee;
   color: #0f172a;
-  border: none;
-  padding: 0.5em 1.2em;
   border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s;
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 12px rgba(34, 211, 238, 0.08);
 }
 
-.admin-actions button:hover {
+.admin-nav a:hover {
   background: #0ea5e9;
   color: #fff;
+  box-shadow: 0 4px 24px #22d3ee44;
 }

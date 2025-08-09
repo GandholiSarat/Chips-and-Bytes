@@ -1,0 +1,74 @@
+.announcement-edit-page {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 2rem 1rem;
+  background: rgba(19, 31, 56, 0.95);
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 32px rgba(34, 211, 238, 0.08);
+  color: #fff;
+}
+
+.announcement-edit-page h1 {
+  color: #22d3ee;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.announcement-edit-page form {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  justify-content: center;
+}
+
+.announcement-edit-page input {
+  flex: 1 1 220px;
+  background: #0f172a;
+  color: #fff;
+  border: 1px solid #22d3ee;
+  border-radius: 8px;
+  padding: 0.7em 1em;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.announcement-edit-page input:focus {
+  border-color: #38bdf8;
+}
+
+.announcement-edit-page button {
+  background: #22d3ee;
+  color: #0f172a;
+  border: none;
+  padding: 0.7em 1.5em;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.announcement-edit-page button:hover {
+  background: #0ea5e9;
+  color: #fff;
+}
+
+.announcement-edit-page ul {
+  list-style: none;
+  padding: 0;
+}
+
+.announcement-edit-page li {
+  background: #19223a;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.announcement-edit-page li button {
+  margin-left: 1rem;
+}
