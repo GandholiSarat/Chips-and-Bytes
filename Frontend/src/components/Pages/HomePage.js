@@ -1,3 +1,20 @@
+/**
+ * @file HomePage.js
+ * @description
+ * Main landing page for the Chips & Bytes website.
+ * Displays a video background, announcements, and all main sections (about, members, events, projects, blogs, mentors, contact).
+ * 
+ * Features:
+ * - Video background with overlay and animated logo.
+ * - Announcement bar with latest updates.
+ * - Scrolls to sections on button click.
+ * - Renders all main club sections.
+ * - Admin login link.
+ * 
+ * @component
+ * @returns {JSX.Element}
+ */
+
 import React, { useEffect, useState } from 'react';
 import { Cpu } from 'lucide-react';
 import './HomePage.css';
@@ -7,7 +24,6 @@ import ProjectsPage from './ProjectsPage';
 import BlogsPage from './BlogsPage';
 import MentorsPage from './MentorsPage';
 import ContactPage from './ContactPage';
-import Members from './MembersPage';
 import MembersPage from './MembersPage';
 import { Link } from 'react-router-dom';
 
@@ -49,9 +65,7 @@ const HomePage = () => {
                 Join Our Community
               </button>
             </div>
-
           </div>
-
           <div className="video-right">
             <div className="bouncing-icon">
               <img src="/assets/logo_white_full.png" alt="Chips & Bytes Logo" 
@@ -90,13 +104,11 @@ const HomePage = () => {
       <div id="contact-section" className="tab-section-container">
         <ContactPage />
       </div>
-
       <div style={{ textAlign: 'right', margin: '2rem 2.5rem 1rem 0' }}>
         <Link to="/admin" aria-label="Admin Login">
           <Cpu size={22} color="#38bff82f" />
         </Link>
       </div>
-
     </div>
   );
 };

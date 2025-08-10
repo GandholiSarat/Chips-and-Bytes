@@ -1,3 +1,20 @@
+/**
+ * @file ProjectsPage.js
+ * @description
+ * Displays a horizontally scrollable carousel of featured projects.
+ * Fetches project preview data (title, description, image, url) using the Microlink API.
+ * Allows users to scroll through project cards, swipe on mobile, and open GitHub links.
+ * 
+ * Features:
+ * - Fetches and displays project previews from external links.
+ * - Responsive carousel with left/right scroll arrows.
+ * - Mobile swipe support for carousel.
+ * - "More..." card to view all projects.
+ * 
+ * @component
+ * @returns {JSX.Element}
+ */
+
 import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -8,12 +25,12 @@ import '../../style.css';
 
 const ProjectsPage = () => {
   const [projectData, setProjectData] = useState([]);
-    const [canScrollLeft, setCanScrollLeft] = useState(false);
-    const [canScrollRight, setCanScrollRight] = useState(false);
-    const [loading, setLoading] = useState(true);
-    const [isMobile, setIsMobile] = useState(false);
-    const [touchStart, setTouchStart] = useState(null);
-    const sliderRef = useRef(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
+  const [touchStart, setTouchStart] = useState(null);
+  const sliderRef = useRef(null);
 
   // Detect mobile/tablet devices
   useEffect(() => {
@@ -21,13 +38,13 @@ const ProjectsPage = () => {
       const mobile = window.innerWidth <= 768;
       setIsMobile(mobile);
     };
-    
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
- useEffect(() => {
+  // Fetch project metadata from Microlink API
+  useEffect(() => {
     const fetchMetadata = async () => {
       const results = await Promise.all(
         gitLinks.map(async (linkObj) => {
@@ -35,7 +52,6 @@ const ProjectsPage = () => {
             const response = await fetch(`https://api.microlink.io/?url=${encodeURIComponent(linkObj.url)}`);
             const json = await response.json();
             const { title, description, image, url } = json.data;
-
             return {
               title: title || linkObj.title,
               description: description || linkObj.description,
@@ -51,10 +67,12 @@ const ProjectsPage = () => {
       setProjectData(results);
       setLoading(false); 
     };
-
     fetchMetadata();
   }, []);
 
+  /**
+   * Checks and updates the scroll position state for the carousel.
+   */
   const checkScrollPosition = () => {
     const slider = sliderRef.current;
     if (!slider) return;
@@ -62,6 +80,10 @@ const ProjectsPage = () => {
     setCanScrollRight(slider.scrollLeft + slider.clientWidth < slider.scrollWidth - 5);
   };
 
+  /**
+   * Scrolls the carousel left or right by a fixed amount.
+   * @param {'left'|'right'} direction
+   */
   const scroll = (direction) => {
     const scrollAmount = isMobile ? (window.innerWidth <= 375 ? 200 : 250) : 320;
     if (sliderRef.current) {
@@ -79,11 +101,9 @@ const ProjectsPage = () => {
 
   const handleTouchMove = (e) => {
     if (!touchStart) return;
-    
     const currentTouch = e.touches[0].clientX;
     const diff = touchStart - currentTouch;
-    
-    if (Math.abs(diff) > 50) { // Minimum swipe distance
+    if (Math.abs(diff) > 50) {
       if (diff > 0 && canScrollRight) {
         scroll('right');
       } else if (diff < 0 && canScrollLeft) {
@@ -97,21 +117,18 @@ const ProjectsPage = () => {
     setTouchStart(null);
   };
 
+  // Set up scroll and touch event listeners
   useEffect(() => {
     const slider = sliderRef.current;
     if (!slider) return;
-
     checkScrollPosition();
     slider.addEventListener('scroll', checkScrollPosition);
     window.addEventListener('resize', checkScrollPosition);
-
-    // Add touch event listeners for mobile
     if (isMobile) {
       slider.addEventListener('touchstart', handleTouchStart, { passive: true });
       slider.addEventListener('touchmove', handleTouchMove, { passive: true });
       slider.addEventListener('touchend', handleTouchEnd, { passive: true });
     }
-
     return () => {
       slider.removeEventListener('scroll', checkScrollPosition);
       window.removeEventListener('resize', checkScrollPosition);
@@ -169,15 +186,15 @@ const ProjectsPage = () => {
                         {Projects.description?.slice(0, isMobile ? 80 : 100)}...
                       </p>
                       <a
-                                    href={Projects.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="continue-link"
-                                    aria-label={`GitHub link for ${Projects.title}`}
-                                  >
-                                    <FaGithub size={20} style={{ marginRight: '8px' }} />
-                                    View Repo
-                                  </a>
+                        href={Projects.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="continue-link"
+                        aria-label={`GitHub link for ${Projects.title}`}
+                      >
+                        <FaGithub size={20} style={{ marginRight: '8px' }} />
+                        View Repo
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -223,13 +240,6 @@ const ProjectsPage = () => {
               </button>
             )}
           </div>
-
-          {/* Mobile swipe hint */}
-          {/* {isMobile && (
-            <div className="mobile-swipe-hint">
-              <p className="swipe-hint">← Swipe to explore →</p>
-            </div>
-          )} */}
 
           <div className="read-more-container">
             <Link to="/Projects/details" className="read-more-link">

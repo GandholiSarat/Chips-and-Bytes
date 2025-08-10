@@ -1,3 +1,18 @@
+/**
+ * @file MentorsPage.js
+ * @description
+ * Displays a horizontally scrollable carousel of mentors.
+ * Supports auto-scroll, manual navigation, and responsive design.
+ * 
+ * Features:
+ * - Auto-scrolls through mentor cards with a maximum loop count.
+ * - Allows manual scrolling with left/right arrows.
+ * - Responsive to window resizing.
+ * 
+ * @component
+ * @returns {JSX.Element}
+ */
+
 import React, { useRef, useEffect, useState, useCallback } from 'react';
 import './MentorsPage.css';
 import '../../style.css';
@@ -14,6 +29,9 @@ const Mentors = () => {
 
   const maxLoops = 20;
 
+  /**
+   * Checks and updates the scroll position state for the carousel.
+   */
   const checkScrollPosition = useCallback(() => {
     const container = scrollRef.current;
     if (!container) return;
@@ -21,43 +39,41 @@ const Mentors = () => {
     setCanScrollRight(container.scrollLeft + container.clientWidth < container.scrollWidth - 5);
   }, []);
 
+  /**
+   * Scrolls the carousel left or right by one card width.
+   * @param {'left'|'right'} direction
+   */
   const scroll = (direction) => {
     const container = scrollRef.current;
     if (!container || container.children.length === 0) return;
-
     const card = container.children[0];
-    const cardWidth = card.offsetWidth + 24; // spacing assumption
-
+    const cardWidth = card.offsetWidth + 24;
     container.scrollBy({
       left: direction === 'left' ? -cardWidth : cardWidth,
       behavior: 'smooth',
     });
-
     setTimeout(checkScrollPosition, 500);
   };
 
+  // Auto-scroll setup
   useEffect(() => {
     const container = scrollRef.current;
     if (!container || container.children.length === 0) return;
-
     const getCardWidth = () => {
       if (!container.children[0]) return 0;
       const card = container.children[0];
       return card.offsetWidth + 24;
     };
-
     const tick = () => {
       if (!container) return;
       const cardWidth = getCardWidth();
       const atEnd = container.scrollLeft + container.clientWidth >= container.scrollWidth - 5;
-
       if (atEnd) {
         scrollCount.current += 1;
         setTimeout(() => {
           container.scrollTo({ left: 0, behavior: 'auto' });
           checkScrollPosition();
         }, 300);
-
         if (scrollCount.current >= maxLoops) {
           if (intervalRef.current !== null) {
             clearInterval(intervalRef.current);
@@ -69,11 +85,8 @@ const Mentors = () => {
         setTimeout(checkScrollPosition, 500);
       }
     };
-
     intervalRef.current = window.setInterval(tick, 8000);
-
     checkScrollPosition();
-
     return () => {
       if (intervalRef.current !== null) {
         clearInterval(intervalRef.current);
@@ -81,6 +94,7 @@ const Mentors = () => {
     };
   }, [checkScrollPosition]);
 
+  // Responsive: update scroll position on resize
   useEffect(() => {
     let timeout = null;
     const onResize = () => {
@@ -103,7 +117,6 @@ const Mentors = () => {
       <p className="tab-mentor-desc">
         Meet our mentors who guide and inspire us in our journey.
       </p>
-
       <div className="mentors-mentor-carousel-wrapper">
         {canScrollLeft && (
           <button
@@ -111,19 +124,11 @@ const Mentors = () => {
             onClick={() => scroll('left')}
             aria-label="Scroll Left"
           >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <polyline points="15,18 9,12 15,6"></polyline>
             </svg>
           </button>
         )}
-
         <div
           className="mentors-mentor-list"
           ref={(el) => {
@@ -154,21 +159,13 @@ const Mentors = () => {
             </div>
           ))}
         </div>
-
         {canScrollRight && (
           <button
             className="mentor-scroll-btn mentor-scroll-right"
             onClick={() => scroll('right')}
             aria-label="Scroll Right"
           >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <polyline points="9,18 15,12 9,6"></polyline>
             </svg>
           </button>

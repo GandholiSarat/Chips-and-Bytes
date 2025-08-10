@@ -1,11 +1,24 @@
-// contact.js
+/**
+ * @file ContactPage.js
+ * @description
+ * Contact form page for the Chips & Bytes website.
+ * Allows users to send messages to the club.
+ * 
+ * Features:
+ * - Validates form fields (name, email, message).
+ * - Shows error messages for invalid input.
+ * - Sends form data to the backend API.
+ * - Displays success or error status messages.
+ * 
+ * @component
+ * @returns {JSX.Element}
+ */
+
 import React, { useState, useEffect } from 'react';
 import './ContactPage.css';
 import '../../style.css';
 
 const initialForm = { name: '', email: '', message: '' };
-
-// Basic email regex (simple, sufficient for frontend hinting)
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const ContactPage = () => {
@@ -14,7 +27,7 @@ const ContactPage = () => {
   const [touched, setTouched] = useState({});
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [statusMessage, setStatusMessage] = useState(null); // for form-level messages
+  const [statusMessage, setStatusMessage] = useState(null);
 
   // Validate on demand
   const validate = () => {
@@ -34,7 +47,6 @@ const ContactPage = () => {
     if (Object.keys(touched).length > 0) {
       setErrors(validate());
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formData]);
 
   const handleChange = (e) => {

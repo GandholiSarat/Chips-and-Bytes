@@ -1,3 +1,18 @@
+/**
+ * @file AdminDashboard.js
+ * @description
+ * Admin dashboard page for Chips & Bytes website.
+ * Allows navigation to announcement, event, and past event editors.
+ * Handles admin logout.
+ * 
+ * Features:
+ * - Navigation links to admin edit pages.
+ * - Logout button clears JWT token and redirects to login.
+ * 
+ * @component
+ * @returns {JSX.Element}
+ */
+
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './AdminDashboard.css';
@@ -5,6 +20,9 @@ import './AdminDashboard.css';
 const AdminDashboard = () => {
   const navigate = useNavigate();
 
+  /**
+   * Handles admin logout by clearing token and redirecting.
+   */
   const handleLogout = () => {
     localStorage.removeItem('token');
     navigate('/admin');

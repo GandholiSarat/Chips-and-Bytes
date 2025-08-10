@@ -1,6 +1,18 @@
-// import '../../style.css';
-import './AboutPage.css'; // Ensure the CSS is imported
+/**
+ * @file AboutPage.js
+ * @description
+ * About page for the Chips & Bytes website.
+ * Describes the club's mission, objectives, and community values.
+ * 
+ * Features:
+ * - Animated headings and paragraphs.
+ * - Lists club mission and objectives.
+ * 
+ * @component
+ * @returns {JSX.Element}
+ */
 
+import './AboutPage.css';
 import React, { useEffect, useRef } from 'react';
 
 function AboutPage() {

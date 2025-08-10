@@ -1,3 +1,20 @@
+/**
+ * @file App.js
+ * @description
+ * Main entry point for the Chips & Bytes React application.
+ * Sets up routing for all pages, including public and admin routes.
+ * Handles navigation, active tab state, and renders the Navbar and Footer.
+ * 
+ * Features:
+ * - Client-side routing using react-router-dom.
+ * - Dynamic active tab highlighting in the Navbar.
+ * - Protected admin routes using JWT authentication.
+ * - Renders all main pages and admin edit pages.
+ * 
+ * @component
+ * @returns {JSX.Element}
+ */
+
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 
@@ -17,7 +34,14 @@ import PastEventsEdit from './components/AdminPages/PastEventsEdit';
 import AnnouncementEdit from './components/AdminPages/AnnouncementEdit';
 import ProtectedRoute from './components/Auth/ProtectedRoute';
 
-
+/**
+ * AppContent Component
+ * 
+ * Handles the main layout, routing, and active tab state.
+ * 
+ * @component
+ * @returns {JSX.Element}
+ */
 function AppContent() {
   const [activeTab, setActiveTab] = useState('home');
   const navigate = useNavigate();
@@ -88,6 +112,14 @@ function AppContent() {
   );
 }
 
+/**
+ * App Component
+ * 
+ * Wraps the application in a Router and renders AppContent.
+ * 
+ * @component
+ * @returns {JSX.Element}
+ */
 function App() {
   return (
     <div className="app-container">

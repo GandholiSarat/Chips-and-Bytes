@@ -1,3 +1,18 @@
+/**
+ * @file EventsPage.js
+ * @description
+ * Displays a grid of upcoming events.
+ * Fetches event data from the backend API.
+ * 
+ * Features:
+ * - Fetches and displays all upcoming events.
+ * - Shows event details: title, speaker, date, time, location, description.
+ * - Link to view past events.
+ * 
+ * @component
+ * @returns {JSX.Element}
+ */
+
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './EventsPage.css';
@@ -12,8 +27,6 @@ const EventsPage = () => {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/api/events`)
       .then((res) => res.json())
       .then((data) => {
-        const mappedData = data.map(e => ({ ...e, id: e._id }));
-        console.log(data);
         setEvents(data);
         setLoading(false);
       })

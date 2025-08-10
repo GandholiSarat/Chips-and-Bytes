@@ -1,3 +1,18 @@
+/**
+ * @file EventsDetailsPage.js
+ * @description
+ * Displays a table of past events with their date, title, report, and resources links.
+ * Fetches event data from the backend API.
+ * 
+ * Features:
+ * - Fetches and displays all past events.
+ * - Shows links to event reports and resources if available.
+ * - Formats event dates for readability.
+ * 
+ * @component
+ * @returns {JSX.Element}
+ */
+
 import React, { useEffect, useState } from 'react';
 import './EventsDetailsPage.css';
 import '../../style.css';
@@ -10,6 +25,9 @@ const EventDetailsPage = () => {
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
+    /**
+     * Fetches all past events from the backend API.
+     */
     const fetchEvents = async () => {
       try {
         const res = await axios.get(API_URL);
@@ -21,6 +39,11 @@ const EventDetailsPage = () => {
     fetchEvents();
   }, []);
 
+  /**
+   * Formats a date string into a human-readable format.
+   * @param {string} dateString
+   * @returns {string}
+   */
   const formatDate = (dateString) => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     return new Date(dateString).toLocaleDateString(undefined, options);
