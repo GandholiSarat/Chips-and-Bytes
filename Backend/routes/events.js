@@ -1,3 +1,16 @@
+/**
+ * @file events.js
+ * @description
+ * Express router for managing events.
+ * Supports CRUD operations for events, with admin authentication for write actions.
+ * 
+ * Routes:
+ *   GET    /api/events        - Get all events (public)
+ *   POST   /api/events        - Add new event (admin only)
+ *   PUT    /api/events/:id    - Edit an event (admin only)
+ *   DELETE /api/events/:id    - Delete an event (admin only)
+ */
+
 const express = require('express');
 const router = express.Router();
 const auth = require('../middleware/auth');

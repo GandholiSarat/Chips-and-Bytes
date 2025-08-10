@@ -1,3 +1,16 @@
+/**
+ * @file announcements.js
+ * @description
+ * Express router for managing announcements.
+ * Supports CRUD operations for announcements, with admin authentication for write actions.
+ * 
+ * Routes:
+ *   GET    /api/announcements        - Get all announcements (public)
+ *   POST   /api/announcements        - Add new announcement (admin only)
+ *   PUT    /api/announcements/:id    - Edit an announcement (admin only)
+ *   DELETE /api/announcements/:id    - Delete an announcement (admin only)
+ */
+
 const express = require('express');
 const router = express.Router();
 const auth = require('../middleware/auth');
