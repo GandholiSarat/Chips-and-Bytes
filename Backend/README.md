@@ -4,24 +4,21 @@
 This project is a backend application built with Node.js and Express, integrated with MongoDB for data storage. It is designed to be deployable on Vercel, utilizing serverless functions for handling API requests.
 
 ## Project Structure
+
 ```
-backend-app
-├── api
-│   └── index.js          # Exports serverless function for Vercel
-├── db
-│   └── mongoose.js       # MongoDB connection setup
-├── middleware
-│   └── auth.js           # JWT authentication middleware
-├── models
-│   └── Event.js          # Mongoose model for events
-├── routes
-│   ├── auth.js           # User authentication routes
-│   └── events.js         # Event management routes
-├── .env                   # Environment variables
-├── app.js                 # Main application setup
-├── package.json           # Project dependencies and scripts
-├── server.js              # Starts the Express server
-└── README.md              # Project documentation
+Backend/
+├── api/            # Serverless handler entry point
+├── db/             # MongoDB connection utility
+├── middleware/     # Express middleware (e.g., auth)
+├── models/         # Mongoose models
+├── routes/         # Express route handlers
+├── scripts/        # Utility scripts (e.g., seeders)
+├── .env            # Environment variables
+├── app.js          # Main Express app
+├── server.js       # Server entry point
+├── users.json      # Admin user storage
+├── package.json    # Project metadata and scripts
+└── README.md       # This file
 ```
 
 ## Setup Instructions
@@ -51,34 +48,60 @@ backend-app
    ```
    The server will be running on `http://localhost:3001`.
 
-## Usage
+##  Authentication
 
-- **Authentication**
-  - POST `/api/auth/login`: Log in with username and password to receive a JWT token.
+- Admin authentication uses JWT.
+- Default admin credentials are created if `users.json` does not exist.
+- Login endpoint: `POST /api/auth/login`
 
-- **Event Management**
-  - GET `/api/events`: Retrieve all events.
-  - POST `/api/events`: Create a new event (admin only).
-  - PUT `/api/events/:id`: Update an existing event by ID (admin only).
-  - DELETE `/api/events/:id`: Delete an event by ID (admin only).
+---
 
-## Deployment on Vercel
+##  Scripts
 
-To deploy this application on Vercel:
+| Command         | Description                |
+|-----------------|---------------------------|
+| `npm start`     | Start the server          |
+| `npm run docs`  | Generate API docs (if configured) |
+| `node scripts/seedPastEvents.js` | Seed past events data |
 
-1. **Install Vercel CLI**
-   ```bash
-   npm install -g vercel
-   ```
+---
 
-2. **Deploy the Application**
-   Run the following command in the root directory:
-   ```bash
-   vercel
-   ```
+##  API Endpoints
 
-3. **Follow the Prompts**
-   Follow the prompts to configure your deployment settings.
+- `/api/events`         — Manage events
+- `/api/pastevents`     — Manage past events
+- `/api/announcements`  — Manage announcements
+- `/api/auth`           — Admin authentication
 
-## License
+---
+
+##  Documentation
+
+- Source code is documented with JSDoc comments.
+- To generate documentation, use:
+  ```sh
+  npx jsdoc -c jsdoc.json
+  ```
+  Output will be in the `docs/` folder (if configured).
+
+---
+
+##  Contributing
+
+1. Fork the repo
+2. Create your feature branch (`git checkout -b feature/YourFeature`)
+3. Commit your changes (`git commit -am 'Add feature'`)
+4. Push to the branch (`git push origin feature/YourFeature`)
+5. Open a Pull Request
+
+---
+
+##  License
+
 This project is licensed under the MIT License.
+
+---
+
+##  Contact
+
+For questions or support, contact the Chips & Bytes team.
