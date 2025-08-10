@@ -1,11 +1,25 @@
-// import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './EventsDetailsPage.css';
 import '../../style.css';
 import { FaExternalLinkAlt } from 'react-icons/fa';
-import { events } from '../../data/constants';
+import axios from 'axios';
+
+const API_URL = `${process.env.REACT_APP_BACKEND_URL}/api/pastevents`;
 
 const EventDetailsPage = () => {
-  // const [eventsList] = useState(events);
+  const [events, setEvents] = useState([]);
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const res = await axios.get(API_URL);
+        setEvents(res.data || []);
+      } catch (err) {
+        setEvents([]);
+      }
+    };
+    fetchEvents();
+  }, []);
 
   const formatDate = (dateString) => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -32,34 +46,42 @@ const EventDetailsPage = () => {
               </tr>
             </thead>
             <tbody>
-              {events.map((event, index) => (
-                <tr key={event.id} className="table-row">
+              {[...events].reverse().map((event, index) => (
+                <tr key={event._id} className="table-row">
                   <td className="table-cell serial-cell">{index + 1}</td>
                   <td className="table-cell date-cell">{formatDate(event.date)}</td>
                   <td className="table-cell title-cell">{event.title}</td>
                   <td className="table-cell link-cell">
-                    <a 
-                      href={event.reportLink} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="drive-link report-link"
-                      aria-label={`Report for ${event.title}`}
-                    >
-                      <FaExternalLinkAlt size={16} />
-                      Click here
-                    </a>
+                    {event.reportLink ? (
+                      <a 
+                        href={event.reportLink} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="drive-link report-link"
+                        aria-label={`Report for ${event.title}`}
+                      >
+                        <FaExternalLinkAlt size={16} />
+                        Click here
+                      </a>
+                    ) : (
+                      <span style={{ color: '#888' }}>N/A</span>
+                    )}
                   </td>
                   <td className="table-cell link-cell">
-                    <a 
-                      href={event.resourcesLink} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="drive-link resources-link"
-                      aria-label={`Resources for ${event.title}`}
-                    >
-                      <FaExternalLinkAlt size={16} />
-                      Click here
-                    </a>
+                    {event.resourcesLink ? (
+                      <a 
+                        href={event.resourcesLink} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="drive-link resources-link"
+                        aria-label={`Resources for ${event.title}`}
+                      >
+                        <FaExternalLinkAlt size={16} />
+                        Click here
+                      </a>
+                    ) : (
+                      <span style={{ color: '#888' }}>N/A</span>
+                    )}
                   </td>
                 </tr>
               ))}

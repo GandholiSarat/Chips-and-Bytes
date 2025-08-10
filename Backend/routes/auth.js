@@ -3,8 +3,7 @@ const fs = require('fs');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
-const path = require('path'); // Add this line
-// ...existing code...
+const path = require('path');
 
 const USERS_FILE = path.join(__dirname, '../users.json');
 const SECRET_KEY = 'codez_secret_key'; // change for production

@@ -73,7 +73,7 @@ const MembersPage = () => {
       }
     };
 
-    intervalRef.current = window.setInterval(tick, 3000);
+    intervalRef.current = window.setInterval(tick, 8000);
 
     // initial check
     checkScrollPosition();
@@ -104,16 +104,16 @@ const MembersPage = () => {
   }, [checkScrollPosition]);
 
   return (
-    <div className="members-page">
-      <h1 className="tab-heading">Members</h1>
-      <p className="tab-desc">
+    <div className="members-member-page">
+      <h1 className="tab-member-heading">Members</h1>
+      <p className="tab-member-desc">
         Meet our members who are part of this club.
       </p>
 
-      <div className="members-carousel-wrapper">
+      <div className="members-member-carousel-wrapper">
         {canScrollLeft && (
           <button
-            className="scroll-arrow left-arrow"
+            className="member-scroll-btn member-scroll-left"
             onClick={() => scroll('left')}
             aria-label="Scroll Left"
           >
@@ -131,25 +131,25 @@ const MembersPage = () => {
         )}
 
         <div
-          className="members-list"
+          className="members-member-list"
           ref={(el) => {
             scrollRef.current = el;
           }}
           onScroll={checkScrollPosition}
         >
           {members.map((mentor, index) => (
-            <div className="mentor-card" key={`${mentor.name}-${index}`}>
+            <div className="member-mentor-card" key={`${mentor.name}-${index}`}>
               <img
                 src={mentor.image}
                 alt={mentor.name}
-                className="mentor-image"
+                className="member-mentor-image"
               />
-              <div className="mentor-info">
+              <div className="member-mentor-info">
                 <h2>{mentor.name}</h2>
-                <p className="mentor-designation">{mentor.designation}</p>
-                <p className="mentor-summary">{mentor.summary}</p>
+                <p className="member-mentor-designation">{mentor.designation}</p>
+                <p className="member-mentor-summary">{mentor.summary}</p>
                 <a
-                  className="linkedin-link"
+                  className="member-linkedin-link"
                   href={mentor.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -163,7 +163,7 @@ const MembersPage = () => {
 
         {canScrollRight && (
           <button
-            className="scroll-arrow right-arrow"
+            className="member-scroll-btn member-scroll-right"
             onClick={() => scroll('right')}
             aria-label="Scroll Right"
           >

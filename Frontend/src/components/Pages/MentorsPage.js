@@ -33,11 +33,9 @@ const Mentors = () => {
       behavior: 'smooth',
     });
 
-    // After smooth scroll, update arrow visibility
     setTimeout(checkScrollPosition, 500);
   };
 
-  // Auto-scroll setup with up-to-date refs
   useEffect(() => {
     const container = scrollRef.current;
     if (!container || container.children.length === 0) return;
@@ -55,7 +53,6 @@ const Mentors = () => {
 
       if (atEnd) {
         scrollCount.current += 1;
-        // reset to start
         setTimeout(() => {
           container.scrollTo({ left: 0, behavior: 'auto' });
           checkScrollPosition();
@@ -73,9 +70,8 @@ const Mentors = () => {
       }
     };
 
-    intervalRef.current = window.setInterval(tick, 3000);
+    intervalRef.current = window.setInterval(tick, 8000);
 
-    // initial check
     checkScrollPosition();
 
     return () => {
@@ -85,7 +81,6 @@ const Mentors = () => {
     };
   }, [checkScrollPosition]);
 
-  // Debounced resize listener
   useEffect(() => {
     let timeout = null;
     const onResize = () => {
@@ -95,7 +90,6 @@ const Mentors = () => {
       }, 150);
     };
     window.addEventListener('resize', onResize);
-    // initial
     checkScrollPosition();
     return () => {
       window.removeEventListener('resize', onResize);
@@ -104,16 +98,16 @@ const Mentors = () => {
   }, [checkScrollPosition]);
 
   return (
-    <div className="mentors-page">
-      <h1 className="tab-heading">Mentors</h1>
-      <p className="tab-desc">
+    <div className="mentors-mentor-page">
+      <h1 className="tab-mentor-heading">Mentors</h1>
+      <p className="tab-mentor-desc">
         Meet our mentors who guide and inspire us in our journey.
       </p>
 
-      <div className="mentors-carousel-wrapper">
+      <div className="mentors-mentor-carousel-wrapper">
         {canScrollLeft && (
           <button
-            className="scroll-arrow left-arrow"
+            className="mentor-scroll-btn mentor-scroll-left"
             onClick={() => scroll('left')}
             aria-label="Scroll Left"
           >
@@ -131,25 +125,25 @@ const Mentors = () => {
         )}
 
         <div
-          className="mentors-list"
+          className="mentors-mentor-list"
           ref={(el) => {
             scrollRef.current = el;
           }}
           onScroll={checkScrollPosition}
         >
           {mentors.map((mentor, index) => (
-            <div className="mentor-card" key={`${mentor.name}-${index}`}>
+            <div className="mentor-mentor-card" key={`${mentor.name}-${index}`}>
               <img
                 src={mentor.image}
                 alt={mentor.name}
-                className="mentor-image"
+                className="mentor-mentor-image"
               />
-              <div className="mentor-info">
+              <div className="mentor-mentor-info">
                 <h2>{mentor.name}</h2>
-                <p className="mentor-designation">{mentor.designation}</p>
-                <p className="mentor-summary">{mentor.summary}</p>
+                <p className="mentor-mentor-designation">{mentor.designation}</p>
+                <p className="mentor-mentor-summary">{mentor.summary}</p>
                 <a
-                  className="linkedin-link"
+                  className="mentor-mentor-linkedin-link"
                   href={mentor.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -163,7 +157,7 @@ const Mentors = () => {
 
         {canScrollRight && (
           <button
-            className="scroll-arrow right-arrow"
+            className="mentor-scroll-btn mentor-scroll-right"
             onClick={() => scroll('right')}
             aria-label="Scroll Right"
           >
