@@ -1,3 +1,13 @@
+/**
+ * @file seedPastEvents.js
+ * @description
+ * Script to seed the database with initial past events data.
+ * Connects to MongoDB, clears existing PastEvent documents, and inserts sample events.
+ * 
+ * Usage:
+ *   MONGODB_URI=<your_mongo_uri> node seedPastEvents.js
+ */
+
 const mongoose = require('mongoose');
 const PastEvent = require('../models/PastEvent');
 

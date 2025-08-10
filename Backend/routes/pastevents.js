@@ -1,3 +1,16 @@
+/**
+ * @file pastevents.js
+ * @description
+ * Express router for managing past events.
+ * Supports CRUD operations for past events, with admin authentication for write actions.
+ * 
+ * Routes:
+ *   GET    /api/pastevents        - Get all past events (public)
+ *   POST   /api/pastevents        - Add new past event (admin only)
+ *   PUT    /api/pastevents/:id    - Edit a past event (admin only)
+ *   DELETE /api/pastevents/:id    - Delete a past event (admin only)
+ */
+
 const express = require('express');
 const router = express.Router();
 const auth = require('../middleware/auth');

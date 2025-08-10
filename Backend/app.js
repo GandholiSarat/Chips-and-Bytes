@@ -1,3 +1,18 @@
+/**
+ * @file app.js
+ * @description
+ * Main Express application for the Chips & Bytes backend API.
+ * Sets up middleware, connects to MongoDB, and registers all API routes.
+ * 
+ * Features:
+ * - Loads environment variables from .env
+ * - Connects to MongoDB using Mongoose
+ * - Enables CORS and JSON body parsing
+ * - Registers routes for events, authentication, announcements, and past events
+ * 
+ * @module app
+ */
+
 require('dotenv').config();
 
 const express = require('express');
