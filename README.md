@@ -1,4 +1,4 @@
-# 💻 Chips and Bytes – Computer Architecture Club
+#  Chips and Bytes – Computer Architecture Club
 
 This is the official repository for the **Chips and Bytes** Computer Architecture Club website.  
 It is built with [Create React App](https://github.com/facebook/create-react-app).
@@ -9,7 +9,7 @@ This README is divided into two parts:
 
 ---
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Prerequisites
 - [Node.js](https://nodejs.org/) (latest LTS recommended)
@@ -17,17 +17,17 @@ This README is divided into two parts:
 
 ---
 
-## 🧑‍💻 For Website Admins (Core Team)
+##  For Website Admins (Core Team)
 
 You **have** direct push access to this repository.
 
-### 1️⃣ Clone the Repository
+###  Clone the Repository
 ```bash
 git clone https://github.com/GandholiSarat/Chips-and-Bytes.git
 cd Chips-and-Bytes
 ```
 
-### 2️⃣ Create Your Own Feature Branch
+###  Create Your Own Feature Branch
 ```bash
 git checkout -b feature-yourname-section
 ```
@@ -36,14 +36,14 @@ Example:
 git checkout -b feature-ali-login
 ```
 
-### 3️⃣ Work on Your Section
+###  Work on Your Section
 ```bash
 git add .
 git commit -m "Add my section"
 git push -u origin feature-yourname-section
 ```
 
-### 4️⃣ Create a Pull Request (PR)
+###  Create a Pull Request (PR)
 1. Go to the [GitHub repo](https://github.com/GandholiSarat/Chips-and-Bytes)
 2. Click **"Compare & pull request"** next to your branch
 3. Set the base branch to `main`
@@ -51,32 +51,32 @@ git push -u origin feature-yourname-section
 
 ---
 
-## 🤝 For Contributors (Public Members)
+##  For Contributors (Public Members)
 
 You **do not** have direct push access. Please fork and submit changes via Pull Requests.
 
-### 1️⃣ Fork the Repository
+###  Fork the Repository
 Click **Fork** at the top-right of this page to create your copy.
 
-### 2️⃣ Clone Your Fork
+###  Clone Your Fork
 ```bash
 git clone https://github.com/<your-username>/Chips-and-Bytes.git
 cd Chips-and-Bytes
 ```
 
-### 3️⃣ Create Your Own Feature Branch
+###  Create Your Own Feature Branch
 ```bash
 git checkout -b feature-yourname-section
 ```
 
-### 4️⃣ Make Changes, Commit, and Push
+###  Make Changes, Commit, and Push
 ```bash
 git add .
 git commit -m "Describe your change"
 git push -u origin feature-yourname-section
 ```
 
-### 5️⃣ Create a Pull Request to the Main Repo
+###  Create a Pull Request to the Main Repo
 1. Go to your fork on GitHub
 2. Click **"Compare & pull request"**
 3. Set **base repo** to `GandholiSarat/Chips-and-Bytes` and **base branch** to `main`
@@ -84,7 +84,7 @@ git push -u origin feature-yourname-section
 
 ---
 
-## ✅ Git Tips
+## Git Tips
 
 - Keep your local main branch up to date:
 ```bash
@@ -111,7 +111,7 @@ git push
 
 ---
 
-## 🛠 Available Scripts (Create React App)
+##  Available Scripts (Create React App)
 
 In the project directory, you can run:
 
@@ -135,11 +135,11 @@ Copies all configuration files and dependencies locally for full control.
 
 ---
 
-## 📚 Learn More
+##  Learn More
 
 - [Create React App Documentation](https://facebook.github.io/create-react-app/docs/getting-started)  
 - [React Documentation](https://reactjs.org/)  
 
 ---
 
-Happy coding, team! 🚀
+Happy coding, team! 
