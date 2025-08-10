@@ -1,6 +1,22 @@
+/**
+ * @file AdminLogin.js
+ * @description
+ * Admin login page for Chips & Bytes website.
+ * Allows admins to log in using username and password.
+ * 
+ * Features:
+ * - Handles login form and authentication.
+ * - Stores JWT token in localStorage on success.
+ * - Redirects to admin dashboard after login.
+ * - Shows error messages on failure.
+ * 
+ * @component
+ * @returns {JSX.Element}
+ */
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './AdminLogin.css'; // Optional: For styling
+import './AdminLogin.css';
 
 const AdminLogin = () => {
   const [username, setUsername] = useState('');
@@ -8,6 +24,10 @@ const AdminLogin = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
+  /**
+   * Handles admin login form submission.
+   * @param {React.FormEvent} e
+   */
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
@@ -16,9 +36,7 @@ const AdminLogin = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password })
       });
-
       const data = await response.json();
-
       if (response.ok) {
         localStorage.setItem('token', data.token);
         navigate('/admin/dashboard');

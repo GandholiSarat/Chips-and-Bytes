@@ -1,3 +1,19 @@
+/**
+ * @file ProjectsDetailsPage.js
+ * @description
+ * Displays a horizontally scrollable carousel of featured projects.
+ * Fetches project preview data (title, description, image, url) using the Microlink API.
+ * Allows users to scroll through project cards and open GitHub links.
+ * 
+ * Features:
+ * - Fetches and displays project previews from external links.
+ * - Responsive carousel with left/right scroll arrows.
+ * - Smooth scroll and scroll position detection.
+ * 
+ * @component
+ * @returns {JSX.Element}
+ */
+
 import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { gitLinks } from '../../data/constants';
@@ -13,6 +29,9 @@ const ProjectsDetailsPage = () => {
   const sliderRef = useRef(null);
 
   useEffect(() => {
+    /**
+     * Fetches project preview data from the Microlink API for each project link.
+     */
     const fetchProjectPreviews = async () => {
       const previews = [];
       for (const linkObj of gitLinks) {
@@ -41,6 +60,9 @@ const ProjectsDetailsPage = () => {
     fetchProjectPreviews();
   }, []);
 
+  /**
+   * Checks and updates the scroll position state for the carousel.
+   */
   const checkScrollPosition = () => {
     const slider = sliderRef.current;
     if (!slider) return;
@@ -48,6 +70,10 @@ const ProjectsDetailsPage = () => {
     setCanScrollRight(slider.scrollLeft + slider.clientWidth < slider.scrollWidth - 5);
   };
 
+  /**
+   * Scrolls the carousel left or right by a fixed amount.
+   * @param {'left'|'right'} direction
+   */
   const scroll = (direction) => {
     const scrollAmount = 350;
     if (sliderRef.current) {
@@ -107,16 +133,16 @@ const ProjectsDetailsPage = () => {
                   <p className="project-description">
                     {project.description?.slice(0, 120)}...
                   </p>
-<a
-                                    href={project.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="continue-link"
-                                    aria-label={`GitHub link for ${project.title}`}
-                                  >
-                                    <FaGithub size={20} style={{ marginRight: '8px' }} />
-                                    View Repo
-                                  </a>
+                  <a
+                    href={project.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="continue-link"
+                    aria-label={`GitHub link for ${project.title}`}
+                  >
+                    <FaGithub size={20} style={{ marginRight: '8px' }} />
+                    View Repo
+                  </a>
                 </div>
               </div>
             </div>

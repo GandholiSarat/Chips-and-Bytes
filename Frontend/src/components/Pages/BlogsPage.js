@@ -1,10 +1,26 @@
+/**
+ * @file BlogsPage.js
+ * @description
+ * Displays a horizontally scrollable carousel of featured blogs.
+ * Fetches blog preview data (title, description, image, url) using the Microlink API.
+ * Allows users to scroll through blog cards, swipe on mobile, and open blog links.
+ * 
+ * Features:
+ * - Fetches and displays blog previews from external links.
+ * - Responsive carousel with left/right scroll arrows.
+ * - Mobile swipe support for carousel.
+ * - "More..." card to view all blogs.
+ * 
+ * @component
+ * @returns {JSX.Element}
+ */
+
 import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { blogLinks } from '../../data/constants';
 import './BlogsPage.css';
 import '../../style.css';
-
 
 const BlogsPage = () => {
   const [blogs, setBlogs] = useState([]);
@@ -21,18 +37,16 @@ const BlogsPage = () => {
       const mobile = window.innerWidth <= 768;
       setIsMobile(mobile);
     };
-    
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
+  // Fetch blog previews from Microlink API
   useEffect(() => {
     const fetchBlogPreviews = async () => {
       const previews = [];
-      // Get only first 7 blogs
       const firstSevenLinks = blogLinks.slice(0, 7);
-
       for (const link of firstSevenLinks) {
         try {
           const res = await axios.get(`https://api.microlink.io/?url=${encodeURIComponent(link)}`);
@@ -53,6 +67,9 @@ const BlogsPage = () => {
     fetchBlogPreviews();
   }, []);
 
+  /**
+   * Checks and updates the scroll position state for the carousel.
+   */
   const checkScrollPosition = () => {
     const slider = sliderRef.current;
     if (!slider) return;
@@ -60,6 +77,10 @@ const BlogsPage = () => {
     setCanScrollRight(slider.scrollLeft + slider.clientWidth < slider.scrollWidth - 5);
   };
 
+  /**
+   * Scrolls the carousel left or right by a fixed amount.
+   * @param {'left'|'right'} direction
+   */
   const scroll = (direction) => {
     const scrollAmount = isMobile ? (window.innerWidth <= 375 ? 200 : 250) : 320;
     if (sliderRef.current) {
@@ -77,11 +98,9 @@ const BlogsPage = () => {
 
   const handleTouchMove = (e) => {
     if (!touchStart) return;
-    
     const currentTouch = e.touches[0].clientX;
     const diff = touchStart - currentTouch;
-    
-    if (Math.abs(diff) > 50) { // Minimum swipe distance
+    if (Math.abs(diff) > 50) {
       if (diff > 0 && canScrollRight) {
         scroll('right');
       } else if (diff < 0 && canScrollLeft) {
@@ -95,21 +114,18 @@ const BlogsPage = () => {
     setTouchStart(null);
   };
 
+  // Set up scroll and touch event listeners
   useEffect(() => {
     const slider = sliderRef.current;
     if (!slider) return;
-
     checkScrollPosition();
     slider.addEventListener('scroll', checkScrollPosition);
     window.addEventListener('resize', checkScrollPosition);
-
-    // Add touch event listeners for mobile
     if (isMobile) {
       slider.addEventListener('touchstart', handleTouchStart, { passive: true });
       slider.addEventListener('touchmove', handleTouchMove, { passive: true });
       slider.addEventListener('touchend', handleTouchEnd, { passive: true });
     }
-
     return () => {
       slider.removeEventListener('scroll', checkScrollPosition);
       window.removeEventListener('resize', checkScrollPosition);
@@ -182,7 +198,6 @@ const BlogsPage = () => {
                   </div>
                 </div>
               ))}
-              
               {/* More... card */}
               <div className={`blog-card more-card ${isMobile ? 'mobile-card' : ''}`}>
                 <Link to="/blogs/details" className="more-card-link">
@@ -223,14 +238,6 @@ const BlogsPage = () => {
               </button>
             )}
           </div>
-
-          {/* Mobile swipe hint */}
-          {/* {isMobile && (
-            <div className="mobile-swipe-hint">
-              <p className="swipe-hint">← Swipe to explore →</p>
-            </div>
-          )} */}
-
           <div className="read-more-container">
             <Link to="/blogs/details" className="read-more-link">
               View All Blogs →
@@ -238,7 +245,6 @@ const BlogsPage = () => {
           </div>
         </>
       )}
-      
     </div>
   );
 };

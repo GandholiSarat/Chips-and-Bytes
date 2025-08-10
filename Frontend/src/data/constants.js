@@ -1,5 +1,18 @@
-// src/data/constants.js
+/**
+ * @file constants.js
+ * @description
+ * Contains static data and configuration constants for the Chips & Bytes website.
+ * Includes blog links, project links, mentors, events, and members data.
+ * 
+ * Exports:
+ * - blogLinks: Array of blog URLs.
+ * - gitLinks: Array of GitHub project objects.
+ * - mentors: Array of mentor profile objects.
+ * - events: Array of event objects.
+ * - members: Array of club member profile objects.
+ */
 
+// List of featured blog URLs for the Blogs section and carousel
 export const blogLinks = [
   "https://medium.com/@saratgandholi/tracing-code-execution-unlocking-software-insight-without-exposing-code-c2d2f2b84ab6",
   "https://medium.com/@panugantichiragsai12/memory-around-us-why-your-laptop-phone-and-playstation-dont-speak-the-same-927b4cb86850",
@@ -13,10 +26,12 @@ export const blogLinks = [
   "https://medium.com/@ssaketh.2002/cuda-chronicles-programming-interface-3-part-1-021dec1d231c",
 ];
 
+// List of featured GitHub project links for the Projects section and carousel
 export const gitLinks = [
   { url: "https://github.com/GandholiSarat/DynamoRIO-Custom-Client" },
 ];
 
+// Array of mentor profiles for the Mentors section
 export const mentors = [
   {
     name: 'Dr. R. Raghunatha Sarma',
@@ -87,23 +102,27 @@ export const mentors = [
     image: '/images/Mangala.jpeg',
   },
 ];
+
+// Array of event objects for the Events section
 export const events = [
-    {
-      id: 1,
-      date: "2025-07-26",
-      title: "“The PC Builder Challenge” – System Fundamentals and PC Building Workshop",
-      reportLink: "https://drive.google.com/file/d/14rrIuCom7amLkbolOILVtzG1hFJlhPW1/view?usp=drive_link",
-      resourcesLink: "https://drive.google.com/drive/folders/1WQaSN3Oi6kHMR5ogUtprUuxLQ7t8Nl9g?usp=drive_link"
-    },
-    {
-      id: 2,
-      date: "2025-08-02",
-      title: "Visit to SAI HiPC",
-      reportLink: "https://drive.google.com/file/d/1K4NeZU8Cbdr_WuKwkZFmZntq9E61Bco_/view?usp=drive_link",
-      resourcesLink: "https://drive.google.com/drive/folders/10T8PJSt8KK2FokBF2OmTI2jjjrPXRCVA?usp=drive_link"
-    }
-  ];
-  export const members = [
+  {
+    id: 1,
+    date: "2025-07-26",
+    title: "“The PC Builder Challenge” – System Fundamentals and PC Building Workshop",
+    reportLink: "https://drive.google.com/file/d/14rrIuCom7amLkbolOILVtzG1hFJlhPW1/view?usp=drive_link",
+    resourcesLink: "https://drive.google.com/drive/folders/1WQaSN3Oi6kHMR5ogUtprUuxLQ7t8Nl9g?usp=drive_link"
+  },
+  {
+    id: 2,
+    date: "2025-08-02",
+    title: "Visit to SAI HiPC",
+    reportLink: "https://drive.google.com/file/d/1K4NeZU8Cbdr_WuKwkZFmZntq9E61Bco_/view?usp=drive_link",
+    resourcesLink: "https://drive.google.com/drive/folders/10T8PJSt8KK2FokBF2OmTI2jjjrPXRCVA?usp=drive_link"
+  }
+];
+
+// Array of club member profiles for the Members section
+export const members = [
   {
     name: 'Gandholi Sarat',
     designation: 'I M.Tech CS at SSSIHL',
@@ -111,7 +130,7 @@ export const events = [
     image: '/images/Sarat.png',
     linkedin: 'https://www.linkedin.com/in/gandholi-sarat/',
   },
-    {
+  {
     name: 'Panuganti Chirag Sai',
     designation: 'I M.Tech CS at SSSIHL',
     summary: 'Vice-President of the Club',

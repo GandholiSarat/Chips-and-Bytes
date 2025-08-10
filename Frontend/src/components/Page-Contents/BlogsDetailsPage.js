@@ -1,3 +1,21 @@
+/**
+ * @file BlogsDetailsPage.js
+ * @description
+ * Displays a horizontally scrollable carousel of featured blogs.
+ * Fetches blog preview data (title, description, image, url) using the Microlink API.
+ * Shows a loading spinner while fetching data.
+ * Allows users to scroll through blog cards and open blog links.
+ * 
+ * Features:
+ * - Fetches and displays blog previews from external links.
+ * - Responsive carousel with left/right scroll arrows.
+ * - Loading spinner while fetching data.
+ * - Smooth scroll and scroll position detection.
+ * 
+ * @component
+ * @returns {JSX.Element}
+ */
+
 import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { blogLinks } from '../../data/constants';
@@ -14,6 +32,9 @@ const BlogsDetailsPage = () => {
   const location = useLocation();
 
   useEffect(() => {
+    /**
+     * Fetches blog preview data from the Microlink API for each blog link.
+     */
     const fetchBlogPreviews = async () => {
       setLoading(true);
       const previews = [];
@@ -37,6 +58,9 @@ const BlogsDetailsPage = () => {
     fetchBlogPreviews();
   }, []);
 
+  /**
+   * Checks and updates the scroll position state for the carousel.
+   */
   const checkScrollPosition = () => {
     const slider = sliderRef.current;
     if (!slider) return;
@@ -44,6 +68,10 @@ const BlogsDetailsPage = () => {
     setCanScrollRight(slider.scrollLeft + slider.clientWidth < slider.scrollWidth - 5);
   };
 
+  /**
+   * Scrolls the carousel left or right by a fixed amount.
+   * @param {'left'|'right'} direction
+   */
   const scroll = (direction) => {
     const scrollAmount = 350;
     if (sliderRef.current) {
@@ -72,7 +100,10 @@ const BlogsDetailsPage = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [location.pathname]);
 
-  // Loading Spinner Component
+  /**
+   * Loading spinner component shown while fetching blog data.
+   * @returns {JSX.Element}
+   */
   const LoadingSpinner = () => (
     <div className="loading-container">
       <div className="spinner">

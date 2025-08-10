@@ -1,3 +1,18 @@
+/**
+ * @file MembersPage.js
+ * @description
+ * Displays a horizontally scrollable carousel of club members.
+ * Supports auto-scroll, manual navigation, and responsive design.
+ * 
+ * Features:
+ * - Auto-scrolls through member cards with a maximum loop count.
+ * - Allows manual scrolling with left/right arrows.
+ * - Responsive to window resizing.
+ * 
+ * @component
+ * @returns {JSX.Element}
+ */
+
 import React, { useRef, useEffect, useState, useCallback } from 'react';
 import './MembersPage.css';
 import '../../style.css';
@@ -14,6 +29,9 @@ const MembersPage = () => {
 
   const maxLoops = 20;
 
+  /**
+   * Checks and updates the scroll position state for the carousel.
+   */
   const checkScrollPosition = useCallback(() => {
     const container = scrollRef.current;
     if (!container) return;
@@ -21,46 +39,41 @@ const MembersPage = () => {
     setCanScrollRight(container.scrollLeft + container.clientWidth < container.scrollWidth - 5);
   }, []);
 
+  /**
+   * Scrolls the carousel left or right by one card width.
+   * @param {'left'|'right'} direction
+   */
   const scroll = (direction) => {
     const container = scrollRef.current;
     if (!container || container.children.length === 0) return;
-
     const card = container.children[0];
-    const cardWidth = card.offsetWidth + 24; // spacing assumption
-
+    const cardWidth = card.offsetWidth + 24;
     container.scrollBy({
       left: direction === 'left' ? -cardWidth : cardWidth,
       behavior: 'smooth',
     });
-
-    // After smooth scroll, update arrow visibility
     setTimeout(checkScrollPosition, 500);
   };
 
-  // Auto-scroll setup with up-to-date refs
+  // Auto-scroll setup
   useEffect(() => {
     const container = scrollRef.current;
     if (!container || container.children.length === 0) return;
-
     const getCardWidth = () => {
       if (!container.children[0]) return 0;
       const card = container.children[0];
       return card.offsetWidth + 24;
     };
-
     const tick = () => {
       if (!container) return;
       const cardWidth = getCardWidth();
       const atEnd = container.scrollLeft + container.clientWidth >= container.scrollWidth - 5;
-
       if (atEnd) {
         scrollCount.current += 1;
-        // reset to start
         setTimeout(() => {
           container.scrollTo({ left: 0, behavior: 'auto' });
           checkScrollPosition();
         }, 300);
-
         if (scrollCount.current >= maxLoops) {
           if (intervalRef.current !== null) {
             clearInterval(intervalRef.current);
@@ -72,12 +85,8 @@ const MembersPage = () => {
         setTimeout(checkScrollPosition, 500);
       }
     };
-
     intervalRef.current = window.setInterval(tick, 8000);
-
-    // initial check
     checkScrollPosition();
-
     return () => {
       if (intervalRef.current !== null) {
         clearInterval(intervalRef.current);
@@ -85,7 +94,7 @@ const MembersPage = () => {
     };
   }, [checkScrollPosition]);
 
-  // Debounced resize listener
+  // Responsive: update scroll position on resize
   useEffect(() => {
     let timeout = null;
     const onResize = () => {
@@ -95,7 +104,6 @@ const MembersPage = () => {
       }, 150);
     };
     window.addEventListener('resize', onResize);
-    // initial
     checkScrollPosition();
     return () => {
       window.removeEventListener('resize', onResize);
@@ -109,7 +117,6 @@ const MembersPage = () => {
       <p className="tab-member-desc">
         Meet our members who are part of this club.
       </p>
-
       <div className="members-member-carousel-wrapper">
         {canScrollLeft && (
           <button
@@ -117,19 +124,11 @@ const MembersPage = () => {
             onClick={() => scroll('left')}
             aria-label="Scroll Left"
           >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <polyline points="15,18 9,12 15,6"></polyline>
             </svg>
           </button>
         )}
-
         <div
           className="members-member-list"
           ref={(el) => {
@@ -160,21 +159,13 @@ const MembersPage = () => {
             </div>
           ))}
         </div>
-
         {canScrollRight && (
           <button
             className="member-scroll-btn member-scroll-right"
             onClick={() => scroll('right')}
             aria-label="Scroll Right"
           >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <polyline points="9,18 15,12 9,6"></polyline>
             </svg>
           </button>
