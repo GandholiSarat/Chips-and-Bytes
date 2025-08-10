@@ -1,3 +1,17 @@
+/**
+ * @file PastEventsEdit.js
+ * @description
+ * Admin page for creating, editing, and deleting past events.
+ * Allows admins to manage past event details such as date, title, report link, and resources link.
+ * 
+ * Features:
+ * - Fetches all past events from the backend.
+ * - Allows adding new past events.
+ * - Allows editing and deleting existing past events.
+ * - Uses JWT token from localStorage for authentication.
+ * - Navigates back to the admin dashboard.
+ */
+
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -6,6 +20,13 @@ import './EventEdit.css'; // reuse styles
 
 const API_URL = `${process.env.REACT_APP_BACKEND_URL}/api/pastevents`;
 
+/**
+ * PastEventsEdit Component
+ * 
+ * Renders a form and table for managing past events.
+ * 
+ * @component
+ */
 const PastEventsEdit = () => {
   const [events, setEvents] = useState([]);
   const [formData, setFormData] = useState({
@@ -19,6 +40,9 @@ const PastEventsEdit = () => {
   const token = localStorage.getItem('token');
   const navigate = useNavigate();
 
+  /**
+   * Fetch all past events from the backend API.
+   */
   const fetchEvents = async () => {
     const res = await axios.get(API_URL);
     setEvents(res.data || []);
@@ -26,10 +50,18 @@ const PastEventsEdit = () => {
 
   useEffect(() => { fetchEvents(); }, []);
 
+  /**
+   * Handle input changes for the past event form.
+   * @param {React.ChangeEvent<HTMLInputElement>} e
+   */
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  /**
+   * Handle form submission for adding or updating a past event.
+   * @param {React.FormEvent} e
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
     const config = { headers: { Authorization: `Bearer ${token}` } };
@@ -43,6 +75,10 @@ const PastEventsEdit = () => {
     fetchEvents();
   };
 
+  /**
+   * Populate the form for editing a past event.
+   * @param {Object} event - Past event object
+   */
   const handleEdit = (event) => {
     setFormData({
       date: event.date || '',
@@ -53,6 +89,10 @@ const PastEventsEdit = () => {
     setEditingId(event._id);
   };
 
+  /**
+   * Delete a past event by ID.
+   * @param {string} id - Event ID
+   */
   const handleDelete = async (id) => {
     const config = { headers: { Authorization: `Bearer ${token}` } };
     await axios.delete(`${API_URL}/${id}`, config);

@@ -1,3 +1,17 @@
+/**
+ * @file AnnouncementEdit.js
+ * @description
+ * Admin page for creating, editing, and deleting announcements.
+ * Allows admins to manage announcement text entries.
+ * 
+ * Features:
+ * - Fetches all announcements from the backend.
+ * - Allows adding new announcements.
+ * - Allows editing and deleting existing announcements.
+ * - Uses JWT token from localStorage for authentication.
+ * - Navigates back to the admin dashboard.
+ */
+
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; // Add this import
@@ -5,6 +19,13 @@ import './AnnouncementEdit.css';
 
 const API_URL = `${process.env.REACT_APP_BACKEND_URL}/api/announcements`;
 
+/**
+ * AnnouncementEdit Component
+ * 
+ * Renders a form and list for managing announcements.
+ * 
+ * @component
+ */
 const AnnouncementEdit = () => {
   const [announcements, setAnnouncements] = useState([]);
   const [text, setText] = useState('');
@@ -13,6 +34,9 @@ const AnnouncementEdit = () => {
   const token = localStorage.getItem('token');
   const navigate = useNavigate(); // Add this line
 
+  /**
+   * Fetch all announcements from the backend API.
+   */
   const fetchAnnouncements = async () => {
     const res = await axios.get(API_URL);
     setAnnouncements(res.data || []);
@@ -20,6 +44,10 @@ const AnnouncementEdit = () => {
 
   useEffect(() => { fetchAnnouncements(); }, []);
 
+  /**
+   * Handle form submission for adding or updating an announcement.
+   * @param {React.FormEvent} e
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
     const config = { headers: { Authorization: `Bearer ${token}` } };
@@ -33,11 +61,19 @@ const AnnouncementEdit = () => {
     fetchAnnouncements();
   };
 
+  /**
+   * Populate the form for editing an announcement.
+   * @param {Object} a - Announcement object
+   */
   const handleEdit = (a) => {
     setText(a.text);
     setEditingId(a._id);
   };
 
+  /**
+   * Delete an announcement by ID.
+   * @param {string} id - Announcement ID
+   */
   const handleDelete = async (id) => {
     const config = { headers: { Authorization: `Bearer ${token}` } };
     await axios.delete(`${API_URL}/${id}`, config);

@@ -1,10 +1,31 @@
+/**
+ * @file EventEdit.js
+ * @description
+ * Admin page for creating, editing, and deleting events.
+ * Allows admins to manage event details such as title, speaker, date, time, location, and description.
+ * 
+ * Features:
+ * - Fetches all events from the backend.
+ * - Allows adding new events.
+ * - Allows editing and deleting existing events.
+ * - Uses JWT token from localStorage for authentication.
+ * - Navigates back to the admin dashboard.
+ */
+
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom'; // <-- Add this line
-import './EventEdit.css'; // Create this file for custom styles if needed
+import { useNavigate } from 'react-router-dom';
+import './EventEdit.css';
 
 const API_URL = `${process.env.REACT_APP_BACKEND_URL}/api/events`;
 
+/**
+ * EventEdit Component
+ * 
+ * Renders a form and list for managing events.
+ * 
+ * @component
+ */
 const EventEdit = () => {
   const [events, setEvents] = useState([]);
   const [formData, setFormData] = useState({
@@ -20,8 +41,11 @@ const EventEdit = () => {
   const [error, setError] = useState('');
 
   const token = localStorage.getItem('token');
-  const navigate = useNavigate(); // <-- Add this line
+  const navigate = useNavigate();
 
+  /**
+   * Fetch all events from the backend API.
+   */
   const fetchEvents = async () => {
     setLoading(true);
     setError('');
@@ -46,10 +70,18 @@ const EventEdit = () => {
     // eslint-disable-next-line
   }, [token]);
 
+  /**
+   * Handle input changes for the event form.
+   * @param {React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>} e
+   */
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  /**
+   * Handle form submission for adding or updating an event.
+   * @param {React.FormEvent} e
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!token) return alert('No token. Please login again.');
@@ -79,6 +111,10 @@ const EventEdit = () => {
     }
   };
 
+  /**
+   * Populate the form for editing an event.
+   * @param {Object} event - Event object
+   */
   const handleEdit = (event) => {
     setFormData({
       title: event.title || '',
@@ -91,6 +127,10 @@ const EventEdit = () => {
     setEditingId(event._id);
   };
 
+  /**
+   * Delete an event by ID.
+   * @param {string} _id - Event ID
+   */
   const handleDelete = async (_id) => {
     try {
       await axios.delete(`${API_URL}/${_id}`, {
