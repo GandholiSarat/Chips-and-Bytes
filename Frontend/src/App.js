@@ -24,6 +24,7 @@ import BlogsPage from './components/Pages/BlogsPage';
 import BlogsDetailsPage from './components/Page-Contents/BlogsDetailsPage';
 import ProjectsPage from './components/Pages/ProjectsPage';
 import ProjectsDetailsPage from './components/Page-Contents/ProjectsDetailsPage';
+import ActiveProjectsFullPage from './components/Pages/ActiveProjectsFullPage';
 import EventsPage from './components/Pages/EventsPage';
 import EventDetailsPage from './components/Page-Contents/EventsDetailsPage';
 import Footer from './components/Footer/Footer';
@@ -62,12 +63,13 @@ function AppContent() {
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       <Navbar activeTab={activeTab} setActiveTab={setActiveTab} navigate={navigate} />
-      <div style={{ flex: 1 }}>
+      <div style={{ flex: 1, paddingTop: '80px' }}>
         <Routes>
           <Route path="/" element={<ChipsBytesWebsite />} />
           <Route path="/blogs" element={<BlogsPage />} />
           <Route path="/blogs/details" element={<BlogsDetailsPage />} />
           <Route path="/projects" element={<ProjectsPage />} />
+          <Route path="/projects/active" element={<ActiveProjectsFullPage />} />
           <Route path="/projects/details" element={<ProjectsDetailsPage />} />
           <Route path="/events" element={<EventsPage />} />
           <Route path="/events/details" element={<EventDetailsPage />} />

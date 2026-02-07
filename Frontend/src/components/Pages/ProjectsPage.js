@@ -16,7 +16,6 @@
  */
 
 import React, { useEffect, useState, useRef, useCallback } from 'react';
-import { Link } from 'react-router-dom';
 import { gitLinks } from '../../data/constants';
 import { FaGithub } from 'react-icons/fa';
 import './ProjectsPage.css';
@@ -141,7 +140,7 @@ const ProjectsPage = () => {
 
   return (
     <div className="Projects-page">
-      <h1 className="tab-heading">Projects</h1>
+      <h1 id="archived-projects-section" className="tab-heading">Archived Projects</h1>
       <p className="tab-desc">
         Explore projects built by our community members.
       </p>
@@ -199,32 +198,7 @@ const ProjectsPage = () => {
                 </div>
               ))}
               
-              {/* More... card */}
-              <div className={`Projects-card more-card ${isMobile ? 'mobile-card' : ''}`}>
-                <Link to="/Projects/details" className="more-card-link">
-                  <div className="card-content more-card-content">
-                    <div className="more-card-inner">
-                      <div className="more-icon">
-                        <svg width={isMobile ? "50" : "70"} height={isMobile ? "50" : "70"} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                          <circle cx="12" cy="12" r="3"></circle>
-                          <circle cx="12" cy="5" r="3"></circle>
-                          <circle cx="12" cy="19" r="3"></circle>
-                        </svg>
-                      </div>
-                      <h3 className="more-title">More...</h3>
-                      <p className="more-description">
-                        {isMobile ? "Explore more content" : "Explore all our Projects and discover more amazing content"}
-                      </p>
-                      <div className="more-arrow">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                          <line x1="7" y1="17" x2="17" y2="7"></line>
-                          <polyline points="7,7 17,7 17,17"></polyline>
-                        </svg>
-                      </div>
-                    </div>
-                  </div>
-                </Link>
-              </div>
+              {/* More card removed per request */}
             </div>
 
             {canScrollRight && (
@@ -240,11 +214,7 @@ const ProjectsPage = () => {
             )}
           </div>
 
-          <div className="read-more-container">
-            <Link to="/Projects/details" className="read-more-link">
-              View All Projects →
-            </Link>
-          </div>
+          {/* Removed 'View All Archived Projects' per design — navigation now handled from navbar/full pages */}
         </>
       )}
     </div>

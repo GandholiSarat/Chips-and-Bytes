@@ -9,6 +9,39 @@
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
 }
 
+/* Projects dropdown */
+.projects-dropdown-wrapper {
+  position: relative;
+}
+.projects-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  background: rgba(3,7,19,0.98);
+  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  padding: 6px 0;
+  display: none;
+  min-width: 180px;
+  z-index: 1002;
+}
+.projects-dropdown-wrapper.open .projects-dropdown {
+  display: block;
+}
+.projects-dropdown .dropdown-item {
+  background: none;
+  border: none;
+  color: #e2e8f0;
+  padding: 10px 16px;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+}
+.projects-dropdown .dropdown-item:hover {
+  background: rgba(255,255,255,0.04);
+  color: #007bff;
+}
+
 /* Container for the logo and navigation links */
 .nav-container {
   max-width: 1280px; /* Maximum width for the content inside the navbar */
