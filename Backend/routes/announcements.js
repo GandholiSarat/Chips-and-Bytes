@@ -16,10 +16,15 @@ const router = express.Router();
 const auth = require('../middleware/auth');
 const Announcement = require('../models/Announcement');
 
+const setPublicCacheHeaders = (res) => {
+  res.set('Cache-Control', 'public, max-age=60, s-maxage=300, stale-while-revalidate=86400');
+};
+
 // Get all announcements (public)
 router.get('/', async (req, res) => {
   try {
-    const announcements = await Announcement.find().sort({ createdAt: -1 });
+    const announcements = await Announcement.find().sort({ createdAt: -1 }).lean();
+    setPublicCacheHeaders(res);
     res.json(announcements);
   } catch (error) {
     res.status(500).json({ message: 'Server error' });

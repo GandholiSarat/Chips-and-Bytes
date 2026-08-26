@@ -27,10 +27,21 @@ const pastEventsRoutes = require('./routes/pastevents');
 
 const app = express();
 
-connectDB();
+// Start connecting at boot. Public routes also await this promise so a cold
+// database never leaves a request buffered indefinitely inside Mongoose.
+connectDB().catch(() => {});
 
 app.use(cors());
 app.use(bodyParser.json());
+
+app.use('/api', async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (error) {
+    res.status(503).json({ message: 'Service is temporarily unavailable. Please retry shortly.' });
+  }
+});
 
 app.get('/', (req, res) => {
   res.send('Backend is running 🚀');

@@ -15,7 +15,7 @@
  * @returns {JSX.Element}
  */
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Cpu } from 'lucide-react';
 import './HomePage.css';
 import AboutPage from './AboutPage';
@@ -26,27 +26,22 @@ import MentorsPage from './MentorsPage';
 import ContactPage from './ContactPage';
 import MembersPage from './MembersPage';
 import { Link } from 'react-router-dom';
+import { publicContentFallback } from '../../data/publicContentFallback';
+import { usePublicResource } from '../../hooks/usePublicResource';
 
 const API_URL = `${process.env.REACT_APP_BACKEND_URL}/api/announcements`;
 
 const HomePage = () => {
-  const [announcements, setAnnouncements] = useState([]);
-  const [loadingAnnouncements, setLoadingAnnouncements] = useState(true);
-
-  useEffect(() => {
-    fetch(API_URL)
-      .then(res => res.json())
-      .then(data => {
-        setAnnouncements(data || []);
-        setLoadingAnnouncements(false);
-      })
-      .catch(() => setLoadingAnnouncements(false));
-  }, []);
+  const { data: announcements, isRefreshing: loadingAnnouncements } = usePublicResource({
+    cacheKey: 'announcements',
+    url: API_URL,
+    fallback: publicContentFallback.announcements,
+  });
 
   return (
     <div className="page home-page">
       <div className="video-background-section">
-        <video className="bg-video" autoPlay loop muted playsInline>
+        <video className="bg-video" autoPlay loop muted playsInline preload="metadata">
           <source src="/videos/background.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
@@ -80,11 +75,10 @@ const HomePage = () => {
         <div className="announcements-bar">
           <div className="scroll-text">
             <span className="announcement-highlight">Latest Updates: </span>
-            {loadingAnnouncements
-              ? 'Loading announcements...'
-              : (announcements.length > 0
-                  ? announcements.map(a => a.text).join(' | ')
-                  : 'No announcements yet.')}
+            {announcements.length > 0
+              ? announcements.map(a => a.text).join(' | ')
+              : 'No announcements yet.'}
+            {loadingAnnouncements && <span className="announcement-refresh-indicator"> Updating…</span>}
           </div>
         </div>
       </div>

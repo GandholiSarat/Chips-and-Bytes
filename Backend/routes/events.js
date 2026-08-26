@@ -16,10 +16,15 @@ const router = express.Router();
 const auth = require('../middleware/auth');
 const Event = require('../models/Event');
 
+const setPublicCacheHeaders = (res) => {
+  res.set('Cache-Control', 'public, max-age=60, s-maxage=300, stale-while-revalidate=86400');
+};
+
 // GET all events (public)
 router.get('/', async (req, res) => {
   try {
-    const events = await Event.find({});
+    const events = await Event.find({}).lean();
+    setPublicCacheHeaders(res);
     res.json(events);
   } catch (error) {
     res.status(500).json({ message: 'Server error' });

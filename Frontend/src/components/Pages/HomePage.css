@@ -187,6 +187,11 @@
   font-weight: bold;
 }
 
+.announcement-refresh-indicator {
+  color: rgba(154, 243, 201, 0.88);
+  font-size: 0.88em;
+}
+
 @keyframes scroll {
   0% {
     transform: translateX(0);

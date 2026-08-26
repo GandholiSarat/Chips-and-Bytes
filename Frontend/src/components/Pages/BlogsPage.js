@@ -2,11 +2,11 @@
  * @file BlogsPage.js
  * @description
  * Displays a horizontally scrollable carousel of featured blogs.
- * Fetches blog preview data (title, description, image, url) using the Microlink API.
+ * Renders locally packaged blog metadata so the carousel is available immediately.
  * Allows users to scroll through blog cards, swipe on mobile, and open blog links.
  * 
  * Features:
- * - Fetches and displays blog previews from external links.
+ * - Displays a locally packaged article catalogue with no preview API wait.
  * - Responsive carousel with left/right scroll arrows.
  * - Mobile swipe support for carousel.
  * - "More..." card to view all blogs.
@@ -17,19 +17,20 @@
 
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
-import { blogLinks } from '../../data/constants';
+import { blogPosts } from '../../data/blogPosts';
+import BlogCard from '../BlogCard/BlogCard';
 import './BlogsPage.css';
 import '../../style.css';
 
+const FEATURED_BLOG_POSTS = blogPosts.slice(0, 7);
+
 const BlogsPage = () => {
-  const [blogs, setBlogs] = useState([]);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
-  const [loading, setLoading] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
   const [touchStart, setTouchStart] = useState(null);
   const sliderRef = useRef(null);
+  const blogs = FEATURED_BLOG_POSTS;
 
   // Detect mobile/tablet devices
   useEffect(() => {
@@ -40,31 +41,6 @@ const BlogsPage = () => {
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
-  // Fetch blog previews from Microlink API
-  useEffect(() => {
-    const fetchBlogPreviews = async () => {
-      const previews = [];
-      const firstSevenLinks = blogLinks.slice(0, 7);
-      for (const link of firstSevenLinks) {
-        try {
-          const res = await axios.get(`https://api.microlink.io/?url=${encodeURIComponent(link)}`);
-          const { title, description, image, url } = res.data.data;
-          previews.push({
-            title,
-            description,
-            image: image?.url || '',
-            url,
-          });
-        } catch (error) {
-          console.error("Error fetching preview for", link, error);
-        }
-      }
-      setBlogs(previews);
-      setLoading(false);
-    };
-    fetchBlogPreviews();
   }, []);
 
   /**
@@ -144,13 +120,7 @@ const BlogsPage = () => {
         Read articles and tutorials written by our community members.
       </p>
 
-      {loading ? (
-        <div className="loading-container">
-          <div className="loading-spinner"></div>
-          <p>Loading blogs...</p>
-        </div>
-      ) : (
-        <>
+      <>
           <div className="carousel-wrapper">
             {canScrollLeft && (
               <button 
@@ -169,34 +139,14 @@ const BlogsPage = () => {
               ref={sliderRef}
             >
               {blogs.map((blog, idx) => (
-                <div className={`blog-card ${isMobile ? 'mobile-card' : ''}`} key={idx}>
-                  <div className="card-content">
-                    {blog.image && (
-                      <div className="image-container">
-                        <img src={blog.image} alt={blog.title} className="blog-image" />
-                        <div className="image-overlay"></div>
-                      </div>
-                    )}
-                    <div className="text-content">
-                      <h3 className="blog-title">{blog.title}</h3>
-                      <p className="blog-description">
-                        {blog.description?.slice(0, isMobile ? 80 : 100)}...
-                      </p>
-                      <a 
-                        href={blog.url} 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
-                        className="blog-read-link"
-                      >
-                        Read Article
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                          <line x1="7" y1="17" x2="17" y2="7"></line>
-                          <polyline points="7,7 17,7 17,17"></polyline>
-                        </svg>
-                      </a>
-                    </div>
-                  </div>
-                </div>
+                <BlogCard
+                  key={blog.id}
+                  blog={blog}
+                  index={idx}
+                  className={isMobile ? 'mobile-card' : ''}
+                  linkClassName="blog-read-link"
+                  actionLabel="Read Article"
+                />
               ))}
               {/* More... card */}
               <div className={`blog-card more-card ${isMobile ? 'mobile-card' : ''}`}>
@@ -243,8 +193,7 @@ const BlogsPage = () => {
               View All Blogs →
             </Link>
           </div>
-        </>
-      )}
+      </>
     </div>
   );
 };
