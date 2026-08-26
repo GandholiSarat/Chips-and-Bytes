@@ -1,94 +1,178 @@
-.blog-visual {
+.blog-card {
+  --card-radius: 1.25rem;
+  flex: 0 0 clamp(274px, 28vw, 340px);
+  width: clamp(274px, 28vw, 340px);
+  height: 30.5rem;
   position: relative;
-  min-height: clamp(118px, 22vw, 166px);
-  overflow: hidden;
-  isolation: isolate;
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  padding: 1rem 1.15rem;
-  color: var(--cnb-text);
-  background: linear-gradient(135deg, #152b48 0%, #0b1829 100%);
+  scroll-snap-align: start;
 }
 
-.blog-visual::before {
-  content: '';
+.blog-card .card-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid var(--line-soft);
+  border-radius: var(--card-radius);
+  background: var(--surface-raised);
+  box-shadow: 0 22px 48px rgba(12, 14, 17, 0.13);
+  transition: transform 500ms cubic-bezier(.2, .8, .2, 1), box-shadow 500ms ease, border-color 300ms ease;
+}
+
+.image-container {
+  position: relative;
+  min-height: 13.5rem;
+  overflow: hidden;
+  background: var(--surface-ink);
+}
+
+.blog-image,
+.blog-image-fallback {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 900ms cubic-bezier(.2, .75, .2, 1), filter 500ms ease;
+}
+
+.blog-image-fallback {
   position: absolute;
   inset: 0;
-  opacity: 0.4;
-  background-image:
-    linear-gradient(rgba(224, 245, 255, 0.13) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(224, 245, 255, 0.13) 1px, transparent 1px);
-  background-size: 24px 24px;
-  mask-image: linear-gradient(90deg, #000, transparent);
-  z-index: -1;
+  background:
+    radial-gradient(circle at 78% 25%, var(--signal) 0 2px, transparent 3px),
+    linear-gradient(125deg, transparent 48%, rgba(255,255,255,.18) 49% 50%, transparent 51%),
+    var(--surface-ink);
 }
 
-.blog-visual::after {
-  content: '';
+.blog-image-fallback--memory { background-color: #324f68; }
+.blog-image-fallback--gpu { background-color: #384266; }
+.blog-image-fallback--instrumentation { background-color: #315d54; }
+.blog-image-fallback--cpu { background-color: #5c4638; }
+.blog-image-fallback--systems { background-color: #38434e; }
+
+.image-overlay {
   position: absolute;
-  width: 140px;
-  height: 140px;
-  right: -46px;
-  top: -54px;
-  border: 1px solid rgba(255, 255, 255, 0.34);
-  border-radius: 50%;
-  box-shadow: 0 0 0 24px rgba(255, 255, 255, 0.06), 0 0 0 48px rgba(255, 255, 255, 0.04);
-  z-index: -1;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(8, 10, 12, 0.02) 15%, rgba(8, 10, 12, 0.62));
+  pointer-events: none;
 }
 
-.blog-visual--memory {
-  background: linear-gradient(135deg, #1a3550 0%, #123247 52%, #0d1b30 100%);
-}
-
-.blog-visual--gpu {
-  background: linear-gradient(135deg, #251d53 0%, #3b2874 52%, #161b3a 100%);
-}
-
-.blog-visual--instrumentation {
-  background: linear-gradient(135deg, #0c3b3f 0%, #145057 52%, #102530 100%);
-}
-
-.blog-visual--cpu {
-  background: linear-gradient(135deg, #3d2d18 0%, #5a4721 50%, #1e2430 100%);
-}
-
-.blog-visual--systems {
-  background: linear-gradient(135deg, #273544 0%, #35515d 50%, #172534 100%);
-}
-
-.blog-visual-label,
-.blog-visual-index {
-  position: relative;
+.blog-card-meta {
+  position: absolute;
+  inset: 1rem 1rem auto;
   z-index: 1;
-  font-family: 'Space Grotesk', sans-serif;
-}
-
-.blog-visual-label {
-  max-width: 65%;
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  line-height: 1.45;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  color: #fffaf1;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: .1em;
   text-transform: uppercase;
-  color: rgba(244, 250, 255, 0.78);
 }
 
-.blog-visual-index {
-  font-size: clamp(2.25rem, 5vw, 3.75rem);
+.blog-card-meta span:first-child {
+  max-width: 78%;
+}
+
+.blog-card .text-content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1.35rem 1.35rem 1.25rem;
+}
+
+.blog-byline {
+  margin-bottom: .75rem;
+  color: var(--ink-faint);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .68rem;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+
+.blog-card .blog-title {
+  margin: 0;
+  color: var(--ink) !important;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.22rem;
+  font-weight: 560;
+  letter-spacing: -.045em;
+  line-height: 1.18;
+  text-wrap: balance;
+}
+
+.blog-card .blog-description {
+  display: -webkit-box;
+  overflow: hidden;
+  margin: .8rem 0 1.1rem;
+  color: var(--ink-muted) !important;
+  font-size: .83rem;
+  line-height: 1.55;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.blog-read-link,
+.continue-link {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  margin-top: auto;
+  color: var(--ink) !important;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .7rem;
   font-weight: 600;
-  line-height: 0.8;
-  letter-spacing: -0.08em;
-  color: rgba(255, 255, 255, 0.94);
+  letter-spacing: .04em;
+  text-decoration: none;
+  text-transform: uppercase;
 }
 
-.blog-visual-orbit {
-  position: absolute;
-  width: 9px;
-  height: 9px;
-  top: 30px;
-  right: 42px;
-  border-radius: 50%;
-  background: var(--cnb-mint);
-  box-shadow: 0 0 20px var(--cnb-mint);
+.blog-read-link::after,
+.continue-link::after {
+  content: '';
+  width: 1.55rem;
+  height: 1px;
+  margin-left: .05rem;
+  background: currentColor;
+  transition: width 300ms ease;
+}
+
+.blog-read-link svg,
+.continue-link svg {
+  display: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .blog-card:hover .card-content {
+    transform: translateY(-.55rem);
+    border-color: rgba(224, 82, 44, .45);
+    box-shadow: 0 32px 60px rgba(12, 14, 17, .18);
+  }
+
+  .blog-card:hover .blog-image {
+    filter: saturate(1.08);
+    transform: scale(1.055);
+  }
+
+  .blog-card:hover .blog-read-link::after,
+  .blog-card:hover .continue-link::after {
+    width: 2.4rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .blog-card,
+  .blog-card.mobile-card {
+    flex-basis: min(83vw, 330px);
+    width: min(83vw, 330px);
+    height: 29.25rem;
+  }
+
+  .image-container {
+    min-height: 12.5rem;
+  }
 }

@@ -24,12 +24,17 @@ const eventRoutes = require('./routes/events');
 const authRoutes = require('./routes/auth');
 const announcementRoutes = require('./routes/announcements');
 const pastEventsRoutes = require('./routes/pastevents');
+const blogPreviewRoutes = require('./routes/blogPreviews');
+const { warmBlogPreviewCache } = require('./services/blogPreviewCache');
 
 const app = express();
 
-// Start connecting at boot. Public routes also await this promise so a cold
-// database never leaves a request buffered indefinitely inside Mongoose.
-connectDB().catch(() => {});
+// Start connecting at boot. Once Mongo is ready, prewarm the first seven
+// articles. This keeps the most visible covers in the persistent cache across
+// deployments without delaying the server from accepting requests.
+connectDB()
+  .then(() => warmBlogPreviewCache({ limit: 7 }))
+  .catch(() => {});
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -51,5 +56,6 @@ app.use('/api/events', eventRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/announcements', announcementRoutes);
 app.use('/api/pastevents', pastEventsRoutes);
+app.use('/api/blog-previews', blogPreviewRoutes);
 
 module.exports = app;

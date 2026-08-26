@@ -15,7 +15,7 @@
  */
 
 import React, { useEffect, useState, useRef } from 'react';
-import { blogPosts } from '../../data/blogPosts';
+import { useBlogPreviews } from '../../hooks/useBlogPreviews';
 import BlogCard from '../BlogCard/BlogCard';
 import './BlogsDetailsPage.css';
 import '../../style.css';
@@ -26,7 +26,7 @@ const BlogsDetailsPage = () => {
   const [canScrollRight, setCanScrollRight] = useState(false);
   const sliderRef = useRef(null);
   const location = useLocation();
-  const blogs = blogPosts;
+  const { items: blogs, isRefreshing } = useBlogPreviews();
 
   /**
    * Checks and updates the scroll position state for the carousel.
@@ -75,6 +75,7 @@ const BlogsDetailsPage = () => {
       <div className="header-section">
         <h1 className="blog-heading">Featured Blogs</h1>
         <p className="blog-subtitle">Discover our latest insights and stories</p>
+        {isRefreshing && <p className="content-refresh-status blog-cache-status">Refreshing original article previews…</p>}
       </div>
 
       <div className="carousel-wrapper">

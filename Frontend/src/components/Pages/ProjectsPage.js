@@ -23,10 +23,9 @@ import './ProjectsPage.css';
 import '../../style.css';
 
 const ProjectsPage = () => {
-  const [projectData, setProjectData] = useState([]);
+  const [projectData, setProjectData] = useState(gitLinks);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
-  const [loading, setLoading] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
   const [touchStart, setTouchStart] = useState(null);
   const sliderRef = useRef(null);
@@ -64,7 +63,6 @@ const ProjectsPage = () => {
         })
       );
       setProjectData(results);
-      setLoading(false); 
     };
     fetchMetadata();
   }, []);
@@ -146,13 +144,7 @@ const ProjectsPage = () => {
         Explore projects built by our community members.
       </p>
 
-      {loading ? (
-        <div className="loading-container">
-          <div className="loading-spinner"></div>
-          <p>Loading Projects...</p>
-        </div>
-      ) : (
-        <>
+      <>
           <div className="carousel-wrapper">
             {canScrollLeft && (
               <button 
@@ -245,8 +237,7 @@ const ProjectsPage = () => {
               View All Projects →
             </Link>
           </div>
-        </>
-      )}
+      </>
     </div>
   );
 };

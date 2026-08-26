@@ -17,12 +17,10 @@
 
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { blogPosts } from '../../data/blogPosts';
+import { useBlogPreviews } from '../../hooks/useBlogPreviews';
 import BlogCard from '../BlogCard/BlogCard';
 import './BlogsPage.css';
 import '../../style.css';
-
-const FEATURED_BLOG_POSTS = blogPosts.slice(0, 7);
 
 const BlogsPage = () => {
   const [canScrollLeft, setCanScrollLeft] = useState(false);
@@ -30,7 +28,7 @@ const BlogsPage = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [touchStart, setTouchStart] = useState(null);
   const sliderRef = useRef(null);
-  const blogs = FEATURED_BLOG_POSTS;
+  const { items: blogs, isRefreshing } = useBlogPreviews({ limit: 7 });
 
   // Detect mobile/tablet devices
   useEffect(() => {
@@ -119,6 +117,7 @@ const BlogsPage = () => {
       <p className="tab-desc">
         Read articles and tutorials written by our community members.
       </p>
+      {isRefreshing && <p className="content-refresh-status blog-cache-status">Refreshing article previews in the background…</p>}
 
       <>
           <div className="carousel-wrapper">

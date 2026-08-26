@@ -1,22 +1,5 @@
-/**
- * @file HomePage.js
- * @description
- * Main landing page for the Chips & Bytes website.
- * Displays a video background, announcements, and all main sections (about, members, events, projects, blogs, mentors, contact).
- * 
- * Features:
- * - Video background with overlay and animated logo.
- * - Announcement bar with latest updates.
- * - Scrolls to sections on button click.
- * - Renders all main club sections.
- * - Admin login link.
- * 
- * @component
- * @returns {JSX.Element}
- */
-
-import React from 'react';
-import { Cpu } from 'lucide-react';
+import React, { useEffect } from 'react';
+import { ArrowDownRight, ArrowUpRight, Cpu } from 'lucide-react';
 import './HomePage.css';
 import AboutPage from './AboutPage';
 import EventsPage from './EventsPage';
@@ -38,75 +21,86 @@ const HomePage = () => {
     fallback: publicContentFallback.announcements,
   });
 
+  useEffect(() => {
+    const sections = Array.from(document.querySelectorAll('.tab-section-container'));
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12 },
+    );
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
+
+  const scrollTo = (sectionId) => {
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
   return (
     <div className="page home-page">
-      <div className="video-background-section">
-        <video className="bg-video" autoPlay loop muted playsInline preload="metadata">
-          <source src="/videos/background.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+      <section className="studio-hero" aria-labelledby="hero-title">
+        <div className="hero-grain" aria-hidden="true" />
+        <div className="hero-gridline hero-gridline--vertical" aria-hidden="true" />
+        <div className="hero-gridline hero-gridline--horizontal" aria-hidden="true" />
 
-        <div className="video-overlay" />
-
-        <div className="video-grid">
-          <div className="video-left">
-            <h1 className="main-heading">Welcome to</h1>
-            <h2 className="typing-heading">Chips & Bytes</h2>
-            <p className="subheading">Explore the world of Computer Architecture</p>
-            <div className="hero-buttons">
-              <button
-                className="btn primary button-glow"
-                onClick={() => {
-                  document.getElementById("contact-section")?.scrollIntoView({ behavior: "smooth" });
-                }}
-              >
-                Join Our Community
-              </button>
-            </div>
+        <div className="hero-copy">
+          <p className="hero-kicker"><span /> Computer Architecture Club · SSSIHL</p>
+          <h1 id="hero-title">Build an instinct<br />for <em>systems.</em></h1>
+          <p className="hero-lede">
+            A student-led lab for asking better questions about computation—then learning, building, and sharing the answers.
+          </p>
+          <div className="hero-actions">
+            <button className="hero-action hero-action--primary" onClick={() => scrollTo('about-us')}>
+              Explore the club <ArrowDownRight size={17} strokeWidth={1.8} />
+            </button>
+            <button className="hero-action hero-action--quiet" onClick={() => scrollTo('events-section')}>
+              See what’s next
+            </button>
           </div>
-          <div className="video-right">
-            <div className="bouncing-icon">
-              <img src="/assets/logo_white_full.png" alt="Chips & Bytes Logo" 
-                style={{width: '120px',height: '95px'}}/>
-            </div>
-          </div>
+          <dl className="hero-index" aria-label="Club focus areas">
+            <div><dt>01</dt><dd>Architecture</dd></div>
+            <div><dt>02</dt><dd>Systems</dd></div>
+            <div><dt>03</dt><dd>Open practice</dd></div>
+          </dl>
         </div>
 
-        <div className="announcements-bar">
-          <div className="scroll-text">
-            <span className="announcement-highlight">Latest Updates: </span>
-            {announcements.length > 0
-              ? announcements.map(a => a.text).join(' | ')
-              : 'No announcements yet.'}
-            {loadingAnnouncements && <span className="announcement-refresh-indicator"> Updating…</span>}
-          </div>
+        <div className="hero-object" aria-hidden="true">
+          <div className="hero-object__orbit hero-object__orbit--outer" />
+          <div className="hero-object__orbit hero-object__orbit--inner" />
+          <div className="hero-object__core"><span>C&amp;B</span><small>01 / 01</small></div>
+          <div className="hero-object__marker hero-object__marker--one" />
+          <div className="hero-object__marker hero-object__marker--two" />
+          <p className="hero-object__caption">A field guide to how machines think</p>
         </div>
-      </div>
-      <div id="about-us" className="tab-section-container">
-        <AboutPage />
-      </div>
-      <div id="members-section" className="tab-section-container">
-        <MembersPage />
-      </div>
-      <div id="events-section" className="tab-section-container">
-        <EventsPage />
-      </div>
-      <div id="projects-section" className="tab-section-container">
-        <ProjectsPage />
-      </div>
-      <div id="blogs-section" className="tab-section-container">
-        <BlogsPage />
-      </div>
-      <div id="mentors-section" className="tab-section-container">
-        <MentorsPage />
-      </div>
-      <div id="contact-section" className="tab-section-container">
-        <ContactPage />
-      </div>
-      <div style={{ textAlign: 'right', margin: '2rem 2.5rem 1rem 0' }}>
-        <Link to="/admin" aria-label="Admin Login">
-          <Cpu size={22} color="#38bff82f" />
-        </Link>
+
+        <div className="hero-scroll-cue" aria-hidden="true"><span /> Scroll to enter</div>
+      </section>
+
+      <section className="announcement-panel" aria-label="Latest updates">
+        <p className="announcement-panel__label">Field notes / latest</p>
+        <p className="announcement-panel__copy">
+          {announcements.length > 0 ? announcements.map((announcement) => announcement.text).join(' · ') : 'No announcements yet.'}
+        </p>
+        <span className="announcement-panel__status">{loadingAnnouncements ? 'Syncing' : 'Live'}</span>
+      </section>
+
+      <div id="about-us" className="tab-section-container"><AboutPage /></div>
+      <div id="members-section" className="tab-section-container"><MembersPage /></div>
+      <div id="events-section" className="tab-section-container"><EventsPage /></div>
+      <div id="projects-section" className="tab-section-container"><ProjectsPage /></div>
+      <div id="blogs-section" className="tab-section-container"><BlogsPage /></div>
+      <div id="mentors-section" className="tab-section-container"><MentorsPage /></div>
+      <div id="contact-section" className="tab-section-container"><ContactPage /></div>
+
+      <div className="admin-entry">
+        <Link to="/admin" aria-label="Admin login"><Cpu size={16} /><span>Club admin</span><ArrowUpRight size={14} /></Link>
       </div>
     </div>
   );
