@@ -1,0 +1,70 @@
+name: AI repository safety gate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ai-safety-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  architecture:
+    name: AI architecture guard
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      BASE_SHA: ${{ github.event.pull_request.base.sha || '' }}
+    steps:
+      - name: Check out exact revision and base history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Set up Node for dependency-free guard
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Self-test guard logic
+        run: node scripts/ai-architecture-check.mjs --self-test
+      - name: Audit configured architecture
+        run: node scripts/ai-architecture-check.mjs
+
+  frontend:
+    name: Frontend tests and production build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: Frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: Frontend/package-lock.json
+      - run: npm ci
+      - run: CI=true npm test -- --watchAll=false
+      - run: npm run build
+
+  backend:
+    name: Backend install and build contract
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: Backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: Backend/package-lock.json
+      - run: npm ci
+      - run: npm run build
