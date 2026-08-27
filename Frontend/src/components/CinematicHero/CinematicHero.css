@@ -140,25 +140,6 @@ body.welcome-is-playing {
   mix-blend-mode: soft-light;
 }
 
-.cinematic-hero__frame {
-  position: absolute;
-  z-index: 2;
-  top: 5.35rem;
-  right: clamp(1.2rem, 3vw, 3.2rem);
-  left: clamp(1.2rem, 3vw, 3.2rem);
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-  padding-top: .8rem;
-  border-top: 1px solid rgba(255, 255, 255, .36);
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: .59rem;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-}
-
-.cinematic-hero__frame span:last-child { justify-self: end; }
-
 .cinematic-hero__copy {
   position: absolute;
   z-index: 3;
@@ -308,11 +289,6 @@ body.welcome-is-playing {
   .welcome-sequence__index { justify-content: center; }
 
   .cinematic-hero { min-height: max(40rem, 100svh); }
-  .cinematic-hero__frame {
-    top: 4.6rem;
-    grid-template-columns: 1fr 1fr;
-  }
-  .cinematic-hero__frame span:nth-child(2) { display: none; }
   .cinematic-hero__copy { bottom: 8.4rem; }
   .cinematic-hero__copy h1 { font-size: clamp(3.1rem, 15vw, 5.6rem); }
   .cinematic-hero__topics {

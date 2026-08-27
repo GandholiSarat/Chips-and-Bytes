@@ -543,3 +543,65 @@
   }
 
 }
+
+/* All-projects archive: use the same card system as the homepage in a full grid. */
+.project-details-container {
+  display: block;
+  min-height: 100vh;
+  padding: clamp(7rem, 10vw, 9rem) clamp(1.1rem, 5vw, 4.75rem) clamp(4rem, 8vw, 7rem);
+  overflow: visible;
+  color: var(--ink);
+  background: var(--canvas) !important;
+}
+
+.project-details-container::before {
+  background:
+    radial-gradient(circle at 8% 20%, rgba(224, 82, 44, .09), transparent 28rem),
+    radial-gradient(circle at 92% 70%, rgba(181, 198, 116, .12), transparent 30rem);
+}
+
+.project-details-container .header-section {
+  width: min(100%, var(--page-width));
+  max-width: var(--page-width);
+  margin: 0 auto clamp(2rem, 5vw, 4rem);
+  text-align: left;
+}
+
+.project-details-container .project-heading,
+.project-details-container .project-subtitle {
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  text-align: left !important;
+}
+
+.project-grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  width: min(100%, var(--page-width));
+  margin: 0 auto;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
+  gap: clamp(1.15rem, 2.5vw, 2rem);
+}
+
+.project-grid .project-card-shell {
+  width: 100%;
+  height: 31rem;
+}
+
+@media (max-width: 700px) {
+  .project-details-container {
+    padding: 6.5rem 1rem 4rem;
+  }
+
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .project-grid .project-card-shell {
+    width: 100%;
+    max-width: 32rem;
+    height: 29.75rem;
+    margin: 0 auto;
+  }
+}

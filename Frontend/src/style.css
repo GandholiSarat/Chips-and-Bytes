@@ -95,17 +95,7 @@
   }
   
   .nav-button.active {
-    color: #007bff; /* Active tab color */
-  }
-  
-  .nav-button.active::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background-color: #007bff; /* Underline for active tab */
+    color: inherit;
   }
   
   /* Icon size */

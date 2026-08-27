@@ -198,7 +198,7 @@ const Navbar = ({ activeTab, setActiveTab, navigate }) => {
       <div className="nav-container">
         {/* Logo */}
         <button className="navbar-logo" onClick={() => handleNavClick('home')} aria-label="Chips & Bytes home">
-          <img src="/assets/emblem_dark.PNG" alt="" className="logo-icon" />
+          <img src="/assets/logo_white.png" alt="" className="logo-icon" />
           <div className="logo-text">
             <h1 className="logo-title">Chips & Bytes</h1>
             <p className="logo-subtitle">Computer Architecture Club</p>

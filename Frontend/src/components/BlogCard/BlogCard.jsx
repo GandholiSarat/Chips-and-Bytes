@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { ArrowUpRight } from 'lucide-react';
+import { FaMedium } from 'react-icons/fa';
+import ExternalCardLink from '../ExternalCardLink/ExternalCardLink';
 import './BlogCard.css';
 
 const BlogCard = ({ blog, index, className = '', linkClassName, actionLabel }) => {
@@ -30,19 +31,14 @@ const BlogCard = ({ blog, index, className = '', linkClassName, actionLabel }) =
           <p className="blog-byline">{blog.author || 'Chips & Bytes'}</p>
           <h3 className="blog-title">{blog.title}</h3>
           <p className="blog-description">{blog.description}</p>
-          <a
+          <ExternalCardLink
             href={blog.url}
-            target="_blank"
-            rel="noopener noreferrer"
+            ariaLabel={`${actionLabel}: ${blog.title} on Medium`}
+            icon={<FaMedium size={19} />}
+            label={actionLabel}
+            host="medium.com"
             className={linkClassName}
-            aria-label={`${actionLabel}: ${blog.title} on Medium`}
-          >
-            <span className="blog-link-copy">
-              <strong>{actionLabel}</strong>
-              <small>medium.com</small>
-            </span>
-            <ArrowUpRight size={18} strokeWidth={1.7} aria-hidden="true" />
-          </a>
+          />
         </div>
       </div>
     </article>

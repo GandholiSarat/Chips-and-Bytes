@@ -54,7 +54,6 @@ const shouldShowWelcome = () => {
 
 const CinematicHero = ({ onJoin }) => {
   const [showWelcome, setShowWelcome] = useState(shouldShowWelcome);
-  const [activeFrame, setActiveFrame] = useState(0);
 
   useEffect(() => {
     if (!showWelcome) return undefined;
@@ -76,17 +75,6 @@ const CinematicHero = ({ onJoin }) => {
       document.body.classList.remove('welcome-is-playing');
     };
   }, [showWelcome]);
-
-  useEffect(() => {
-    const reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches ?? false;
-    if (reducedMotion) return undefined;
-
-    const frameTimer = window.setInterval(() => {
-      setActiveFrame((currentFrame) => (currentFrame + 1) % heroFrames.length);
-    }, FRAME_DURATION_MS);
-
-    return () => window.clearInterval(frameTimer);
-  }, []);
 
   return (
     <>
@@ -123,12 +111,6 @@ const CinematicHero = ({ onJoin }) => {
         </div>
 
         <div className="cinematic-hero__shade" aria-hidden="true" />
-        <div className="cinematic-hero__frame" aria-hidden="true">
-          <span>{String(activeFrame + 1).padStart(2, '0')} / {String(heroFrames.length).padStart(2, '0')}</span>
-          <span>C&amp;B / {heroFrames[activeFrame].label}</span>
-          <span>SSSIHL</span>
-        </div>
-
         <div className="cinematic-hero__copy">
           <p className="cinematic-hero__eyebrow">Chips &amp; Bytes · Computer Architecture Club</p>
           <h1 id="hero-title">

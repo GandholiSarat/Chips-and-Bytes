@@ -18,8 +18,7 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { gitLinks } from '../../data/constants';
-import { FaGithub } from 'react-icons/fa';
-import { ArrowUpRight } from 'lucide-react';
+import ProjectCard from '../ProjectCard/ProjectCard';
 import './ProjectsPage.css';
 import '../../style.css';
 
@@ -164,36 +163,11 @@ const ProjectsPage = () => {
               ref={sliderRef}
             >
               {projectData.map((Projects, idx) => (
-                <div className={`Projects-card  ${isMobile ? 'mobile-card' : ''}`} key={idx}>
-                  <div className="cards-content">
-                    {Projects.image && (
-                      <div className="image-container">
-                        <img src={Projects.image} alt={Projects.title} className="Projects-image" loading="lazy" decoding="async" />
-                        <div className="image-overlay"></div>
-                      </div>
-                    )}
-                    <div className="text-content">
-                      <h3 className="Projects-title">{Projects.title}</h3>
-                      <p className="Projects-description">
-                        {Projects.description?.slice(0, isMobile ? 80 : 100)}...
-                      </p>
-                      <a
-                        href={Projects.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="Projects-read-link project-external-link"
-                        aria-label={`GitHub link for ${Projects.title}`}
-                      >
-                        <FaGithub size={19} aria-hidden="true" />
-                        <span className="project-link-copy">
-                          <strong>View repository</strong>
-                          <small>github.com</small>
-                        </span>
-                        <ArrowUpRight size={18} strokeWidth={1.7} aria-hidden="true" />
-                      </a>
-                    </div>
-                  </div>
-                </div>
+                <ProjectCard
+                  key={Projects.url || idx}
+                  project={Projects}
+                  className={isMobile ? 'mobile-card' : ''}
+                />
               ))}
               
               {/* More... card */}

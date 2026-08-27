@@ -1,0 +1,78 @@
+.external-card-link.external-card-link {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: .72rem;
+  width: 100%;
+  min-height: 3.25rem;
+  margin-top: auto;
+  padding: .66rem .78rem;
+  overflow: hidden;
+  border: 1px solid var(--surface-ink) !important;
+  border-radius: .72rem;
+  color: var(--paper) !important;
+  background: var(--surface-ink) !important;
+  box-shadow: none !important;
+  font-family: 'IBM Plex Mono', monospace;
+  text-decoration: none;
+  transition: border-color 220ms ease, background-color 220ms ease, transform 220ms ease;
+}
+
+.external-card-link.external-card-link:visited,
+.external-card-link.external-card-link strong,
+.external-card-link.external-card-link svg {
+  color: var(--paper) !important;
+}
+
+.external-card-link__icon {
+  display: grid;
+  width: 1.2rem;
+  height: 1.2rem;
+  color: var(--paper);
+  place-items: center;
+}
+
+.external-card-link__copy {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: .1rem;
+}
+
+.external-card-link__copy strong {
+  max-width: 100%;
+  overflow: hidden;
+  font-size: .67rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.external-card-link.external-card-link .external-card-link__copy small {
+  color: var(--paper-muted) !important;
+  font-size: .53rem;
+  font-weight: 400;
+  letter-spacing: .05em;
+}
+
+.external-card-link.external-card-link:hover,
+.external-card-link.external-card-link:focus-visible {
+  color: var(--paper) !important;
+  background: #292b29 !important;
+  border-color: var(--signal) !important;
+  transform: translateY(-2px);
+}
+
+.external-card-link.external-card-link:hover .external-card-link__copy small,
+.external-card-link.external-card-link:focus-visible .external-card-link__copy small {
+  color: #ded9cd !important;
+}
+
+.external-card-link.external-card-link:focus-visible {
+  outline: 3px solid rgba(224, 82, 44, .24);
+  outline-offset: 3px;
+}

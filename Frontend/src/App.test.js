@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import AboutPage from './components/Pages/AboutPage';
 import BlogCard from './components/BlogCard/BlogCard';
 import CinematicHero from './components/CinematicHero/CinematicHero';
+import ProjectCard from './components/ProjectCard/ProjectCard';
 
 beforeEach(() => {
   Object.defineProperty(window, 'matchMedia', {
@@ -46,6 +47,22 @@ test('shows a visible Medium destination on every blog card', () => {
   const link = screen.getByRole('link', { name: /Example architecture article on Medium/i });
   expect(link).toHaveAttribute('href', 'https://medium.com/@chips-and-bytes/example');
   expect(screen.getByText('medium.com')).toBeInTheDocument();
+});
+
+test('shows a visible GitHub destination on project cards', () => {
+  render(
+    <ProjectCard
+      project={{
+        url: 'https://github.com/PrabinKuSabat/example',
+        title: 'Example architecture project',
+        description: 'An open-source systems project.',
+      }}
+    />,
+  );
+
+  const link = screen.getByRole('link', { name: /View Example architecture project repository on GitHub/i });
+  expect(link).toHaveAttribute('href', 'https://github.com/PrabinKuSabat/example');
+  expect(screen.getByText('github.com')).toBeInTheDocument();
 });
 
 test('opens with the requested welcome and retains the original hero copy', () => {
