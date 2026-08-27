@@ -7,40 +7,40 @@ const FRAME_DURATION_MS = 5000;
 
 const heroFrames = [
   {
-    src: 'https://images.unsplash.com/photo-1739168283356-d1b9bd1c0954?auto=format&fit=crop&fm=webp&q=84&w=2400',
-    position: 'center 52%',
-    label: 'Microprocessor',
+    src: '/assets/hero/zen2-matisse-die.webp',
+    position: 'center',
+    label: 'AMD Zen 2 Matisse die',
     kind: 'photo',
   },
   {
-    src: '/assets/architecture/pipeline-study.svg',
+    src: '/assets/hero/nvidia-gp100-die.webp',
     position: 'center',
-    label: 'Pipeline',
-    kind: 'diagram',
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1631376604944-ddb97deb9839?auto=format&fit=crop&fm=webp&q=84&w=2400',
-    position: 'center 50%',
-    label: 'FPGA development board',
+    label: 'NVIDIA GP100 die',
     kind: 'photo',
   },
   {
-    src: '/assets/architecture/cache-tlb-study.svg',
+    src: '/assets/hero/intel-i9-13900k-die.webp',
     position: 'center',
-    label: 'Caches + TLBs',
-    kind: 'diagram',
+    label: 'Intel Core i9-13900K labelled die',
+    kind: 'photo',
   },
   {
-    src: '/assets/architecture/qemu-study.svg',
+    src: '/assets/hero/amd-epyc-rome-io-die.webp',
     position: 'center',
-    label: 'QEMU emulation',
-    kind: 'diagram',
+    label: 'AMD EPYC Rome IO die',
+    kind: 'photo',
   },
   {
-    src: '/assets/architecture/memory-study.svg',
+    src: '/assets/hero/silicon-wafer-closeup.webp',
     position: 'center',
-    label: 'Memory hierarchy',
-    kind: 'diagram',
+    label: 'Silicon wafer close-up',
+    kind: 'photo',
+  },
+  {
+    src: '/assets/hero/exposed-processor-die.webp',
+    position: 'center',
+    label: 'Exposed processor die',
+    kind: 'photo',
   },
 ];
 

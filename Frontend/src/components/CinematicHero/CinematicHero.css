@@ -112,14 +112,7 @@ body.welcome-is-playing {
   animation: cinematic-drift 15s ease-in-out infinite alternate;
 }
 
-.cinematic-frame--diagram img {
-  object-fit: cover;
-  filter: saturate(.88) contrast(1.06) brightness(.72);
-  transform: scale(1.012);
-  animation-direction: alternate-reverse;
-}
-
-.cinematic-frame--photo:nth-child(3) img {
+.cinematic-frame--photo:nth-child(even) img {
   filter: saturate(.68) contrast(1.1) brightness(.7);
   animation-direction: alternate-reverse;
 }

@@ -9,10 +9,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: min(100%, 90rem);
+  width: 100%;
   min-height: 3.65rem;
   margin: 0 auto;
-  padding: .38rem clamp(1.15rem, 4vw, 3.1rem);
+  padding: .38rem clamp(.65rem, 1.5vw, 1.35rem);
 }
 
 .navbar-logo {
@@ -54,7 +54,16 @@
   white-space: nowrap;
 }
 
-.navbar-links.desktop-links { display: flex; align-items: center; gap: .15rem; }
+.navbar-links.desktop-links {
+  display: flex;
+  align-items: center;
+  gap: .15rem;
+  margin-left: auto;
+  padding: .2rem;
+  border: 1px solid rgba(16, 17, 18, .09);
+  border-radius: 999px;
+  background: rgba(248, 245, 237, .42);
+}
 .nav-button {
   padding: .48rem .66rem;
   border: 1px solid transparent;
@@ -125,5 +134,5 @@
 
 @media (max-width: 420px) {
   .logo-subtitle { display: none; }
-  .nav-container { padding-right: 1rem; padding-left: 1rem; }
+  .nav-container { padding-right: .75rem; padding-left: .75rem; }
 }
