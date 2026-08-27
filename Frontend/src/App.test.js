@@ -1,9 +1,14 @@
-import { render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 import AboutPage from './components/Pages/AboutPage';
 import BlogCard from './components/BlogCard/BlogCard';
 import CinematicHero from './components/CinematicHero/CinematicHero';
 import ProjectCard from './components/ProjectCard/ProjectCard';
 import LiveSessions from './components/LiveSessions/LiveSessions';
+import Navbar from './components/Navbar/Navbar';
+
+jest.mock('react-router-dom', () => ({
+  useLocation: () => ({ pathname: '/' }),
+}), { virtual: true });
 
 beforeEach(() => {
   Object.defineProperty(window, 'matchMedia', {
@@ -64,6 +69,29 @@ test('shows a visible GitHub destination on project cards', () => {
   const link = screen.getByRole('link', { name: /View Example architecture project repository on GitHub/i });
   expect(link).toHaveAttribute('href', 'https://github.com/PrabinKuSabat/example');
   expect(screen.getByText('github.com')).toBeInTheDocument();
+});
+
+test('uses an accessible compact header menu and closes it after two seconds', () => {
+  jest.useFakeTimers();
+
+  const { unmount } = render(
+    <Navbar activeTab="home" setActiveTab={jest.fn()} navigate={jest.fn()} />,
+  );
+
+  const menuButton = screen.getByRole('button', { name: /site navigation/i });
+  expect(screen.queryByText('Computer Architecture Club')).not.toBeInTheDocument();
+  expect(menuButton).toHaveAttribute('aria-expanded', 'true');
+  expect(screen.getByRole('button', { name: 'Blogs' })).toHaveAttribute('tabindex', '0');
+
+  act(() => jest.advanceTimersByTime(2000));
+  expect(menuButton).toHaveAttribute('aria-expanded', 'false');
+  expect(screen.getByRole('button', { name: 'Blogs', hidden: true })).toHaveAttribute('tabindex', '-1');
+
+  fireEvent.click(menuButton);
+  expect(menuButton).toHaveAttribute('aria-expanded', 'true');
+
+  unmount();
+  jest.useRealTimers();
 });
 
 test('opens with the requested welcome and retains the original hero copy', () => {

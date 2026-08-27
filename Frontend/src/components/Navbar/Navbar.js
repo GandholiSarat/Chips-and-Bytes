@@ -20,8 +20,8 @@
  * @returns {JSX.Element}
  */
 
-import React, { useEffect, useState } from 'react';
-import { Menu, X } from 'lucide-react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { ChevronDown } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
 import './Navbar.css';
 
@@ -36,6 +36,19 @@ const sectionMap = {
   contact: 'contact-section'
 };
 
+const navigationItems = [
+  { id: 'home', label: 'Home' },
+  { id: 'about', label: 'About Us' },
+  { id: 'members', label: 'Members' },
+  { id: 'events', label: 'Events' },
+  { id: 'projects', label: 'Projects' },
+  { id: 'blogs', label: 'Blogs' },
+  { id: 'mentors', label: 'Mentors' },
+  { id: 'contact', label: 'Contact Us' }
+];
+
+const MENU_CLOSE_DELAY_MS = 2000;
+
 /**
  * Navbar Component
  * 
@@ -43,8 +56,31 @@ const sectionMap = {
  * and manages mobile menu state.
  */
 const Navbar = ({ activeTab, setActiveTab, navigate }) => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isNavigationOpen, setIsNavigationOpen] = useState(false);
+  const closeTimerRef = useRef(null);
+  const navigationRef = useRef(null);
+  const menuButtonRef = useRef(null);
   const location = useLocation();
+
+  const clearCloseTimer = useCallback(() => {
+    if (closeTimerRef.current) {
+      window.clearTimeout(closeTimerRef.current);
+      closeTimerRef.current = null;
+    }
+  }, []);
+
+  const scheduleClose = useCallback(() => {
+    clearCloseTimer();
+    closeTimerRef.current = window.setTimeout(() => {
+      setIsNavigationOpen(false);
+      closeTimerRef.current = null;
+    }, MENU_CLOSE_DELAY_MS);
+  }, [clearCloseTimer]);
+
+  const openNavigation = useCallback(() => {
+    clearCloseTimer();
+    setIsNavigationOpen(true);
+  }, [clearCloseTimer]);
 
   // Update active tab based on route changes
   useEffect(() => {
@@ -63,8 +99,9 @@ const Navbar = ({ activeTab, setActiveTab, navigate }) => {
    * @param {string} id - Section or page identifier
    */
   const handleNavClick = (id) => {
-    setActiveTab(id); 
-    setIsMobileMenuOpen(false);
+    setActiveTab(id);
+    setIsNavigationOpen(true);
+    scheduleClose();
 
     if (id === 'home') {
       if (location.pathname === '/') {
@@ -107,30 +144,50 @@ const Navbar = ({ activeTab, setActiveTab, navigate }) => {
     }
   };
 
-  /**
-   * Toggles the mobile menu open/close state.
-   */
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-  };
+  // Reveal the active title briefly, then return to the compact menu.
+  useEffect(() => {
+    setIsNavigationOpen(true);
+    scheduleClose();
+  }, [activeTab, scheduleClose]);
 
-  // Close mobile menu on outside click or scroll
+  // Close on outside click and support the disclosure-navigation Escape pattern.
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (isMobileMenuOpen && !event.target.closest('.navbar')) {
-        setIsMobileMenuOpen(false);
+      if (isNavigationOpen && navigationRef.current && !navigationRef.current.contains(event.target)) {
+        clearCloseTimer();
+        setIsNavigationOpen(false);
       }
     };
-    const handleScroll = () => {
-      if (isMobileMenuOpen) setIsMobileMenuOpen(false);
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape' && isNavigationOpen) {
+        clearCloseTimer();
+        setIsNavigationOpen(false);
+        menuButtonRef.current?.focus();
+      }
     };
     document.addEventListener('click', handleClickOutside);
-    window.addEventListener('scroll', handleScroll);
+    document.addEventListener('keydown', handleKeyDown);
     return () => {
       document.removeEventListener('click', handleClickOutside);
-      window.removeEventListener('scroll', handleScroll);
+      document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [isMobileMenuOpen]);
+  }, [clearCloseTimer, isNavigationOpen]);
+
+  useEffect(() => () => clearCloseTimer(), [clearCloseTimer]);
+
+  const toggleNavigation = () => {
+    clearCloseTimer();
+    if (isNavigationOpen) {
+      setIsNavigationOpen(false);
+      return;
+    }
+    setIsNavigationOpen(true);
+    scheduleClose();
+  };
+
+  const handleNavigationBlur = (event) => {
+    if (!event.currentTarget.contains(event.relatedTarget)) scheduleClose();
+  };
 
   // Detect and highlight active section on scroll (home page only)
   useEffect(() => {
@@ -201,67 +258,49 @@ const Navbar = ({ activeTab, setActiveTab, navigate }) => {
           <img src="/assets/logo_white.png" alt="" className="logo-icon" />
           <div className="logo-text">
             <h1 className="logo-title">Chips & Bytes</h1>
-            <p className="logo-subtitle">Computer Architecture Club</p>
           </div>
         </button>
 
-        {/* Desktop Navigation Links */}
-        <div className="navbar-links desktop-links">
-          {[
-            { id: 'home', label: 'Home' },
-            { id: 'about', label: 'About Us' },
-            { id: 'members', label: 'Members'},
-            { id: 'events', label: 'Events' },
-            { id: 'projects', label: 'Projects' },
-            { id: 'blogs', label: 'Blogs' },
-            { id: 'mentors', label: 'Mentors' },
-            { id: 'contact', label: 'Contact Us' }
-          ].map(({ id, label }) => (
-            <button
-              key={id}
-              onClick={() => handleNavClick(id)}
-              className={`nav-button ${activeTab === id ? 'active' : ''}`}
-              aria-current={activeTab === id ? 'page' : undefined}
-            >
-              {label}
-            </button>
-          ))}
-        </div>
-
-        {/* Mobile Menu Toggle */}
-        <div className="mobile-menu-toggle">
-          <button 
-            onClick={toggleMobileMenu}
-            className="menu-toggle-btn"
-            aria-label="Toggle mobile menu"
+        <div
+          ref={navigationRef}
+          className={`nav-disclosure ${isNavigationOpen ? 'is-open' : ''}`}
+          onMouseEnter={openNavigation}
+          onMouseLeave={scheduleClose}
+          onFocus={openNavigation}
+          onBlur={handleNavigationBlur}
+        >
+          <button
+            ref={menuButtonRef}
+            type="button"
+            onClick={toggleNavigation}
+            className="nav-menu-toggle"
+            aria-expanded={isNavigationOpen}
+            aria-controls="primary-navigation-links"
+            aria-label={`${isNavigationOpen ? 'Close' : 'Open'} site navigation`}
           >
-            {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+            <span>Menu</span>
+            <ChevronDown size={15} strokeWidth={1.7} aria-hidden="true" />
           </button>
-        </div>
-      </div>
 
-      {/* Mobile Navigation Menu */}
-      <div className={`mobile-menu ${isMobileMenuOpen ? 'open' : ''}`}>
-        <div className="mobile-menu-links">
-          {[
-            { id: 'home', label: 'Home' },
-            { id: 'about', label: 'About Us' },
-            { id: 'members', label: 'Members' },
-            { id: 'events', label: 'Events' },
-            { id: 'projects', label: 'Projects' },
-            { id: 'blogs', label: 'Blogs' },
-            { id: 'mentors', label: 'Mentors' },
-            { id: 'contact', label: 'Contact Us' }
-          ].map(({ id, label }) => (
-            <button
-              key={id}
-              onClick={() => handleNavClick(id)}
-              className={`mobile-nav-button ${activeTab === id ? 'active' : ''}`}
-              aria-current={activeTab === id ? 'page' : undefined}
-            >
-              {label}
-            </button>
-          ))}
+          <div
+            id="primary-navigation-links"
+            className="navbar-links"
+            aria-hidden={!isNavigationOpen}
+          >
+            <div className="navbar-links__inner">
+              {navigationItems.map(({ id, label }) => (
+                <button
+                  key={id}
+                  onClick={() => handleNavClick(id)}
+                  className={`nav-button ${activeTab === id ? 'active' : ''}`}
+                  aria-current={activeTab === id ? 'page' : undefined}
+                  tabIndex={isNavigationOpen ? 0 : -1}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </nav>

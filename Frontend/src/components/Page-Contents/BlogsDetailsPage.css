@@ -56,10 +56,10 @@
 .blog-details-container .blog-card {
   width: 100%;
   height: auto;
-  min-height: 34rem;
+  min-height: 36rem;
 }
 
-.blog-details-container .blog-card .card-content { min-height: 34rem; }
+.blog-details-container .blog-card .card-content { min-height: 36rem; }
 .blog-details-container .scroll-arrow { display: none; }
 
 @media (max-width: 760px) {
@@ -78,9 +78,9 @@
   .blog-details-container .blog-card {
     flex: 0 0 min(86vw, 340px);
     width: min(86vw, 340px);
-    min-height: 33rem;
+    min-height: 35.5rem;
   }
-  .blog-details-container .blog-card .card-content { min-height: 33rem; }
+  .blog-details-container .blog-card .card-content { min-height: 35.5rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {

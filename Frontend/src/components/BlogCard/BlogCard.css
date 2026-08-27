@@ -2,7 +2,7 @@
   --card-radius: 1.25rem;
   flex: 0 0 clamp(274px, 28vw, 340px);
   width: clamp(274px, 28vw, 340px);
-  height: 34rem;
+  height: 36rem;
   position: relative;
   scroll-snap-align: start;
 }
@@ -22,9 +22,9 @@
 
 .image-container {
   position: relative;
-  flex: 0 0 13rem;
-  height: 13rem;
-  min-height: 13rem;
+  flex: 0 0 12.5rem;
+  height: 12.5rem;
+  min-height: 12.5rem;
   overflow: hidden;
   background: var(--surface-ink);
 }
@@ -99,8 +99,8 @@
 }
 
 .blog-card .blog-title {
-  display: -webkit-box;
-  overflow: hidden;
+  display: block;
+  overflow: visible;
   margin: 0;
   color: var(--ink) !important;
   font-family: 'Space Grotesk', sans-serif;
@@ -109,8 +109,6 @@
   letter-spacing: -.045em;
   line-height: 1.18;
   text-wrap: balance;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
 }
 
 .blog-card .blog-description {
@@ -122,7 +120,7 @@
   font-size: .83rem;
   line-height: 1.55;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 4;
+  -webkit-line-clamp: 3;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -144,13 +142,13 @@
   .blog-card.mobile-card {
     flex-basis: min(83vw, 330px);
     width: min(83vw, 330px);
-    height: 33rem;
+    height: 35.5rem;
   }
 
   .image-container {
-    flex-basis: 12rem;
-    height: 12rem;
-    min-height: 12rem;
+    flex-basis: 11.75rem;
+    height: 11.75rem;
+    min-height: 11.75rem;
   }
 }
 
@@ -158,7 +156,7 @@
 .blogs-page .blog-card:not(.more-card),
 .blog-details-container .blog-card {
   width: clamp(285px, 28vw, 340px);
-  height: 34rem;
+  height: 36rem;
 }
 
 .blogs-page .blog-card:not(.more-card) .card-content,
@@ -172,7 +170,7 @@
   .blog-details-container .blog-card {
     width: 100%;
     height: auto;
-    min-height: 34rem;
+    min-height: 36rem;
   }
 }
 
@@ -181,6 +179,6 @@
   .blogs-page .blog-card.mobile-card:not(.more-card),
   .blog-details-container .blog-card {
     width: min(84vw, 330px);
-    height: 33rem;
+    height: 35.5rem;
   }
 }

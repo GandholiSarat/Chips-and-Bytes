@@ -63,7 +63,7 @@
 .blogs-page .more-card {
   flex: 0 0 clamp(274px, 28vw, 340px);
   width: clamp(274px, 28vw, 340px);
-  height: 34rem;
+  height: 36rem;
   scroll-snap-align: start;
 }
 
@@ -154,7 +154,7 @@
   .blogs-page .more-card {
     flex-basis: min(83vw, 330px);
     width: min(83vw, 330px);
-    height: 33rem;
+    height: 35.5rem;
   }
 }
 
