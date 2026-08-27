@@ -108,8 +108,9 @@ h1, h2, h3, h4, .logo-title, .tab-heading, .about-us-heading, .subheading,
   transform: none !important;
 }
 .about-page:hover { transform: translateY(-.25rem) !important; box-shadow: 0 25px 54px rgba(23, 24, 20, .14) !important; }
-.about-list, .club-mission, .club-objectives, .about-page p { color: var(--ink-muted) !important; line-height: 1.75; }
+.about-list, .about-list li, .club-mission, .club-objectives, .about-page p { color: var(--ink-muted) !important; line-height: 1.75; }
 .about-list li::marker, .announcement-highlight { color: var(--signal) !important; }
+.about-list li:hover { color: var(--ink) !important; }
 
 .events-page, .blogs-page, .Projects-page, .members-member-page, .mentors-mentor-page, .contact-page {
   width: min(100%, var(--page-width));
@@ -167,7 +168,7 @@ h1, h2, h3, h4, .logo-title, .tab-heading, .about-us-heading, .subheading,
 .Projects-card .Projects-title { color: var(--ink) !important; text-shadow: none !important; }
 .Projects-card .Projects-description { color: var(--ink-muted) !important; }
 
-.read-more-link, .blog-read-link, .continue-link, .Projects-read-link, .btn.primary {
+.read-more-link, .btn.primary {
   color: var(--ink) !important;
   background: transparent !important;
   border: 0 !important;
@@ -178,7 +179,7 @@ h1, h2, h3, h4, .logo-title, .tab-heading, .about-us-heading, .subheading,
   letter-spacing: .055em;
   text-transform: uppercase;
 }
-.read-more-link:hover, .blog-read-link:hover, .continue-link:hover, .Projects-read-link:hover { color: var(--signal) !important; }
+.read-more-link:hover { color: var(--signal) !important; }
 .more-card-content, .more-cards-content { background: var(--surface-subtle) !important; border-color: var(--line-soft) !important; }
 
 .blog-details-container, .event-details-container, .project-details-container {

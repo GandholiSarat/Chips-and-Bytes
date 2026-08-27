@@ -10,9 +10,9 @@
   align-items: center;
   justify-content: space-between;
   width: min(100%, 90rem);
-  min-height: 4.6rem;
+  min-height: 3.65rem;
   margin: 0 auto;
-  padding: .65rem clamp(1.15rem, 4vw, 3.1rem);
+  padding: .38rem clamp(1.15rem, 4vw, 3.1rem);
 }
 
 .navbar-logo {
@@ -20,29 +20,33 @@
   flex-shrink: 0;
   align-items: center;
   gap: .7rem;
+  padding: 0;
+  border: 0;
+  color: inherit;
+  background: transparent;
   cursor: pointer;
 }
 
 .logo-icon {
-  width: 2.35rem;
-  height: 2.35rem;
+  width: 1.9rem;
+  height: 1.9rem;
   margin: 0;
-  filter: grayscale(1) contrast(1.25);
+  object-fit: contain;
 }
 
 .logo-text { display: flex; flex-direction: column; }
 .logo-title {
   margin: 0;
-  font-size: 1rem;
+  font-size: .9rem;
   font-weight: 620;
   letter-spacing: -.055em;
   line-height: 1;
   white-space: nowrap;
 }
 .logo-subtitle {
-  margin: .28rem 0 0;
+  margin: .22rem 0 0;
   font-family: 'IBM Plex Mono', monospace;
-  font-size: .55rem;
+  font-size: .5rem;
   letter-spacing: .055em;
   line-height: 1;
   text-transform: uppercase;
@@ -51,7 +55,7 @@
 
 .navbar-links.desktop-links { display: flex; align-items: center; gap: .15rem; }
 .nav-button {
-  padding: .62rem .72rem;
+  padding: .48rem .66rem;
   border: 0;
   border-radius: 999px;
   background: transparent;
@@ -62,10 +66,10 @@
 .mobile-menu-toggle { display: none; }
 .menu-toggle-btn {
   display: grid;
-  width: 2.7rem;
-  min-width: 2.7rem;
-  height: 2.7rem;
-  min-height: 2.7rem;
+  width: 2.35rem;
+  min-width: 2.35rem;
+  height: 2.35rem;
+  min-height: 2.35rem;
   padding: 0;
   border-radius: 50%;
   cursor: pointer;
@@ -102,7 +106,7 @@
 @media (max-width: 820px) {
   .navbar-links.desktop-links { display: none; }
   .mobile-menu-toggle { display: block; }
-  .nav-container { min-height: 4.25rem; }
+  .nav-container { min-height: 3.55rem; }
 }
 
 @media (max-width: 420px) {

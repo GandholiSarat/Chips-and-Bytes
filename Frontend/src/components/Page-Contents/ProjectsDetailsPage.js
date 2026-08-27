@@ -15,14 +15,14 @@
  */
 
 import React, { useEffect, useState, useRef } from 'react';
-import axios from 'axios';
 import { gitLinks } from '../../data/constants';
 import './ProjectsDetailsPage.css';
 import '../../style.css';
 import { FaGithub } from 'react-icons/fa';
+import { ArrowUpRight } from 'lucide-react';
 
 const ProjectsDetailsPage = () => {
-  const [projects, setProjects] = useState([]);
+  const [projects, setProjects] = useState(gitLinks);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
   const sliderRef = useRef(null);
@@ -32,28 +32,22 @@ const ProjectsDetailsPage = () => {
      * Fetches project preview data from the Microlink API for each project link.
      */
     const fetchProjectPreviews = async () => {
-      const previews = [];
-      for (const linkObj of gitLinks) {
+      const previews = await Promise.all(gitLinks.map(async (linkObj) => {
         try {
-          const res = await axios.get(`https://api.microlink.io/?url=${encodeURIComponent(linkObj.url)}`);
-          const { title, description, image, url } = res.data.data;
-          previews.push({
+          const response = await fetch(`https://api.microlink.io/?url=${encodeURIComponent(linkObj.url)}`);
+          const payload = await response.json();
+          const { title, description, image } = payload.data || {};
+          return {
             title: title || linkObj.title,
             description: description || linkObj.description,
             image: image?.url || '',
-            url: url || linkObj.url,
-          });
+            url: linkObj.url,
+          };
         } catch (error) {
           console.error("Error fetching preview for", linkObj.url, error);
-          // Fallback to original data if API fails
-          previews.push({
-            title: linkObj.title,
-            description: linkObj.description,
-            image: '',
-            url: linkObj.url,
-          });
+          return { ...linkObj };
         }
-      }
+      }));
       setProjects(previews);
     };
     fetchProjectPreviews();
@@ -123,7 +117,7 @@ const ProjectsDetailsPage = () => {
               <div className="card-content">
                 {project.image && (
                   <div className="image-container">
-                    <img src={project.image} alt={project.title} className="project-image" />
+                    <img src={project.image} alt={project.title} className="project-image" loading="lazy" decoding="async" />
                     <div className="image-overlay"></div>
                   </div>
                 )}
@@ -136,11 +130,15 @@ const ProjectsDetailsPage = () => {
                     href={project.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="continue-link"
+                    className="project-repo-link project-external-link"
                     aria-label={`GitHub link for ${project.title}`}
                   >
-                    <FaGithub size={20} style={{ marginRight: '8px' }} />
-                    View Repo
+                    <FaGithub size={19} aria-hidden="true" />
+                    <span className="project-link-copy">
+                      <strong>View repository</strong>
+                      <small>github.com</small>
+                    </span>
+                    <ArrowUpRight size={18} strokeWidth={1.7} aria-hidden="true" />
                   </a>
                 </div>
               </div>

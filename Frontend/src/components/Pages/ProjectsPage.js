@@ -19,6 +19,7 @@ import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { gitLinks } from '../../data/constants';
 import { FaGithub } from 'react-icons/fa';
+import { ArrowUpRight } from 'lucide-react';
 import './ProjectsPage.css';
 import '../../style.css';
 
@@ -49,12 +50,12 @@ const ProjectsPage = () => {
           try {
             const response = await fetch(`https://api.microlink.io/?url=${encodeURIComponent(linkObj.url)}`);
             const json = await response.json();
-            const { title, description, image, url } = json.data;
+            const { title, description, image } = json.data;
             return {
               title: title || linkObj.title,
               description: description || linkObj.description,
               image: image?.url || null,
-              url: url || linkObj.url,
+              url: linkObj.url,
             };
           } catch (err) {
             console.error(`Failed to fetch metadata for ${linkObj.url}`, err);
@@ -159,7 +160,7 @@ const ProjectsPage = () => {
             )}
 
             <div 
-              className={`blog-slider ${isMobile ? 'mobile-slider' : ''}`} 
+              className={`Projects-slider ${isMobile ? 'mobile-slider' : ''}`}
               ref={sliderRef}
             >
               {projectData.map((Projects, idx) => (
@@ -167,7 +168,7 @@ const ProjectsPage = () => {
                   <div className="cards-content">
                     {Projects.image && (
                       <div className="image-container">
-                        <img src={Projects.image} alt={Projects.title} className="Projects-image" />
+                        <img src={Projects.image} alt={Projects.title} className="Projects-image" loading="lazy" decoding="async" />
                         <div className="image-overlay"></div>
                       </div>
                     )}
@@ -180,11 +181,15 @@ const ProjectsPage = () => {
                         href={Projects.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="continue-link"
+                        className="Projects-read-link project-external-link"
                         aria-label={`GitHub link for ${Projects.title}`}
                       >
-                        <FaGithub size={20} style={{ marginRight: '8px' }} />
-                        View Repo
+                        <FaGithub size={19} aria-hidden="true" />
+                        <span className="project-link-copy">
+                          <strong>View repository</strong>
+                          <small>github.com</small>
+                        </span>
+                        <ArrowUpRight size={18} strokeWidth={1.7} aria-hidden="true" />
                       </a>
                     </div>
                   </div>
@@ -193,7 +198,7 @@ const ProjectsPage = () => {
               
               {/* More... card */}
               <div className={`Projects-card more-card ${isMobile ? 'mobile-card' : ''}`}>
-                <Link to="/Projects/details" className="more-card-link">
+                <Link to="/projects/details" className="more-card-link">
                   <div className="card-content more-card-content">
                     <div className="more-card-inner">
                       <div className="more-icon">
@@ -233,7 +238,7 @@ const ProjectsPage = () => {
           </div>
 
           <div className="read-more-container">
-            <Link to="/Projects/details" className="read-more-link">
+            <Link to="/projects/details" className="read-more-link">
               View All Projects →
             </Link>
           </div>

@@ -197,13 +197,13 @@ const Navbar = ({ activeTab, setActiveTab, navigate }) => {
     <nav className="navbar">
       <div className="nav-container">
         {/* Logo */}
-        <div className="navbar-logo" onClick={() => handleNavClick('home')} style={{ cursor: 'pointer' }}>
-          <img src="/assets/logo_white.png" alt="Chips & Bytes Logo" className="logo-icon" />
+        <button className="navbar-logo" onClick={() => handleNavClick('home')} aria-label="Chips & Bytes home">
+          <img src="/assets/emblem_dark.PNG" alt="" className="logo-icon" />
           <div className="logo-text">
             <h1 className="logo-title">Chips & Bytes</h1>
             <p className="logo-subtitle">Computer Architecture Club</p>
           </div>
-        </div>
+        </button>
 
         {/* Desktop Navigation Links */}
         <div className="navbar-links desktop-links">
@@ -221,6 +221,7 @@ const Navbar = ({ activeTab, setActiveTab, navigate }) => {
               key={id}
               onClick={() => handleNavClick(id)}
               className={`nav-button ${activeTab === id ? 'active' : ''}`}
+              aria-current={activeTab === id ? 'page' : undefined}
             >
               {label}
             </button>
@@ -256,6 +257,7 @@ const Navbar = ({ activeTab, setActiveTab, navigate }) => {
               key={id}
               onClick={() => handleNavClick(id)}
               className={`mobile-nav-button ${activeTab === id ? 'active' : ''}`}
+              aria-current={activeTab === id ? 'page' : undefined}
             >
               {label}
             </button>

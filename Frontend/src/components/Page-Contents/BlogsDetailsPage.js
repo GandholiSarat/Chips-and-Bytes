@@ -97,7 +97,7 @@ const BlogsDetailsPage = () => {
                 key={blog.id}
                 blog={blog}
                 index={idx}
-                linkClassName="continue-link"
+                linkClassName="blog-read-link"
                 actionLabel="Read More"
               />
             ))}

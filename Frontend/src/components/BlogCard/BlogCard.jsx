@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { ArrowUpRight } from 'lucide-react';
 import './BlogCard.css';
 
 const BlogCard = ({ blog, index, className = '', linkClassName, actionLabel }) => {
@@ -34,12 +35,13 @@ const BlogCard = ({ blog, index, className = '', linkClassName, actionLabel }) =
             target="_blank"
             rel="noopener noreferrer"
             className={linkClassName}
+            aria-label={`${actionLabel}: ${blog.title} on Medium`}
           >
-            {actionLabel}
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-              <line x1="7" y1="17" x2="17" y2="7" />
-              <polyline points="7,7 17,7 17,17" />
-            </svg>
+            <span className="blog-link-copy">
+              <strong>{actionLabel}</strong>
+              <small>medium.com</small>
+            </span>
+            <ArrowUpRight size={18} strokeWidth={1.7} aria-hidden="true" />
           </a>
         </div>
       </div>
