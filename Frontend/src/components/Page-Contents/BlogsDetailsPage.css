@@ -656,3 +656,27 @@
     display: none !important;
   }
 }
+
+/* Archive cards grow with their content, so the destination CTA is never clipped. */
+.blog-details-container .blog-slider {
+  align-items: stretch;
+}
+
+.blog-details-container .blog-slider .blog-card {
+  height: auto !important;
+  min-height: 32rem;
+}
+
+.blog-details-container .blog-slider .blog-card .card-content {
+  height: 100% !important;
+  min-height: 32rem;
+  color: var(--ink) !important;
+  background: var(--surface-raised) !important;
+}
+
+@media (max-width: 700px) {
+  .blog-details-container .blog-slider .blog-card,
+  .blog-details-container .blog-slider .blog-card .card-content {
+    min-height: 31rem;
+  }
+}

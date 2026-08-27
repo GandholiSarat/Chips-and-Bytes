@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom';
 import { publicContentFallback } from '../../data/publicContentFallback';
 import { usePublicResource } from '../../hooks/usePublicResource';
 import CinematicHero from '../CinematicHero/CinematicHero';
+import LiveSessions from '../LiveSessions/LiveSessions';
 
 const API_URL = `${process.env.REACT_APP_BACKEND_URL}/api/announcements`;
 
@@ -46,13 +47,7 @@ const HomePage = () => {
         onJoin={() => document.getElementById('contact-section')?.scrollIntoView({ behavior: 'smooth' })}
       />
 
-      <section className="announcement-panel" aria-label="Latest updates">
-        <p className="announcement-panel__label">Field notes / latest</p>
-        <p className="announcement-panel__copy">
-          {announcements.length > 0 ? announcements.map((announcement) => announcement.text).join(' · ') : 'No announcements yet.'}
-        </p>
-        <span className="announcement-panel__status">{loadingAnnouncements ? 'Syncing' : 'Live'}</span>
-      </section>
+      <LiveSessions sessions={announcements} isRefreshing={loadingAnnouncements} />
 
       <div id="about-us" className="tab-section-container"><AboutPage /></div>
       <div id="members-section" className="tab-section-container"><MembersPage /></div>

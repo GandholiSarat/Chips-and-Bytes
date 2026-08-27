@@ -22,6 +22,8 @@
 
 .image-container {
   position: relative;
+  flex: 0 0 13.5rem;
+  height: 13.5rem;
   min-height: 13.5rem;
   overflow: hidden;
   background: var(--surface-ink);
@@ -79,6 +81,7 @@
 
 .blog-card .text-content {
   display: flex;
+  min-height: 0;
   flex: 1;
   flex-direction: column;
   align-items: flex-start;
@@ -95,6 +98,8 @@
 }
 
 .blog-card .blog-title {
+  display: -webkit-box;
+  overflow: hidden;
   margin: 0;
   color: var(--ink) !important;
   font-family: 'Space Grotesk', sans-serif;
@@ -103,6 +108,8 @@
   letter-spacing: -.045em;
   line-height: 1.18;
   text-wrap: balance;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
 .blog-card .blog-description {
@@ -139,6 +146,8 @@
   }
 
   .image-container {
+    flex-basis: 12.5rem;
+    height: 12.5rem;
     min-height: 12.5rem;
   }
 }
@@ -160,7 +169,8 @@
 @media (min-width: 1024px) {
   .blog-details-container .blog-card {
     width: 100%;
-    height: 31rem;
+    height: auto;
+    min-height: 32rem;
   }
 }
 

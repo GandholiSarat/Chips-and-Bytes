@@ -144,7 +144,7 @@ body.welcome-is-playing {
   position: absolute;
   z-index: 3;
   right: clamp(1.3rem, 6vw, 6rem);
-  bottom: clamp(7.2rem, 15vh, 10.5rem);
+  bottom: clamp(3.6rem, 10vh, 6.5rem);
   left: clamp(1.3rem, 6vw, 6rem);
   max-width: 64rem;
 }
@@ -209,56 +209,6 @@ body.welcome-is-playing {
   outline-offset: 3px;
 }
 
-.cinematic-hero__topics {
-  position: absolute;
-  z-index: 3;
-  right: clamp(1.3rem, 3vw, 3.2rem);
-  bottom: 2rem;
-  left: clamp(1.3rem, 3vw, 3.2rem);
-  display: flex;
-  gap: clamp(1rem, 3vw, 2.8rem);
-  padding-top: .9rem;
-  border-top: 1px solid rgba(255, 255, 255, .36);
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: .6rem;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-}
-
-.cinematic-hero__topics span::before {
-  content: '';
-  display: inline-block;
-  width: .35rem;
-  height: .35rem;
-  margin-right: .55rem;
-  border-radius: 50%;
-  background: #fff;
-  vertical-align: .05rem;
-}
-
-.cinematic-hero__credit {
-  position: absolute;
-  z-index: 3;
-  right: clamp(1.3rem, 3vw, 3.2rem);
-  bottom: 4.5rem;
-  margin: 0;
-  color: rgba(255, 255, 255, .62);
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: .52rem;
-  letter-spacing: .06em;
-}
-
-.cinematic-hero__credit a {
-  color: inherit;
-  text-decoration-color: rgba(255, 255, 255, .38);
-  text-underline-offset: .16em;
-}
-
-.cinematic-hero__credit a:hover,
-.cinematic-hero__credit a:focus-visible {
-  color: #fff;
-}
-
 @keyframes welcome-text {
   from { opacity: 0; transform: translateY(1rem); }
   to { opacity: 1; transform: translateY(0); }
@@ -289,27 +239,14 @@ body.welcome-is-playing {
   .welcome-sequence__index { justify-content: center; }
 
   .cinematic-hero { min-height: max(40rem, 100svh); }
-  .cinematic-hero__copy { bottom: 8.4rem; }
+  .cinematic-hero__copy { bottom: 3.5rem; }
   .cinematic-hero__copy h1 { font-size: clamp(3.1rem, 15vw, 5.6rem); }
-  .cinematic-hero__topics {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    row-gap: .65rem;
-  }
-  .cinematic-hero__credit {
-    right: 1.3rem;
-    bottom: 5.8rem;
-    left: 1.3rem;
-    max-width: 29rem;
-    line-height: 1.5;
-  }
 }
 
 @media (max-width: 430px) {
   .cinematic-hero__eyebrow { max-width: 23rem; line-height: 1.6; }
   .cinematic-hero__copy h1 { font-size: clamp(2.9rem, 14.5vw, 4.2rem); }
   .cinematic-hero__action { width: 100%; }
-  .cinematic-hero__topics { font-size: .52rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {

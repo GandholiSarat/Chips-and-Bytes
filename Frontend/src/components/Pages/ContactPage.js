@@ -15,6 +15,7 @@
  */
 
 import React, { useState, useEffect, useCallback } from 'react';
+import { ArrowUpRight, Cpu, Send } from 'lucide-react';
 import './ContactPage.css';
 import '../../style.css';
 
@@ -25,7 +26,6 @@ const ContactPage = () => {
   const [formData, setFormData] = useState(initialForm);
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({});
-  const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [statusMessage, setStatusMessage] = useState(null);
 
@@ -54,14 +54,12 @@ const ContactPage = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
     setTouched((prev) => ({ ...prev, [name]: true }));
     setStatusMessage(null);
-    setSubmitted(false);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = validate();
     setErrors(validationErrors);
-    setSubmitted(false);
     setStatusMessage(null);
 
     if (Object.keys(validationErrors).length > 0) {
@@ -81,7 +79,6 @@ const ContactPage = () => {
       });
 
       if (response.ok) {
-        setSubmitted(true);
         setFormData(initialForm);
         setTouched({});
         setErrors({});
@@ -118,21 +115,39 @@ const ContactPage = () => {
 
   return (
     <section className="contact-page" aria-labelledby="contact-heading">
-      <h1 id="contact-heading">Contact Us</h1>
-      <p>We'd love to hear from you! Reach out with questions, feedback, or collaboration ideas.</p>
+      <header className="contact-page__header">
+        <p className="contact-page__eyebrow">Open channel / C&amp;B</p>
+        <h1 id="contact-heading">Contact Us</h1>
+        <p>We'd love to hear from you! Reach out with questions, feedback, or collaboration ideas.</p>
+      </header>
 
-      <form className="contact-form" onSubmit={handleSubmit} noValidate aria-describedby="form-status">
-        {statusMessage && (
-          <div
-            className={`form-status ${statusMessage.type === 'error' ? 'error-box' : 'success-box'}`}
-            role={statusMessage.type === 'error' ? 'alert' : 'status'}
-            id="form-status"
-          >
-            {statusMessage.text}
+      <div className="contact-page__layout">
+        <aside className="contact-page__signal" aria-label="Chips and Bytes contact channel">
+          <div className="contact-page__chip" aria-hidden="true"><Cpu size={42} strokeWidth={1.2} /></div>
+          <div>
+            <p>Start a conversation</p>
+            <h2>Build, study and think architecture together.</h2>
           </div>
-        )}
+          <span>Messages are routed to the club team <ArrowUpRight size={15} /></span>
+        </aside>
 
-        <div className="form-group">
+        <form className="contact-form" onSubmit={handleSubmit} noValidate aria-describedby="form-status">
+          <div className="contact-form__topline">
+            <span>Send a message</span>
+            <span>* Required fields</span>
+          </div>
+          {statusMessage && (
+            <div
+              className={`form-status ${statusMessage.type === 'error' ? 'error-box' : 'success-box'}`}
+              role={statusMessage.type === 'error' ? 'alert' : 'status'}
+              id="form-status"
+            >
+              {statusMessage.text}
+            </div>
+          )}
+
+          <div className="contact-form__fields">
+            <div className="form-group">
           <label htmlFor="name">
             Name<span aria-hidden="true">*</span>
           </label>
@@ -151,9 +166,9 @@ const ContactPage = () => {
             autoComplete="name"
           />
           {renderError('name')}
-        </div>
+            </div>
 
-        <div className="form-group">
+            <div className="form-group">
           <label htmlFor="email">
             Email<span aria-hidden="true">*</span>
           </label>
@@ -172,9 +187,9 @@ const ContactPage = () => {
             autoComplete="email"
           />
           {renderError('email')}
-        </div>
+            </div>
 
-        <div className="form-group">
+            <div className="form-group form-group--message">
           <label htmlFor="message">
             Message<span aria-hidden="true">*</span>
           </label>
@@ -192,23 +207,20 @@ const ContactPage = () => {
             disabled={loading}
           />
           {renderError('message')}
-        </div>
+            </div>
+          </div>
 
-        <button
-          type="submit"
-          className="submit-button"
-          disabled={loading}
-          aria-busy={loading}
-        >
-          {loading ? 'Sending…' : 'Send Message'}
-        </button>
-
-        {submitted && (
-          <p className="success-message" role="status">
-            Thanks for your message. We'll get back to you soon!
-          </p>
-        )}
-      </form>
+          <button
+            type="submit"
+            className="submit-button"
+            disabled={loading}
+            aria-busy={loading}
+          >
+            <span>{loading ? 'Sending…' : 'Send Message'}</span>
+            <Send size={17} aria-hidden="true" />
+          </button>
+        </form>
+      </div>
     </section>
   );
 };

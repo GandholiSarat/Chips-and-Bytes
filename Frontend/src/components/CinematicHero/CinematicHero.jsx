@@ -122,16 +122,6 @@ const CinematicHero = ({ onJoin }) => {
           </button>
         </div>
 
-        <div className="cinematic-hero__topics" aria-label="Club focus areas">
-          <span>Microprocessors</span>
-          <span>Pipelines</span>
-          <span>Memory systems</span>
-          <span>QEMU labs</span>
-        </div>
-
-        <p className="cinematic-hero__credit">
-          Hardware: <a href="https://unsplash.com/photos/a-close-up-of-a-processor-chip-on-a-table-lD1nt9ePX0s" target="_blank" rel="noreferrer">Thorium</a> &amp; <a href="https://unsplash.com/photos/a-close-up-of-two-electronic-devices-on-a-table-Rp2qgKrTEJQ" target="_blank" rel="noreferrer">Vishnu Mohanan</a> / Unsplash · Study plates: Chips &amp; Bytes
-        </p>
       </section>
     </>
   );

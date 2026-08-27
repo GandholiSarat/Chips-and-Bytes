@@ -62,14 +62,14 @@
 .external-card-link.external-card-link:hover,
 .external-card-link.external-card-link:focus-visible {
   color: var(--paper) !important;
-  background: #292b29 !important;
+  background: var(--signal) !important;
   border-color: var(--signal) !important;
   transform: translateY(-2px);
 }
 
 .external-card-link.external-card-link:hover .external-card-link__copy small,
 .external-card-link.external-card-link:focus-visible .external-card-link__copy small {
-  color: #ded9cd !important;
+  color: #fff3e9 !important;
 }
 
 .external-card-link.external-card-link:focus-visible {

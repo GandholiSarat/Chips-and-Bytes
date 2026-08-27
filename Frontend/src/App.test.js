@@ -3,6 +3,7 @@ import AboutPage from './components/Pages/AboutPage';
 import BlogCard from './components/BlogCard/BlogCard';
 import CinematicHero from './components/CinematicHero/CinematicHero';
 import ProjectCard from './components/ProjectCard/ProjectCard';
+import LiveSessions from './components/LiveSessions/LiveSessions';
 
 beforeEach(() => {
   Object.defineProperty(window, 'matchMedia', {
@@ -76,5 +77,24 @@ test('opens with the requested welcome and retains the original hero copy', () =
   expect(container.querySelector('img[src="/assets/architecture/cache-tlb-study.svg"]')).toBeInTheDocument();
   expect(container.querySelector('img[src="/assets/architecture/qemu-study.svg"]')).toBeInTheDocument();
   expect(container.querySelector('img[src="/assets/architecture/memory-study.svg"]')).toBeInTheDocument();
+  expect(screen.queryByText('Microprocessors')).not.toBeInTheDocument();
+  expect(screen.queryByText(/Hardware:/i)).not.toBeInTheDocument();
   unmount();
+});
+
+test('keeps multiple live sessions individually readable and navigable', () => {
+  render(
+    <LiveSessions
+      sessions={[
+        { _id: 'one', text: 'Think Architecture Together S1' },
+        { _id: 'two', text: 'QEMU Lab: Tracing a Boot Sequence' },
+      ]}
+    />,
+  );
+
+  expect(screen.getByRole('heading', { name: 'Live Sessions' })).toBeInTheDocument();
+  expect(screen.getByText('Think Architecture Together S1')).toBeInTheDocument();
+  expect(screen.getByText('QEMU Lab: Tracing a Boot Sequence')).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: 'Previous live session' })).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: 'Next live session' })).toBeInTheDocument();
 });

@@ -538,3 +538,22 @@
     color: #60a5fa;
   }
 }
+
+/* Keep the reusable article card authoritative over the legacy carousel sizes. */
+.blogs-page .blog-slider .blog-card:not(.more-card),
+.blogs-page .blog-slider .blog-card.mobile-card:not(.more-card) {
+  height: 32rem !important;
+}
+
+.blogs-page .blog-slider .blog-card:not(.more-card) .card-content {
+  height: 100% !important;
+  color: var(--ink) !important;
+  background: var(--surface-raised) !important;
+}
+
+@media (max-width: 700px) {
+  .blogs-page .blog-slider .blog-card:not(.more-card),
+  .blogs-page .blog-slider .blog-card.mobile-card:not(.more-card) {
+    height: 31rem !important;
+  }
+}
