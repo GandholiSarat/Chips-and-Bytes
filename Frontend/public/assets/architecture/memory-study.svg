@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title description">
+  <title id="title">Computer memory hierarchy</title>
+  <desc id="description">Registers, caches, main memory, and storage are arranged from lowest latency to highest capacity.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0a0c0b"/><stop offset="1" stop-color="#1b1d1a"/></linearGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="#e9eee9" stroke-opacity=".055"/></pattern>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/><rect width="1600" height="900" fill="url(#grid)"/>
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace">
+    <text x="110" y="112" fill="#f5f3eb" font-size="20" letter-spacing="5">MEMORY HIERARCHY / LOCALITY</text>
+    <text x="1490" y="112" fill="#9da9a0" font-size="17" letter-spacing="3" text-anchor="end">LATENCY ↔ CAPACITY</text>
+    <path d="M110 145H1490" stroke="#f5f3eb" stroke-opacity=".4"/>
+    <g transform="translate(215 215)">
+      <path d="M0 520 485 0l485 520z" fill="#101513" stroke="#eef3ef" stroke-opacity=".65"/>
+      <g text-anchor="middle">
+        <path d="M405 86h160l54 58H351z" fill="#e65e3d"/>
+        <text x="485" y="123" fill="#fff" font-size="18" font-weight="600">REGISTERS</text>
+        <path d="M331 164h308l64 69H267z" fill="#b74b34"/>
+        <text x="485" y="207" fill="#fff" font-size="20" font-weight="600">L1 CACHE</text>
+        <path d="M243 254h484l73 78H170z" fill="#773d30"/>
+        <text x="485" y="303" fill="#fff" font-size="22" font-weight="600">L2 / L3 CACHE</text>
+        <path d="M151 353h668l80 86H71z" fill="#34483b"/>
+        <text x="485" y="406" fill="#f5f3eb" font-size="24" font-weight="600">MAIN MEMORY / DRAM</text>
+        <path d="M55 460h860l55 60H0z" fill="#222c27"/>
+        <text x="485" y="499" fill="#f5f3eb" font-size="24" font-weight="600">NVME / STORAGE</text>
+      </g>
+      <g fill="#9da9a0" font-size="15" letter-spacing="2">
+        <text x="1010" y="110">~ 1 CYCLE</text><text x="1010" y="200">~ 4 CYCLES</text>
+        <text x="1010" y="295">~ 12–40 CYCLES</text><text x="1010" y="397">~ 100 NS</text><text x="1010" y="492">~ 100 µS</text>
+      </g>
+      <g stroke="#f5f3eb" stroke-opacity=".2"><path d="M620 104H980M700 194H980M790 289H980M880 391H980M930 486H980"/></g>
+    </g>
+    <g transform="translate(110 790)" font-size="15" letter-spacing="2">
+      <text fill="#e65e3d">FAST / SMALL / EXPENSIVE</text><text x="1380" fill="#9da9a0" text-anchor="end">SLOW / LARGE / CHEAP</text>
+      <path d="M270 -6H1110" stroke="#f5f3eb" stroke-opacity=".45"/><path d="m1110-6-14-8v16z" fill="#f5f3eb"/>
+    </g>
+  </g>
+</svg>

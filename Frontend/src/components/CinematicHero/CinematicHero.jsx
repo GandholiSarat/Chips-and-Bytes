@@ -3,19 +3,44 @@ import { ArrowDownRight } from 'lucide-react';
 import './CinematicHero.css';
 
 const INTRO_STORAGE_KEY = 'chips-and-bytes:welcome-seen';
+const FRAME_DURATION_MS = 5000;
 
 const heroFrames = [
   {
-    src: 'https://images.unsplash.com/photo-1727119313713-e5d844a1f0b3?auto=format&fit=crop&fm=webp&q=82&w=2200',
-    position: 'center 58%',
+    src: 'https://images.unsplash.com/photo-1739168283356-d1b9bd1c0954?auto=format&fit=crop&fm=webp&q=84&w=2400',
+    position: 'center 52%',
+    label: 'Microprocessor',
+    kind: 'photo',
   },
   {
-    src: 'https://images.unsplash.com/photo-1596496181935-7801d2065877?auto=format&fit=crop&fm=webp&q=82&w=2200',
-    position: 'center 48%',
+    src: '/assets/architecture/pipeline-study.svg',
+    position: 'center',
+    label: 'Pipeline',
+    kind: 'diagram',
   },
   {
-    src: 'https://images.unsplash.com/photo-1727119313390-9e7737d8fc1c?auto=format&fit=crop&fm=webp&q=82&w=2200',
-    position: 'center 54%',
+    src: 'https://images.unsplash.com/photo-1631376604944-ddb97deb9839?auto=format&fit=crop&fm=webp&q=84&w=2400',
+    position: 'center 50%',
+    label: 'FPGA development board',
+    kind: 'photo',
+  },
+  {
+    src: '/assets/architecture/cache-tlb-study.svg',
+    position: 'center',
+    label: 'Caches + TLBs',
+    kind: 'diagram',
+  },
+  {
+    src: '/assets/architecture/qemu-study.svg',
+    position: 'center',
+    label: 'QEMU emulation',
+    kind: 'diagram',
+  },
+  {
+    src: '/assets/architecture/memory-study.svg',
+    position: 'center',
+    label: 'Memory hierarchy',
+    kind: 'diagram',
   },
 ];
 
@@ -29,6 +54,7 @@ const shouldShowWelcome = () => {
 
 const CinematicHero = ({ onJoin }) => {
   const [showWelcome, setShowWelcome] = useState(shouldShowWelcome);
+  const [activeFrame, setActiveFrame] = useState(0);
 
   useEffect(() => {
     if (!showWelcome) return undefined;
@@ -51,6 +77,17 @@ const CinematicHero = ({ onJoin }) => {
     };
   }, [showWelcome]);
 
+  useEffect(() => {
+    const reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches ?? false;
+    if (reducedMotion) return undefined;
+
+    const frameTimer = window.setInterval(() => {
+      setActiveFrame((currentFrame) => (currentFrame + 1) % heroFrames.length);
+    }, FRAME_DURATION_MS);
+
+    return () => window.clearInterval(frameTimer);
+  }, []);
+
   return (
     <>
       {showWelcome && (
@@ -69,8 +106,9 @@ const CinematicHero = ({ onJoin }) => {
         <div className="cinematic-reel" aria-hidden="true">
           {heroFrames.map((frame, index) => (
             <figure
-              className={`cinematic-frame cinematic-frame--${index + 1}`}
+              className={`cinematic-frame cinematic-frame--${frame.kind}`}
               key={frame.src}
+              style={{ '--frame-delay': `${index * (FRAME_DURATION_MS / 1000)}s` }}
             >
               <img
                 src={frame.src}
@@ -86,8 +124,8 @@ const CinematicHero = ({ onJoin }) => {
 
         <div className="cinematic-hero__shade" aria-hidden="true" />
         <div className="cinematic-hero__frame" aria-hidden="true">
-          <span>01</span>
-          <span>C&amp;B / ARCH</span>
+          <span>{String(activeFrame + 1).padStart(2, '0')} / {String(heroFrames.length).padStart(2, '0')}</span>
+          <span>C&amp;B / {heroFrames[activeFrame].label}</span>
           <span>SSSIHL</span>
         </div>
 
@@ -103,14 +141,14 @@ const CinematicHero = ({ onJoin }) => {
         </div>
 
         <div className="cinematic-hero__topics" aria-label="Club focus areas">
-          <span>Architecture</span>
-          <span>Systems</span>
-          <span>Open source</span>
-          <span>Research</span>
+          <span>Microprocessors</span>
+          <span>Pipelines</span>
+          <span>Memory systems</span>
+          <span>QEMU labs</span>
         </div>
 
         <p className="cinematic-hero__credit">
-          Imagery: Laurens van der Drift &amp; Jeswin Thomas / Unsplash
+          Hardware: <a href="https://unsplash.com/photos/a-close-up-of-a-processor-chip-on-a-table-lD1nt9ePX0s" target="_blank" rel="noreferrer">Thorium</a> &amp; <a href="https://unsplash.com/photos/a-close-up-of-two-electronic-devices-on-a-table-Rp2qgKrTEJQ" target="_blank" rel="noreferrer">Vishnu Mohanan</a> / Unsplash · Study plates: Chips &amp; Bytes
         </p>
       </section>
     </>

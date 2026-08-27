@@ -49,10 +49,15 @@ test('shows a visible Medium destination on every blog card', () => {
 });
 
 test('opens with the requested welcome and retains the original hero copy', () => {
-  const { unmount } = render(<CinematicHero onJoin={jest.fn()} />);
+  const { container, unmount } = render(<CinematicHero onJoin={jest.fn()} />);
 
   expect(screen.getByRole('status', { name: 'Welcome to Chips and Bytes' })).toBeInTheDocument();
   expect(screen.getByRole('heading', { name: /Explore the world of Computer Architecture/i })).toBeInTheDocument();
   expect(screen.getByRole('button', { name: 'Join Our Community' })).toBeInTheDocument();
+  expect(container.querySelectorAll('.cinematic-frame')).toHaveLength(6);
+  expect(container.querySelector('img[src="/assets/architecture/pipeline-study.svg"]')).toBeInTheDocument();
+  expect(container.querySelector('img[src="/assets/architecture/cache-tlb-study.svg"]')).toBeInTheDocument();
+  expect(container.querySelector('img[src="/assets/architecture/qemu-study.svg"]')).toBeInTheDocument();
+  expect(container.querySelector('img[src="/assets/architecture/memory-study.svg"]')).toBeInTheDocument();
   unmount();
 });

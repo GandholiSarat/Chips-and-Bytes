@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title description">
+  <title id="title">Cache and translation lookaside buffer study</title>
+  <desc id="description">A processor core connects through instruction and data TLBs to cache levels and physical memory.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#07100e"/><stop offset="1" stop-color="#18211d"/></linearGradient>
+    <pattern id="grid" width="56" height="56" patternUnits="userSpaceOnUse"><path d="M56 0H0V56" fill="none" stroke="#edf3ee" stroke-opacity=".06"/></pattern>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/><rect width="1600" height="900" fill="url(#grid)"/>
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace">
+    <text x="110" y="112" fill="#f5f3eb" font-size="20" letter-spacing="5">CACHE + ADDRESS TRANSLATION</text>
+    <text x="1490" y="112" fill="#9da9a0" font-size="17" letter-spacing="3" text-anchor="end">VIRTUAL → PHYSICAL</text>
+    <path d="M110 145H1490" stroke="#f5f3eb" stroke-opacity=".4"/>
+    <g transform="translate(105 225)">
+      <rect width="310" height="390" rx="18" fill="#e65e3d" stroke="#ffb19c"/>
+      <text x="34" y="58" fill="#fff" font-size="16" letter-spacing="3">PROCESSOR CORE</text>
+      <text x="34" y="152" fill="#fff" font-size="74" font-weight="600">RV64</text>
+      <text x="34" y="205" fill="#ffe9e2" font-size="18">PC · ALU · register file</text>
+      <path d="M34 248H276" stroke="#fff" stroke-opacity=".45"/>
+      <text x="34" y="290" fill="#fff" font-size="15" letter-spacing="2">VA 0x0000_7FA2</text>
+      <text x="34" y="336" fill="#fff" font-size="15" letter-spacing="2">PA 0x83C0_7FA2</text>
+    </g>
+    <g transform="translate(495 225)">
+      <text x="0" y="-24" fill="#9da9a0" font-size="15" letter-spacing="3">TRANSLATION</text>
+      <rect width="250" height="174" rx="15" fill="#1e3027" stroke="#a7b7aa"/>
+      <text x="30" y="50" fill="#f5f3eb" font-size="16" letter-spacing="3">I-TLB</text>
+      <text x="30" y="104" fill="#f5f3eb" font-size="36" font-weight="600">HIT</text>
+      <text x="30" y="143" fill="#9da9a0" font-size="14">VPN → PPN</text>
+      <rect y="216" width="250" height="174" rx="15" fill="#1e3027" stroke="#a7b7aa"/>
+      <text x="30" y="266" fill="#f5f3eb" font-size="16" letter-spacing="3">D-TLB</text>
+      <text x="30" y="320" fill="#f5f3eb" font-size="36" font-weight="600">HIT</text>
+      <text x="30" y="359" fill="#9da9a0" font-size="14">VPN → PPN</text>
+    </g>
+    <g transform="translate(825 225)">
+      <text x="0" y="-24" fill="#9da9a0" font-size="15" letter-spacing="3">CACHE HIERARCHY</text>
+      <rect width="210" height="174" rx="15" fill="#243a2e" stroke="#b0c0b3"/>
+      <text x="28" y="48" fill="#f5f3eb" font-size="16" letter-spacing="3">L1 I$</text>
+      <text x="28" y="101" fill="#f5f3eb" font-size="34" font-weight="600">32 KB</text>
+      <text x="28" y="140" fill="#9da9a0" font-size="14">~ 4 cycles</text>
+      <rect y="216" width="210" height="174" rx="15" fill="#243a2e" stroke="#b0c0b3"/>
+      <text x="28" y="264" fill="#f5f3eb" font-size="16" letter-spacing="3">L1 D$</text>
+      <text x="28" y="317" fill="#f5f3eb" font-size="34" font-weight="600">32 KB</text>
+      <text x="28" y="356" fill="#9da9a0" font-size="14">~ 4 cycles</text>
+      <rect x="280" width="220" height="390" rx="15" fill="#1c2922" stroke="#849087"/>
+      <text x="310" y="55" fill="#f5f3eb" font-size="16" letter-spacing="3">UNIFIED L2</text>
+      <text x="310" y="125" fill="#f5f3eb" font-size="42" font-weight="600">1 MB</text>
+      <text x="310" y="170" fill="#9da9a0" font-size="14">PRIVATE / CORE</text>
+      <path d="M310 215H470" stroke="#f5f3eb" stroke-opacity=".24"/>
+      <text x="310" y="258" fill="#9da9a0" font-size="14">SET 0 · WAY 0</text>
+      <text x="310" y="298" fill="#9da9a0" font-size="14">SET 0 · WAY 1</text>
+      <text x="310" y="338" fill="#9da9a0" font-size="14">SET 1 · WAY 0</text>
+    </g>
+    <g transform="translate(1175 700)">
+      <rect width="320" height="90" rx="12" fill="#f5f3eb"/>
+      <text x="28" y="38" fill="#151917" font-size="14" letter-spacing="3">PHYSICAL MEMORY</text>
+      <text x="28" y="68" fill="#151917" font-size="18" font-weight="600">DRAM · 16 GB</text>
+    </g>
+    <g fill="none" stroke="#f5f3eb" stroke-width="2" stroke-opacity=".58">
+      <path d="M415 314H495M415 510H495M745 314H825M745 510H825M1035 314H1105V420H1105M1035 510H1105V420H1105M1325 615V700"/>
+      <path d="M1105 420H1105"/>
+    </g>
+    <g fill="#f5f3eb"><path d="m488 314-12-7v14z"/><path d="m488 510-12-7v14z"/><path d="m818 314-12-7v14z"/><path d="m818 510-12-7v14z"/><path d="m1325 693-7-12h14z"/></g>
+    <text x="110" y="820" fill="#9da9a0" font-size="15" letter-spacing="2">FAST PATH: CORE → TLB → L1 → L2 → DRAM</text>
+  </g>
+</svg>
