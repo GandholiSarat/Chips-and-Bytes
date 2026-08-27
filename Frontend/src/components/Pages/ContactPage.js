@@ -15,9 +15,8 @@
  */
 
 import React, { useState, useEffect, useCallback } from 'react';
-import { ArrowUpRight, Cpu, Send } from 'lucide-react';
+import { Send } from 'lucide-react';
 import './ContactPage.css';
-import '../../style.css';
 
 const initialForm = { name: '', email: '', message: '' };
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -123,12 +122,11 @@ const ContactPage = () => {
 
       <div className="contact-page__layout">
         <aside className="contact-page__signal" aria-label="Chips and Bytes contact channel">
-          <div className="contact-page__chip" aria-hidden="true"><Cpu size={42} strokeWidth={1.2} /></div>
-          <div>
-            <p>Start a conversation</p>
-            <h2>Build, study and think architecture together.</h2>
-          </div>
-          <span>Messages are routed to the club team <ArrowUpRight size={15} /></span>
+          <img
+            src="/assets/logo_white_full.png"
+            alt="Chips & Bytes"
+            className="contact-page__club-logo"
+          />
         </aside>
 
         <form className="contact-form" onSubmit={handleSubmit} noValidate aria-describedby="form-status">
