@@ -72,13 +72,28 @@ test('opens with the requested welcome and retains the original hero copy', () =
   expect(screen.getByRole('status', { name: 'Welcome to Chips and Bytes' })).toBeInTheDocument();
   expect(screen.getByRole('heading', { name: /Explore the world of Computer Architecture/i })).toBeInTheDocument();
   expect(screen.getByRole('button', { name: 'Join Our Community' })).toBeInTheDocument();
-  expect(container.querySelectorAll('.cinematic-frame')).toHaveLength(6);
-  expect(container.querySelector('img[src="/assets/hero/zen2-matisse-die.webp"]')).toBeInTheDocument();
-  expect(container.querySelector('img[src="/assets/hero/nvidia-gp100-die.webp"]')).toBeInTheDocument();
-  expect(container.querySelector('img[src="/assets/hero/intel-i9-13900k-die.webp"]')).toBeInTheDocument();
-  expect(container.querySelector('img[src="/assets/hero/amd-epyc-rome-io-die.webp"]')).toBeInTheDocument();
-  expect(container.querySelector('img[src="/assets/hero/silicon-wafer-closeup.webp"]')).toBeInTheDocument();
-  expect(container.querySelector('img[src="/assets/hero/exposed-processor-die.webp"]')).toBeInTheDocument();
+  const heroImages = [
+    '/assets/hero/zen2-matisse-die.webp',
+    '/assets/hero/silicon-wafer-closeup.webp',
+    '/assets/hero/nvidia-gp100-die.webp',
+    '/assets/hero/processor-grid-macro.webp',
+    '/assets/hero/intel-i9-13900k-die.webp',
+    '/assets/hero/circuit-board-macro.webp',
+    '/assets/hero/amd-epyc-rome-io-die.webp',
+    '/assets/hero/golden-processor-die.webp',
+    '/assets/hero/exposed-processor-die.webp',
+    '/assets/hero/blue-processor-die.webp',
+    '/assets/hero/development-board-top.webp',
+    '/assets/hero/orange-processor-die.webp',
+    '/assets/hero/silicon-wafer-macro-secondary.webp',
+    '/assets/hero/angled-rainbow-die.webp',
+    '/assets/hero/wafer-die-pattern.webp',
+  ];
+
+  expect(container.querySelectorAll('.cinematic-frame')).toHaveLength(heroImages.length);
+  heroImages.forEach((src) => {
+    expect(container.querySelector(`img[src="${src}"]`)).toBeInTheDocument();
+  });
   expect(screen.queryByText('Microprocessors')).not.toBeInTheDocument();
   expect(screen.queryByText(/Hardware:/i)).not.toBeInTheDocument();
   unmount();

@@ -99,7 +99,8 @@ body.welcome-is-playing {
 .cinematic-frame {
   margin: 0;
   opacity: 0;
-  animation: cinematic-cut 30s linear infinite;
+  will-change: opacity;
+  animation: cinematic-cut var(--reel-duration) linear infinite both;
   animation-delay: var(--frame-delay);
 }
 
@@ -108,8 +109,10 @@ body.welcome-is-playing {
   height: 100%;
   object-fit: cover;
   filter: saturate(.78) contrast(1.08) brightness(.74);
-  transform: scale(1.025) translate3d(-.35%, 0, 0);
-  animation: cinematic-drift 15s ease-in-out infinite alternate;
+  transform: scale(1.035) translate3d(-.4%, 0, 0);
+  will-change: transform;
+  animation: cinematic-drift 19s cubic-bezier(.37, 0, .23, 1) infinite alternate;
+  animation-delay: var(--drift-delay);
 }
 
 .cinematic-frame--photo:nth-child(even) img {
@@ -117,9 +120,14 @@ body.welcome-is-playing {
   animation-direction: alternate-reverse;
 }
 
+.cinematic-frame--photo:nth-child(3n) img {
+  filter: saturate(.74) contrast(1.12) brightness(.72) hue-rotate(-3deg);
+}
+
 .cinematic-hero__shade {
   z-index: 1;
   background:
+    radial-gradient(circle at 52% 44%, transparent 24%, rgba(5, 6, 7, .26) 100%),
     linear-gradient(90deg, rgba(5, 6, 7, .9) 0%, rgba(5, 6, 7, .54) 44%, rgba(5, 6, 7, .18) 72%, rgba(5, 6, 7, .42) 100%),
     linear-gradient(180deg, rgba(5, 6, 7, .32), transparent 30%, rgba(5, 6, 7, .7));
 }
@@ -218,13 +226,14 @@ body.welcome-is-playing {
 }
 
 @keyframes cinematic-cut {
-  0%, 14% { opacity: 1; }
-  17%, 100% { opacity: 0; }
+  0% { opacity: 0; }
+  1.45%, 6.667% { opacity: 1; }
+  8.1%, 100% { opacity: 0; }
 }
 
 @keyframes cinematic-drift {
-  from { transform: scale(1.025) translate3d(-.35%, 0, 0); }
-  to { transform: scale(1.04) translate3d(.45%, -.25%, 0); }
+  from { transform: scale(1.035) translate3d(-.4%, .15%, 0); }
+  to { transform: scale(1.075) translate3d(.65%, -.35%, 0); }
 }
 
 @media (max-width: 760px) {
