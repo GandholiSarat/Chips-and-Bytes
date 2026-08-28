@@ -128,7 +128,7 @@ const NewsEdit = () => {
   };
 
   return (
-    <main className="news-edit-page">
+    <main className="admin-editor news-edit-page">
       <header className="news-edit-header">
         <p>Daily briefing editor</p>
         <h1>{editingId ? 'Update News Item' : 'Add News Item'}</h1>
