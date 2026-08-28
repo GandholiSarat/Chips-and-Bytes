@@ -186,9 +186,9 @@ const BlogsPage = () => {
               </button>
             )}
           </div>
-          <div className="read-more-container">
-            <Link to="/blogs/details" className="read-more-link">
-              View All Blogs →
+          <div className="section-route">
+            <Link to="/blogs/details" className="section-route__link">
+              <span>View All Blogs</span><span aria-hidden="true">↗</span>
             </Link>
           </div>
       </>

@@ -101,7 +101,8 @@ h1, h2, h3, h4, .logo-title, .tab-heading, .about-us-heading, .subheading,
 }
 
 .tab-heading, .blogs-page h1, .Projects-page h1, .events-page h1,
-.about-us-heading, .subheading, .blog-heading, .event-heading, .project-heading {
+.about-us-heading, .subheading, .blog-heading, .event-heading, .project-heading,
+.tab-member-heading, .tab-mentor-heading {
   margin: 0 0 1rem !important;
   color: var(--ink) !important;
   font-size: clamp(2.1rem, 5vw, 4.6rem) !important;
@@ -159,11 +160,14 @@ h1, h2, h3, h4, .logo-title, .tab-heading, .about-us-heading, .subheading,
   box-shadow: var(--shadow-soft) !important;
 }
 .event-title, .event-date, .event-time, .event-location, .event-speaker,
-.member-mentor-info h3, .mentor-mentor-info h3 { color: var(--ink) !important; }
+.member-mentor-info h2, .member-mentor-info h3,
+.mentor-mentor-info h2, .mentor-mentor-info h3 { color: var(--ink) !important; }
 .event-description, .event-meta, .member-mentor-summary, .mentor-mentor-summary,
 .member-mentor-designation, .mentor-mentor-designation, .member-mentor-experience, .mentor-mentor-experience {
   color: var(--ink-muted) !important;
 }
+.member-linkedin-link, .mentor-mentor-linkedin-link { color: var(--signal) !important; }
+.member-linkedin-link:hover, .mentor-mentor-linkedin-link:hover { color: var(--ink) !important; }
 
 .carousel-wrapper, .members-member-carousel-wrapper, .mentors-mentor-carousel-wrapper { justify-content: flex-start !important; }
 .blog-slider, .Projects-slider, .members-member-list, .mentors-mentor-list {
@@ -204,6 +208,39 @@ h1, h2, h3, h4, .logo-title, .tab-heading, .about-us-heading, .subheading,
   text-transform: uppercase;
 }
 .read-more-link:hover { color: var(--signal) !important; }
+.section-route {
+  display: flex;
+  margin-top: clamp(1.6rem, 3vw, 2.35rem);
+  padding-top: clamp(1.15rem, 2.5vw, 1.65rem);
+  border-top: 1px solid var(--line-soft);
+  justify-content: flex-start;
+}
+.section-route__link {
+  display: inline-flex;
+  min-height: 2.9rem;
+  padding: .72rem .9rem .72rem 1rem;
+  align-items: center;
+  gap: 2.5rem;
+  border: 1px solid var(--line-soft);
+  border-radius: .72rem;
+  color: var(--ink);
+  background: var(--surface-raised);
+  box-shadow: 0 8px 20px rgba(23, 24, 20, .06);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .66rem;
+  font-weight: 600;
+  letter-spacing: .07em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 220ms ease, background-color 220ms ease, border-color 220ms ease, transform 220ms ease;
+}
+.section-route__link:hover,
+.section-route__link:focus-visible {
+  border-color: var(--signal);
+  color: var(--paper);
+  background: var(--signal);
+  transform: translateY(-.14rem);
+}
 .more-card-content, .more-cards-content { background: var(--surface-subtle); border-color: var(--line-soft); }
 
 .blog-details-container, .event-details-container, .project-details-container {

@@ -210,9 +210,9 @@ const ProjectsPage = () => {
             )}
           </div>
 
-          <div className="read-more-container">
-            <Link to="/projects/details" className="read-more-link">
-              View All Projects →
+          <div className="section-route">
+            <Link to="/projects/details" className="section-route__link">
+              <span>View All Projects</span><span aria-hidden="true">↗</span>
             </Link>
           </div>
       </>

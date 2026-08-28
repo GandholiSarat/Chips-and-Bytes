@@ -64,9 +64,9 @@ const EventsPage = () => {
 
       {error && <p className="content-refresh-status">Showing the latest available event details while the server reconnects.</p>}
 
-      <div className="read-more-container">
-        <Link to="/events/details" className="read-more-link">
-          View Past Events →
+      <div className="section-route">
+        <Link to="/events/details" className="section-route__link">
+          <span>View Past Events</span><span aria-hidden="true">↗</span>
         </Link>
       </div>
     </>
