@@ -198,6 +198,20 @@ const Navbar = ({ activeTab, setActiveTab, navigate }) => {
 
   useEffect(() => () => clearCloseTimer(), [clearCloseTimer]);
 
+  // Do not obstruct reading when a touch user resumes scrolling. This listens
+  // passively and only closes the disclosure; it never changes scroll input.
+  useEffect(() => {
+    if (!isNavigationOpen || !isCompactNavigation()) return undefined;
+
+    const closeOnScroll = () => {
+      clearCloseTimer();
+      setIsNavigationOpen(false);
+    };
+
+    window.addEventListener('scroll', closeOnScroll, { passive: true });
+    return () => window.removeEventListener('scroll', closeOnScroll);
+  }, [clearCloseTimer, isCompactNavigation, isNavigationOpen]);
+
   const toggleNavigation = () => {
     clearCloseTimer();
     if (isNavigationOpen) {
