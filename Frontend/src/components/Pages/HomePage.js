@@ -13,6 +13,7 @@ import { publicContentFallback } from '../../data/publicContentFallback';
 import { usePublicResource } from '../../hooks/usePublicResource';
 import CinematicHero from '../CinematicHero/CinematicHero';
 import LiveSessions from '../LiveSessions/LiveSessions';
+import AnnouncementPanel from '../AnnouncementPanel/AnnouncementPanel';
 
 const ANNOUNCEMENTS_API_URL = `${process.env.REACT_APP_BACKEND_URL}/api/announcements`;
 const EVENTS_API_URL = `${process.env.REACT_APP_BACKEND_URL}/api/events`;
@@ -54,6 +55,7 @@ const HomePage = () => {
         onJoin={() => document.getElementById('contact-section')?.scrollIntoView({ behavior: 'smooth' })}
       />
 
+      <AnnouncementPanel announcements={announcements} />
       <LiveSessions sessions={sessions} isRefreshing={loadingEvents} />
 
       <div id="about-us" className="tab-section-container"><AboutPage /></div>
