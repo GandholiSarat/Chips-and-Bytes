@@ -693,6 +693,13 @@
   outline-offset: 2px;
 }
 
+.pending-event-link {
+  color: rgba(255, 255, 255, 0.7);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+}
+
 /* Custom scrollbar for webkit browsers */
 .table-container::-webkit-scrollbar {
   height: 8px;
@@ -711,4 +718,3 @@
 .table-container::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(135deg, #0891b2 0%, #1d4ed8 100%);
 }
-

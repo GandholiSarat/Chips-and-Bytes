@@ -17,6 +17,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { publicContentFallback } from '../../data/publicContentFallback';
 import { usePublicResource } from '../../hooks/usePublicResource';
+import { getScheduledEvents } from '../../utils/eventSchedule';
 import './EventsPage.css';
 
 const EventsPage = () => {
@@ -24,20 +25,22 @@ const EventsPage = () => {
     cacheKey: 'events',
     url: `${process.env.REACT_APP_BACKEND_URL}/api/events`,
     fallback: publicContentFallback.events,
+    refreshInterval: 60000,
   });
+  const scheduledEvents = getScheduledEvents(events);
 
   return (
     <>
       <h1 className="tab-heading">Events</h1>
       <p className="tab-desc">Join our upcoming workshops, hackathons, and seminars.</p>
 
-      {events.length === 0 ? (
+      {scheduledEvents.length === 0 ? (
         <p>No events found.</p>
       ) : (
         <div className="events-wrapper" aria-busy={isRefreshing}>
           {isRefreshing && <p className="content-refresh-status">Refreshing the latest event details…</p>}
           <div className="events-grid">
-            {events.map((event) => (
+            {scheduledEvents.map((event) => (
               <div className="event-card neon-glow" key={event._id}>
                 <div className="event-card-header">
                   <h2 className="event-title">{event.title}</h2>

@@ -14,6 +14,7 @@ import { usePublicResource } from '../../hooks/usePublicResource';
 import CinematicHero from '../CinematicHero/CinematicHero';
 import LiveSessions from '../LiveSessions/LiveSessions';
 import AnnouncementPanel from '../AnnouncementPanel/AnnouncementPanel';
+import { getScheduledEvents } from '../../utils/eventSchedule';
 
 const ANNOUNCEMENTS_API_URL = `${process.env.REACT_APP_BACKEND_URL}/api/announcements`;
 const EVENTS_API_URL = `${process.env.REACT_APP_BACKEND_URL}/api/events`;
@@ -28,8 +29,11 @@ const HomePage = () => {
     cacheKey: 'events',
     url: EVENTS_API_URL,
     fallback: publicContentFallback.events,
+    refreshInterval: 60000,
   });
-  const sessions = Array.isArray(events) && events.length > 0 ? events : announcements;
+  // The API archives expired events; this client guard keeps a passed cached
+  // event from lingering while the tab stays open between refreshes.
+  const nextSession = getScheduledEvents(events)[0];
 
   useEffect(() => {
     const sections = Array.from(document.querySelectorAll('.tab-section-container'));
@@ -56,7 +60,7 @@ const HomePage = () => {
       />
 
       <AnnouncementPanel announcements={announcements} />
-      <LiveSessions sessions={sessions} isRefreshing={loadingEvents} />
+      <LiveSessions sessions={nextSession ? [nextSession] : []} isRefreshing={loadingEvents} />
 
       <div id="about-us" className="tab-section-container"><AboutPage /></div>
       <div id="members-section" className="tab-section-container"><MembersPage /></div>

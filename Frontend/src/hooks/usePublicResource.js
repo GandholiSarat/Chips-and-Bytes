@@ -34,7 +34,7 @@ const writeCachedValue = (cacheKey, value) => {
  * Serves public API data with an immediate local fallback and background
  * revalidation. This avoids a blank section when a free-tier backend wakes.
  */
-export const usePublicResource = ({ cacheKey, url, fallback = [], maxAge = DEFAULT_CACHE_TTL }) => {
+export const usePublicResource = ({ cacheKey, url, fallback = [], maxAge = DEFAULT_CACHE_TTL, refreshInterval = 0 }) => {
   const [data, setData] = useState(() => readCachedValue(cacheKey, maxAge) || fallback);
   const [isRefreshing, setIsRefreshing] = useState(Boolean(url));
   const [error, setError] = useState(null);
@@ -45,11 +45,13 @@ export const usePublicResource = ({ cacheKey, url, fallback = [], maxAge = DEFAU
       return undefined;
     }
 
-    const controller = new AbortController();
     let isActive = true;
-    const timeoutId = window.setTimeout(() => controller.abort(), 15000);
+    let activeController;
 
     const refresh = async () => {
+      const controller = new AbortController();
+      activeController = controller;
+      const timeoutId = window.setTimeout(() => controller.abort(), 15000);
       try {
         const response = await fetch(url, { signal: controller.signal });
         if (!response.ok) throw new Error(`Request failed with status ${response.status}`);
@@ -64,18 +66,20 @@ export const usePublicResource = ({ cacheKey, url, fallback = [], maxAge = DEFAU
       } catch (requestError) {
         if (isActive) setError(requestError);
       } finally {
+        window.clearTimeout(timeoutId);
         if (isActive) setIsRefreshing(false);
       }
     };
 
     refresh();
+    const intervalId = refreshInterval > 0 ? window.setInterval(refresh, refreshInterval) : null;
 
     return () => {
       isActive = false;
-      window.clearTimeout(timeoutId);
-      controller.abort();
+      if (intervalId) window.clearInterval(intervalId);
+      activeController?.abort();
     };
-  }, [cacheKey, url]);
+  }, [cacheKey, url, refreshInterval]);
 
   return { data, isRefreshing, error };
 };

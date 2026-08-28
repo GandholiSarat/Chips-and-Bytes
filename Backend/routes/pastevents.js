@@ -15,6 +15,7 @@ const express = require('express');
 const router = express.Router();
 const auth = require('../middleware/auth');
 const PastEvent = require('../models/PastEvent');
+const { archiveExpiredEvents } = require('../services/eventLifecycle');
 
 const setPublicCacheHeaders = (res) => {
   res.set('Cache-Control', 'public, max-age=60, s-maxage=300, stale-while-revalidate=86400');
@@ -23,6 +24,7 @@ const setPublicCacheHeaders = (res) => {
 // Get all past events (public)
 router.get('/', async (req, res) => {
   try {
+    await archiveExpiredEvents();
     const events = await PastEvent.find().sort({ date: -1 }).lean();
     setPublicCacheHeaders(res);
     res.json(events);
