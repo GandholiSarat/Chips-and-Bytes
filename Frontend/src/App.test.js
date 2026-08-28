@@ -151,6 +151,29 @@ test('requires an explicit tap to open the header menu on touch-sized screens', 
   expect(menuButton).toHaveAttribute('aria-expanded', 'true');
 });
 
+
+test('closes an open touch navigation menu when page scrolling resumes', () => {
+  window.matchMedia.mockImplementation((query) => ({
+    matches: query.includes('max-width: 940px'),
+    media: query,
+    onchange: null,
+    addListener: jest.fn(),
+    removeListener: jest.fn(),
+    addEventListener: jest.fn(),
+    removeEventListener: jest.fn(),
+    dispatchEvent: jest.fn(),
+  }));
+
+  render(<Navbar activeTab="home" setActiveTab={jest.fn()} navigate={jest.fn()} />);
+  const menuButton = screen.getByRole('button', { name: /site navigation/i });
+
+  fireEvent.click(menuButton);
+  expect(menuButton).toHaveAttribute('aria-expanded', 'true');
+
+  fireEvent.scroll(window);
+  expect(menuButton).toHaveAttribute('aria-expanded', 'false');
+});
+
 test('shows only the current dated news edition with numbered headings and reading links', () => {
   const now = new Date();
   const dateKey = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
