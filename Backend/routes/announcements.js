@@ -20,6 +20,30 @@ const setPublicCacheHeaders = (res) => {
   res.set('Cache-Control', 'public, max-age=60, s-maxage=300, stale-while-revalidate=86400');
 };
 
+const clean = (value, maxLength) => (
+  typeof value === 'string' ? value.trim().slice(0, maxLength) : ''
+);
+
+const normalizeAnnouncement = (body = {}) => {
+  const message = clean(body.message || body.text, 600);
+  const title = clean(body.title, 120);
+  const actionLabel = clean(body.actionLabel, 48);
+  const actionUrl = clean(body.actionUrl, 2048);
+  const category = ['notice', 'event', 'opportunity', 'update'].includes(body.category)
+    ? body.category
+    : 'notice';
+
+  return {
+    title,
+    message,
+    text: message,
+    actionLabel: actionUrl ? actionLabel || 'Learn more' : '',
+    actionUrl,
+    category,
+    isActive: body.isActive !== false
+  };
+};
+
 // Get all announcements (public)
 router.get('/', async (req, res) => {
   try {
@@ -34,7 +58,7 @@ router.get('/', async (req, res) => {
 // Add new announcement (admin only)
 router.post('/', auth, async (req, res) => {
   try {
-    const announcement = new Announcement({ text: req.body.text });
+    const announcement = new Announcement(normalizeAnnouncement(req.body));
     await announcement.save();
     res.status(201).json(announcement);
   } catch (error) {
@@ -47,8 +71,8 @@ router.put('/:id', auth, async (req, res) => {
   try {
     const updated = await Announcement.findByIdAndUpdate(
       req.params.id,
-      { text: req.body.text },
-      { new: true }
+      normalizeAnnouncement(req.body),
+      { new: true, runValidators: true }
     );
     if (!updated) return res.status(404).json({ message: 'Announcement not found' });
     res.json(updated);
