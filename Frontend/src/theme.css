@@ -236,6 +236,27 @@ h1, h2, h3, h4, .logo-title, .tab-heading, .about-us-heading, .subheading,
 ::-webkit-scrollbar-thumb { background: var(--ink-faint); border: 1px solid var(--canvas); border-radius: 99px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--ink-muted); }
 
+/* Admin content tools share the public editorial palette while retaining the
+   existing event, archive, and news editor structure. */
+.admin-editor { width: min(calc(100% - 2rem), 68rem); margin: clamp(6rem, 12vw, 9rem) auto 4rem; color: var(--ink); }
+.admin-editor h1 { margin: 0 0 1.25rem; color: var(--ink); font-size: clamp(2rem, 5vw, 3.75rem); font-weight: 500; letter-spacing: -.065em; }
+.admin-editor .event-form, .admin-form, .news-edit-form { display: grid; gap: 1rem; padding: clamp(1.1rem, 3vw, 1.75rem); background: var(--surface-raised); border: 1px solid var(--line-soft); border-radius: 1rem; box-shadow: 0 12px 28px rgba(23, 24, 20, .07); }
+.admin-editor label, .admin-form label, .news-edit-form label { display: grid; gap: .45rem; color: var(--ink-muted); font-size: .78rem; font-weight: 700; }
+.admin-editor input, .admin-editor textarea, .admin-editor select, .news-edit-form input, .news-edit-form textarea { width: 100%; color: var(--ink); background: var(--paper); border: 1px solid var(--line-soft); border-radius: .5rem; padding: .72rem .8rem; }
+.admin-editor input:focus, .admin-editor textarea:focus, .admin-editor select:focus, .news-edit-form input:focus, .news-edit-form textarea:focus { outline: 2px solid var(--signal-soft); outline-offset: 1px; border-color: var(--signal); }
+.admin-editor button, .news-edit-page button { border: 1px solid var(--surface-ink); border-radius: .55rem; padding: .72rem .9rem; color: var(--paper); background: var(--surface-ink); cursor: pointer; font-family: 'IBM Plex Mono', monospace; font-size: .68rem; letter-spacing: .055em; text-transform: uppercase; }
+.admin-editor button:hover, .admin-editor button:focus-visible, .news-edit-page button:hover, .news-edit-page button:focus-visible { background: var(--signal); border-color: var(--signal); }
+.admin-editor .back-to-admin-btn, .admin-back, .news-edit-back { color: var(--ink-muted); background: transparent; border-color: var(--line-soft); }
+.admin-editor .back-to-admin-btn:hover, .admin-back:hover, .news-edit-back:hover { color: var(--paper); background: var(--surface-ink); }
+.admin-form__row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(10rem, .45fr); gap: 1rem; }
+.admin-form__actions, .admin-card-actions { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: .2rem; }
+.admin-secondary { color: var(--ink) !important; background: transparent !important; border-color: var(--line-soft) !important; }
+.admin-list { display: grid; gap: .8rem; margin-top: 1.5rem; }
+.admin-list__heading { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+.admin-list__heading h2 { margin: 0; font-size: 1.35rem; letter-spacing: -.04em; }
+.admin-list__heading span, .admin-message { color: var(--ink-faint); font: 500 .68rem/1.4 'IBM Plex Mono', monospace; letter-spacing: .04em; }
+@media (max-width: 600px) { .admin-form__row { grid-template-columns: 1fr; } }
+
 @keyframes section-reveal {
   from { opacity: 0; transform: translateY(1.35rem); }
   to { opacity: 1; transform: translateY(0); }
