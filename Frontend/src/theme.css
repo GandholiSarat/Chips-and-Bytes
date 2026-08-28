@@ -19,7 +19,12 @@
 }
 
 * { box-sizing: border-box; }
-html { background: var(--canvas); scroll-behavior: smooth; }
+html {
+  background: var(--canvas);
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--ink-faint) var(--canvas);
+}
 body {
   margin: 0;
   color: var(--ink);
@@ -226,9 +231,10 @@ h1, h2, h3, h4, .logo-title, .tab-heading, .about-us-heading, .subheading,
 .footer-logo, .footer-maintained a { color: var(--paper) !important; }
 .footer-maintained a:hover { color: var(--signal-soft) !important; }
 
-::-webkit-scrollbar { width: .7rem; }
-::-webkit-scrollbar-track { background: var(--canvas); }
-::-webkit-scrollbar-thumb { background: #bab6ac; border: 2px solid var(--canvas); border-radius: 99px; }
+::-webkit-scrollbar { width: .48rem; height: .48rem; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--ink-faint); border: 1px solid var(--canvas); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: var(--ink-muted); }
 
 @keyframes section-reveal {
   from { opacity: 0; transform: translateY(1.35rem); }
