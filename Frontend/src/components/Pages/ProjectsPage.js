@@ -18,15 +18,13 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { gitLinks } from '../../data/constants';
-import { FaGithub } from 'react-icons/fa';
+import ProjectCard from '../ProjectCard/ProjectCard';
 import './ProjectsPage.css';
-import '../../style.css';
 
 const ProjectsPage = () => {
-  const [projectData, setProjectData] = useState([]);
+  const [projectData, setProjectData] = useState(gitLinks);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
-  const [loading, setLoading] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
   const [touchStart, setTouchStart] = useState(null);
   const sliderRef = useRef(null);
@@ -50,12 +48,12 @@ const ProjectsPage = () => {
           try {
             const response = await fetch(`https://api.microlink.io/?url=${encodeURIComponent(linkObj.url)}`);
             const json = await response.json();
-            const { title, description, image, url } = json.data;
+            const { title, description, image } = json.data;
             return {
               title: title || linkObj.title,
               description: description || linkObj.description,
               image: image?.url || null,
-              url: url || linkObj.url,
+              url: linkObj.url,
             };
           } catch (err) {
             console.error(`Failed to fetch metadata for ${linkObj.url}`, err);
@@ -64,7 +62,6 @@ const ProjectsPage = () => {
         })
       );
       setProjectData(results);
-      setLoading(false); 
     };
     fetchMetadata();
   }, []);
@@ -146,13 +143,7 @@ const ProjectsPage = () => {
         Explore projects built by our community members.
       </p>
 
-      {loading ? (
-        <div className="loading-container">
-          <div className="loading-spinner"></div>
-          <p>Loading Projects...</p>
-        </div>
-      ) : (
-        <>
+      <>
           <div className="carousel-wrapper">
             {canScrollLeft && (
               <button 
@@ -167,41 +158,20 @@ const ProjectsPage = () => {
             )}
 
             <div 
-              className={`blog-slider ${isMobile ? 'mobile-slider' : ''}`} 
+              className={`Projects-slider ${isMobile ? 'mobile-slider' : ''}`}
               ref={sliderRef}
             >
               {projectData.map((Projects, idx) => (
-                <div className={`Projects-card  ${isMobile ? 'mobile-card' : ''}`} key={idx}>
-                  <div className="cards-content">
-                    {Projects.image && (
-                      <div className="image-container">
-                        <img src={Projects.image} alt={Projects.title} className="Projects-image" />
-                        <div className="image-overlay"></div>
-                      </div>
-                    )}
-                    <div className="text-content">
-                      <h3 className="Projects-title">{Projects.title}</h3>
-                      <p className="Projects-description">
-                        {Projects.description?.slice(0, isMobile ? 80 : 100)}...
-                      </p>
-                      <a
-                        href={Projects.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="continue-link"
-                        aria-label={`GitHub link for ${Projects.title}`}
-                      >
-                        <FaGithub size={20} style={{ marginRight: '8px' }} />
-                        View Repo
-                      </a>
-                    </div>
-                  </div>
-                </div>
+                <ProjectCard
+                  key={Projects.url || idx}
+                  project={Projects}
+                  className={isMobile ? 'mobile-card' : ''}
+                />
               ))}
               
               {/* More... card */}
               <div className={`Projects-card more-card ${isMobile ? 'mobile-card' : ''}`}>
-                <Link to="/Projects/details" className="more-card-link">
+                <Link to="/projects/details" className="more-card-link">
                   <div className="card-content more-card-content">
                     <div className="more-card-inner">
                       <div className="more-icon">
@@ -241,12 +211,11 @@ const ProjectsPage = () => {
           </div>
 
           <div className="read-more-container">
-            <Link to="/Projects/details" className="read-more-link">
+            <Link to="/projects/details" className="read-more-link">
               View All Projects →
             </Link>
           </div>
-        </>
-      )}
+      </>
     </div>
   );
 };

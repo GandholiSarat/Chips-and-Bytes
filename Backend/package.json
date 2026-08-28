@@ -6,13 +6,16 @@
     "start": "node server.js",
     "dev": "nodemon server.js",
     "build": "echo 'No build step required'",
-    "test": "echo 'No tests specified' && exit 1",
+    "test": "node --test test/*.test.js",
     "docs": "jsdoc -c jsdoc.json"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "A backend application integrated with MongoDB and deployable on Vercel.",
+  "engines": {
+    "node": ">=18"
+  },
   "dependencies": {
     "bcryptjs": "^3.0.2",
     "body-parser": "^2.2.0",

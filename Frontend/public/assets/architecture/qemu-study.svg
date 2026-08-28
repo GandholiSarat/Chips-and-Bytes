@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title description">
+  <title id="title">QEMU system emulation study</title>
+  <desc id="description">A RISC-V guest system runs through QEMU on a host computer with virtual CPU, memory, and devices.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#080c0e"/><stop offset="1" stop-color="#171b1d"/></linearGradient>
+    <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M50 0H0V50" fill="none" stroke="#dae2dd" stroke-opacity=".055"/></pattern>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/><rect width="1600" height="900" fill="url(#grid)"/>
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace">
+    <text x="110" y="112" fill="#f5f3eb" font-size="20" letter-spacing="5">QEMU / FULL-SYSTEM EMULATION</text>
+    <text x="1490" y="112" fill="#9da9a0" font-size="17" letter-spacing="3" text-anchor="end">GUEST ≠ HOST</text>
+    <path d="M110 145H1490" stroke="#f5f3eb" stroke-opacity=".4"/>
+    <g transform="translate(110 215)">
+      <rect width="820" height="490" rx="20" fill="#0c100f" stroke="#89958d"/>
+      <path d="M0 60H820" stroke="#89958d"/>
+      <circle cx="34" cy="30" r="7" fill="#e65e3d"/><circle cx="58" cy="30" r="7" fill="#bba882"/><circle cx="82" cy="30" r="7" fill="#66826f"/>
+      <text x="410" y="37" fill="#9da9a0" font-size="13" letter-spacing="2" text-anchor="middle">ARCH LAB / TERMINAL</text>
+      <g font-size="18">
+        <text x="42" y="112" fill="#a7b7aa">student@chips-bytes</text><text x="260" y="112" fill="#f5f3eb">:</text><text x="274" y="112" fill="#c8a2ff">~/riscv-lab</text><text x="430" y="112" fill="#f5f3eb">$</text>
+        <text x="42" y="158" fill="#f5f3eb">qemu-system-riscv64 -M virt -m 2G \</text>
+        <text x="42" y="196" fill="#f5f3eb">  -kernel Image -nographic</text>
+        <text x="42" y="254" fill="#6f8f7a">[    0.000000] Linux version 6.x-riscv64</text>
+        <text x="42" y="292" fill="#6f8f7a">[    0.000000] Machine model: riscv-virtio,qemu</text>
+        <text x="42" y="330" fill="#6f8f7a">[    0.183104] Memory: 2048M available</text>
+        <text x="42" y="388" fill="#a7b7aa">riscv64 login:</text><text x="195" y="388" fill="#f5f3eb">student</text>
+        <text x="42" y="436" fill="#a7b7aa">student@rv64</text><text x="190" y="436" fill="#f5f3eb">:~$ uname -m</text>
+        <text x="42" y="474" fill="#e65e3d" font-weight="600">riscv64</text>
+      </g>
+    </g>
+    <g transform="translate(1010 215)">
+      <text x="0" y="-24" fill="#9da9a0" font-size="15" letter-spacing="3">VIRTUAL MACHINE MODEL</text>
+      <rect width="480" height="118" rx="15" fill="#e65e3d" stroke="#ffb19c"/>
+      <text x="28" y="47" fill="#fff" font-size="15" letter-spacing="3">GUEST</text>
+      <text x="28" y="84" fill="#fff" font-size="24" font-weight="600">RISC-V Linux / RV64</text>
+      <rect y="148" width="480" height="150" rx="15" fill="#24362d" stroke="#a8b6ab"/>
+      <text x="28" y="193" fill="#f5f3eb" font-size="15" letter-spacing="3">QEMU</text>
+      <text x="28" y="235" fill="#f5f3eb" font-size="24" font-weight="600">TCG / KVM accelerator</text>
+      <text x="28" y="272" fill="#9da9a0" font-size="14">CPU · memory · VirtIO devices</text>
+      <rect y="328" width="480" height="118" rx="15" fill="#1a2320" stroke="#7e8982"/>
+      <text x="28" y="374" fill="#f5f3eb" font-size="15" letter-spacing="3">HOST</text>
+      <text x="28" y="411" fill="#f5f3eb" font-size="24" font-weight="600">x86-64 / Arm machine</text>
+      <path d="M240 118V148M240 298V328" stroke="#f5f3eb" stroke-opacity=".65" stroke-width="2"/>
+      <path d="m240 142-7-12h14zM240 322l-7-12h14z" fill="#f5f3eb"/>
+    </g>
+    <text x="1010" y="760" fill="#9da9a0" font-size="15" letter-spacing="2">CPU · MEMORY · DEVICES · DEBUG</text>
+    <text x="1490" y="820" fill="#9da9a0" font-size="15" letter-spacing="2" text-anchor="end">RUN ANY MACHINE / STUDY EVERY LAYER</text>
+  </g>
+</svg>

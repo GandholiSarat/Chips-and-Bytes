@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title description">
+  <title id="title">Five-stage instruction pipeline</title>
+  <desc id="description">A study plate showing instruction fetch, decode, execute, memory, and write-back stages across clock cycles.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#080b0b"/>
+      <stop offset="1" stop-color="#171c19"/>
+    </linearGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M48 0H0V48" fill="none" stroke="#c6d2c8" stroke-opacity=".07"/>
+    </pattern>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="9" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <rect width="1600" height="900" fill="url(#grid)"/>
+  <g fill="#f5f3eb" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">
+    <text x="110" y="112" font-size="20" letter-spacing="5">INSTRUCTION PIPELINE / RV64</text>
+    <text x="1490" y="112" font-size="17" letter-spacing="3" text-anchor="end" fill="#9da9a0">05 STAGES · 01 IPC</text>
+  </g>
+  <path d="M110 145H1490" stroke="#f5f3eb" stroke-opacity=".4"/>
+  <g transform="translate(110 225)" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">
+    <g fill="#f5f3eb" font-size="17" letter-spacing="3">
+      <text x="126" y="-28" text-anchor="middle">FETCH</text>
+      <text x="408" y="-28" text-anchor="middle">DECODE</text>
+      <text x="690" y="-28" text-anchor="middle">EXECUTE</text>
+      <text x="972" y="-28" text-anchor="middle">MEMORY</text>
+      <text x="1254" y="-28" text-anchor="middle">WRITE BACK</text>
+    </g>
+    <g stroke="#f5f3eb" stroke-opacity=".7">
+      <rect width="252" height="154" rx="12" fill="#17201b"/>
+      <rect x="282" width="252" height="154" rx="12" fill="#17201b"/>
+      <rect x="564" width="252" height="154" rx="12" fill="#e65e3d" stroke="#ffb29d"/>
+      <rect x="846" width="252" height="154" rx="12" fill="#17201b"/>
+      <rect x="1128" width="252" height="154" rx="12" fill="#17201b"/>
+    </g>
+    <g fill="#f5f3eb" font-size="50" font-weight="600">
+      <text x="126" y="94" text-anchor="middle">IF</text>
+      <text x="408" y="94" text-anchor="middle">ID</text>
+      <text x="690" y="94" text-anchor="middle">EX</text>
+      <text x="972" y="94" text-anchor="middle">MEM</text>
+      <text x="1254" y="94" text-anchor="middle">WB</text>
+    </g>
+    <g fill="none" stroke="#f5f3eb" stroke-width="2" stroke-opacity=".6">
+      <path d="M252 77H282"/><path d="M534 77H564"/><path d="M816 77H846"/><path d="M1098 77H1128"/>
+    </g>
+    <g fill="#f5f3eb">
+      <path d="m276 77-11-6v12z"/><path d="m558 77-11-6v12z"/><path d="m840 77-11-6v12z"/><path d="m1122 77-11-6v12z"/>
+    </g>
+  </g>
+  <g transform="translate(110 506)" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">
+    <g fill="#9da9a0" font-size="15" letter-spacing="2">
+      <text x="0" y="-24">CYCLE</text><text x="165" y="-24">01</text><text x="375" y="-24">02</text>
+      <text x="585" y="-24">03</text><text x="795" y="-24">04</text><text x="1005" y="-24">05</text><text x="1215" y="-24">06</text>
+    </g>
+    <g stroke="#f5f3eb" stroke-opacity=".2" fill="none">
+      <path d="M0 0H1380M0 72H1380M0 144H1380M0 216H1380"/>
+      <path d="M140 0V216M350 0V216M560 0V216M770 0V216M980 0V216M1190 0V216M1380 0V216"/>
+    </g>
+    <g font-size="16" font-weight="600" text-anchor="middle">
+      <g fill="#eef4ee"><rect x="148" y="12" width="194" height="48" rx="6" fill="#2b3d31"/><text x="245" y="43">IF · ADD</text></g>
+      <g fill="#eef4ee"><rect x="358" y="12" width="194" height="48" rx="6" fill="#344a3a"/><text x="455" y="43">ID · ADD</text></g>
+      <g fill="#fff"><rect x="568" y="12" width="194" height="48" rx="6" fill="#e65e3d"/><text x="665" y="43">EX · ADD</text></g>
+      <g fill="#eef4ee"><rect x="778" y="12" width="194" height="48" rx="6" fill="#344a3a"/><text x="875" y="43">MEM · ADD</text></g>
+      <g fill="#eef4ee"><rect x="988" y="12" width="194" height="48" rx="6" fill="#2b3d31"/><text x="1085" y="43">WB · ADD</text></g>
+      <g fill="#eef4ee"><rect x="358" y="84" width="194" height="48" rx="6" fill="#2b3d31"/><text x="455" y="115">IF · LOAD</text></g>
+      <g fill="#eef4ee"><rect x="568" y="84" width="194" height="48" rx="6" fill="#344a3a"/><text x="665" y="115">ID · LOAD</text></g>
+      <g fill="#fff"><rect x="778" y="84" width="194" height="48" rx="6" fill="#e65e3d"/><text x="875" y="115">EX · LOAD</text></g>
+      <g fill="#eef4ee"><rect x="988" y="84" width="194" height="48" rx="6" fill="#344a3a"/><text x="1085" y="115">MEM · LOAD</text></g>
+      <g fill="#eef4ee"><rect x="1198" y="84" width="174" height="48" rx="6" fill="#2b3d31"/><text x="1285" y="115">WB · LOAD</text></g>
+      <g fill="#eef4ee"><rect x="568" y="156" width="194" height="48" rx="6" fill="#2b3d31"/><text x="665" y="187">IF · BRANCH</text></g>
+      <g fill="#eef4ee"><rect x="778" y="156" width="194" height="48" rx="6" fill="#344a3a"/><text x="875" y="187">ID · BRANCH</text></g>
+      <g fill="#fff"><rect x="988" y="156" width="194" height="48" rx="6" fill="#e65e3d"/><text x="1085" y="187">EX · BRANCH</text></g>
+    </g>
+  </g>
+  <circle cx="800" cy="302" r="7" fill="#ff9b7e" filter="url(#glow)"/>
+</svg>

@@ -1,52 +1,13 @@
-/* AdminLogin.css */
-
-.login-container {
-  max-width: 400px;
-  margin: 80px auto;
-  padding: 30px;
-  border: 1px solid #ccc;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  background-color: #fefefe;
-  font-family: 'Segoe UI', sans-serif;
-}
-
-.login-container h2 {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.login-container label {
-  font-weight: bold;
-}
-
-.login-container input {
-  width: 100%;
-  padding: 10px;
-  margin-top: 5px;
-  margin-bottom: 15px;
-  border: 1px solid #aaa;
-  border-radius: 6px;
-}
-
-.login-container button {
-  width: 100%;
-  padding: 12px;
-  background-color: #007bff;
-  color: white;
-  font-weight: bold;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.login-container button:hover {
-  background-color: #0056b3;
-}
-
-.error-message {
-  color: red;
-  text-align: center;
-  margin-bottom: 10px;
-}
+.admin-login { display: grid; min-height: 72vh; padding: 8rem 1rem 3rem; place-items: center; }
+.admin-login__panel { width: min(100%, 30rem); padding: clamp(1.6rem, 5vw, 2.8rem); color: var(--ink); background: var(--surface-raised); border: 1px solid var(--line-soft); border-radius: 1rem; box-shadow: var(--shadow-soft); }
+.admin-login__panel > p { margin: 0 0 .75rem; color: var(--signal); font: 600 .66rem/1 'IBM Plex Mono', monospace; letter-spacing: .1em; text-transform: uppercase; }
+.admin-login h1 { margin: 0; font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 500; letter-spacing: -.065em; }
+.admin-login__panel > span { display: block; margin: .8rem 0 1.7rem; color: var(--ink-muted); line-height: 1.6; }
+.admin-login form { display: grid; gap: 1rem; }
+.admin-login label { display: grid; gap: .45rem; color: var(--ink-muted); font-size: .8rem; font-weight: 700; }
+.admin-login input { width: 100%; padding: .78rem .85rem; color: var(--ink); background: var(--paper); border: 1px solid var(--line-soft); border-radius: .5rem; }
+.admin-login input:focus { outline: 2px solid var(--signal-soft); outline-offset: 1px; border-color: var(--signal); }
+.admin-login button { padding: .85rem 1rem; color: var(--paper); background: var(--surface-ink); border: 0; border-radius: .55rem; cursor: pointer; font-family: 'IBM Plex Mono', monospace; font-size: .68rem; letter-spacing: .06em; text-transform: uppercase; }
+.admin-login button:hover, .admin-login button:focus-visible { background: var(--signal); }
+.admin-login button:disabled { cursor: wait; opacity: .65; }
+.error-message { margin: 0; color: var(--danger); font-size: .85rem; }

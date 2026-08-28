@@ -1,0 +1,184 @@
+.blog-card {
+  --card-radius: 1.25rem;
+  flex: 0 0 clamp(274px, 28vw, 340px);
+  width: clamp(274px, 28vw, 340px);
+  height: 36rem;
+  position: relative;
+  scroll-snap-align: start;
+}
+
+.blog-card .card-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid var(--line-soft);
+  border-radius: var(--card-radius);
+  background: var(--surface-raised);
+  box-shadow: 0 22px 48px rgba(12, 14, 17, 0.13);
+  transition: transform 500ms cubic-bezier(.2, .8, .2, 1), box-shadow 500ms ease, border-color 300ms ease;
+}
+
+.image-container {
+  position: relative;
+  flex: 0 0 12.5rem;
+  height: 12.5rem;
+  min-height: 12.5rem;
+  overflow: hidden;
+  background: var(--surface-ink);
+}
+
+.blog-image,
+.blog-image-fallback {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 900ms cubic-bezier(.2, .75, .2, 1), filter 500ms ease;
+}
+
+.blog-image-fallback {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 78% 25%, var(--signal) 0 2px, transparent 3px),
+    linear-gradient(125deg, transparent 48%, rgba(255,255,255,.18) 49% 50%, transparent 51%),
+    var(--surface-ink);
+}
+
+.blog-image-fallback--memory { background-color: #324f68; }
+.blog-image-fallback--gpu { background-color: #384266; }
+.blog-image-fallback--instrumentation { background-color: #315d54; }
+.blog-image-fallback--cpu { background-color: #5c4638; }
+.blog-image-fallback--systems { background-color: #38434e; }
+
+.image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(8, 10, 12, 0.02) 15%, rgba(8, 10, 12, 0.62));
+  pointer-events: none;
+}
+
+.blog-card-meta {
+  position: absolute;
+  inset: 1rem 1rem auto;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  color: #fffaf1;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.blog-card-meta span:first-child {
+  max-width: 78%;
+}
+
+.blog-card .text-content {
+  display: flex;
+  min-height: 0;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  overflow: visible;
+  padding: 1.35rem 1.35rem 1.25rem;
+}
+
+.blog-byline {
+  margin: 0 0 .75rem;
+  color: var(--ink-faint);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .68rem;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+
+.blog-card .blog-title {
+  display: block;
+  overflow: visible;
+  margin: 0;
+  color: var(--ink) !important;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.22rem;
+  font-weight: 560;
+  letter-spacing: -.045em;
+  line-height: 1.18;
+  text-wrap: balance;
+}
+
+.blog-card .blog-description {
+  display: -webkit-box;
+  overflow: hidden;
+  flex: 0 0 auto;
+  margin: .8rem 0 1.15rem;
+  color: var(--ink-muted) !important;
+  font-size: .83rem;
+  line-height: 1.55;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .blog-card:hover .card-content {
+    transform: translateY(-.55rem);
+    border-color: rgba(224, 82, 44, .45);
+    box-shadow: 0 32px 60px rgba(12, 14, 17, .18);
+  }
+
+  .blog-card:hover .blog-image {
+    filter: saturate(1.08);
+    transform: scale(1.055);
+  }
+
+}
+
+@media (max-width: 700px) {
+  .blog-card,
+  .blog-card.mobile-card {
+    flex-basis: min(83vw, 330px);
+    width: min(83vw, 330px);
+    height: 35.5rem;
+  }
+
+  .image-container {
+    flex-basis: 11.75rem;
+    height: 11.75rem;
+    min-height: 11.75rem;
+  }
+}
+
+/* Page-level legacy card rules must not shorten the reusable article card. */
+.blogs-page .blog-card:not(.more-card),
+.blog-details-container .blog-card {
+  width: clamp(285px, 28vw, 340px);
+  height: 36rem;
+}
+
+.blogs-page .blog-card:not(.more-card) .card-content,
+.blog-details-container .blog-card .card-content {
+  color: var(--ink) !important;
+  background: var(--surface-raised) !important;
+  border: 1px solid var(--line-soft) !important;
+}
+
+@media (min-width: 1024px) {
+  .blog-details-container .blog-card {
+    width: 100%;
+    height: auto;
+    min-height: 36rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .blogs-page .blog-card:not(.more-card),
+  .blogs-page .blog-card.mobile-card:not(.more-card),
+  .blog-details-container .blog-card {
+    width: min(84vw, 330px);
+    height: 35.5rem;
+  }
+}

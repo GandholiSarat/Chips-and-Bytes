@@ -1,0 +1,85 @@
+{
+  "$schema": "https://example.invalid/website-ai-safety-policy-v1.json",
+  "schemaVersion": 1,
+  "mode": "audit",
+  "productionBranch": "main",
+  "sourceRoots": ["Frontend/src", "Backend"],
+  "requiredPaths": [
+    "Frontend/src/index.js",
+    "Frontend/src/App.js",
+    "Frontend/src/theme.css",
+    "Frontend/src/index.css",
+    "Frontend/src/components",
+    "Backend/app.js",
+    "Backend/routes",
+    "Backend/models",
+    "vercel.json"
+  ],
+  "allowedStyleRoots": ["Frontend/src"],
+  "styleFileExtensions": [".css", ".scss", ".sass", ".less"],
+  "markupFileExtensions": [".html", ".htm", ".astro", ".vue", ".svelte", ".jsx", ".tsx"],
+  "scriptFileExtensions": [".js", ".mjs", ".cjs", ".ts", ".tsx", ".jsx"],
+  "styleEntryPoints": [
+    {
+      "file": "Frontend/src/index.js",
+      "orderedImports": ["./index.css", "./theme.css"]
+    }
+  ],
+  "tokenFiles": ["Frontend/src/theme.css"],
+  "rawColorAllowlist": [],
+  "localStyleBlockAllowlist": ["Frontend/public/index.html"],
+  "nestedVerticalScrollAllowlist": [],
+  "fixedViewportHeightAllowlist": [],
+  "globalScrollInterceptionAllowlist": ["scripts/ai-architecture-check.mjs"],
+  "importantCeilings": {},
+  "protectedPathGlobs": ["Frontend/build/**", "Frontend/public/**", "Frontend/src/data/**", "Backend/users.json", "Backend/models/**", ".env*", "vercel.json"],
+  "contentPathGlobs": ["Frontend/src/data/**", "Frontend/public/**", "Backend/users.json"],
+  "codePathGlobs": ["Frontend/src/**", "Backend/**/*.js"],
+  "forbidMixedContentAndCode": false,
+  "allowNewTopLevelDirectories": false,
+  "newTopLevelDirectoryAllowlist": [".github", "config", "docs", "scripts"],
+  "maxChangedFiles": 40,
+  "dependencyLockPairs": [
+    ["Frontend/package.json", "Frontend/package-lock.json"],
+    ["Backend/package.json", "Backend/package-lock.json"]
+  ],
+  "browserContract": {
+    "routes": [
+      "/",
+      "/blogs",
+      "/blogs/details",
+      "/projects",
+      "/projects/details",
+      "/events",
+      "/events/details",
+      "/news",
+      "/news/2026-08-27",
+      "/admin",
+      "/admin/dashboard",
+      "/admin/news-edit"
+    ],
+    "effectiveViewports": [
+      { "width": 1440, "height": 900 },
+      { "width": 1024, "height": 768 },
+      { "width": 768, "height": 1024 },
+      { "width": 430, "height": 932 },
+      { "width": 390, "height": 667 },
+      { "width": 320, "height": 640 }
+    ],
+    "assertions": [
+      "no-horizontal-document-overflow",
+      "one-vertical-scroll-owner",
+      "scroll-reaches-footer",
+      "essential-content-visible",
+      "keyboard-focus-visible",
+      "reduced-motion-operable",
+      "no-console-errors"
+    ]
+  },
+  "notes": [
+    "Audit mode is intentional because this repository has legacy component CSS and generated build output.",
+    "Frontend/build is ignored by the guard and must never be edited as source.",
+    "Frontend/public/index.html contains the minimal first-paint welcome gate required to prevent the React welcome overlay flashing after the homepage becomes visible.",
+    "Move to enforce only in a later reviewed PR after baselining and resolving findings."
+  ]
+}

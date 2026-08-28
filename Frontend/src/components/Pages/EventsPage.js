@@ -13,43 +13,29 @@
  * @returns {JSX.Element}
  */
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
+import { publicContentFallback } from '../../data/publicContentFallback';
+import { usePublicResource } from '../../hooks/usePublicResource';
 import './EventsPage.css';
-import '../../style.css';
 
 const EventsPage = () => {
-  const [events, setEvents] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  // Fetch events from backend
-  useEffect(() => {
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/events`)
-      .then((res) => res.json())
-      .then((data) => {
-        setEvents(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error('Failed to fetch events:', err);
-        setLoading(false);
-      });
-  }, []);
+  const { data: events, isRefreshing, error } = usePublicResource({
+    cacheKey: 'events',
+    url: `${process.env.REACT_APP_BACKEND_URL}/api/events`,
+    fallback: publicContentFallback.events,
+  });
 
   return (
     <>
       <h1 className="tab-heading">Events</h1>
       <p className="tab-desc">Join our upcoming workshops, hackathons, and seminars.</p>
 
-      {loading ? (
-        <div style={{ textAlign: 'center', margin: '2rem 0' }}>
-          <span className="spinner" />
-          <div style={{ marginTop: '0.5rem', color: '#38bff8', fontWeight: 'bold' }}>Loading...</div>
-        </div>
-      ) : events.length === 0 ? (
+      {events.length === 0 ? (
         <p>No events found.</p>
       ) : (
-        <div className="events-wrapper">
+        <div className="events-wrapper" aria-busy={isRefreshing}>
+          {isRefreshing && <p className="content-refresh-status">Refreshing the latest event details…</p>}
           <div className="events-grid">
             {events.map((event) => (
               <div className="event-card neon-glow" key={event._id}>
@@ -72,6 +58,8 @@ const EventsPage = () => {
           </div>
         </div>
       )}
+
+      {error && <p className="content-refresh-status">Showing the latest available event details while the server reconnects.</p>}
 
       <div className="read-more-container">
         <Link to="/events/details" className="read-more-link">

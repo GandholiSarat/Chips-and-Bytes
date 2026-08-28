@@ -100,7 +100,7 @@ const PastEventsEdit = () => {
   };
 
   return (
-    <div className="event-edit-page">
+    <main className="admin-editor event-edit-page">
       <h1>Edit Past Events</h1>
       <form className="event-form" onSubmit={handleSubmit}>
         <input name="date" type="date" value={formData.date} onChange={handleChange} required />
@@ -216,7 +216,7 @@ const PastEventsEdit = () => {
       >
         Go Back to Admin Page
       </button>
-    </div>
+    </main>
   );
 };
 

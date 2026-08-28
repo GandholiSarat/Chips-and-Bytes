@@ -15,19 +15,15 @@
 
 import React, { useRef, useEffect, useState, useCallback } from 'react';
 import './MentorsPage.css';
-import '../../style.css';
 import { mentors } from '../../data/constants';
 import { FaLinkedin } from 'react-icons/fa';
 
 const Mentors = () => {
   const scrollRef = useRef(null);
-  const scrollCount = useRef(0);
-  const intervalRef = useRef(null);
 
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
 
-  const maxLoops = 20;
 
   /**
    * Checks and updates the scroll position state for the carousel.
@@ -54,45 +50,6 @@ const Mentors = () => {
     });
     setTimeout(checkScrollPosition, 500);
   };
-
-  // Auto-scroll setup
-  useEffect(() => {
-    const container = scrollRef.current;
-    if (!container || container.children.length === 0) return;
-    const getCardWidth = () => {
-      if (!container.children[0]) return 0;
-      const card = container.children[0];
-      return card.offsetWidth + 24;
-    };
-    const tick = () => {
-      if (!container) return;
-      const cardWidth = getCardWidth();
-      const atEnd = container.scrollLeft + container.clientWidth >= container.scrollWidth - 5;
-      if (atEnd) {
-        scrollCount.current += 1;
-        setTimeout(() => {
-          container.scrollTo({ left: 0, behavior: 'auto' });
-          checkScrollPosition();
-        }, 300);
-        if (scrollCount.current >= maxLoops) {
-          if (intervalRef.current !== null) {
-            clearInterval(intervalRef.current);
-            intervalRef.current = null;
-          }
-        }
-      } else {
-        container.scrollBy({ left: cardWidth, behavior: 'smooth' });
-        setTimeout(checkScrollPosition, 500);
-      }
-    };
-    intervalRef.current = window.setInterval(tick, 8000);
-    checkScrollPosition();
-    return () => {
-      if (intervalRef.current !== null) {
-        clearInterval(intervalRef.current);
-      }
-    };
-  }, [checkScrollPosition]);
 
   // Responsive: update scroll position on resize
   useEffect(() => {
@@ -176,4 +133,3 @@ const Mentors = () => {
 };
 
 export default Mentors;
-

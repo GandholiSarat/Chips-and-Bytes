@@ -143,7 +143,7 @@ const EventEdit = () => {
   };
 
   return (
-    <div className="event-edit-page">
+    <main className="admin-editor event-edit-page">
       <h1>Edit Events</h1>
       {error && <p className="error">{error}</p>}
       {loading && <p>Loading events...</p>}
@@ -197,7 +197,7 @@ const EventEdit = () => {
       >
         Go Back to Admin Page
       </button>
-    </div>
+    </main>
   );
 };
 

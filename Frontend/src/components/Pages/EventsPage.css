@@ -180,6 +180,15 @@
   padding: 0 1rem;
 }
 
+.content-refresh-status {
+  margin: 0 0 0.75rem;
+  color: #a9bfd4;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+
 /* Add to EventsPage.css or style.css */
 .spinner {
   display: inline-block;

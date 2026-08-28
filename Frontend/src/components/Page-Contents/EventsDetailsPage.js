@@ -13,31 +13,20 @@
  * @returns {JSX.Element}
  */
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './EventsDetailsPage.css';
-import '../../style.css';
 import { FaExternalLinkAlt } from 'react-icons/fa';
-import axios from 'axios';
+import { publicContentFallback } from '../../data/publicContentFallback';
+import { usePublicResource } from '../../hooks/usePublicResource';
 
 const API_URL = `${process.env.REACT_APP_BACKEND_URL}/api/pastevents`;
 
 const EventDetailsPage = () => {
-  const [events, setEvents] = useState([]);
-
-  useEffect(() => {
-    /**
-     * Fetches all past events from the backend API.
-     */
-    const fetchEvents = async () => {
-      try {
-        const res = await axios.get(API_URL);
-        setEvents(res.data || []);
-      } catch (err) {
-        setEvents([]);
-      }
-    };
-    fetchEvents();
-  }, []);
+  const { data: events, isRefreshing } = usePublicResource({
+    cacheKey: 'past-events',
+    url: API_URL,
+    fallback: publicContentFallback.pastEvents,
+  });
 
   /**
    * Formats a date string into a human-readable format.
@@ -57,6 +46,7 @@ const EventDetailsPage = () => {
       </div>
 
       <div className="table-wrapper">
+        {isRefreshing && <p className="content-refresh-status">Refreshing the latest event archive…</p>}
         <div className="table-container">
           <table className="events-table">
             <thead>

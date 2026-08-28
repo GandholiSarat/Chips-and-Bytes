@@ -1,284 +1,232 @@
-/* Base styles for the Navbar */
 .navbar {
-  width: 100%;
-  position: fixed; /* Stays at the top of the viewport */
+  position: fixed;
   top: 0;
-  z-index: 1000; /* Ensures the navbar is above other content */
-  background: linear-gradient(to right, rgba(3, 7, 19, 0.9), rgba(11, 4, 22, 0.9)); /* Gradient background */
-  backdrop-filter: blur(12px); /* Blurred background effect */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+  z-index: 1000;
+  width: 100%;
 }
 
-/* Container for the logo and navigation links */
 .nav-container {
-  max-width: 1280px; /* Maximum width for the content inside the navbar */
-  margin: 0 auto; /* Centers the container horizontally */
-  display: flex;
-  justify-content: space-between; /* Pushes logo to left, links/toggle to right */
-  align-items: center; /* Vertically aligns items in the center */
-  padding: 0.75rem 1rem; /* Padding around the content */
-  width: 100%; /* Ensures container takes full width up to max-width */
-  box-sizing: border-box; /* Includes padding and border in the element's total width and height */
-  position: relative; /* Needed for positioning the mobile menu absolutely */
-}
-
-/* Logo styling */
-.navbar-logo {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 3.65rem;
+  margin: 0 auto;
+  padding: .38rem clamp(.65rem, 1.5vw, 1.35rem);
+}
+
+.navbar-logo {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: .7rem;
+  padding: 0;
+  border: 0;
+  color: inherit;
+  background: transparent;
   cursor: pointer;
-  flex-shrink: 0; /* Prevents the logo from shrinking when space is limited */
 }
 
 .logo-icon {
-  width: 60px;
-  height: 60px;
-  margin-right: 10px;
-  flex-shrink: 0; /* Ensures the icon doesn't shrink */
+  width: 2.05rem;
+  height: 2.05rem;
+  margin: 0;
+  filter: brightness(0) saturate(100%);
+  object-fit: contain;
 }
 
-.logo-text {
-  display: flex;
-  flex-direction: column;
-}
-
+.logo-text { display: flex; align-items: center; }
 .logo-title {
-  font-size: 1.5rem;
-  font-weight: bold;
   margin: 0;
-  color: #fff;
-  white-space: nowrap; /* Prevents the title from wrapping */
+  font-size: .9rem;
+  font-weight: 620;
+  letter-spacing: -.055em;
+  line-height: 1;
+  white-space: nowrap;
+}
+.nav-disclosure {
+  --nav-expanded-width: 38rem;
+  position: relative;
+  display: grid;
+  width: 3.15rem;
+  height: 3.15rem;
+  align-items: center;
+  justify-items: stretch;
+  margin-left: auto;
+  overflow: hidden;
+  border: 1px solid var(--line-soft);
+  border-radius: 50%;
+  background: var(--paper);
+  box-shadow: var(--shadow-soft);
+  transition:
+    width 650ms cubic-bezier(.2, .75, .2, 1),
+    border-radius 650ms cubic-bezier(.2, .75, .2, 1),
+    background-color 650ms ease,
+    box-shadow 650ms ease;
+  will-change: width, border-radius;
 }
 
-.logo-subtitle {
-  font-size: 0.9rem;
-  margin: 0;
-  color: #dbdbdb;
-  white-space: nowrap; /* Prevents the subtitle from wrapping */
+.nav-disclosure.is-open {
+  width: min(var(--nav-expanded-width), calc(100vw - 13rem));
+  border-radius: 999px;
+  background: var(--paper);
+  box-shadow: var(--shadow-soft);
 }
 
-/* Desktop Navigation Links (default visible) */
-.navbar-links.desktop-links {
-  display: flex; /* Displayed as a flex container by default */
-  gap: 20px; /* Space between navigation buttons */
-}
-
-.nav-button {
-  background: none;
-  border: none;
-  font-size: 1rem;
+.nav-menu-toggle {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: inherit;
+  color: var(--ink);
+  background: var(--surface-raised);
+  box-shadow: none;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .57rem;
+  font-weight: 600;
+  letter-spacing: .045em;
+  text-transform: uppercase;
   cursor: pointer;
-  padding: 8px 12px;
-  color: #e2e8f0;
-  transition: color 0.3s ease, background 0.3s ease; /* Smooth transition for hover effects */
-  border-radius: 4px;
+  opacity: 1;
+  place-items: center;
+  transform: scale(1);
+  transition:
+    opacity 650ms cubic-bezier(.2, .75, .2, 1),
+    transform 650ms cubic-bezier(.2, .75, .2, 1),
+    background-color 650ms ease;
 }
 
-.nav-button:hover {
-  color: #007bff; /* Highlight color on hover */
-  background: rgba(255, 255, 255, 0.1); /* Subtle background on hover */
+.nav-disclosure.is-open .nav-menu-toggle {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(.88);
+}
+
+.navbar-links {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(.55rem) scale(.99);
+  transition:
+    opacity 650ms cubic-bezier(.2, .75, .2, 1),
+    transform 650ms cubic-bezier(.2, .75, .2, 1);
+}
+
+.nav-disclosure.is-open .navbar-links {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0) scale(1);
+}
+
+.navbar-links__inner {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  padding: .24rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0;
+}
+.nav-button {
+  padding: .48rem .66rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+  transition: color 180ms ease, background-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
 }
 
 .nav-button.active {
-  color: #007bff;
-  background: rgba(0, 123, 255, 0.15); /* Active state background */
+  border-color: rgba(16, 17, 18, .2);
+  background: rgba(255, 253, 248, .92);
+  box-shadow: inset 0 1px rgba(255, 255, 255, .92), 0 8px 20px rgba(16, 17, 18, .15);
+  transform: translateY(-1px);
 }
 
-/* Mobile Menu Toggle (hidden by default on desktop) */
-.mobile-menu-toggle {
-  display: none; /* Hidden on larger screens by default */
-  position: relative;
-  z-index: 1001; /* Ensures toggle button is on top */
-  flex-shrink: 0; /* Prevents the toggle from shrinking */
+.nav-button.active::after {
+  content: none !important;
+  display: none !important;
 }
 
-.menu-toggle-btn {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  color: white;
-  padding: 12px;
-  border-radius: 8px;
-  cursor: pointer;
-  display: flex; /* For centering the icon */
-  align-items: center;
-  justify-content: center;
-  min-width: 48px; /* Minimum touch target size */
-  min-height: 48px; /* Minimum touch target size */
-  transition: all 0.3s ease;
+@media (max-width: 1050px) {
+  .nav-disclosure { --nav-expanded-width: 34rem; }
+  .nav-button { padding: .58rem .5rem; font-size: .61rem !important; }
 }
 
-.menu-toggle-btn:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: scale(1.05); /* Slight scale effect on hover */
-}
+@media (max-width: 940px) {
+  .nav-container { min-height: 3.55rem; }
 
-/* Mobile Navigation Menu (hidden by default) */
-.mobile-menu {
-  position: absolute;
-  top: 100%; /* Positions the menu right below the navbar */
-  left: 0;
-  right: 0;
-  background: rgba(3, 7, 19, 0.98);
-  backdrop-filter: blur(16px);
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-  transform: translateY(-20px); /* Starts slightly above for slide-down effect */
-  opacity: 0; /* Starts invisible */
-  max-height: 0; /* Hidden state for transition */
-  overflow: hidden; /* Hides content outside max-height */
-  transition: all 0.4s ease; /* Smooth transition for opening/closing */
-  z-index: 99; /* Below the toggle button but above main content */
-}
-
-.mobile-menu.open {
-  transform: translateY(0); /* Slides down to its position */
-  opacity: 1; /* Becomes visible */
-  max-height: 800px; /* Sufficiently large height to contain all menu items */
-  /* Using a large fixed value for max-height is common for smooth slide transitions */
-}
-
-.mobile-menu-links {
-  padding: 1rem 0;
-  display: flex;
-  flex-direction: column; /* Stacks menu items vertically */
-}
-
-.mobile-nav-button {
-  background: none;
-  border: none;
-  color: #e2e8f0;
-  font-size: 1.1rem;
-  padding: 1rem 1.5rem;
-  text-align: left;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Separator between items */
-}
-
-.mobile-nav-button:hover {
-  color: #007bff;
-  background: rgba(255, 255, 255, 0.1);
-  padding-left: 2rem; /* Indent effect on hover */
-}
-
-.mobile-nav-button.active {
-  color: #007bff;
-  background: rgba(0, 123, 255, 0.2);
-  border-left: 4px solid #007bff; /* Highlight active item */
-}
-
-/* --------------------------------------------------------------------- */
-/* RESPONSIVE RULES (Media Queries) */
-/* --------------------------------------------------------------------- */
-
-/* Desktop screens (min-width: 769px) */
-@media screen and (min-width: 769px) {
-  /* Show desktop links, hide mobile toggle */
-  .navbar-links.desktop-links {
-    display: flex; /* Ensure desktop links are visible */
+  .nav-disclosure {
+    position: absolute;
+    top: .25rem;
+    right: .75rem;
+    width: 3.15rem;
+    height: auto;
+    min-height: 3.15rem;
+    max-height: 3.15rem;
+    margin: 0;
+    align-items: start;
+    transition:
+      width 650ms cubic-bezier(.2, .75, .2, 1),
+      max-height 650ms cubic-bezier(.2, .75, .2, 1),
+      border-radius 650ms cubic-bezier(.2, .75, .2, 1),
+      background-color 650ms ease,
+      box-shadow 650ms ease;
   }
 
-  .mobile-menu-toggle {
-    display: none; /* Hide mobile toggle button */
+  .nav-disclosure.is-open {
+    width: min(21rem, calc(100vw - 1.5rem));
+    max-height: 35rem;
+    border-radius: 1.15rem;
+    background: var(--paper);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .navbar-links {
+    height: auto;
+    min-height: 0;
+    align-items: flex-start;
+    transform: translateY(-.55rem) scale(.985);
+  }
+
+  .nav-disclosure.is-open .navbar-links {
+    transform: translateY(0) scale(1);
+  }
+
+  .navbar-links__inner {
+    padding: .65rem;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .nav-button {
+    justify-content: flex-start;
+    width: 100%;
+    padding: .82rem .9rem;
+    text-align: left;
   }
 }
 
-/* Mobile and Tablet screens (max-width: 768px) */
-@media screen and (max-width: 768px) {
-  /* Hide desktop links, show mobile toggle */
-  .navbar-links.desktop-links {
-    display: none; /* Hide desktop links */
-  }
-
-  .mobile-menu-toggle {
-    display: block; /* Show mobile toggle button */
-  }
-
-  /* Adjust nav container for mobile */
-  .nav-container {
-    padding: 0.5rem 1rem; /* Reduced padding for smaller screens */
-    gap: 1rem; /* Space between logo and toggle */
-  }
-
-  /* Make logo more compact on mobile */
-  .navbar-logo {
-    min-width: 0; /* Allow logo to shrink if necessary */
-    /* Calculate max-width to leave space for the toggle button */
-    max-width: calc(100% - 80px); /* 80px for toggle + some margin */
-  }
-
-  .logo-icon {
-    width: 50px;
-    height: 50px;
-  }
-
-  .logo-title {
-    font-size: 1.3rem;
-  }
-
-  .logo-subtitle {
-    font-size: 0.8rem;
-  }
-
-  /* Ensure toggle button styles are consistent */
-  .menu-toggle-btn {
-    background: rgba(255, 255, 255, 0.1); /* Re-apply base styles without !important */
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    min-width: 48px;
-    min-height: 48px;
-  }
+@media (max-width: 420px) {
+  .nav-container { padding-right: .75rem; padding-left: .75rem; }
+  .logo-icon { width: 1.9rem; height: 1.9rem; }
+  .logo-title { font-size: .82rem; }
 }
 
-/* Smaller mobile screens (max-width: 480px) */
-@media screen and (max-width: 480px) {
-  .nav-container {
-    padding: 0.5rem 0.75rem; /* Further reduced padding */
-    gap: 0.5rem; /* Reduced gap */
-  }
-
-  /* Make logo even more compact on very small screens */
-  .navbar-logo {
-    max-width: calc(100% - 70px); /* Adjust max-width for smaller toggle space */
-  }
-
-  .logo-icon {
-    width: 45px;
-    height: 45px;
-    margin-right: 8px;
-  }
-
-  .logo-title {
-    font-size: 1.2rem;
-  }
-
-  .logo-subtitle {
-    font-size: 0.75rem;
-  }
-
-  .menu-toggle-btn {
-    min-width: 44px; /* Slightly smaller touch target */
-    min-height: 44px;
-    padding: 10px;
-  }
-}
-
-/* Extra small screens (max-width: 360px) */
-@media screen and (max-width: 360px) {
-  .logo-subtitle {
-    display: block !important; /* Hide subtitle to save space */
-  }
-
-  .logo-title {
-    font-size: 1.1rem;
-  }
-
-  .logo-icon {
-    width: 40px;
-    height: 40px;
-    margin-right: 6px;
-  }
-
-  .navbar-logo {
-    max-width: calc(100% - 60px); /* Adjust max-width for even smaller space */
-  }
+@media (prefers-reduced-motion: reduce) {
+  .nav-disclosure,
+  .navbar-links,
+  .nav-menu-toggle { transition-duration: .01ms !important; }
 }

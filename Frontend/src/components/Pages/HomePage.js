@@ -1,117 +1,75 @@
-/**
- * @file HomePage.js
- * @description
- * Main landing page for the Chips & Bytes website.
- * Displays a video background, announcements, and all main sections (about, members, events, projects, blogs, mentors, contact).
- * 
- * Features:
- * - Video background with overlay and animated logo.
- * - Announcement bar with latest updates.
- * - Scrolls to sections on button click.
- * - Renders all main club sections.
- * - Admin login link.
- * 
- * @component
- * @returns {JSX.Element}
- */
-
-import React, { useEffect, useState } from 'react';
-import { Cpu } from 'lucide-react';
+import React, { useEffect } from 'react';
 import './HomePage.css';
 import AboutPage from './AboutPage';
 import EventsPage from './EventsPage';
+import NewsPage from './NewsPage';
 import ProjectsPage from './ProjectsPage';
 import BlogsPage from './BlogsPage';
 import MentorsPage from './MentorsPage';
 import ContactPage from './ContactPage';
 import MembersPage from './MembersPage';
 import { Link } from 'react-router-dom';
+import { publicContentFallback } from '../../data/publicContentFallback';
+import { usePublicResource } from '../../hooks/usePublicResource';
+import CinematicHero from '../CinematicHero/CinematicHero';
+import LiveSessions from '../LiveSessions/LiveSessions';
+import AnnouncementPanel from '../AnnouncementPanel/AnnouncementPanel';
 
-const API_URL = `${process.env.REACT_APP_BACKEND_URL}/api/announcements`;
+const ANNOUNCEMENTS_API_URL = `${process.env.REACT_APP_BACKEND_URL}/api/announcements`;
+const EVENTS_API_URL = `${process.env.REACT_APP_BACKEND_URL}/api/events`;
 
 const HomePage = () => {
-  const [announcements, setAnnouncements] = useState([]);
-  const [loadingAnnouncements, setLoadingAnnouncements] = useState(true);
+  const { data: announcements } = usePublicResource({
+    cacheKey: 'announcements',
+    url: ANNOUNCEMENTS_API_URL,
+    fallback: publicContentFallback.announcements,
+  });
+  const { data: events, isRefreshing: loadingEvents } = usePublicResource({
+    cacheKey: 'events',
+    url: EVENTS_API_URL,
+    fallback: publicContentFallback.events,
+  });
+  const sessions = Array.isArray(events) && events.length > 0 ? events : announcements;
 
   useEffect(() => {
-    fetch(API_URL)
-      .then(res => res.json())
-      .then(data => {
-        setAnnouncements(data || []);
-        setLoadingAnnouncements(false);
-      })
-      .catch(() => setLoadingAnnouncements(false));
+    const sections = Array.from(document.querySelectorAll('.tab-section-container'));
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12 },
+    );
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
   }, []);
 
   return (
     <div className="page home-page">
-      <div className="video-background-section">
-        <video className="bg-video" autoPlay loop muted playsInline>
-          <source src="/videos/background.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+      <CinematicHero
+        onJoin={() => document.getElementById('contact-section')?.scrollIntoView({ behavior: 'smooth' })}
+      />
 
-        <div className="video-overlay" />
+      <AnnouncementPanel announcements={announcements} />
+      <LiveSessions sessions={sessions} isRefreshing={loadingEvents} />
 
-        <div className="video-grid">
-          <div className="video-left">
-            <h1 className="main-heading">Welcome to</h1>
-            <h2 className="typing-heading">Chips & Bytes</h2>
-            <p className="subheading">Explore the world of Computer Architecture</p>
-            <div className="hero-buttons">
-              <button
-                className="btn primary button-glow"
-                onClick={() => {
-                  document.getElementById("contact-section")?.scrollIntoView({ behavior: "smooth" });
-                }}
-              >
-                Join Our Community
-              </button>
-            </div>
-          </div>
-          <div className="video-right">
-            <div className="bouncing-icon">
-              <img src="/assets/logo_white_full.png" alt="Chips & Bytes Logo" 
-                style={{width: '120px',height: '95px'}}/>
-            </div>
-          </div>
-        </div>
+      <div id="about-us" className="tab-section-container"><AboutPage /></div>
+      <div id="members-section" className="tab-section-container"><MembersPage /></div>
+      <div id="events-section" className="tab-section-container"><EventsPage /></div>
+      <div id="news-section" className="tab-section-container"><NewsPage /></div>
+      <div id="projects-section" className="tab-section-container"><ProjectsPage /></div>
+      <div id="blogs-section" className="tab-section-container"><BlogsPage /></div>
+      <div id="mentors-section" className="tab-section-container"><MentorsPage /></div>
+      <div id="contact-section" className="tab-section-container"><ContactPage /></div>
 
-        <div className="announcements-bar">
-          <div className="scroll-text">
-            <span className="announcement-highlight">Latest Updates: </span>
-            {loadingAnnouncements
-              ? 'Loading announcements...'
-              : (announcements.length > 0
-                  ? announcements.map(a => a.text).join(' | ')
-                  : 'No announcements yet.')}
-          </div>
-        </div>
-      </div>
-      <div id="about-us" className="tab-section-container">
-        <AboutPage />
-      </div>
-      <div id="members-section" className="tab-section-container">
-        <MembersPage />
-      </div>
-      <div id="events-section" className="tab-section-container">
-        <EventsPage />
-      </div>
-      <div id="projects-section" className="tab-section-container">
-        <ProjectsPage />
-      </div>
-      <div id="blogs-section" className="tab-section-container">
-        <BlogsPage />
-      </div>
-      <div id="mentors-section" className="tab-section-container">
-        <MentorsPage />
-      </div>
-      <div id="contact-section" className="tab-section-container">
-        <ContactPage />
-      </div>
-      <div style={{ textAlign: 'right', margin: '2rem 2.5rem 1rem 0' }}>
-        <Link to="/admin" aria-label="Admin Login">
-          <Cpu size={22} color="#38bff82f" />
+      <div className="admin-entry">
+        <Link to="/admin" aria-label="Admin login">
+          <img src="/assets/logo_blue_full.png" alt="" />
         </Link>
       </div>
     </div>
