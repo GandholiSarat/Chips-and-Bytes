@@ -49,6 +49,7 @@ const navigationItems = [
 ];
 
 const MENU_CLOSE_DELAY_MS = 5000;
+const COMPACT_NAVIGATION_QUERY = '(max-width: 940px), (hover: none) and (pointer: coarse)';
 
 /**
  * Navbar Component
@@ -62,6 +63,12 @@ const Navbar = ({ activeTab, setActiveTab, navigate }) => {
   const navigationRef = useRef(null);
   const menuButtonRef = useRef(null);
   const location = useLocation();
+
+  const isCompactNavigation = useCallback(() => (
+    typeof window !== 'undefined'
+    && typeof window.matchMedia === 'function'
+    && window.matchMedia(COMPACT_NAVIGATION_QUERY).matches
+  ), []);
 
   const clearCloseTimer = useCallback(() => {
     if (closeTimerRef.current) {
@@ -79,9 +86,12 @@ const Navbar = ({ activeTab, setActiveTab, navigate }) => {
   }, [clearCloseTimer]);
 
   const openNavigation = useCallback(() => {
+    // Section changes occur continuously while touch users swipe. Keep this
+    // disclosure under explicit touch control so it never obscures content.
+    if (isCompactNavigation()) return;
     clearCloseTimer();
     setIsNavigationOpen(true);
-  }, [clearCloseTimer]);
+  }, [clearCloseTimer, isCompactNavigation]);
 
   // Update active tab based on route changes
   useEffect(() => {
@@ -103,8 +113,13 @@ const Navbar = ({ activeTab, setActiveTab, navigate }) => {
    */
   const handleNavClick = (id) => {
     setActiveTab(id);
-    setIsNavigationOpen(true);
-    scheduleClose();
+    if (isCompactNavigation()) {
+      clearCloseTimer();
+      setIsNavigationOpen(false);
+    } else {
+      setIsNavigationOpen(true);
+      scheduleClose();
+    }
 
     if (id === 'home') {
       if (location.pathname === '/') {
@@ -149,9 +164,14 @@ const Navbar = ({ activeTab, setActiveTab, navigate }) => {
 
   // Reveal the active title briefly, then return to the compact menu.
   useEffect(() => {
+    if (isCompactNavigation()) {
+      clearCloseTimer();
+      setIsNavigationOpen(false);
+      return;
+    }
     setIsNavigationOpen(true);
     scheduleClose();
-  }, [activeTab, scheduleClose]);
+  }, [activeTab, clearCloseTimer, isCompactNavigation, scheduleClose]);
 
   // Close on outside click and support the disclosure-navigation Escape pattern.
   useEffect(() => {
@@ -189,7 +209,14 @@ const Navbar = ({ activeTab, setActiveTab, navigate }) => {
   };
 
   const handleNavigationBlur = (event) => {
-    if (!event.currentTarget.contains(event.relatedTarget)) scheduleClose();
+    if (!event.currentTarget.contains(event.relatedTarget)) {
+      if (isCompactNavigation()) {
+        clearCloseTimer();
+        setIsNavigationOpen(false);
+      } else {
+        scheduleClose();
+      }
+    }
   };
 
   // Detect and highlight active section on scroll (home page only)
