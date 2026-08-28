@@ -1,74 +1,9 @@
-.announcement-edit-page {
-  max-width: 600px;
-  margin: 40px auto;
-  padding: 2rem 1rem;
-  background: rgba(19, 31, 56, 0.95);
-  border-radius: 1.5rem;
-  box-shadow: 0 4px 32px rgba(34, 211, 238, 0.08);
-  color: #fff;
-}
-
-.announcement-edit-page h1 {
-  color: #22d3ee;
-  margin-bottom: 1.5rem;
-  text-align: center;
-}
-
-.announcement-edit-page form {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 2rem;
-  justify-content: center;
-}
-
-.announcement-edit-page input {
-  flex: 1 1 220px;
-  background: #0f172a;
-  color: #fff;
-  border: 1px solid #22d3ee;
-  border-radius: 8px;
-  padding: 0.7em 1em;
-  font-size: 1rem;
-  outline: none;
-  transition: border 0.2s;
-}
-
-.announcement-edit-page input:focus {
-  border-color: #38bdf8;
-}
-
-.announcement-edit-page button {
-  background: #22d3ee;
-  color: #0f172a;
-  border: none;
-  padding: 0.7em 1.5em;
-  border-radius: 8px;
-  font-weight: 700;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background 0.2s, color 0.2s;
-}
-
-.announcement-edit-page button:hover {
-  background: #0ea5e9;
-  color: #fff;
-}
-
-.announcement-edit-page ul {
-  list-style: none;
-  padding: 0;
-}
-
-.announcement-edit-page li {
-  background: #19223a;
-  margin-bottom: 1rem;
-  padding: 1rem;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.announcement-edit-page li button {
-  margin-left: 1rem;
-}
+.announcement-form__link-group { margin: .25rem 0 1.1rem; padding: 1rem; border: 1px solid var(--line-soft); border-radius: .8rem; }
+.announcement-form__link-group legend { padding: 0 .35rem; color: var(--ink-muted); font: 500 .67rem/1 'IBM Plex Mono', monospace; letter-spacing: .06em; text-transform: uppercase; }
+.admin-checkbox { display: inline-flex; align-items: center; gap: .6rem; color: var(--ink-muted); cursor: pointer; }
+.admin-checkbox input { width: 1rem; height: 1rem; accent-color: var(--signal); }
+.announcement-admin-card { padding: 1.15rem; background: var(--surface-raised); border: 1px solid var(--line-soft); border-radius: .9rem; }
+.announcement-admin-card h3 { margin: .8rem 0 .35rem; color: var(--ink); font-size: 1.12rem; }
+.announcement-admin-card p { margin: 0; color: var(--ink-muted); line-height: 1.6; }
+.announcement-admin-card small { display: block; margin-top: .7rem; color: var(--ink-faint); overflow-wrap: anywhere; }
+.announcement-admin-card__meta { display: flex; justify-content: space-between; gap: .5rem; color: var(--signal); font: 500 .64rem/1 'IBM Plex Mono', monospace; letter-spacing: .06em; text-transform: uppercase; }
