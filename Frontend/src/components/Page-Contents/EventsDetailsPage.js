@@ -61,10 +61,10 @@ const EventDetailsPage = () => {
             <tbody>
               {events.map((event, index) => (
                 <tr key={event._id} className="table-row">
-                  <td className="table-cell serial-cell">{index + 1}</td>
-                  <td className="table-cell date-cell">{formatDate(event.date)}</td>
-                  <td className="table-cell title-cell">{event.title}</td>
-                  <td className="table-cell link-cell">
+                  <td className="table-cell serial-cell" data-label="No.">{index + 1}</td>
+                  <td className="table-cell date-cell" data-label="Date">{formatDate(event.date)}</td>
+                  <td className="table-cell title-cell" data-label="Event">{event.title}</td>
+                  <td className="table-cell link-cell" data-label="Report">
                     {event.reportLink ? (
                       <a 
                         href={event.reportLink} 
@@ -80,7 +80,7 @@ const EventDetailsPage = () => {
                       <span className="pending-event-link">Yet to be added</span>
                     )}
                   </td>
-                  <td className="table-cell link-cell">
+                  <td className="table-cell link-cell" data-label="Resources">
                     {event.resourcesLink ? (
                       <a 
                         href={event.resourcesLink} 
