@@ -121,6 +121,36 @@ test('uses an accessible compact header menu and closes it after five seconds', 
   jest.useRealTimers();
 });
 
+
+test('requires an explicit tap to open the header menu on touch-sized screens', () => {
+  window.matchMedia.mockImplementation((query) => ({
+    matches: query.includes('max-width: 940px'),
+    media: query,
+    onchange: null,
+    addListener: jest.fn(),
+    removeListener: jest.fn(),
+    addEventListener: jest.fn(),
+    removeEventListener: jest.fn(),
+    dispatchEvent: jest.fn(),
+  }));
+
+  const { rerender } = render(
+    <Navbar activeTab="home" setActiveTab={jest.fn()} navigate={jest.fn()} />,
+  );
+  const menuButton = screen.getByRole('button', { name: /site navigation/i });
+
+  expect(menuButton).toHaveAttribute('aria-expanded', 'false');
+
+  rerender(<Navbar activeTab="about" setActiveTab={jest.fn()} navigate={jest.fn()} />);
+  expect(menuButton).toHaveAttribute('aria-expanded', 'false');
+
+  fireEvent.focus(menuButton);
+  expect(menuButton).toHaveAttribute('aria-expanded', 'false');
+
+  fireEvent.click(menuButton);
+  expect(menuButton).toHaveAttribute('aria-expanded', 'true');
+});
+
 test('shows only the current dated news edition with numbered headings and reading links', () => {
   const now = new Date();
   const dateKey = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
