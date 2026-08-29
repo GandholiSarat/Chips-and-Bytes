@@ -123,7 +123,7 @@ const PastEventsEdit = () => {
               </tr>
             </thead>
             <tbody>
-              {[...events].reverse().map((event, index) => (
+              {events.map((event, index) => (
                 <tr key={event._id} className="table-row">
                   <td className="table-cell serial-cell">{index + 1}</td>
                   <td className="table-cell date-cell">{event.date}</td>
@@ -141,7 +141,7 @@ const PastEventsEdit = () => {
                         Click here
                       </a>
                     ) : (
-                      <span style={{ color: '#888' }}>N/A</span>
+                      <span className="pending-event-link">Yet to be added</span>
                     )}
                   </td>
                   <td className="table-cell link-cell">
@@ -157,7 +157,7 @@ const PastEventsEdit = () => {
                         Click here
                       </a>
                     ) : (
-                      <span style={{ color: '#888' }}>N/A</span>
+                      <span className="pending-event-link">Yet to be added</span>
                     )}
                   </td>
                   <td className="table-cell link-cell">

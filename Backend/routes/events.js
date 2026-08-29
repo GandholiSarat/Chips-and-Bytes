@@ -15,6 +15,7 @@ const express = require('express');
 const router = express.Router();
 const auth = require('../middleware/auth');
 const Event = require('../models/Event');
+const { archiveEventById, archiveExpiredEvents } = require('../services/eventLifecycle');
 
 const setPublicCacheHeaders = (res) => {
   res.set('Cache-Control', 'public, max-age=60, s-maxage=300, stale-while-revalidate=86400');
@@ -23,11 +24,24 @@ const setPublicCacheHeaders = (res) => {
 // GET all events (public)
 router.get('/', async (req, res) => {
   try {
-    const events = await Event.find({}).lean();
+    await archiveExpiredEvents();
+    const events = await Event.find({}).sort({ date: 1, time: 1 }).lean();
     setPublicCacheHeaders(res);
     res.json(events);
   } catch (error) {
     res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// Archive a completed event manually when it needs to be removed before its
+// scheduled time. Report and resource links remain deliberately blank.
+router.post('/:id/archive', auth, async (req, res) => {
+  try {
+    const archivedEvent = await archiveEventById(req.params.id);
+    if (!archivedEvent) return res.status(404).json({ message: 'Event not found' });
+    return res.status(201).json(archivedEvent);
+  } catch (error) {
+    return res.status(400).json({ message: 'Unable to archive event' });
   }
 });
 

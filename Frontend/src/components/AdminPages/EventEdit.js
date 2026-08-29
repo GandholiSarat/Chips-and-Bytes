@@ -142,6 +142,23 @@ const EventEdit = () => {
     }
   };
 
+  const handleArchive = async (event) => {
+    if (!window.confirm(`Archive “${event.title}” to Past Events? You can add its report and resources there later.`)) return;
+
+    try {
+      await axios.post(`${API_URL}/${event._id}/archive`, {}, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      if (editingId === event._id) {
+        setFormData({ title: '', speaker: '', date: '', time: '', location: '', description: '' });
+        setEditingId(null);
+      }
+      fetchEvents();
+    } catch (err) {
+      setError(err.response?.data?.message || 'Unable to archive event.');
+    }
+  };
+
   return (
     <main className="admin-editor event-edit-page">
       <h1>Edit Events</h1>
@@ -180,6 +197,7 @@ const EventEdit = () => {
                       <p className="event-description">{event.description}</p>
                       <div className="admin-actions">
                         <button type="button" onClick={() => handleEdit(event)}>Edit</button>
+                        <button type="button" onClick={() => handleArchive(event)}>Archive</button>
                         <button type="button" onClick={() => handleDelete(event._id)}>Delete</button>
                       </div>
                     </div>

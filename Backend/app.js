@@ -27,6 +27,7 @@ const pastEventsRoutes = require('./routes/pastevents');
 const blogPreviewRoutes = require('./routes/blogPreviews');
 const newsRoutes = require('./routes/news');
 const { warmBlogPreviewCache } = require('./services/blogPreviewCache');
+const { startEventArchiver } = require('./services/eventArchiver');
 
 const app = express();
 
@@ -34,7 +35,10 @@ const app = express();
 // articles. This keeps the most visible covers in the persistent cache across
 // deployments without delaying the server from accepting requests.
 connectDB()
-  .then(() => warmBlogPreviewCache({ limit: 7 }))
+  .then(() => {
+    void warmBlogPreviewCache({ limit: 7 });
+    startEventArchiver();
+  })
   .catch(() => {});
 
 app.use(cors());
