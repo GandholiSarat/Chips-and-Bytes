@@ -19,6 +19,7 @@ import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import ProjectCard from '../ProjectCard/ProjectCard';
 import { projects } from '../../data/projects';
+import { getCarouselScrollState } from '../../utils/carouselPosition';
 import './ProjectsPage.css';
 
 const ProjectsPage = () => {
@@ -72,8 +73,9 @@ const ProjectsPage = () => {
   const checkScrollPosition = () => {
     const slider = sliderRef.current;
     if (!slider) return;
-    setCanScrollLeft(slider.scrollLeft > 0);
-    setCanScrollRight(slider.scrollLeft + slider.clientWidth < slider.scrollWidth - 5);
+    const scrollState = getCarouselScrollState(slider);
+    setCanScrollLeft(scrollState.canScrollLeft);
+    setCanScrollRight(scrollState.canScrollRight);
   };
 
   /**
