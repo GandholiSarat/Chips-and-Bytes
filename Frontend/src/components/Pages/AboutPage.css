@@ -4,8 +4,19 @@
   color: var(--ink);
 }
 
+.about-page__identity-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(17rem, 25vw, 27rem);
+  align-items: center;
+  gap: clamp(3rem, 7vw, 7.5rem);
+}
+
+.about-page__identity-copy {
+  min-width: 0;
+}
+
 .about-page__heading {
-  width: min(100%, 64rem);
+  width: 100%;
 }
 
 .about-page a {
@@ -24,6 +35,10 @@
 .club-objectives,
 .about-page__closing {
   width: min(100%, 64rem);
+}
+
+.club-mission {
+  width: 100%;
 }
 
 .club-mission,
@@ -69,4 +84,28 @@
 
 .about-page__closing {
   margin-bottom: 0;
+}
+
+.about-page__dmacs-mark {
+  width: 100%;
+  justify-self: end;
+}
+
+.about-page__dmacs-mark img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+@media (max-width: 900px) {
+  .about-page__identity-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(2rem, 7vw, 3.5rem);
+  }
+
+  .about-page__dmacs-mark {
+    width: min(64vw, 20rem);
+    justify-self: center;
+  }
 }

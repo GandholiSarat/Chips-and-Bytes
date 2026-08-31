@@ -45,6 +45,10 @@ test('preserves the original club writing', () => {
     'href',
     'https://www.sssihl.edu.in/departments/mathematics-computer-science/',
   );
+  expect(screen.getByRole('img', { name: /Department of Mathematics and Computer Science/i })).toHaveAttribute(
+    'src',
+    '/assets/dmacs-logo.webp',
+  );
 });
 
 test('keeps the announcement heading focused without the old club notice label', () => {

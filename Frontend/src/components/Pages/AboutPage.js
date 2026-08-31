@@ -18,25 +18,36 @@ import React from 'react';
 function AboutPage() {
   return (
     <section className="about-page" aria-labelledby="about-heading">
-      <header className="section-heading about-page__heading">
-        <h1 id="about-heading" className="about-us-heading">About Us</h1>
-        <p className="tab-desc">
-          <strong>Chips &amp; Bytes</strong> is a dynamic community of computer science and architecture enthusiasts from Department of Mathematics &amp; Computer Science (DMACS) at{' '}
-          <a href="https://www.sssihl.edu.in/departments/mathematics-computer-science/" target="_blank" rel="noreferrer">
-            <strong>Sri Sathya Sai Institute of Higher Learning (SSSIHL)</strong>
-          </a>, dedicated to learning, building, and innovating. We blend deep technical understanding with hands-on practice, encouraging self-driven growth, open-source contributions, and entrepreneurial thinking so members can turn ideas into real startup-worthy projects.
-        </p>
-      </header>
+      <div className="about-page__identity-layout">
+        <div className="about-page__identity-copy">
+          <header className="section-heading about-page__heading">
+            <h1 id="about-heading" className="about-us-heading">About Us</h1>
+            <p className="tab-desc">
+              <strong>Chips &amp; Bytes</strong> is a dynamic community of computer science and architecture enthusiasts from Department of Mathematics &amp; Computer Science (DMACS) at{' '}
+              <a href="https://www.sssihl.edu.in/departments/mathematics-computer-science/" target="_blank" rel="noreferrer">
+                <strong>Sri Sathya Sai Institute of Higher Learning (SSSIHL)</strong>
+              </a>, dedicated to learning, building, and innovating. We blend deep technical understanding with hands-on practice, encouraging self-driven growth, open-source contributions, and entrepreneurial thinking so members can turn ideas into real startup-worthy projects.
+            </p>
+          </header>
 
-      <div className="club-mission">
-        <h2 className="subheading">Our Mission</h2>
-        <p className="tab-desc">
-          To cultivate a passionate, collaborative community that explores the 
-          intricacies of computer architecture and systems, contributes to 
-          technological advancement through research and open-source development, 
-          and inspires members to incubate and pursue startup ideas with an 
-          entrepreneurial mindset.
-        </p>
+          <div className="club-mission">
+            <h2 className="subheading">Our Mission</h2>
+            <p className="tab-desc">
+              To cultivate a passionate, collaborative community that explores the
+              intricacies of computer architecture and systems, contributes to
+              technological advancement through research and open-source development,
+              and inspires members to incubate and pursue startup ideas with an
+              entrepreneurial mindset.
+            </p>
+          </div>
+        </div>
+
+        <div className="about-page__dmacs-mark">
+          <img
+            src="/assets/dmacs-logo.webp"
+            alt="Department of Mathematics and Computer Science (DMACS)"
+          />
+        </div>
       </div>
 
       <div className="club-objectives">
