@@ -119,6 +119,7 @@ test('uses an accessible compact header menu and closes it after five seconds', 
 
   const menuButton = screen.getByRole('button', { name: /site navigation/i });
   expect(container.querySelector('img[src="/assets/dmacs-logo.webp"]')).toBeInTheDocument();
+  expect(screen.queryByText('Menu')).not.toBeInTheDocument();
   expect(screen.queryByText('Computer Architecture Club')).not.toBeInTheDocument();
   expect(menuButton).toHaveAttribute('aria-expanded', 'true');
   expect(screen.getByRole('button', { name: 'Blogs' })).toHaveAttribute('tabindex', '0');
@@ -243,6 +244,7 @@ test('opens with the requested welcome and retains the original hero copy', () =
   expect(screen.getByRole('heading', { name: /Explore the world of Computer Architecture/i })).toBeInTheDocument();
   expect(screen.getByRole('button', { name: 'Join Our Community' })).toBeInTheDocument();
   expect(screen.getByRole('img', { name: 'Chips & Bytes' })).toHaveAttribute('src', '/assets/logo_white_full.png');
+  expect(screen.queryByText('Chips & Bytes · Computer Architecture Club')).not.toBeInTheDocument();
   const heroImages = [
     '/assets/hero/zen2-matisse-die.webp',
     '/assets/hero/silicon-wafer-closeup.webp',

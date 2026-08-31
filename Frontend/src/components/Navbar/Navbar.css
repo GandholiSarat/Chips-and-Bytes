@@ -10,9 +10,9 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  min-height: 3.65rem;
+  min-height: 3rem;
   margin: 0 auto;
-  padding: .38rem clamp(.65rem, 1.5vw, 1.35rem);
+  padding: .25rem clamp(.65rem, 1.5vw, 1.35rem);
 }
 
 .navbar-logo {
@@ -28,8 +28,8 @@
 }
 
 .logo-icon {
-  width: 2.05rem;
-  height: 2.05rem;
+  width: 1.75rem;
+  height: 1.75rem;
   margin: 0;
   filter: brightness(0) saturate(100%);
   object-fit: contain;
@@ -38,7 +38,7 @@
 .logo-text { display: flex; align-items: center; }
 .logo-title {
   margin: 0;
-  font-size: .9rem;
+  font-size: .84rem;
   font-weight: 620;
   letter-spacing: -.055em;
   line-height: 1;
@@ -48,16 +48,16 @@
   --nav-expanded-width: 38rem;
   position: relative;
   display: grid;
-  width: 3.65rem;
-  height: 4.75rem;
+  width: 2.55rem;
+  height: 2.55rem;
   align-items: center;
   justify-items: stretch;
   margin-left: auto;
   overflow: hidden;
-  border: 1px solid var(--line-soft);
+  border: 1px solid transparent;
   border-radius: 50%;
-  background: var(--paper);
-  box-shadow: var(--shadow-soft);
+  background: transparent;
+  box-shadow: none;
   transition:
     width 650ms cubic-bezier(.2, .75, .2, 1),
     height 650ms cubic-bezier(.2, .75, .2, 1),
@@ -69,7 +69,8 @@
 
 .nav-disclosure.is-open {
   width: min(var(--nav-expanded-width), calc(100vw - 13rem));
-  height: 3.15rem;
+  height: 2.75rem;
+  border-color: var(--line-soft);
   border-radius: 999px;
   background: var(--paper);
   box-shadow: var(--shadow-soft);
@@ -86,19 +87,12 @@
   border: 0;
   border-radius: inherit;
   color: var(--ink);
-  background: var(--surface-raised);
+  background: transparent;
   box-shadow: none;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: .57rem;
-  font-weight: 600;
-  letter-spacing: .045em;
-  text-transform: uppercase;
   cursor: pointer;
   opacity: 1;
   align-items: center;
-  flex-direction: column;
   justify-content: center;
-  gap: .2rem;
   transform: scale(1);
   transition:
     opacity 650ms cubic-bezier(.2, .75, .2, 1),
@@ -108,8 +102,9 @@
 
 .nav-menu-emblem {
   display: block;
-  width: 2.05rem;
-  height: 2rem;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
   object-fit: contain;
   transition: opacity 650ms cubic-bezier(.2, .75, .2, 1), transform 650ms cubic-bezier(.2, .75, .2, 1);
 }
@@ -184,16 +179,16 @@
 }
 
 @media (max-width: 940px) {
-  .nav-container { min-height: 3.55rem; }
+  .nav-container { min-height: 3rem; }
 
   .nav-disclosure {
     position: absolute;
-    top: .25rem;
+    top: .22rem;
     right: .75rem;
-    width: 3.15rem;
+    width: 2.55rem;
     height: auto;
-    min-height: 4.75rem;
-    max-height: 4.75rem;
+    min-height: 2.55rem;
+    max-height: 2.55rem;
     margin: 0;
     align-items: start;
     transition:
@@ -208,7 +203,7 @@
     width: min(21rem, calc(100vw - 1.5rem));
     height: auto;
     max-height: 35rem;
-    min-height: 3.15rem;
+    min-height: 2.75rem;
     border-radius: 1.15rem;
     background: var(--paper);
     box-shadow: var(--shadow-soft);
@@ -241,8 +236,8 @@
 
 @media (max-width: 420px) {
   .nav-container { padding-right: .75rem; padding-left: .75rem; }
-  .logo-icon { width: 1.9rem; height: 1.9rem; }
-  .logo-title { font-size: .82rem; }
+  .logo-icon { width: 1.65rem; height: 1.65rem; }
+  .logo-title { font-size: .78rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
