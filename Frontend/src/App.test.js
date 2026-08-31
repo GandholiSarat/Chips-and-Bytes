@@ -243,7 +243,7 @@ test('opens with the requested welcome and retains the original hero copy', () =
   expect(screen.getByRole('status', { name: 'Welcome to Chips and Bytes' })).toBeInTheDocument();
   expect(screen.getByRole('heading', { name: /Explore the world of Computer Architecture/i })).toBeInTheDocument();
   expect(screen.getByRole('button', { name: 'Join Our Community' })).toBeInTheDocument();
-  expect(screen.getByRole('img', { name: 'Chips & Bytes' })).toHaveAttribute('src', '/assets/logo_white_full.png');
+  expect(screen.getByRole('img', { name: 'Chips & Bytes' })).toHaveAttribute('src', '/assets/logo_white.png');
   expect(screen.queryByText('Chips & Bytes · Computer Architecture Club')).not.toBeInTheDocument();
   const heroImages = [
     '/assets/hero/zen2-matisse-die.webp',

@@ -199,7 +199,7 @@ const CinematicHero = ({ onJoin }) => {
                 <ArrowDownRight size={19} strokeWidth={1.7} aria-hidden="true" />
               </button>
             </div>
-            <img className="cinematic-hero__brand" src="/assets/logo_white_full.png" alt="Chips & Bytes" />
+            <img className="cinematic-hero__brand" src="/assets/logo_white.png" alt="Chips & Bytes" />
           </div>
         </div>
 
