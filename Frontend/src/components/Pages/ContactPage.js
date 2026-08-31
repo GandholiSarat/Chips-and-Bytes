@@ -114,10 +114,9 @@ const ContactPage = () => {
 
   return (
     <section className="contact-page" aria-labelledby="contact-heading">
-      <header className="contact-page__header">
-        <p className="contact-page__eyebrow">Open channel / C&amp;B</p>
-        <h1 id="contact-heading">Contact Us</h1>
-        <p>We'd love to hear from you! Reach out with questions, feedback, or collaboration ideas.</p>
+      <header className="section-heading contact-page__header">
+        <h1 id="contact-heading" className="tab-heading">Contact Us</h1>
+        <p className="tab-desc">We'd love to hear from you! Reach out with questions, feedback, or collaboration ideas.</p>
       </header>
 
       <div className="contact-page__layout">

@@ -13,33 +13,22 @@
  */
 
 import './AboutPage.css';
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 
 function AboutPage() {
-  const headingRef = useRef(null);
-  const paraRef = useRef(null);
-
-  useEffect(() => {
-    if (headingRef.current) headingRef.current.classList.add('visible');
-    if (paraRef.current) paraRef.current.classList.add('fade-in');
-  }, []);
-
   return (
-    <div className="about-page">
-      <h1 ref={headingRef} className="about-us-heading">
-        About Us
-      </h1>
-      
-      <p ref={paraRef} className="tab-desc fade-in">
-        <strong>Chips &amp; Bytes</strong> is a dynamic community of computer 
-        science and architecture enthusiasts dedicated to learning, building, 
-        and innovating. We blend deep technical understanding with hands-on 
-        practice, encouraging self-driven growth, open-source contributions, 
-        and entrepreneurial thinking so members can turn ideas into real 
-        startup-worthy projects.
-      </p>
+    <section className="about-page" aria-labelledby="about-heading">
+      <header className="section-heading about-page__heading">
+        <h1 id="about-heading" className="about-us-heading">About Us</h1>
+        <p className="tab-desc">
+          <strong>Chips &amp; Bytes</strong> is a dynamic community of computer science and architecture enthusiasts from Department of Mathematics &amp; Computer Science (DMACS) at{' '}
+          <a href="https://www.sssihl.edu.in/departments/mathematics-computer-science/" target="_blank" rel="noreferrer">
+            <strong>Sri Sathya Sai Institute of Higher Learning (SSSIHL)</strong>
+          </a>, dedicated to learning, building, and innovating. We blend deep technical understanding with hands-on practice, encouraging self-driven growth, open-source contributions, and entrepreneurial thinking so members can turn ideas into real startup-worthy projects.
+        </p>
+      </header>
 
-      <div className="club-mission fade-in">
+      <div className="club-mission">
         <h2 className="subheading">Our Mission</h2>
         <p className="tab-desc">
           To cultivate a passionate, collaborative community that explores the 
@@ -50,7 +39,7 @@ function AboutPage() {
         </p>
       </div>
 
-      <div className="club-objectives fade-in">
+      <div className="club-objectives">
         <h2 className="subheading">What We Do</h2>
         <ul className="about-list">
           <li>
@@ -78,12 +67,12 @@ function AboutPage() {
         </ul>
       </div>
 
-      <p className="tab-desc fade-in">
+      <p className="tab-desc about-page__closing">
         Join <strong>Chips &amp; Bytes</strong> to explore the building blocks 
         of modern computing, grow your capabilities, and help shape the future 
         of technology.
       </p>
-    </div>
+    </section>
   );
 }
 

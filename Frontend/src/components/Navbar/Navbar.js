@@ -324,6 +324,7 @@ const Navbar = ({ activeTab, setActiveTab, navigate }) => {
             aria-controls="primary-navigation-links"
             aria-label={`${isNavigationOpen ? 'Close' : 'Open'} site navigation`}
           >
+            <img className="nav-menu-emblem" src="/assets/dmacs-logo.webp" alt="" />
             <span>Menu</span>
           </button>
 

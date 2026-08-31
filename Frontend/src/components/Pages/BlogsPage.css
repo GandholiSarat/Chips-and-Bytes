@@ -88,13 +88,15 @@
   border-radius: 1.25rem;
   color: var(--ink);
   background: var(--surface-subtle);
-  transition: border-color 260ms ease, background-color 260ms ease, transform 400ms cubic-bezier(.2, .8, .2, 1);
+  box-shadow: var(--shadow-card);
+  transition: border-color 260ms ease, background-color 260ms ease, box-shadow 450ms ease, transform 450ms cubic-bezier(.2, .8, .2, 1);
 }
 
 .blogs-page .more-card:hover .more-card-content {
   border-color: var(--signal);
   color: var(--paper);
   background: var(--signal);
+  box-shadow: var(--shadow-card-hover);
   transform: translateY(-.45rem);
 }
 

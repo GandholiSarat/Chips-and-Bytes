@@ -48,8 +48,8 @@
   --nav-expanded-width: 38rem;
   position: relative;
   display: grid;
-  width: 3.15rem;
-  height: 3.15rem;
+  width: 3.65rem;
+  height: 4.75rem;
   align-items: center;
   justify-items: stretch;
   margin-left: auto;
@@ -60,6 +60,7 @@
   box-shadow: var(--shadow-soft);
   transition:
     width 650ms cubic-bezier(.2, .75, .2, 1),
+    height 650ms cubic-bezier(.2, .75, .2, 1),
     border-radius 650ms cubic-bezier(.2, .75, .2, 1),
     background-color 650ms ease,
     box-shadow 650ms ease;
@@ -68,6 +69,7 @@
 
 .nav-disclosure.is-open {
   width: min(var(--nav-expanded-width), calc(100vw - 13rem));
+  height: 3.15rem;
   border-radius: 999px;
   background: var(--paper);
   box-shadow: var(--shadow-soft);
@@ -77,7 +79,7 @@
   position: absolute;
   inset: 0;
   z-index: 2;
-  display: grid;
+  display: flex;
   width: 100%;
   height: 100%;
   padding: 0;
@@ -93,7 +95,10 @@
   text-transform: uppercase;
   cursor: pointer;
   opacity: 1;
-  place-items: center;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  gap: .2rem;
   transform: scale(1);
   transition:
     opacity 650ms cubic-bezier(.2, .75, .2, 1),
@@ -101,10 +106,23 @@
     background-color 650ms ease;
 }
 
+.nav-menu-emblem {
+  display: block;
+  width: 2.05rem;
+  height: 2rem;
+  object-fit: contain;
+  transition: opacity 650ms cubic-bezier(.2, .75, .2, 1), transform 650ms cubic-bezier(.2, .75, .2, 1);
+}
+
 .nav-disclosure.is-open .nav-menu-toggle {
   opacity: 0;
   pointer-events: none;
   transform: scale(.88);
+}
+
+.nav-disclosure.is-open .nav-menu-emblem {
+  opacity: 0;
+  transform: translateY(-.55rem) scale(.84);
 }
 
 .navbar-links {
@@ -174,8 +192,8 @@
     right: .75rem;
     width: 3.15rem;
     height: auto;
-    min-height: 3.15rem;
-    max-height: 3.15rem;
+    min-height: 4.75rem;
+    max-height: 4.75rem;
     margin: 0;
     align-items: start;
     transition:
@@ -188,7 +206,9 @@
 
   .nav-disclosure.is-open {
     width: min(21rem, calc(100vw - 1.5rem));
+    height: auto;
     max-height: 35rem;
+    min-height: 3.15rem;
     border-radius: 1.15rem;
     background: var(--paper);
     box-shadow: var(--shadow-soft);
@@ -228,5 +248,6 @@
 @media (prefers-reduced-motion: reduce) {
   .nav-disclosure,
   .navbar-links,
-  .nav-menu-toggle { transition-duration: .01ms !important; }
+  .nav-menu-toggle,
+  .nav-menu-emblem { transition-duration: .01ms !important; }
 }

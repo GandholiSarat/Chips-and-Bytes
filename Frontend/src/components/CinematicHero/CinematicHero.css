@@ -129,6 +129,15 @@ body.welcome-is-playing {
   max-width: 64rem;
 }
 
+.cinematic-hero__brand {
+  display: block;
+  width: clamp(8rem, 15vw, 13rem);
+  max-height: 7rem;
+  margin: 0 0 1.35rem;
+  object-fit: contain;
+  object-position: left center;
+}
+
 .cinematic-hero__eyebrow {
   margin: 0 0 1.25rem;
   font-family: 'IBM Plex Mono', monospace;

@@ -16,6 +16,8 @@
   --line-soft: rgba(24, 25, 23, .14);
   --line-dark: rgba(248, 245, 237, .18);
   --shadow-soft: 0 20px 48px rgba(23, 24, 20, .1);
+  --shadow-card: 0 12px 26px rgba(23, 24, 20, .09), 0 2px 7px rgba(23, 24, 20, .055);
+  --shadow-card-hover: 0 20px 38px rgba(23, 24, 20, .14), 0 5px 12px rgba(23, 24, 20, .07);
   --page-width: 90rem;
 }
 
@@ -101,7 +103,7 @@ h1, h2, h3, h4, .logo-title, .tab-heading, .about-us-heading, .subheading,
 }
 
 .tab-heading, .blogs-page h1, .Projects-page h1, .events-page h1,
-.about-us-heading, .subheading, .blog-heading, .event-heading, .project-heading,
+.about-us-heading, .blog-heading, .event-heading, .project-heading,
 .tab-member-heading, .tab-mentor-heading {
   margin: 0 0 1rem !important;
   color: var(--ink) !important;
@@ -112,6 +114,15 @@ h1, h2, h3, h4, .logo-title, .tab-heading, .about-us-heading, .subheading,
   text-align: left !important;
   text-shadow: none !important;
 }
+.subheading {
+  margin: 0 0 .85rem;
+  color: var(--ink);
+  font-size: clamp(1.55rem, 3vw, 2.5rem);
+  font-weight: 500;
+  letter-spacing: -.055em;
+  line-height: 1.05;
+  text-align: left;
+}
 .tab-desc, .blog-subtitle, .event-subtitle, .project-subtitle, .tab-member-desc, .tab-mentor-desc {
   max-width: 40rem !important;
   margin: 0 0 2.35rem !important;
@@ -121,7 +132,35 @@ h1, h2, h3, h4, .logo-title, .tab-heading, .about-us-heading, .subheading,
   text-align: left !important;
 }
 
-.about-page, .global-page {
+.section-heading {
+  display: flex;
+  width: min(100%, 48rem);
+  margin: 0 0 clamp(2rem, 5vw, 3.5rem);
+  align-self: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  text-align: left;
+}
+
+.section-heading > h1,
+.section-heading > p {
+  width: 100%;
+  padding-inline: 0 !important;
+}
+
+.section-heading .tab-heading,
+.section-heading .tab-member-heading,
+.section-heading .tab-mentor-heading {
+  margin: 0 0 .85rem !important;
+}
+
+.section-heading .tab-desc,
+.section-heading .tab-member-desc,
+.section-heading .tab-mentor-desc {
+  margin: 0 !important;
+}
+
+.global-page {
   max-width: 75rem;
   padding: clamp(1.5rem, 4vw, 3.5rem) !important;
   color: var(--ink) !important;
@@ -132,7 +171,6 @@ h1, h2, h3, h4, .logo-title, .tab-heading, .about-us-heading, .subheading,
   opacity: 1 !important;
   transform: none !important;
 }
-.about-page:hover { transform: translateY(-.25rem) !important; box-shadow: 0 25px 54px rgba(23, 24, 20, .14) !important; }
 .about-list, .about-list li, .club-mission, .club-objectives, .about-page p { color: var(--ink-muted) !important; line-height: 1.75; }
 .about-list li::marker, .announcement-highlight { color: var(--signal) !important; }
 .about-list li:hover { color: var(--ink) !important; }
@@ -151,14 +189,23 @@ h1, h2, h3, h4, .logo-title, .tab-heading, .about-us-heading, .subheading,
   background: var(--surface-raised) !important;
   border: 1px solid var(--line-soft) !important;
   border-radius: 1rem !important;
-  box-shadow: 0 12px 28px rgba(23, 24, 20, .07) !important;
+  box-shadow: var(--shadow-card) !important;
 }
 .event-card::before { background: var(--signal) !important; box-shadow: none !important; }
-.event-card:hover, .event-card.neon-glow:hover, .event-card.neon-glow:focus-within,
+.event-card:hover, .event-card:focus-within,
 .member-mentor-card:hover, .mentor-mentor-card:hover {
   border-color: rgba(224, 82, 44, .5) !important;
-  box-shadow: var(--shadow-soft) !important;
+  box-shadow: var(--shadow-card-hover) !important;
 }
+.member-mentor-card,
+.mentor-mentor-card {
+  margin: 0 !important;
+  transition: transform 450ms cubic-bezier(.2, .8, .2, 1), box-shadow 450ms ease, border-color 300ms ease !important;
+}
+.member-mentor-card:hover,
+.mentor-mentor-card:hover { transform: translateY(-.45rem) !important; }
+.member-mentor-image,
+.mentor-mentor-image { border-color: var(--signal-soft) !important; box-shadow: none !important; }
 .event-title, .event-date, .event-time, .event-location, .event-speaker,
 .member-mentor-info h2, .member-mentor-info h3,
 .mentor-mentor-info h2, .mentor-mentor-info h3 { color: var(--ink) !important; }
@@ -171,8 +218,8 @@ h1, h2, h3, h4, .logo-title, .tab-heading, .about-us-heading, .subheading,
 
 .carousel-wrapper, .members-member-carousel-wrapper, .mentors-mentor-carousel-wrapper { justify-content: flex-start !important; }
 .blog-slider, .Projects-slider, .members-member-list, .mentors-mentor-list {
-  gap: 1rem !important;
-  padding: .5rem 0 1.35rem !important;
+  gap: 1.25rem !important;
+  padding: 1rem .15rem 2.25rem !important;
   scroll-snap-type: x proximity !important;
 }
 .scroll-arrow, .member-scroll-btn, .mentor-scroll-btn {
@@ -187,11 +234,11 @@ h1, h2, h3, h4, .logo-title, .tab-heading, .about-us-heading, .subheading,
   color: var(--ink) !important;
   background: var(--surface-raised) !important;
   border: 1px solid var(--line-soft) !important;
-  box-shadow: 0 12px 28px rgba(23, 24, 20, .07) !important;
+  box-shadow: var(--shadow-card) !important;
 }
 .Projects-card:not(.more-card):hover .cards-content {
   border-color: rgba(224, 82, 44, .5) !important;
-  box-shadow: var(--shadow-soft) !important;
+  box-shadow: var(--shadow-card-hover) !important;
 }
 .Projects-card .Projects-title { color: var(--ink) !important; text-shadow: none !important; }
 .Projects-card .Projects-description { color: var(--ink-muted) !important; }
@@ -277,6 +324,9 @@ h1, h2, h3, h4, .logo-title, .tab-heading, .about-us-heading, .subheading,
 /* Admin content tools share the public editorial palette while retaining the
    existing event, archive, and news editor structure. */
 .admin-editor { width: min(calc(100% - 2rem), 68rem); margin: clamp(6rem, 12vw, 9rem) auto 4rem; color: var(--ink); }
+.admin-editor__header { max-width: 48rem; margin-bottom: clamp(1.5rem, 4vw, 2.4rem); }
+.admin-editor__header > p { margin: 0 0 .75rem; color: var(--signal); font: 600 .66rem/1 'IBM Plex Mono', monospace; letter-spacing: .1em; text-transform: uppercase; }
+.admin-editor__header > span { display: block; max-width: 42rem; color: var(--ink-muted); line-height: 1.7; }
 .admin-editor h1 { margin: 0 0 1.25rem; color: var(--ink); font-size: clamp(2rem, 5vw, 3.75rem); font-weight: 500; letter-spacing: -.065em; }
 .admin-editor .event-form, .admin-form, .news-edit-form { display: grid; gap: 1rem; padding: clamp(1.1rem, 3vw, 1.75rem); background: var(--surface-raised); border: 1px solid var(--line-soft); border-radius: 1rem; box-shadow: 0 12px 28px rgba(23, 24, 20, .07); }
 .admin-editor label, .admin-form label, .news-edit-form label { display: grid; gap: .45rem; color: var(--ink-muted); font-size: .78rem; font-weight: 700; }

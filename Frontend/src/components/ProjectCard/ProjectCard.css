@@ -16,7 +16,7 @@
   background: var(--surface-raised);
   border: 1px solid var(--line-soft);
   border-radius: 1.25rem;
-  box-shadow: 0 22px 48px rgba(12, 14, 17, .13);
+  box-shadow: var(--shadow-card);
   transition: border-color 300ms ease, box-shadow 500ms ease, transform 500ms cubic-bezier(.2, .8, .2, 1);
 }
 
@@ -119,7 +119,7 @@
 @media (hover: hover) and (pointer: fine) {
   .project-card-shell:hover .project-card-surface {
     border-color: rgba(224, 82, 44, .45);
-    box-shadow: 0 32px 60px rgba(12, 14, 17, .18);
+    box-shadow: var(--shadow-card-hover);
     transform: translateY(-.55rem);
   }
 

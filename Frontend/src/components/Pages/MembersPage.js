@@ -15,8 +15,8 @@
 
 import React, { useRef, useEffect, useState, useCallback } from 'react';
 import './MembersPage.css';
-import { members } from '../../data/constants';
 import { FaLinkedin } from 'react-icons/fa';
+import { members } from '../../data/members';
 
 const MembersPage = () => {
   const scrollRef = useRef(null);
@@ -70,10 +70,12 @@ const MembersPage = () => {
 
   return (
     <div className="members-member-page">
-      <h1 className="tab-member-heading">Members</h1>
-      <p className="tab-member-desc">
-        Meet our members who are part of this club.
-      </p>
+      <header className="section-heading">
+        <h1 className="tab-member-heading">Members</h1>
+        <p className="tab-member-desc">
+          Meet our members who are part of this club.
+        </p>
+      </header>
       <div className="members-member-carousel-wrapper">
         {canScrollLeft && (
           <button
@@ -104,14 +106,14 @@ const MembersPage = () => {
                 <h2>{mentor.name}</h2>
                 <p className="member-mentor-designation">{mentor.designation}</p>
                 <p className="member-mentor-summary">{mentor.summary}</p>
-                <a
+                {mentor.linkedin && <a
                   className="member-linkedin-link"
                   href={mentor.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   <FaLinkedin /> {mentor.name}
-                </a>
+                </a>}
               </div>
             </div>
           ))}

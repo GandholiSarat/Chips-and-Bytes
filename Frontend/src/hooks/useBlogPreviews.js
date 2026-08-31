@@ -1,21 +1,21 @@
 import { useEffect, useMemo, useState } from 'react';
-import { blogPosts } from '../data/blogPosts';
 import { blogPreviewSeed } from '../data/blogPreviewSeed';
+import { blogPosts } from '../data/blogPosts';
 
 const CACHE_KEY = 'chips-and-bytes:blog-previews:v2';
 const CACHE_TTL = 24 * 60 * 60 * 1000;
 
 const makeIndex = (items) => new Map(items.map((item) => [item.url, item]));
 
-const mergePreviews = (remote = []) => {
+const mergePreviews = (posts, remote = []) => {
   const seeded = makeIndex(blogPreviewSeed);
   const refreshed = makeIndex(remote);
 
-  return blogPosts.map((post) => ({
-    ...post,
+  return posts.map((post) => ({
     ...seeded.get(post.url),
     ...refreshed.get(post.url),
-    id: post.id,
+    ...post,
+    id: post.id || post.sourceId,
     url: post.url,
     category: post.category,
     accent: post.accent,
@@ -49,8 +49,8 @@ const writeBrowserCache = (items) => {
  * quietly reconciles them with the server's persistent preview cache.
  */
 export const useBlogPreviews = ({ limit } = {}) => {
-  const initialItems = useMemo(() => mergePreviews(readBrowserCache() || []), []);
-  const [items, setItems] = useState(initialItems);
+  const [previews, setPreviews] = useState(() => readBrowserCache() || []);
+  const items = useMemo(() => mergePreviews(blogPosts, previews), [previews]);
   const [isRefreshing, setIsRefreshing] = useState(Boolean(process.env.REACT_APP_BACKEND_URL));
 
   useEffect(() => {
@@ -71,7 +71,7 @@ export const useBlogPreviews = ({ limit } = {}) => {
         const refreshed = Array.isArray(payload?.items) ? payload.items : [];
         if (refreshed.length) {
           writeBrowserCache(refreshed);
-          setItems(mergePreviews(refreshed));
+          setPreviews(refreshed);
         }
       })
       .catch(() => {

@@ -15,19 +15,19 @@
  */
 
 import React, { useEffect, useState } from 'react';
-import { gitLinks } from '../../data/constants';
 import ProjectCard from '../ProjectCard/ProjectCard';
+import { projects as projectData } from '../../data/projects';
 import './ProjectsDetailsPage.css';
 
 const ProjectsDetailsPage = () => {
-  const [projects, setProjects] = useState(gitLinks);
+  const [projects, setProjects] = useState(projectData);
 
   useEffect(() => {
     /**
      * Fetches project preview data from the Microlink API for each project link.
      */
     const fetchProjectPreviews = async () => {
-      const previews = await Promise.all(gitLinks.map(async (linkObj) => {
+      const previews = await Promise.all(projectData.map(async (linkObj) => {
         try {
           const response = await fetch(`https://api.microlink.io/?url=${encodeURIComponent(linkObj.url)}`);
           const payload = await response.json();
@@ -35,7 +35,7 @@ const ProjectsDetailsPage = () => {
           return {
             title: title || linkObj.title,
             description: description || linkObj.description,
-            image: image?.url || '',
+            image: linkObj.image || image?.url || '',
             url: linkObj.url,
           };
         } catch (error) {

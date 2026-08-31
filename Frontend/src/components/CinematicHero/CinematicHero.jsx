@@ -189,6 +189,7 @@ const CinematicHero = ({ onJoin }) => {
 
         <div className="cinematic-hero__shade" aria-hidden="true" />
         <div className="cinematic-hero__copy">
+          <img className="cinematic-hero__brand" src="/assets/logo_white_full.png" alt="Chips & Bytes" />
           <p className="cinematic-hero__eyebrow">Chips &amp; Bytes · Computer Architecture Club</p>
           <h1 id="hero-title">
             Explore the world of <em>Computer Architecture</em>

@@ -430,7 +430,8 @@
   background: var(--surface-subtle);
   border: 1px solid var(--line-soft);
   border-radius: 1.25rem;
-  transition: color 260ms ease, background-color 260ms ease, border-color 260ms ease, transform 400ms cubic-bezier(.2, .8, .2, 1);
+  box-shadow: var(--shadow-card);
+  transition: color 260ms ease, background-color 260ms ease, border-color 260ms ease, box-shadow 450ms ease, transform 450ms cubic-bezier(.2, .8, .2, 1);
 }
 
 .Projects-page .more-card-inner {
@@ -475,6 +476,7 @@
     color: var(--paper);
     background: var(--signal);
     border-color: var(--signal);
+    box-shadow: var(--shadow-card-hover);
     transform: translateY(-.45rem);
   }
 

@@ -16,7 +16,7 @@
   border: 1px solid var(--line-soft);
   border-radius: var(--card-radius);
   background: var(--surface-raised);
-  box-shadow: 0 22px 48px rgba(12, 14, 17, 0.13);
+  box-shadow: var(--shadow-card);
   transition: transform 500ms cubic-bezier(.2, .8, .2, 1), box-shadow 500ms ease, border-color 300ms ease;
 }
 
@@ -127,7 +127,7 @@
   .blog-card:hover .card-content {
     transform: translateY(-.55rem);
     border-color: rgba(224, 82, 44, .45);
-    box-shadow: 0 32px 60px rgba(12, 14, 17, .18);
+    box-shadow: var(--shadow-card-hover);
   }
 
   .blog-card:hover .blog-image {
