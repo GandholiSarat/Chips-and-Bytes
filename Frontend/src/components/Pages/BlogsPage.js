@@ -19,6 +19,7 @@ import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { useBlogPreviews } from '../../hooks/useBlogPreviews';
 import BlogCard from '../BlogCard/BlogCard';
+import { getCarouselScrollState } from '../../utils/carouselPosition';
 import './BlogsPage.css';
 
 const BlogsPage = () => {
@@ -46,8 +47,9 @@ const BlogsPage = () => {
   const checkScrollPosition = () => {
     const slider = sliderRef.current;
     if (!slider) return;
-    setCanScrollLeft(slider.scrollLeft > 0);
-    setCanScrollRight(slider.scrollLeft + slider.clientWidth < slider.scrollWidth - 5);
+    const scrollState = getCarouselScrollState(slider);
+    setCanScrollLeft(scrollState.canScrollLeft);
+    setCanScrollRight(scrollState.canScrollRight);
   };
 
   /**
@@ -112,10 +114,12 @@ const BlogsPage = () => {
 
   return (
     <div className="blogs-page">
-      <h1 className="tab-heading">Blogs</h1>
-      <p className="tab-desc">
-        Read articles and tutorials written by our community members.
-      </p>
+      <header className="section-heading">
+        <h1 className="tab-heading">Blogs</h1>
+        <p className="tab-desc">
+          Read articles and tutorials written by our community members.
+        </p>
+      </header>
       {isRefreshing && <p className="content-refresh-status blog-cache-status">Refreshing article previews in the background…</p>}
 
       <>

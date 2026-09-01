@@ -1,216 +1,111 @@
 .about-page {
-  width: 90%;
-  max-width: 1200px;
-  min-width: 320px;
-  margin: 80px auto 0 auto;
-  padding: 2.5rem;
-  background: linear-gradient(
-    135deg, 
-    rgba(17, 24, 39, 0.85), 
-    rgba(30, 41, 59, 0.85)
-  );
-  border-radius: 20px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  color: #f1f5f9;
-  text-align: center;
-  transition: all 0.3s ease-in-out;
+  width: min(100%, var(--page-width));
+  margin: 0 auto;
+  color: var(--ink);
 }
 
-/* About section hover glow */
-.about-page:hover {
-  transform: scale(1.01);
-  box-shadow: 0 12px 36px rgba(34, 211, 238, 0.3);
+.about-page__identity-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(17rem, 25vw, 27rem);
+  align-items: center;
+  gap: clamp(3rem, 7vw, 7.5rem);
 }
 
-.about-us-heading {
-  opacity: 0;
-  transform: translateY(30px) scale(0.95);
-  transition: opacity 1s ease, transform 1s ease, text-shadow 1.2s ease;
-  font-size: 2.5rem;
-  color: #22d3ee;
-  margin-bottom: 1.5rem;
-  /* text-shadow: 0 0 0px #22d3ee; */
+.about-page__identity-copy {
+  min-width: 0;
 }
 
-.about-us-heading.visible {
-  opacity: 1;
-  transform: translateY(0) scale(1.05);
-  /* text-shadow: 0 0 16px #22d3ee, 0 0 4px #fff; */
-}
-
-.subheading {
-  font-size: 1.8rem;
-  color: #22d3ee;
-  margin-bottom: 1rem;
-  margin-top: 2rem;
-}
-
-.tab-desc {
-  font-size: 1.15rem;
-  margin-bottom: 1.5rem;
-  line-height: 1.7;
-  color: #cbd5e1;
-  /* Make text use full width */
+.about-page__heading {
   width: 100%;
-  max-width: 100%;
-  text-align: justify;
-  text-justify: inter-word;
-  padding: 0 1rem;
-  box-sizing: border-box;
 }
 
-/* Specific styling for the main about us paragraph */
-.about-page > .tab-desc:first-of-type {
-  text-align: justify;
-  text-justify: inter-word;
-  width: 100%;
-  max-width: 100%;
-  padding: 0 1rem;
+.about-page a {
+  color: var(--ink);
+  text-decoration-color: var(--signal);
+  text-decoration-thickness: .12rem;
+  text-underline-offset: .18rem;
 }
 
-/* Also target the last paragraph */
-.about-page > .tab-desc:last-of-type {
-  text-align: justify;
-  text-justify: inter-word;
+.about-page a:hover,
+.about-page a:focus-visible {
+  color: var(--signal);
+}
+
+.club-mission,
+.club-objectives,
+.about-page__closing {
+  width: min(100%, 64rem);
+}
+
+.club-mission {
   width: 100%;
-  max-width: 100%;
-  padding: 0 1rem;
 }
 
 .club-mission,
 .club-objectives {
-  margin-bottom: 2rem;
-  /* Ensure full width utilization */
-  width: 100%;
+  margin-bottom: clamp(2rem, 4vw, 3.5rem);
 }
 
-.club-mission .tab-desc,
-.club-objectives .tab-desc {
-  /* Override center alignment for mission/objectives descriptions */
-  text-align: justify;
-  text-justify: inter-word;
-  padding: 0 1rem;
+.about-page .subheading {
+  font-size: clamp(1.55rem, 3vw, 2.5rem);
+}
+
+.about-page .tab-desc {
   width: 100%;
-  max-width: 100%;
+  padding: 0;
 }
 
 .about-list {
-  list-style: none;
-  padding: 0;
-  margin: 2rem auto;
-  max-width: 100%; /* Changed from 80% to 100% */
+  display: grid;
   width: 100%;
-  text-align: left;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  gap: .8rem;
+  list-style: none;
 }
 
 .about-list li {
-  margin-bottom: 0.8rem;
-  padding-left: 1rem;
-  font-size: 1.05rem;
-  color: var(--ink-muted);
-  transition: all 0.3s ease;
   position: relative;
-  /* Use full width */
-  width: 100%;
-  text-align: justify;
-  text-justify: inter-word;
-  /* border-left: 4px solid #22d3ee; */
+  padding-left: 1.35rem;
+  color: var(--ink-muted);
+  line-height: 1.7;
 }
 
 .about-list li::before {
-  content: "▶";
-  color: var(--signal);
-  font-size: 0.8rem;
   position: absolute;
-  left: -0.5rem;
-  top: 0.1rem;
+  top: .65rem;
+  left: 0;
+  width: .38rem;
+  height: .38rem;
+  border-radius: 50%;
+  background: var(--signal);
+  content: '';
 }
 
-.about-list li:hover {
-  transform: translateX(5px);
-  color: var(--ink);
-  /* background: rgba(34, 211, 238, 0.1); */
-  /* border-left-color: #0ea5e9; */
+.about-page__closing {
+  margin-bottom: 0;
 }
 
-.fade-in {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 1s forwards ease-out;
-  animation-delay: 0.4s;
+.about-page__dmacs-mark {
+  width: 100%;
+  justify-self: end;
 }
 
-.fade-in:nth-child(2) {
-  animation-delay: 0.6s;
+.about-page__dmacs-mark img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
 }
 
-.fade-in:nth-child(3) {
-  animation-delay: 0.8s;
-}
+@media (max-width: 900px) {
+  .about-page__identity-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(2rem, 7vw, 3.5rem);
+  }
 
-.fade-in:nth-child(4) {
-  animation-delay: 1s;
-}
-
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Responsive design */
-@media (max-width: 768px) {
-  .about-page {
-    width: 95%;
-    margin: 60px auto 0 auto;
-    padding: 1.5rem;
-  }
-  
-  .about-us-heading {
-    font-size: 2rem;
-  }
-  
-  .subheading {
-    font-size: 1.5rem;
-  }
-  
-  .tab-desc {
-    font-size: 1rem;
-    padding: 0 0.5rem;
-  }
-  
-  .about-list {
-    max-width: 100%;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .about-page {
-    width: 98%;
-    padding: 1rem;
-    margin: 40px auto 0 auto;
-  }
-  
-  .about-us-heading {
-    font-size: 1.8rem;
-  }
-  
-  .subheading {
-    font-size: 1.3rem;
-  }
-  
-  .tab-desc {
-    padding: 0 0.25rem;
-  }
-  
-  .about-list {
-    padding-left: 0.25rem;
-    padding-right: 0.25rem;
+  .about-page__dmacs-mark {
+    width: min(64vw, 20rem);
+    justify-self: center;
   }
 }

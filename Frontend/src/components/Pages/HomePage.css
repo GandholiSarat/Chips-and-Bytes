@@ -36,7 +36,7 @@
   width: 3.7rem;
   height: 3.7rem;
   padding: .45rem;
-  background: var(--surface-raised);
+  background: var(--surface-ink);
   border: 1px solid var(--line-soft);
   border-radius: .85rem;
   box-shadow: var(--shadow-soft);

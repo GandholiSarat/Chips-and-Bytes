@@ -5,22 +5,7 @@
 }
 
 .contact-page__header {
-  display: grid;
   margin-bottom: clamp(2rem, 4vw, 3.5rem);
-  align-items: end;
-  gap: .8rem clamp(2rem, 7vw, 7rem);
-  grid-template-columns: minmax(0, 1.2fr) minmax(17rem, .8fr);
-}
-
-.contact-page__eyebrow {
-  margin: 0 !important;
-  color: var(--signal) !important;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: .64rem !important;
-  font-weight: 600;
-  letter-spacing: .11em;
-  text-transform: uppercase;
-  grid-column: 1 / -1;
 }
 
 .contact-page h1 {
@@ -35,7 +20,7 @@
 
 .contact-page__header > p:last-child {
   max-width: 34rem;
-  margin: 0;
+  margin: 0 !important;
   color: var(--ink-muted);
   font-size: 1rem;
   line-height: 1.7;
@@ -117,7 +102,7 @@
 .contact-form input,
 .contact-form textarea {
   width: 100%;
-  padding: .9rem 0;
+  padding: .9rem .85rem;
   border: 0;
   border-bottom: 1px solid rgba(24, 25, 23, .28);
   border-radius: 0;
@@ -184,7 +169,6 @@
 .submit-button:disabled { cursor: wait; opacity: .58; }
 
 @media (max-width: 850px) {
-  .contact-page__header,
   .contact-page__layout { grid-template-columns: 1fr; }
   .contact-page__signal { min-height: 23rem; }
   .contact-page__club-logo { width: min(78vw, 25rem); max-height: 18rem; }

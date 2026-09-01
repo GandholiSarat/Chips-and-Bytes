@@ -3,10 +3,13 @@ import AboutPage from './components/Pages/AboutPage';
 import BlogCard from './components/BlogCard/BlogCard';
 import CinematicHero from './components/CinematicHero/CinematicHero';
 import ContactPage from './components/Pages/ContactPage';
+import EventsPage from './components/Pages/EventsPage';
 import ProjectCard from './components/ProjectCard/ProjectCard';
 import LiveSessions from './components/LiveSessions/LiveSessions';
 import Navbar from './components/Navbar/Navbar';
 import NewsPage from './components/Pages/NewsPage';
+import AnnouncementPanel from './components/AnnouncementPanel/AnnouncementPanel';
+import { contentCollections, makeContentSource } from './data/managedContent';
 
 jest.mock('react-router-dom', () => ({
   useLocation: () => ({ pathname: '/' }),
@@ -28,6 +31,7 @@ beforeEach(() => {
     })),
   });
   window.sessionStorage.clear();
+  window.localStorage.clear();
   document.documentElement.classList.remove('welcome-app-ready');
   document.getElementById('welcome-bootstrap')?.remove();
 });
@@ -37,6 +41,31 @@ test('preserves the original club writing', () => {
 
   expect(screen.getByRole('heading', { name: 'What We Do' })).toBeInTheDocument();
   expect(screen.getByText(/Foster self-driven learning/i)).toBeInTheDocument();
+  expect(screen.getByRole('link', { name: /Sri Sathya Sai Institute of Higher Learning/i })).toHaveAttribute(
+    'href',
+    'https://www.sssihl.edu.in/departments/mathematics-computer-science/',
+  );
+  expect(screen.getByRole('img', { name: /Department of Mathematics and Computer Science/i })).toHaveAttribute(
+    'src',
+    '/assets/dmacs-logo.webp',
+  );
+});
+
+test('keeps the announcement heading focused without the old club notice label', () => {
+  render(<AnnouncementPanel announcements={[{ _id: 'one', message: 'A public update.' }]} />);
+  expect(screen.getByRole('heading', { name: 'Announcements' })).toBeInTheDocument();
+  expect(screen.queryByText('Club notices')).not.toBeInTheDocument();
+});
+
+test('generates a complete frontend project data file without a backend', () => {
+  const source = makeContentSource(contentCollections.projects, [{
+    title: 'Updated project title',
+    description: 'Updated project description.',
+    url: 'https://github.com/GandholiSarat/DynamoRIO-Custom-Client',
+  }]);
+  expect(source).toContain('export const projects = [');
+  expect(source).toContain('Updated project title');
+  expect(source).not.toContain('contentType');
 });
 
 test('shows a visible Medium destination on every blog card', () => {
@@ -80,6 +109,7 @@ test('keeps the contact panel focused on the club identity', () => {
   render(<ContactPage />);
 
   expect(screen.getByRole('img', { name: 'Chips & Bytes' })).toHaveAttribute('src', '/assets/logo_white_full.png');
+  expect(screen.queryByText(/Open channel/i)).not.toBeInTheDocument();
   expect(screen.queryByText(/Start a conversation/i)).not.toBeInTheDocument();
   expect(screen.queryByText(/Build, study and think architecture together/i)).not.toBeInTheDocument();
 });
@@ -87,11 +117,13 @@ test('keeps the contact panel focused on the club identity', () => {
 test('uses an accessible compact header menu and closes it after five seconds', () => {
   jest.useFakeTimers();
 
-  const { unmount } = render(
+  const { container, unmount } = render(
     <Navbar activeTab="home" setActiveTab={jest.fn()} navigate={jest.fn()} />,
   );
 
   const menuButton = screen.getByRole('button', { name: /site navigation/i });
+  expect(container.querySelector('img[src="/assets/dmacs-logo.webp"]')).toBeInTheDocument();
+  expect(screen.queryByText('Menu')).not.toBeInTheDocument();
   expect(screen.queryByText('Computer Architecture Club')).not.toBeInTheDocument();
   expect(menuButton).toHaveAttribute('aria-expanded', 'true');
   expect(screen.getByRole('button', { name: 'Blogs' })).toHaveAttribute('tabindex', '0');
@@ -185,14 +217,25 @@ test('shows only the current dated news edition with numbered headings and readi
     ],
   }));
 
-  render(<NewsPage />);
+  const { container } = render(<NewsPage />);
 
   expect(screen.getByRole('heading', { name: 'News' })).toBeInTheDocument();
+  expect(container.querySelector('.news-page__date')).not.toBeInTheDocument();
   expect(screen.getByText('01')).toBeInTheDocument();
   expect(screen.getByText('02')).toBeInTheDocument();
   expect(screen.getByRole('heading', { name: 'A new processor arrives' })).toBeInTheDocument();
   expect(screen.getByRole('link', { name: /Read today’s complete note/i })).toHaveAttribute('href', `/news/${dateKey}`);
   expect(screen.getByRole('link', { name: /Browse all news/i })).toHaveAttribute('href', '/news');
+});
+
+test('keeps the events heading on the shared left-aligned section axis', () => {
+  const { container } = render(<EventsPage />);
+
+  const heading = screen.getByRole('heading', { name: 'Events' });
+  expect(heading).toBeInTheDocument();
+  expect(container.querySelector('.events-page > .section-heading')).toContainElement(heading);
+  expect(screen.getByText('Join our upcoming workshops, hackathons, and seminars.')).toBeInTheDocument();
+  expect(screen.queryByText('Schedule clear')).not.toBeInTheDocument();
 });
 
 test('opens with the requested welcome and retains the original hero copy', () => {
@@ -204,6 +247,8 @@ test('opens with the requested welcome and retains the original hero copy', () =
   expect(screen.getByRole('status', { name: 'Welcome to Chips and Bytes' })).toBeInTheDocument();
   expect(screen.getByRole('heading', { name: /Explore the world of Computer Architecture/i })).toBeInTheDocument();
   expect(screen.getByRole('button', { name: 'Join Our Community' })).toBeInTheDocument();
+  expect(screen.getByRole('img', { name: 'Chips & Bytes' })).toHaveAttribute('src', '/assets/logo_white.png');
+  expect(screen.queryByText('Chips & Bytes · Computer Architecture Club')).not.toBeInTheDocument();
   const heroImages = [
     '/assets/hero/zen2-matisse-die.webp',
     '/assets/hero/silicon-wafer-closeup.webp',
@@ -257,8 +302,8 @@ test('keeps multiple structured sessions individually readable and navigable', (
     />,
   );
 
-  expect(screen.getByRole('heading', { name: 'Upcoming Sessions' })).toBeInTheDocument();
-  expect(screen.getByText('Next on the calendar')).toBeInTheDocument();
+  expect(screen.getByRole('heading', { name: 'Next on the calendar' })).toBeInTheDocument();
+  expect(screen.queryByText('2 scheduled sessions')).not.toBeInTheDocument();
   expect(screen.getByText('Think Architecture Together S1')).toBeInTheDocument();
   expect(screen.getByText('QEMU Lab: Tracing a Boot Sequence')).toBeInTheDocument();
   expect(screen.getByText('1st Mtech Lab')).toBeInTheDocument();

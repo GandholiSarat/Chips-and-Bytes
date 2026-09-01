@@ -17,12 +17,13 @@
 
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { gitLinks } from '../../data/constants';
 import ProjectCard from '../ProjectCard/ProjectCard';
+import { projects } from '../../data/projects';
+import { getCarouselScrollState } from '../../utils/carouselPosition';
 import './ProjectsPage.css';
 
 const ProjectsPage = () => {
-  const [projectData, setProjectData] = useState(gitLinks);
+  const [projectData, setProjectData] = useState(projects);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -44,7 +45,7 @@ const ProjectsPage = () => {
   useEffect(() => {
     const fetchMetadata = async () => {
       const results = await Promise.all(
-        gitLinks.map(async (linkObj) => {
+        projects.map(async (linkObj) => {
           try {
             const response = await fetch(`https://api.microlink.io/?url=${encodeURIComponent(linkObj.url)}`);
             const json = await response.json();
@@ -52,7 +53,7 @@ const ProjectsPage = () => {
             return {
               title: title || linkObj.title,
               description: description || linkObj.description,
-              image: image?.url || null,
+              image: linkObj.image || image?.url || null,
               url: linkObj.url,
             };
           } catch (err) {
@@ -72,8 +73,9 @@ const ProjectsPage = () => {
   const checkScrollPosition = () => {
     const slider = sliderRef.current;
     if (!slider) return;
-    setCanScrollLeft(slider.scrollLeft > 0);
-    setCanScrollRight(slider.scrollLeft + slider.clientWidth < slider.scrollWidth - 5);
+    const scrollState = getCarouselScrollState(slider);
+    setCanScrollLeft(scrollState.canScrollLeft);
+    setCanScrollRight(scrollState.canScrollRight);
   };
 
   /**
@@ -138,10 +140,12 @@ const ProjectsPage = () => {
 
   return (
     <div className="Projects-page">
-      <h1 className="tab-heading">Projects</h1>
-      <p className="tab-desc">
-        Explore projects built by our community members.
-      </p>
+      <header className="section-heading">
+        <h1 className="tab-heading">Projects</h1>
+        <p className="tab-desc">
+          Explore projects built by our community members.
+        </p>
+      </header>
 
       <>
           <div className="carousel-wrapper">

@@ -73,7 +73,7 @@ const HomePage = () => {
 
       <div className="admin-entry">
         <Link to="/admin" aria-label="Admin login">
-          <img src="/assets/logo_blue_full.png" alt="" />
+          <img src="/assets/logo_white_full.png" alt="" />
         </Link>
       </div>
     </div>

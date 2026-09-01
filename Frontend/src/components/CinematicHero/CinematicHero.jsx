@@ -189,14 +189,18 @@ const CinematicHero = ({ onJoin }) => {
 
         <div className="cinematic-hero__shade" aria-hidden="true" />
         <div className="cinematic-hero__copy">
-          <p className="cinematic-hero__eyebrow">Chips &amp; Bytes · Computer Architecture Club</p>
-          <h1 id="hero-title">
-            Explore the world of <em>Computer Architecture</em>
-          </h1>
-          <button className="cinematic-hero__action" onClick={onJoin}>
-            <span>Join Our Community</span>
-            <ArrowDownRight size={19} strokeWidth={1.7} aria-hidden="true" />
-          </button>
+          <div className="cinematic-hero__layout">
+            <div className="cinematic-hero__text">
+              <h1 id="hero-title">
+                Explore the world of <em>Computer Architecture</em>
+              </h1>
+              <button className="cinematic-hero__action" onClick={onJoin}>
+                <span>Join Our Community</span>
+                <ArrowDownRight size={19} strokeWidth={1.7} aria-hidden="true" />
+              </button>
+            </div>
+            <img className="cinematic-hero__brand" src="/assets/logo_white.png" alt="Chips & Bytes" />
+          </div>
         </div>
 
       </section>

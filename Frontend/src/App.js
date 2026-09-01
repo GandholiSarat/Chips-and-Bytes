@@ -37,6 +37,7 @@ const EventEdit = lazy(() => import('./components/AdminPages/EventEdit'));
 const PastEventsEdit = lazy(() => import('./components/AdminPages/PastEventsEdit'));
 const AnnouncementEdit = lazy(() => import('./components/AdminPages/AnnouncementEdit'));
 const NewsEdit = lazy(() => import('./components/AdminPages/NewsEdit'));
+const ContentCollectionEdit = lazy(() => import('./components/AdminPages/ContentCollectionEdit'));
 
 /**
  * AppContent Component
@@ -124,6 +125,17 @@ function AppContent() {
                 </ProtectedRoute>
               }
             />
+            {['projects', 'blogs', 'members', 'mentors'].map((contentType) => (
+              <Route
+                key={contentType}
+                path={`/admin/${contentType}-edit`}
+                element={(
+                  <ProtectedRoute>
+                    <ContentCollectionEdit contentType={contentType} />
+                  </ProtectedRoute>
+                )}
+              />
+            ))}
           </Routes>
         </Suspense>
       </div>
