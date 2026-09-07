@@ -26,7 +26,7 @@ function AboutPage() {
               <strong>Chips &amp; Bytes</strong> is a dynamic community of computer science and architecture enthusiasts from Department of Mathematics &amp; Computer Science (DMACS) at{' '}
               <a href="https://www.sssihl.edu.in/departments/mathematics-computer-science/" target="_blank" rel="noreferrer">
                 <strong>Sri Sathya Sai Institute of Higher Learning (SSSIHL)</strong>
-              </a>, dedicated to learning, building, and innovating. We blend deep technical understanding with hands-on practice, encouraging self-driven growth, open-source contributions, and entrepreneurial thinking so members can turn ideas into real startup-worthy projects.
+              </a>, dedicated to learning, building, and innovating. We bridge rigorous mathematical foundation with deep technical expertise and hands-on execution, fostering self-driven growth, open-source contributions, and entrepreneurial vision so our members can transform complex concepts into enterprise-grade, startup-worthy projects.
             </p>
           </header>
 
