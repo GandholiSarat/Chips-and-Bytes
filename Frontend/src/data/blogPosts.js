@@ -176,11 +176,12 @@ export const blogPosts = [
     accent: 'memory',
   },
   {
-    id: 'memory-around-us-gddr-3',
-    title: 'Memory Around Us: GDDR (Part 3)',
-    description: 'The concluding part of the GDDR series, tying graphics memory back to the wider system.',
-    url: 'https://medium.com/@panugantichiragsai12/memory-around-us-gddr-part-3-9f3ca7cfc9fa',
-    category: 'Memory systems',
-    accent: 'memory',
-  },
+    "id": "memory-around-us-gddr-3",
+    "title": "Memory Around Us: GDDR (Part 3)",
+    "description": "The concluding part of the GDDR series, tying graphics memory back to the wider system.",
+    "url": "https://medium.com/@panugantichiragsai12/memory-around-us-gddr-part-3-9f3ca7cfc9fa",
+    "image": "https://miro.medium.com/v2/resize:fit:720/format:webp/1*nPO8o5TCJpRrherViSYmdA.png",
+    "category": "Memory systems",
+    "accent": "memory"
+  }
 ];
